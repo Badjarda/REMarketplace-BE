@@ -1,0 +1,12 @@
+version: "3.2"
+
+services:
+  postgresql:
+    image: postgres
+    container_name: rem-marketplace-postgresql
+    ports:
+      - ${DATABASE_PORT:-5432}:5432
+    environment:
+      - "POSTGRES_DB=rem-marketplace"
+      - "POSTGRES_USER=dev"
+      - "POSTGRES_PASSWORD=dev"
