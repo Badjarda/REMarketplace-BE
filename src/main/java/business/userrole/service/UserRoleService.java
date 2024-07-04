@@ -49,7 +49,7 @@ public class UserRoleService {
     else if (action.equals("decline"))
       command = userAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
 
   }
 

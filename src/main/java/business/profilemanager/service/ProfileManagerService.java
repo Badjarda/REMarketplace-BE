@@ -52,7 +52,7 @@ public class ProfileManagerService {
                                         .create(operatorParty, observersMap)
                                         .commands();
 
-                        transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty));
+                        transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
                 } catch (IllegalArgumentException | IllegalStateException e) {
                         return "Error creating User Profile Factory: " + e.getMessage() + "\n";
                 } catch (Exception e) {

@@ -143,7 +143,7 @@ public class OperatorService {
 
             List<com.daml.ledger.javaapi.data.Command> createCommands = createRole.commands();
 
-            transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Operator: " + operator + e.getMessage() + "\n";
@@ -179,7 +179,7 @@ public class OperatorService {
             List<com.daml.ledger.javaapi.data.Command> commands = operatorId.exerciseCreateInitialRole(
                     registeredUserDescription, registeredUserPermissions, observersMap).commands();
 
-            transactionService.submitTransaction(commands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(commands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Initial Role: " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -202,7 +202,7 @@ public class OperatorService {
 
             List<com.daml.ledger.javaapi.data.Command> exerciseCommands = operatorId.exerciseOfferUserRole(userParty, key).commands();
 
-            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Offer User : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -236,7 +236,7 @@ public class OperatorService {
                             claimRuleContractid)
                     .commands();
 
-            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Offer Custodian Service : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -262,7 +262,7 @@ public class OperatorService {
                     .exerciseOfferUserProfileManagerService(userParty, userProfileFactoryContractid)
                     .commands();
 
-            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Offer User Profile Service : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -311,7 +311,7 @@ public class OperatorService {
                             garagePropertyFactoryContractid, warehousePropertyFactoryContractid)
                     .commands();
 
-            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Offer Property Manager Service : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -333,7 +333,7 @@ public class OperatorService {
                     .exerciseOfferIssuanceService(userParty)
                     .commands();
 
-            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(exerciseCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Offer Issuance Service : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -357,7 +357,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateUserProfile(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating User Profile : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -382,7 +382,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseOpenAccount(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Opening User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -406,7 +406,7 @@ public class OperatorService {
             var requestId = new daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId(rId);
 
             var command = serviceId.exerciseCloseAccount(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Closing User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -430,7 +430,7 @@ public class OperatorService {
             var requestId = new daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId(rId);
 
             var command = serviceId.exerciseDeposit(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Deposit in User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -453,7 +453,7 @@ public class OperatorService {
             var requestId = new daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId(rId);
 
             var command = serviceId.exerciseWithdrawal(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Withdraw in User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -474,7 +474,7 @@ public class OperatorService {
             var requestId = new daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId(rId);
 
             var command = serviceId.exerciseIssue(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Issue in User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -495,7 +495,7 @@ public class OperatorService {
             var requestId = new daml.marketplace.interface$.issuance.choices.deissuerequest.DeIssueRequest.ContractId(rId);
 
             var command = serviceId.exerciseDeIssue(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error DeIssue in User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -519,7 +519,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateApartmentProperty(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Apartment Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -543,7 +543,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateGarageProperty(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Garage Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -567,7 +567,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateLandProperty(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Land Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -591,7 +591,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateResidenceProperty(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Residence Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -615,7 +615,7 @@ public class OperatorService {
                     rId);
 
             var command = serviceId.exerciseCreateWarehouseProperty(requestId).commands();
-            transactionService.submitTransaction(command, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Warehouse Property : " + e.getMessage() + "\n";
         } catch (Exception e) {

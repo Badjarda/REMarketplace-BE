@@ -20,6 +20,8 @@ public class UserProfileDTO {
 
   private String user;
 
+  private String publicString;
+
   private String profileId;
 
   private String username;

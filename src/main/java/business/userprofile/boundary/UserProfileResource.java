@@ -37,8 +37,8 @@ public class UserProfileResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/requestCreateUserProfile")
   public String requestCreateUserProfile(UserProfileDTO request) {
-    return userProfileService.requestCreateUserProfile(request.getOperator(), request.getUser(), request.getProfileId(),
-        request.getUsername(), request.getFirstName(), request.getLastName(), request.getFullName(),
+    return userProfileService.requestCreateUserProfile(request.getOperator(), request.getUser(), request.getPublicString(), 
+        request.getProfileId(), request.getUsername(), request.getFirstName(), request.getLastName(), request.getFullName(),
         request.getBirthday(), request.getGender(), request.getNationality(), request.getContactMail(),
         request.getCellphoneNumber(), request.getTaxId(), request.getSocialSecurityId());
   }

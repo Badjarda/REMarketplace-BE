@@ -93,7 +93,7 @@ public class UserPropertyService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
 
   }
 
@@ -149,7 +149,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, bathrooms, floor, parkingSpaces, elevator, buildDate, 
       installedEquipment, additionalInformation, description, observersMap)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Apartment : " + e.getMessage();
     } catch (Exception e) {
@@ -181,7 +181,7 @@ public class UserPropertyService {
       command = serviceId.exerciseRequestCreateGarageProperty(userPropertyId, garagePropertyKey, propertyAddress, propertyPostalCode, 
       propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity, installedEquipment, additionalInformation, description, observersMap)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Garage : " + e.getMessage();
     } catch (Exception e) {
@@ -214,7 +214,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, 
       installedEquipment, viableConstructionTypes, additionalInformation, description, observersMap)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Land : " + e.getMessage();
     } catch (Exception e) {
@@ -245,7 +245,7 @@ public class UserPropertyService {
 
       command = serviceId.exerciseRequestCreateResidenceProperty(userPropertyId, residencePropertyKey, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty,
        grossArea, usableArea, bedrooms, bathrooms, floors, residenceType, backyard, parking, buildDate, orientation, installedEquipment, additionalInformation, description, observersMap).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Residence : " + e.getMessage();
     } catch (Exception e) {
@@ -278,7 +278,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, warehouseType, grossArea, usableArea, floors, buildDate, installedEquipment, 
       additionalInformation, description, observersMap)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Warehouse : " + e.getMessage();
     } catch (Exception e) {
@@ -301,49 +301,49 @@ public class UserPropertyService {
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyPostalCode(propertyPostalCode, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyDistrict(propertyDistrict, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyCounty(propertyCounty, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
       
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentGrossArea(grossArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentUsableArea(usableArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentBedrooms(bedrooms, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentBathrooms(bathrooms, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentFloor(floor, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentParkingSpaces(parkingSpaces, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentElevator(elevator, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentBuildDate(buildDate, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentInstalledEquipment(installedEquipment, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentAdditionalInformation(additionalInformation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentDescription(description, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Apartment Property: " + e.getMessage();
@@ -367,31 +367,31 @@ public class UserPropertyService {
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyPostalCode(propertyPostalCode, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyDistrict(propertyDistrict, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyCounty(propertyCounty, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
       
       transactionService.submitTransaction(serviceId.exerciseUpdateGarageType(garageType, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateVehicleCapacity(vehicleCapacity, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGarageInstalledEquipment(installedEquipment, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGarageAdditionalInformation(additionalInformation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGarageDescription(description, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Garage Property: " + e.getMessage();
@@ -416,43 +416,43 @@ public class UserPropertyService {
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandPropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandPropertyPostalCode(propertyPostalCode, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandPropertyDistrict(propertyDistrict, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandPropertyCounty(propertyCounty, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
       
       transactionService.submitTransaction(serviceId.exerciseUpdateLandType(landType, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateTotalLandArea(totalLandArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateMinimumSurfaceForSale(minimumSurfaceForSale, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandBuildableArea(buildableArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandAccessByRoad(accessByRoad, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandInstalledEquipment(installedEquipment, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandViableConstructionTypes(viableConstructionTypes, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandAdditionalInformation(additionalInformation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandDescription(description, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Land Property: " + e.getMessage();
@@ -476,55 +476,55 @@ public class UserPropertyService {
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidencePropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidencePropertyPostalCode(propertyPostalCode, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidencePropertyDistrict(propertyDistrict, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidencePropertyCounty(propertyCounty, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
       
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceGrossArea(grossArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceUsableArea(usableArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceBedrooms(bedrooms, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceBathrooms(bathrooms, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceFloors(floors, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceType(residenceType, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceBackyard(backyard, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceParking(parking, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceBuildDate(buildDate, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceOrientation(orientation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceInstalledEquipment(installedEquipment, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceAdditionalInformation(additionalInformation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceDescription(description, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Residence Property: " + e.getMessage();
@@ -548,40 +548,40 @@ public class UserPropertyService {
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyPostalCode(propertyPostalCode, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyDistrict(propertyDistrict, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyCounty(propertyCounty, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseType(warehouseType, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseGrossArea(grossArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseUsableArea(usableArea, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseFloors(floors, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseBuildDate(buildDate, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseInstalledEquipment(installedEquipment, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseAdditionalInformation(additionalInformation, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseDescription(description, key).commands(),
-      Arrays.asList(userParty));
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Warehouse Property: " + e.getMessage();

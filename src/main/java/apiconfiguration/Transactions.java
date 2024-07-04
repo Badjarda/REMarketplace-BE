@@ -1021,11 +1021,18 @@ public class Transactions {
     observerRunning = true;
   }
 
-  public void submitTransaction(List<com.daml.ledger.javaapi.data.Command> commands, List<String> actAs)
+  public void submitTransaction(List<com.daml.ledger.javaapi.data.Command> commands, List<String> actAs, List<String> readAs)
       throws IllegalArgumentException, IllegalStateException, Exception {
     client = clientProvider.getClient();
-    CommandsSubmission commandsSubmission = CommandsSubmission.create(APP_ID, UUID.randomUUID().toString(),
+    CommandsSubmission commandsSubmission;
+    if(readAs == null){
+      commandsSubmission = CommandsSubmission.create(APP_ID, UUID.randomUUID().toString(),
         commands).withActAs(actAs);
+    }else{
+      commandsSubmission = CommandsSubmission.create(APP_ID, UUID.randomUUID().toString(),
+        commands).withActAs(actAs).withReadAs(readAs);
+    }
+    
 
     client.getCommandClient().submitAndWait(commandsSubmission).blockingGet();
   }

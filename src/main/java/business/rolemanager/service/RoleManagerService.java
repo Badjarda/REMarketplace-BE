@@ -64,7 +64,7 @@ public class RoleManagerService {
             List<com.daml.ledger.javaapi.data.Command> createCommands = Factory.create(operatorParty, observersMap)
                     .commands();
 
-            transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty));
+            transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating User Role Factory: " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -113,7 +113,7 @@ public class RoleManagerService {
             default:
                 break;
         }
-        transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+        transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
     }
 
     public String createUserRole(String operator, String user, String id,

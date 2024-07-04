@@ -79,7 +79,7 @@ public class IssuanceService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
   }
 
   public String acceptIssuanceService(String operator, String user) {
@@ -136,7 +136,7 @@ public class IssuanceService {
 
       command = serviceId
           .exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Transferable : " + e.getMessage();
     } catch (Exception e) {
@@ -171,7 +171,7 @@ public class IssuanceService {
 
       command = serviceId
           .exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Fungible : " + e.getMessage();
     } catch (Exception e) {
@@ -201,7 +201,7 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdString));
 
       command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty));
+      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Transfer Currency : " + e.getMessage();
     } catch (Exception e) {
@@ -231,7 +231,7 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, buyerParty, new Id(accountIdString));
 
       command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty));
+      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Transfer Property : " + e.getMessage();
     } catch (Exception e) {

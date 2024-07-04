@@ -72,7 +72,7 @@ public class UserProfileService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
 
   }
 
@@ -104,7 +104,7 @@ public class UserProfileService {
     return "Declined Profile Service!\n";
   }
 
-  public String requestCreateUserProfile(String operator, String user, String profileId,
+  public String requestCreateUserProfile(String operator, String user, String publicString, String profileId,
       String username, String firstName, String lastName, String fullName, LocalDate birthday,
       Optional<Gender> gender, Nationality nationality, String contactMail, Optional<Long> cellphoneNumber,
       Long taxId, Long socialSecurityId) {
@@ -126,6 +126,7 @@ public class UserProfileService {
 
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
+      String publicParty = userRepository.findById(publicString).getPartyId();
       System.out.println("ola2 " + user);
       List<com.daml.ledger.javaapi.data.Command> command = null;
       String servicId = userProfileManagerRepository.findById(operatorParty + userParty).getContractId();
@@ -145,7 +146,7 @@ public class UserProfileService {
               cellphoneNumber, taxId, socialSecurityId, observersMap)
           .commands();
       System.out.println("ola6 " + user);
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), Arrays.asList(publicParty));
       System.out.println("ola7 " + user);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Create User Profile: " + e.getMessage();
@@ -171,46 +172,46 @@ public class UserProfileService {
       var serviceId = new daml.marketplace.interface$.profilemanager.service.Service.ContractId(
           servicId);
       transactionService.submitTransaction(serviceId.exerciseUpdateUsername(username, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(
           serviceId.exerciseUpdateFirstName(firstName, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLastName(lastName, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty),null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateFullName(fullName, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateBirthday(birthday, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       if (gender.isPresent())
         transactionService.submitTransaction(
             serviceId.exerciseUpdateGender(gender, key).commands(),
-            Arrays.asList(userParty));
+            Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(
           serviceId.exerciseUpdateNationality(nationality, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(
           serviceId.exerciseUpdateContactMail(contactMail, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       if (cellphoneNumber.isPresent())
         transactionService.submitTransaction(
             serviceId.exerciseUpdateCellphoneNumber(cellphoneNumber, key)
                 .commands(),
-            Arrays.asList(userParty));
+            Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateTaxId(taxId, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(
           serviceId.exerciseUpdateSocialSecurityId(socialSecurityId, key).commands(),
-          Arrays.asList(userParty));
+          Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Profile: " + e.getMessage();

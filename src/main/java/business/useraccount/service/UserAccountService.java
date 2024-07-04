@@ -82,7 +82,7 @@ public class UserAccountService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty));
+    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
 
   }
 
@@ -136,7 +136,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestOpenAccount(userAccountId, description, controllers, observersMap)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Open Account : " + e.getMessage();
     } catch (Exception e) {
@@ -163,7 +163,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestCloseAccount(accountKey)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Close Account : " + e.getMessage();
     } catch (Exception e) {
@@ -201,7 +201,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestDeposit(quantity, accountKey)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Deposit Property Instrument : " + e.getMessage();
     } catch (Exception e) {
@@ -239,7 +239,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestDeposit(quantity, accountKey)
           .commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Deposit Currency Instrument : " + e.getMessage();
     } catch (Exception e) {
@@ -266,7 +266,7 @@ public class UserAccountService {
       var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
       command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Withdraw Property Instrument : " + e.getMessage();
     } catch (Exception e) {
@@ -293,7 +293,7 @@ public class UserAccountService {
       var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
       command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty));
+      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Withdraw Currency Instrument : " + e.getMessage();
     } catch (Exception e) {

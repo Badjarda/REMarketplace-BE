@@ -86,7 +86,7 @@ public class AccountManagerService {
                     .create(operatorParty, observersMap)
                     .commands();
             transactionService.submitTransaction(accFactoryCommands,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Account Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class AccountManagerService {
                     .create(operatorParty, holdingId, observersMap)
                     .commands();
             transactionService.submitTransaction(holdingFacCommands,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Holding Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -118,7 +118,7 @@ public class AccountManagerService {
                     .create(operatorParty, observers)
                     .commands();
             transactionService.submitTransaction(settlementFactoryCommands,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Settlement Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -141,7 +141,7 @@ public class AccountManagerService {
                     .create(factoryView, holdFactoryContractid, observersMap)
                     .commands();
             transactionService.submitTransaction(createHoldingFactoryRefCommand,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Holding Factory Reference : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -152,7 +152,7 @@ public class AccountManagerService {
 
     public String createRouteSettlement(String operatorParty, String userParty, Set<String> observers) {
         try {
-            List<List<String>> pathsToRootCustodian = Arrays.asList(Arrays.asList(userParty));
+            List<List<String>> pathsToRootCustodian = Arrays.asList(Arrays.asList(userParty), null);
 
             var cashRoute = new daml.daml.finance.settlement.hierarchy.Hierarchy(operatorParty, pathsToRootCustodian);
 
@@ -163,7 +163,7 @@ public class AccountManagerService {
                     .create(operatorParty, observers, paths)
                     .commands();
             transactionService.submitTransaction(createSettlementCommand,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
 
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Route Settlement: " + e.getMessage() + "\n";
@@ -193,7 +193,7 @@ public class AccountManagerService {
                             bool)
                     .commands();
             transactionService.submitTransaction(createLifecycleClaimRuleCommand,
-                    Arrays.asList(operatorParty));
+                    Arrays.asList(operatorParty), null);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Lifecycle Claim Rule : " + e.getMessage() + "\n";
         } catch (Exception e) {
