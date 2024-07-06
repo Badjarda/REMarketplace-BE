@@ -1,4 +1,4 @@
-package daml.marketplace.app.issuance.model;
+package daml.app.issuance.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -32,7 +32,7 @@ import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.marketplace.interface$.common.removable.Removable;
+import daml.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -47,7 +47,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class IssueRequest extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "App.Issuance.Model", "IssueRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "App.Issuance.Model", "IssueRequest");
 
   public static final Choice<IssueRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -55,7 +55,7 @@ public final class IssueRequest extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, IssueRequest> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.issuance.model.IssueRequest", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.app.issuance.model.IssueRequest", TEMPLATE_ID,
         ContractId::new, v -> IssueRequest.templateValueDecoder().decode(v), IssueRequest::fromJson,
         Contract::new, List.of(CHOICE_Archive));
 
@@ -218,7 +218,7 @@ public final class IssueRequest extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.issuance.model.IssueRequest(%s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.issuance.model.IssueRequest(%s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.issuanceId, this.description, this.quantity, this.account);
   }
 
@@ -233,9 +233,9 @@ public final class IssueRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId toInterface(
-        daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId(this.contractId);
+    public daml.interface$.issuance.choices.issuerequest.IssueRequest.ContractId toInterface(
+        daml.interface$.issuance.choices.issuerequest.IssueRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.issuance.choices.issuerequest.IssueRequest.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -243,7 +243,7 @@ public final class IssueRequest extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId interfaceContractId) {
+        daml.interface$.issuance.choices.issuerequest.IssueRequest.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -299,9 +299,9 @@ public final class IssueRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.CreateAnd toInterface(
-        daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.issuance.choices.issuerequest.IssueRequest.CreateAnd toInterface(
+        daml.interface$.issuance.choices.issuerequest.IssueRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.issuance.choices.issuerequest.IssueRequest.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {

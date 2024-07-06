@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdateMinimumSurfaceForSale extends DamlRecord<UpdateMinimumSurfaceForSale> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final BigDecimal newLandMinimumSurfaceForSale;
 
@@ -70,7 +70,7 @@ public class UpdateMinimumSurfaceForSale extends DamlRecord<UpdateMinimumSurface
     return JsonLfDecoders.record(Arrays.asList("newLandMinimumSurfaceForSale", "propertyKey"), name -> {
           switch (name) {
             case "newLandMinimumSurfaceForSale": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -110,7 +110,7 @@ public class UpdateMinimumSurfaceForSale extends DamlRecord<UpdateMinimumSurface
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateMinimumSurfaceForSale(%s, %s)",
+    return String.format("daml.interface$.propertymanager.service.UpdateMinimumSurfaceForSale(%s, %s)",
         this.newLandMinimumSurfaceForSale, this.propertyKey);
   }
 }

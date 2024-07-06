@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.operator;
+package daml.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.rolemanager.userrole.factory.Factory;
+import daml.interface$.rolemanager.userrole.factory.Factory;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class OView extends DamlRecord<OView> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final String operator;
 
@@ -66,7 +66,7 @@ public class OView extends DamlRecord<OView> {
     return JsonLfDecoders.record(Arrays.asList("operator", "userRoleFactoryCid"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "userRoleFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId::new));
+            case "userRoleFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.rolemanager.userrole.factory.Factory.ContractId::new));
             default: return null;
           }
         }
@@ -106,7 +106,7 @@ public class OView extends DamlRecord<OView> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.role.operator.OView(%s, %s)", this.operator,
+    return String.format("daml.interface$.role.operator.OView(%s, %s)", this.operator,
         this.userRoleFactoryCid);
   }
 }

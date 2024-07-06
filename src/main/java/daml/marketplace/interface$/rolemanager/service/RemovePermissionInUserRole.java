@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.service;
+package daml.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,8 +11,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class RemovePermissionInUserRole extends DamlRecord<RemovePermissionInUserRole> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final UserRoleKey userRole;
 
@@ -65,8 +65,8 @@ public class RemovePermissionInUserRole extends DamlRecord<RemovePermissionInUse
   public static JsonLfDecoder<RemovePermissionInUserRole> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRole", "permission"), name -> {
           switch (name) {
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
-            case "permission": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder());
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "permission": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder());
             default: return null;
           }
         }
@@ -106,7 +106,7 @@ public class RemovePermissionInUserRole extends DamlRecord<RemovePermissionInUse
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.rolemanager.service.RemovePermissionInUserRole(%s, %s)",
+    return String.format("daml.interface$.rolemanager.service.RemovePermissionInUserRole(%s, %s)",
         this.userRole, this.permission);
   }
 }

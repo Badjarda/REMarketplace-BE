@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.userprofile.common;
+package daml.interface$.profilemanager.userprofile.common;
 
 import com.daml.ledger.javaapi.data.Value;
 import com.daml.ledger.javaapi.data.codegen.DamlEnum;

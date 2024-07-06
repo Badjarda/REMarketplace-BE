@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.user;
+package daml.interface$.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Approve extends DamlRecord<Approve> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final String operator;
 
@@ -65,7 +65,7 @@ public class Approve extends DamlRecord<Approve> {
     return JsonLfDecoders.record(Arrays.asList("operator", "userRole"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserRoleKey.jsonDecoder());
             default: return null;
           }
         }
@@ -105,6 +105,6 @@ public class Approve extends DamlRecord<Approve> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.role.user.Approve(%s, %s)", this.operator, this.userRole);
+    return String.format("daml.interface$.role.user.Approve(%s, %s)", this.operator, this.userRole);
   }
 }

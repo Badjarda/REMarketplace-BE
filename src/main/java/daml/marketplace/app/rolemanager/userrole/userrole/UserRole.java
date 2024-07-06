@@ -1,4 +1,4 @@
-package daml.marketplace.app.rolemanager.userrole.userrole;
+package daml.app.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -31,7 +31,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.util.disclosure.Disclosure;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -45,7 +45,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class UserRole extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "App.RoleManager.UserRole.UserRole", "UserRole");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "App.RoleManager.UserRole.UserRole", "UserRole");
 
   public static final Choice<UserRole, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -53,7 +53,7 @@ public final class UserRole extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, UserRole> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.rolemanager.userrole.userrole.UserRole",
+      new ContractCompanion.WithoutKey<>("daml.app.rolemanager.userrole.userrole.UserRole",
         TEMPLATE_ID, ContractId::new, v -> UserRole.templateValueDecoder().decode(v),
         UserRole::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -158,7 +158,7 @@ public final class UserRole extends Template {
             case "id": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.daml.finance.interface$.types.common.types.Id.jsonDecoder());
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -207,7 +207,7 @@ public final class UserRole extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.rolemanager.userrole.userrole.UserRole(%s, %s, %s, %s, %s)",
+    return String.format("daml.app.rolemanager.userrole.userrole.UserRole(%s, %s, %s, %s, %s)",
         this.id, this.operator, this.description, this.permissions, this.observers);
   }
 
@@ -222,9 +222,9 @@ public final class UserRole extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.ContractId toInterface(
-        daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.ContractId(this.contractId);
+    public daml.interface$.rolemanager.userrole.userrole.UserRole.ContractId toInterface(
+        daml.interface$.rolemanager.userrole.userrole.UserRole.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.rolemanager.userrole.userrole.UserRole.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -232,7 +232,7 @@ public final class UserRole extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.ContractId interfaceContractId) {
+        daml.interface$.rolemanager.userrole.userrole.UserRole.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -289,9 +289,9 @@ public final class UserRole extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.CreateAnd toInterface(
-        daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.rolemanager.userrole.userrole.UserRole.CreateAnd toInterface(
+        daml.interface$.rolemanager.userrole.userrole.UserRole.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.rolemanager.userrole.userrole.UserRole.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

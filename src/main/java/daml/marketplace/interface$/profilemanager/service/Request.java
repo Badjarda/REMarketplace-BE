@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.service;
+package daml.interface$.profilemanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,13 +16,13 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.marketplace.interface$.profilemanager.userprofile.factory.Factory;
+import daml.interface$.profilemanager.userprofile.factory.Factory;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
 public final class Request {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.ProfileManager.Service", "Request");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.ProfileManager.Service", "Request");
 
   public static final Choice<Request, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -125,7 +125,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, RView> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.profilemanager.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
+            "daml.interface$.profilemanager.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
             RView::fromJson,List.of(CHOICE_Archive, CHOICE_Cancel, CHOICE_Reject, CHOICE_Approve));
     }
   }

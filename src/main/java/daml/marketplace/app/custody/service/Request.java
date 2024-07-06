@@ -1,4 +1,4 @@
-package daml.marketplace.app.custody.service;
+package daml.app.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -39,7 +39,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class Request extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "App.Custody.Service", "Request");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "App.Custody.Service", "Request");
 
   public static final Choice<Request, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -47,7 +47,7 @@ public final class Request extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Request> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.custody.service.Request", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.app.custody.service.Request", TEMPLATE_ID,
         ContractId::new, v -> Request.templateValueDecoder().decode(v), Request::fromJson,
         Contract::new, List.of(CHOICE_Archive));
 
@@ -171,7 +171,7 @@ public final class Request extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.custody.service.Request(%s, %s)", this.user, this.operator);
+    return String.format("daml.app.custody.service.Request(%s, %s)", this.user, this.operator);
   }
 
   public static final class ContractId extends com.daml.ledger.javaapi.data.codegen.ContractId<Request> implements Exercises<ExerciseCommand> {
@@ -185,13 +185,13 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.service.Request.ContractId toInterface(
-        daml.marketplace.interface$.custody.service.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.service.Request.ContractId(this.contractId);
+    public daml.interface$.custody.service.Request.ContractId toInterface(
+        daml.interface$.custody.service.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.service.Request.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.custody.service.Request.ContractId interfaceContractId) {
+        daml.interface$.custody.service.Request.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -243,9 +243,9 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.service.Request.CreateAnd toInterface(
-        daml.marketplace.interface$.custody.service.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.service.Request.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.custody.service.Request.CreateAnd toInterface(
+        daml.interface$.custody.service.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.service.Request.CreateAnd(COMPANION, this.createArguments);
     }
   }
 }

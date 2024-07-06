@@ -1,4 +1,4 @@
-package daml.marketplace.app.profilemanager.service;
+package daml.app.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -26,7 +26,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.profilemanager.userprofile.factory.Factory;
+import daml.interface$.profilemanager.userprofile.factory.Factory;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -40,7 +40,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class Offer extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "App.ProfileManager.Service", "Offer");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "App.ProfileManager.Service", "Offer");
 
   public static final Choice<Offer, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -48,7 +48,7 @@ public final class Offer extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Offer> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.profilemanager.service.Offer", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.app.profilemanager.service.Offer", TEMPLATE_ID,
         ContractId::new, v -> Offer.templateValueDecoder().decode(v), Offer::fromJson,
         Contract::new, List.of(CHOICE_Archive));
 
@@ -137,7 +137,7 @@ public final class Offer extends Template {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "userProfileFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.profilemanager.userprofile.factory.Factory.ContractId::new));
+            case "userProfileFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.profilemanager.userprofile.factory.Factory.ContractId::new));
             default: return null;
           }
         }
@@ -182,7 +182,7 @@ public final class Offer extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.profilemanager.service.Offer(%s, %s, %s)", this.operator,
+    return String.format("daml.app.profilemanager.service.Offer(%s, %s, %s)", this.operator,
         this.user, this.userProfileFactoryCid);
   }
 
@@ -197,13 +197,13 @@ public final class Offer extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.profilemanager.service.Offer.ContractId toInterface(
-        daml.marketplace.interface$.profilemanager.service.Offer.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.profilemanager.service.Offer.ContractId(this.contractId);
+    public daml.interface$.profilemanager.service.Offer.ContractId toInterface(
+        daml.interface$.profilemanager.service.Offer.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.profilemanager.service.Offer.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.profilemanager.service.Offer.ContractId interfaceContractId) {
+        daml.interface$.profilemanager.service.Offer.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -255,9 +255,9 @@ public final class Offer extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.profilemanager.service.Offer.CreateAnd toInterface(
-        daml.marketplace.interface$.profilemanager.service.Offer.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.profilemanager.service.Offer.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.profilemanager.service.Offer.CreateAnd toInterface(
+        daml.interface$.profilemanager.service.Offer.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.profilemanager.service.Offer.CreateAnd(COMPANION, this.createArguments);
     }
   }
 }

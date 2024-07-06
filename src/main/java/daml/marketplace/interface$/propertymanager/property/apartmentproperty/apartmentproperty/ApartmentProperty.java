@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
+package daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -26,7 +26,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public final class ApartmentProperty {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Property.ApartmentProperty.ApartmentProperty", "ApartmentProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Property.ApartmentProperty.ApartmentProperty", "ApartmentProperty");
 
   public static final Choice<ApartmentProperty, GetApartmentBathrooms, Long> CHOICE_GetApartmentBathrooms = 
       Choice.create("GetApartmentBathrooms", value$ -> value$.toValue(), value$ ->
@@ -53,6 +53,11 @@ public final class ApartmentProperty {
         GetApartmentPropertyPostalCode.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromText.decode(value$));
 
+  public static final Choice<ApartmentProperty, SetApartmentPrice, ContractId> CHOICE_SetApartmentPrice = 
+      Choice.create("SetApartmentPrice", value$ -> value$.toValue(), value$ ->
+        SetApartmentPrice.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
   public static final Choice<ApartmentProperty, GetApartmentInstrumentKey, InstrumentKey> CHOICE_GetApartmentInstrumentKey = 
       Choice.create("GetApartmentInstrumentKey", value$ -> value$.toValue(), value$ ->
         GetApartmentInstrumentKey.valueDecoder().decode(value$), value$ ->
@@ -66,11 +71,6 @@ public final class ApartmentProperty {
   public static final Choice<ApartmentProperty, SetApartmentInstalledEquipment, ContractId> CHOICE_SetApartmentInstalledEquipment = 
       Choice.create("SetApartmentInstalledEquipment", value$ -> value$.toValue(), value$ ->
         SetApartmentInstalledEquipment.valueDecoder().decode(value$), value$ ->
-        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
-
-  public static final Choice<ApartmentProperty, SetApartmentParkingSpaces, ContractId> CHOICE_SetApartmentParkingSpaces = 
-      Choice.create("SetApartmentParkingSpaces", value$ -> value$.toValue(), value$ ->
-        SetApartmentParkingSpaces.valueDecoder().decode(value$), value$ ->
         new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<ApartmentProperty, GetApartmentPropertyDistrict, String> CHOICE_GetApartmentPropertyDistrict = 
@@ -191,6 +191,16 @@ public final class ApartmentProperty {
         SetApartmentBedrooms.valueDecoder().decode(value$), value$ ->
         new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
+  public static final Choice<ApartmentProperty, GetApartmentPrice, BigDecimal> CHOICE_GetApartmentPrice = 
+      Choice.create("GetApartmentPrice", value$ -> value$.toValue(), value$ ->
+        GetApartmentPrice.valueDecoder().decode(value$), value$ ->
+        PrimitiveValueDecoders.fromNumeric.decode(value$));
+
+  public static final Choice<ApartmentProperty, SetApartmentParkingSpaces, ContractId> CHOICE_SetApartmentParkingSpaces = 
+      Choice.create("SetApartmentParkingSpaces", value$ -> value$.toValue(), value$ ->
+        SetApartmentParkingSpaces.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
   public static final Choice<ApartmentProperty, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
         daml.da.internal.template.Archive.valueDecoder().decode(value$), value$ ->
@@ -265,6 +275,14 @@ public final class ApartmentProperty {
       return exerciseGetApartmentPropertyPostalCode(new GetApartmentPropertyPostalCode());
     }
 
+    default Update<Exercised<ContractId>> exerciseSetApartmentPrice(SetApartmentPrice arg) {
+      return makeExerciseCmd(CHOICE_SetApartmentPrice, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetApartmentPrice(BigDecimal newApartmentPrice) {
+      return exerciseSetApartmentPrice(new SetApartmentPrice(newApartmentPrice));
+    }
+
     default Update<Exercised<InstrumentKey>> exerciseGetApartmentInstrumentKey(
         GetApartmentInstrumentKey arg) {
       return makeExerciseCmd(CHOICE_GetApartmentInstrumentKey, arg);
@@ -290,16 +308,6 @@ public final class ApartmentProperty {
     default Update<Exercised<ContractId>> exerciseSetApartmentInstalledEquipment(
         String newApartmentInstalledEquipment) {
       return exerciseSetApartmentInstalledEquipment(new SetApartmentInstalledEquipment(newApartmentInstalledEquipment));
-    }
-
-    default Update<Exercised<ContractId>> exerciseSetApartmentParkingSpaces(
-        SetApartmentParkingSpaces arg) {
-      return makeExerciseCmd(CHOICE_SetApartmentParkingSpaces, arg);
-    }
-
-    default Update<Exercised<ContractId>> exerciseSetApartmentParkingSpaces(
-        Long newApartmentParkingSpaces) {
-      return exerciseSetApartmentParkingSpaces(new SetApartmentParkingSpaces(newApartmentParkingSpaces));
     }
 
     default Update<Exercised<String>> exerciseGetApartmentPropertyDistrict(
@@ -519,6 +527,24 @@ public final class ApartmentProperty {
       return exerciseSetApartmentBedrooms(new SetApartmentBedrooms(newApartmentBedrooms));
     }
 
+    default Update<Exercised<BigDecimal>> exerciseGetApartmentPrice(GetApartmentPrice arg) {
+      return makeExerciseCmd(CHOICE_GetApartmentPrice, arg);
+    }
+
+    default Update<Exercised<BigDecimal>> exerciseGetApartmentPrice() {
+      return exerciseGetApartmentPrice(new GetApartmentPrice());
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetApartmentParkingSpaces(
+        SetApartmentParkingSpaces arg) {
+      return makeExerciseCmd(CHOICE_SetApartmentParkingSpaces, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetApartmentParkingSpaces(
+        Long newApartmentParkingSpaces) {
+      return exerciseSetApartmentParkingSpaces(new SetApartmentParkingSpaces(newApartmentParkingSpaces));
+    }
+
     default Update<Exercised<Unit>> exerciseArchive(daml.da.internal.template.Archive arg) {
       return makeExerciseCmd(CHOICE_Archive, arg);
     }
@@ -564,24 +590,24 @@ public final class ApartmentProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<ApartmentProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty", ApartmentProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty", ApartmentProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetApartmentPropertyCounty, CHOICE_GetApartmentFloor,
             CHOICE_GetApartmentElevator, CHOICE_GetView, CHOICE_SetApartmentBedrooms,
             CHOICE_SetApartmentElevator, CHOICE_SetApartmentUsableArea,
             CHOICE_SetApartmentGrossArea, CHOICE_GetApartmentInstrumentKey,
             CHOICE_SetApartmentBuildDate, CHOICE_Remove, CHOICE_GetApartmentBuildDate,
             CHOICE_GetApartmentParkingSpaces, CHOICE_SetApartmentPropertyDistrict,
-            CHOICE_GetApartmentInstalledEquipment, CHOICE_SetApartmentPropertyPostalCode,
-            CHOICE_SetApartmentBathrooms, CHOICE_GetApartmentAdditionalInformation,
-            CHOICE_SetApartmentInstalledEquipment, CHOICE_Archive,
-            CHOICE_GetApartmentPropertyDistrict, CHOICE_SetApartmentParkingSpaces,
+            CHOICE_GetApartmentInstalledEquipment, CHOICE_SetApartmentPrice,
+            CHOICE_SetApartmentPropertyPostalCode, CHOICE_SetApartmentBathrooms,
+            CHOICE_GetApartmentAdditionalInformation, CHOICE_SetApartmentInstalledEquipment,
+            CHOICE_Archive, CHOICE_GetApartmentPropertyDistrict, CHOICE_SetApartmentParkingSpaces,
             CHOICE_SetApartmentFloor, CHOICE_GetApartmentBathrooms,
             CHOICE_SetApartmentAdditionalInformation, CHOICE_GetApartmentDescription,
             CHOICE_GetApartmentPropertyPostalCode, CHOICE_GetApartmentGrossArea,
             CHOICE_GetApartmentUsableArea, CHOICE_GetApartmentPropertyAddress,
-            CHOICE_GetApartmentBedrooms, CHOICE_SetApartmentPropertyAddress,
-            CHOICE_SetApartmentDescription, CHOICE_GetApartmentPropertyCounty,
-            CHOICE_SetApartmentInstrumentKey));
+            CHOICE_SetApartmentPropertyAddress, CHOICE_SetApartmentDescription,
+            CHOICE_GetApartmentPrice, CHOICE_GetApartmentBedrooms,
+            CHOICE_GetApartmentPropertyCounty, CHOICE_SetApartmentInstrumentKey));
     }
   }
 }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SetCid extends DamlRecord<SetCid> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final GarageProperty.ContractId newCid;
 
@@ -58,7 +58,7 @@ public class SetCid extends DamlRecord<SetCid> {
   public static JsonLfDecoder<SetCid> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newCid"), name -> {
           switch (name) {
-            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId::new));
+            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId::new));
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetCid extends DamlRecord<SetCid> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.SetCid(%s)",
+    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.SetCid(%s)",
         this.newCid);
   }
 }

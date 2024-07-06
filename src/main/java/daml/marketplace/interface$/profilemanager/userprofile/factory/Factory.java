@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.userprofile.factory;
+package daml.interface$.profilemanager.userprofile.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,10 +17,10 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
-import daml.marketplace.interface$.common.types.UserProfileKey;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
-import daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile;
+import daml.interface$.common.types.UserProfileKey;
+import daml.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.profilemanager.userprofile.userprofile.UserProfile;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class Factory {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.ProfileManager.UserProfile.Factory", "Factory");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.ProfileManager.UserProfile.Factory", "Factory");
 
   public static final Choice<Factory, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -77,13 +77,13 @@ public final class Factory {
     }
 
     default Update<Exercised<UserProfile.ContractId>> exerciseCreate(UserProfileKey userProfileKey,
-        String username, String firstName, String lastName, String fullName, LocalDate birthday,
-        Optional<Gender> gender, Nationality nationality, String contactMail,
-        Optional<Long> cellphoneNumber, Long taxId, Long socialSecurityId,
+        String username, String firstName, String lastName, String fullName, String password,
+        LocalDate birthday, Optional<Gender> gender, Nationality nationality, String contactMail,
+        Optional<Long> cellphoneNumber, Long idNumber, Long taxId, Long socialSecurityId,
         Map<String, Set<String>> observers) {
       return exerciseCreate(new Create(userProfileKey, username, firstName, lastName, fullName,
-          birthday, gender, nationality, contactMail, cellphoneNumber, taxId, socialSecurityId,
-          observers));
+          password, birthday, gender, nationality, contactMail, cellphoneNumber, idNumber, taxId,
+          socialSecurityId, observers));
     }
   }
 
@@ -114,7 +114,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.profilemanager.userprofile.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.profilemanager.userprofile.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

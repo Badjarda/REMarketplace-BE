@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.service;
+package daml.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,8 +12,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserProfileKey;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.common.types.UserProfileKey;
+import daml.interface$.profilemanager.userprofile.common.Gender;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -26,7 +26,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateGender extends DamlRecord<UpdateGender> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final Optional<Gender> newGender;
 
@@ -68,8 +68,8 @@ public class UpdateGender extends DamlRecord<UpdateGender> {
   public static JsonLfDecoder<UpdateGender> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newGender", "userProfileKey"), name -> {
           switch (name) {
-            case "newGender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.marketplace.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
-            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserProfileKey.jsonDecoder());
+            case "newGender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
+            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserProfileKey.jsonDecoder());
             default: return null;
           }
         }
@@ -109,7 +109,7 @@ public class UpdateGender extends DamlRecord<UpdateGender> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.profilemanager.service.UpdateGender(%s, %s)",
+    return String.format("daml.interface$.profilemanager.service.UpdateGender(%s, %s)",
         this.newGender, this.userProfileKey);
   }
 }

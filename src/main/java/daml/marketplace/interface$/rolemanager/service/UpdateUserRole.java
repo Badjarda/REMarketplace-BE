@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.service;
+package daml.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,8 +12,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdateUserRole extends DamlRecord<UpdateUserRole> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final UserRoleKey userRole;
 
@@ -66,8 +66,8 @@ public class UpdateUserRole extends DamlRecord<UpdateUserRole> {
   public static JsonLfDecoder<UpdateUserRole> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRole", "permissions"), name -> {
           switch (name) {
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
-            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             default: return null;
           }
         }
@@ -107,7 +107,7 @@ public class UpdateUserRole extends DamlRecord<UpdateUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.rolemanager.service.UpdateUserRole(%s, %s)",
+    return String.format("daml.interface$.rolemanager.service.UpdateUserRole(%s, %s)",
         this.userRole, this.permissions);
   }
 }

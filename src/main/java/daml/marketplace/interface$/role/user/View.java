@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.user;
+package daml.interface$.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,6 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserProfileKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,18 +23,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class View extends DamlRecord<View> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final String operator;
 
   public final String user;
 
-  public final UserProfileKey profileKey;
-
-  public View(String operator, String user, UserProfileKey profileKey) {
+  public View(String operator, String user) {
     this.operator = operator;
     this.user = user;
-    this.profileKey = profileKey;
   }
 
   /**
@@ -49,33 +45,30 @@ public class View extends DamlRecord<View> {
   public static ValueDecoder<View> valueDecoder() throws IllegalArgumentException {
     return value$ -> {
       Value recordValue$ = value$;
-      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(3,0,
+      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(2,0,
           recordValue$);
       String operator = PrimitiveValueDecoders.fromParty.decode(fields$.get(0).getValue());
       String user = PrimitiveValueDecoders.fromParty.decode(fields$.get(1).getValue());
-      UserProfileKey profileKey = UserProfileKey.valueDecoder().decode(fields$.get(2).getValue());
-      return new View(operator, user, profileKey);
+      return new View(operator, user);
     } ;
   }
 
   public com.daml.ledger.javaapi.data.DamlRecord toValue() {
-    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(3);
+    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(2);
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("operator", new Party(this.operator)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("user", new Party(this.user)));
-    fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("profileKey", this.profileKey.toValue()));
     return new com.daml.ledger.javaapi.data.DamlRecord(fields);
   }
 
   public static JsonLfDecoder<View> jsonDecoder() {
-    return JsonLfDecoders.record(Arrays.asList("operator", "user", "profileKey"), name -> {
+    return JsonLfDecoders.record(Arrays.asList("operator", "user"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "profileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, daml.marketplace.interface$.common.types.UserProfileKey.jsonDecoder());
             default: return null;
           }
         }
-        , (Object[] args) -> new View(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2])));
+        , (Object[] args) -> new View(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1])));
   }
 
   public static View fromJson(String json) throws JsonLfDecoder.Error {
@@ -85,8 +78,7 @@ public class View extends DamlRecord<View> {
   public JsonLfEncoder jsonEncoder() {
     return JsonLfEncoders.record(
         JsonLfEncoders.Field.of("operator", apply(JsonLfEncoders::party, operator)),
-        JsonLfEncoders.Field.of("user", apply(JsonLfEncoders::party, user)),
-        JsonLfEncoders.Field.of("profileKey", apply(UserProfileKey::jsonEncoder, profileKey)));
+        JsonLfEncoders.Field.of("user", apply(JsonLfEncoders::party, user)));
   }
 
   @Override
@@ -101,18 +93,16 @@ public class View extends DamlRecord<View> {
       return false;
     }
     View other = (View) object;
-    return Objects.equals(this.operator, other.operator) && Objects.equals(this.user, other.user) &&
-        Objects.equals(this.profileKey, other.profileKey);
+    return Objects.equals(this.operator, other.operator) && Objects.equals(this.user, other.user);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.operator, this.user, this.profileKey);
+    return Objects.hash(this.operator, this.user);
   }
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.role.user.View(%s, %s, %s)", this.operator, this.user,
-        this.profileKey);
+    return String.format("daml.interface$.role.user.View(%s, %s)", this.operator, this.user);
   }
 }

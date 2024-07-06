@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory;
+package daml.interface$.propertymanager.property.warehouseproperty.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,9 +18,9 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.common.types.PropertyKey;
-import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
-import daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty;
+import daml.interface$.common.types.PropertyKey;
+import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Factory {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Property.WarehouseProperty.Factory", "Factory");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Property.WarehouseProperty.Factory", "Factory");
 
   public static final Choice<Factory, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -77,14 +77,15 @@ public final class Factory {
     }
 
     default Update<Exercised<WarehouseProperty.ContractId>> exerciseCreate(InstrumentKey instrument,
-        PropertyKey propertyKey, String propertyAddress, String propertyPostalCode,
-        String propertyDistrict, String propertyCounty, WarehouseType warehouseType,
-        BigDecimal grossArea, BigDecimal usableArea, Long floors, LocalDate buildDate,
-        String installedEquipment, String additionalInformation, String description,
-        Map<String, Set<String>> observers) {
-      return exerciseCreate(new Create(instrument, propertyKey, propertyAddress, propertyPostalCode,
-          propertyDistrict, propertyCounty, warehouseType, grossArea, usableArea, floors, buildDate,
-          installedEquipment, additionalInformation, description, observers));
+        BigDecimal warehousePrice, PropertyKey propertyKey, String propertyAddress,
+        String propertyPostalCode, String propertyDistrict, String propertyCounty,
+        WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors,
+        LocalDate buildDate, String installedEquipment, String additionalInformation,
+        String description, Map<String, Set<String>> observers) {
+      return exerciseCreate(new Create(instrument, warehousePrice, propertyKey, propertyAddress,
+          propertyPostalCode, propertyDistrict, propertyCounty, warehouseType, grossArea,
+          usableArea, floors, buildDate, installedEquipment, additionalInformation, description,
+          observers));
     }
   }
 
@@ -115,7 +116,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.warehouseproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

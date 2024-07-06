@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -21,7 +21,7 @@ import java.lang.String;
 import java.util.List;
 
 public final class Offer {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Service", "Offer");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Service", "Offer");
 
   public static final Choice<Offer, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -123,7 +123,7 @@ public final class Offer {
   public static final class INTERFACE_ extends InterfaceCompanion<Offer, ContractId, OView> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.service.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
+            "daml.interface$.propertymanager.service.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
             OView::fromJson,List.of(CHOICE_Archive, CHOICE_Accept, CHOICE_Decline, CHOICE_Withdraw))
           ;
     }

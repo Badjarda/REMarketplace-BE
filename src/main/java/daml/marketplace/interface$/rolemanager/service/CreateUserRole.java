@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.service;
+package daml.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -16,7 +16,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CreateUserRole extends DamlRecord<CreateUserRole> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final Id id;
 
@@ -88,7 +88,7 @@ public class CreateUserRole extends DamlRecord<CreateUserRole> {
           switch (name) {
             case "id": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.daml.finance.interface$.types.common.types.Id.jsonDecoder());
             case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -132,7 +132,7 @@ public class CreateUserRole extends DamlRecord<CreateUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.rolemanager.service.CreateUserRole(%s, %s, %s, %s)",
+    return String.format("daml.interface$.rolemanager.service.CreateUserRole(%s, %s, %s, %s)",
         this.id, this.description, this.permissions, this.observers);
   }
 }

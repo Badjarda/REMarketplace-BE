@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -20,8 +20,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.propertymanager.property.common.LandType;
-import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.interface$.propertymanager.property.common.LandType;
+import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
 import java.lang.Boolean;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
@@ -37,11 +37,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandProperty> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final Id id;
 
   public final InstrumentKey landInstrument;
+
+  public final BigDecimal landPrice;
 
   public final String propertyAddress;
 
@@ -73,14 +75,16 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
 
   public final Map<String, Set<String>> observers;
 
-  public RequestCreateLandProperty(Id id, InstrumentKey landInstrument, String propertyAddress,
-      String propertyPostalCode, String propertyDistrict, String propertyCounty, LandType landType,
-      BigDecimal totalLandArea, BigDecimal minimumSurfaceForSale, BigDecimal buildableArea,
-      Long buildableFloors, Boolean accessByRoad, String installedEquipment,
+  public RequestCreateLandProperty(Id id, InstrumentKey landInstrument, BigDecimal landPrice,
+      String propertyAddress, String propertyPostalCode, String propertyDistrict,
+      String propertyCounty, LandType landType, BigDecimal totalLandArea,
+      BigDecimal minimumSurfaceForSale, BigDecimal buildableArea, Long buildableFloors,
+      Boolean accessByRoad, String installedEquipment,
       List<ViableConstructionTypes> viableConstructionTypes, String additionalInformation,
       String description, Map<String, Set<String>> observers) {
     this.id = id;
     this.landInstrument = landInstrument;
+    this.landPrice = landPrice;
     this.propertyAddress = propertyAddress;
     this.propertyPostalCode = propertyPostalCode;
     this.propertyDistrict = propertyDistrict;
@@ -110,45 +114,47 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
       IllegalArgumentException {
     return value$ -> {
       Value recordValue$ = value$;
-      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(17,0,
+      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(18,0,
           recordValue$);
       Id id = Id.valueDecoder().decode(fields$.get(0).getValue());
       InstrumentKey landInstrument = InstrumentKey.valueDecoder().decode(fields$.get(1).getValue());
-      String propertyAddress = PrimitiveValueDecoders.fromText.decode(fields$.get(2).getValue());
-      String propertyPostalCode = PrimitiveValueDecoders.fromText.decode(fields$.get(3).getValue());
-      String propertyDistrict = PrimitiveValueDecoders.fromText.decode(fields$.get(4).getValue());
-      String propertyCounty = PrimitiveValueDecoders.fromText.decode(fields$.get(5).getValue());
-      LandType landType = LandType.valueDecoder().decode(fields$.get(6).getValue());
+      BigDecimal landPrice = PrimitiveValueDecoders.fromNumeric.decode(fields$.get(2).getValue());
+      String propertyAddress = PrimitiveValueDecoders.fromText.decode(fields$.get(3).getValue());
+      String propertyPostalCode = PrimitiveValueDecoders.fromText.decode(fields$.get(4).getValue());
+      String propertyDistrict = PrimitiveValueDecoders.fromText.decode(fields$.get(5).getValue());
+      String propertyCounty = PrimitiveValueDecoders.fromText.decode(fields$.get(6).getValue());
+      LandType landType = LandType.valueDecoder().decode(fields$.get(7).getValue());
       BigDecimal totalLandArea = PrimitiveValueDecoders.fromNumeric
-          .decode(fields$.get(7).getValue());
-      BigDecimal minimumSurfaceForSale = PrimitiveValueDecoders.fromNumeric
           .decode(fields$.get(8).getValue());
-      BigDecimal buildableArea = PrimitiveValueDecoders.fromNumeric
+      BigDecimal minimumSurfaceForSale = PrimitiveValueDecoders.fromNumeric
           .decode(fields$.get(9).getValue());
-      Long buildableFloors = PrimitiveValueDecoders.fromInt64.decode(fields$.get(10).getValue());
-      Boolean accessByRoad = PrimitiveValueDecoders.fromBool.decode(fields$.get(11).getValue());
+      BigDecimal buildableArea = PrimitiveValueDecoders.fromNumeric
+          .decode(fields$.get(10).getValue());
+      Long buildableFloors = PrimitiveValueDecoders.fromInt64.decode(fields$.get(11).getValue());
+      Boolean accessByRoad = PrimitiveValueDecoders.fromBool.decode(fields$.get(12).getValue());
       String installedEquipment = PrimitiveValueDecoders.fromText
-          .decode(fields$.get(12).getValue());
+          .decode(fields$.get(13).getValue());
       List<ViableConstructionTypes> viableConstructionTypes = PrimitiveValueDecoders.fromList(
-            ViableConstructionTypes.valueDecoder()).decode(fields$.get(13).getValue());
+            ViableConstructionTypes.valueDecoder()).decode(fields$.get(14).getValue());
       String additionalInformation = PrimitiveValueDecoders.fromText
-          .decode(fields$.get(14).getValue());
-      String description = PrimitiveValueDecoders.fromText.decode(fields$.get(15).getValue());
+          .decode(fields$.get(15).getValue());
+      String description = PrimitiveValueDecoders.fromText.decode(fields$.get(16).getValue());
       Map<String, Set<String>> observers = PrimitiveValueDecoders.fromGenMap(
             PrimitiveValueDecoders.fromText,
             Set.<java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty))
-          .decode(fields$.get(16).getValue());
-      return new RequestCreateLandProperty(id, landInstrument, propertyAddress, propertyPostalCode,
-          propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale,
-          buildableArea, buildableFloors, accessByRoad, installedEquipment, viableConstructionTypes,
-          additionalInformation, description, observers);
+          .decode(fields$.get(17).getValue());
+      return new RequestCreateLandProperty(id, landInstrument, landPrice, propertyAddress,
+          propertyPostalCode, propertyDistrict, propertyCounty, landType, totalLandArea,
+          minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, installedEquipment,
+          viableConstructionTypes, additionalInformation, description, observers);
     } ;
   }
 
   public com.daml.ledger.javaapi.data.DamlRecord toValue() {
-    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(17);
+    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(18);
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("id", this.id.toValue()));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("landInstrument", this.landInstrument.toValue()));
+    fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("landPrice", new Numeric(this.landPrice)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("propertyAddress", new Text(this.propertyAddress)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("propertyPostalCode", new Text(this.propertyPostalCode)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("propertyDistrict", new Text(this.propertyDistrict)));
@@ -170,29 +176,30 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
   }
 
   public static JsonLfDecoder<RequestCreateLandProperty> jsonDecoder() {
-    return JsonLfDecoders.record(Arrays.asList("id", "landInstrument", "propertyAddress", "propertyPostalCode", "propertyDistrict", "propertyCounty", "landType", "totalLandArea", "minimumSurfaceForSale", "buildableArea", "buildableFloors", "accessByRoad", "installedEquipment", "viableConstructionTypes", "additionalInformation", "description", "observers"), name -> {
+    return JsonLfDecoders.record(Arrays.asList("id", "landInstrument", "landPrice", "propertyAddress", "propertyPostalCode", "propertyDistrict", "propertyCounty", "landType", "totalLandArea", "minimumSurfaceForSale", "buildableArea", "buildableFloors", "accessByRoad", "installedEquipment", "viableConstructionTypes", "additionalInformation", "description", "observers"), name -> {
           switch (name) {
             case "id": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.daml.finance.interface$.types.common.types.Id.jsonDecoder());
             case "landInstrument": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.daml.finance.interface$.types.common.types.InstrumentKey.jsonDecoder());
-            case "propertyAddress": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "landType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, daml.marketplace.interface$.propertymanager.property.common.LandType.jsonDecoder());
-            case "totalLandArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "minimumSurfaceForSale": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "buildableArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "buildableFloors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
-            case "accessByRoad": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.bool);
-            case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "viableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
-            case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(15, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
+            case "landPrice": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "propertyAddress": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "landType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, daml.interface$.propertymanager.property.common.LandType.jsonDecoder());
+            case "totalLandArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "minimumSurfaceForSale": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "buildableArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "buildableFloors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
+            case "accessByRoad": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.bool);
+            case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "viableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
+            case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(15, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(17, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
         }
-        , (Object[] args) -> new RequestCreateLandProperty(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7]), JsonLfDecoders.cast(args[8]), JsonLfDecoders.cast(args[9]), JsonLfDecoders.cast(args[10]), JsonLfDecoders.cast(args[11]), JsonLfDecoders.cast(args[12]), JsonLfDecoders.cast(args[13]), JsonLfDecoders.cast(args[14]), JsonLfDecoders.cast(args[15]), JsonLfDecoders.cast(args[16])));
+        , (Object[] args) -> new RequestCreateLandProperty(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7]), JsonLfDecoders.cast(args[8]), JsonLfDecoders.cast(args[9]), JsonLfDecoders.cast(args[10]), JsonLfDecoders.cast(args[11]), JsonLfDecoders.cast(args[12]), JsonLfDecoders.cast(args[13]), JsonLfDecoders.cast(args[14]), JsonLfDecoders.cast(args[15]), JsonLfDecoders.cast(args[16]), JsonLfDecoders.cast(args[17])));
   }
 
   public static RequestCreateLandProperty fromJson(String json) throws JsonLfDecoder.Error {
@@ -202,6 +209,7 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
   public JsonLfEncoder jsonEncoder() {
     return JsonLfEncoders.record(JsonLfEncoders.Field.of("id", apply(Id::jsonEncoder, id)),
         JsonLfEncoders.Field.of("landInstrument", apply(InstrumentKey::jsonEncoder, landInstrument)),
+        JsonLfEncoders.Field.of("landPrice", apply(JsonLfEncoders::numeric, landPrice)),
         JsonLfEncoders.Field.of("propertyAddress", apply(JsonLfEncoders::text, propertyAddress)),
         JsonLfEncoders.Field.of("propertyPostalCode", apply(JsonLfEncoders::text, propertyPostalCode)),
         JsonLfEncoders.Field.of("propertyDistrict", apply(JsonLfEncoders::text, propertyDistrict)),
@@ -233,6 +241,7 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
     RequestCreateLandProperty other = (RequestCreateLandProperty) object;
     return Objects.equals(this.id, other.id) &&
         Objects.equals(this.landInstrument, other.landInstrument) &&
+        Objects.equals(this.landPrice, other.landPrice) &&
         Objects.equals(this.propertyAddress, other.propertyAddress) &&
         Objects.equals(this.propertyPostalCode, other.propertyPostalCode) &&
         Objects.equals(this.propertyDistrict, other.propertyDistrict) &&
@@ -252,17 +261,17 @@ public class RequestCreateLandProperty extends DamlRecord<RequestCreateLandPrope
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.id, this.landInstrument, this.propertyAddress, this.propertyPostalCode,
-        this.propertyDistrict, this.propertyCounty, this.landType, this.totalLandArea,
-        this.minimumSurfaceForSale, this.buildableArea, this.buildableFloors, this.accessByRoad,
-        this.installedEquipment, this.viableConstructionTypes, this.additionalInformation,
-        this.description, this.observers);
+    return Objects.hash(this.id, this.landInstrument, this.landPrice, this.propertyAddress,
+        this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.landType,
+        this.totalLandArea, this.minimumSurfaceForSale, this.buildableArea, this.buildableFloors,
+        this.accessByRoad, this.installedEquipment, this.viableConstructionTypes,
+        this.additionalInformation, this.description, this.observers);
   }
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.service.RequestCreateLandProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-        this.id, this.landInstrument, this.propertyAddress, this.propertyPostalCode,
+    return String.format("daml.interface$.propertymanager.service.RequestCreateLandProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        this.id, this.landInstrument, this.landPrice, this.propertyAddress, this.propertyPostalCode,
         this.propertyDistrict, this.propertyCounty, this.landType, this.totalLandArea,
         this.minimumSurfaceForSale, this.buildableArea, this.buildableFloors, this.accessByRoad,
         this.installedEquipment, this.viableConstructionTypes, this.additionalInformation,

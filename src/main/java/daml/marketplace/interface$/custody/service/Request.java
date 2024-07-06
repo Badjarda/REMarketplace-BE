@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -24,7 +24,7 @@ import java.lang.String;
 import java.util.List;
 
 public final class Request {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.Custody.Service", "Request");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.Custody.Service", "Request");
 
   public static final Choice<Request, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -129,7 +129,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, RView> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.custody.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
+            "daml.interface$.custody.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
             RView::fromJson,List.of(CHOICE_Archive, CHOICE_Cancel, CHOICE_Reject, CHOICE_Approve));
     }
   }

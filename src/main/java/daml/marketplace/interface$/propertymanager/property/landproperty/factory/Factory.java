@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.landproperty.factory;
+package daml.interface$.propertymanager.property.landproperty.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,10 +18,10 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.common.types.PropertyKey;
-import daml.marketplace.interface$.propertymanager.property.common.LandType;
-import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
-import daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty;
+import daml.interface$.common.types.PropertyKey;
+import daml.interface$.propertymanager.property.common.LandType;
+import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty;
 import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Factory {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Property.LandProperty.Factory", "Factory");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Property.LandProperty.Factory", "Factory");
 
   public static final Choice<Factory, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -78,16 +78,16 @@ public final class Factory {
     }
 
     default Update<Exercised<LandProperty.ContractId>> exerciseCreate(InstrumentKey instrument,
-        PropertyKey propertyKey, String propertyAddress, String propertyPostalCode,
-        String propertyDistrict, String propertyCounty, LandType landType, BigDecimal totalLandArea,
-        BigDecimal minimumSurfaceForSale, BigDecimal buildableArea, Long buildableFloors,
-        Boolean accessByRoad, String installedEquipment,
-        List<ViableConstructionTypes> viableConstructionTypes, String additionalInformation,
-        String description, Map<String, Set<String>> observers) {
-      return exerciseCreate(new Create(instrument, propertyKey, propertyAddress, propertyPostalCode,
-          propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale,
-          buildableArea, buildableFloors, accessByRoad, installedEquipment, viableConstructionTypes,
-          additionalInformation, description, observers));
+        BigDecimal landPrice, PropertyKey propertyKey, String propertyAddress,
+        String propertyPostalCode, String propertyDistrict, String propertyCounty,
+        LandType landType, BigDecimal totalLandArea, BigDecimal minimumSurfaceForSale,
+        BigDecimal buildableArea, Long buildableFloors, Boolean accessByRoad,
+        String installedEquipment, List<ViableConstructionTypes> viableConstructionTypes,
+        String additionalInformation, String description, Map<String, Set<String>> observers) {
+      return exerciseCreate(new Create(instrument, landPrice, propertyKey, propertyAddress,
+          propertyPostalCode, propertyDistrict, propertyCounty, landType, totalLandArea,
+          minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, installedEquipment,
+          viableConstructionTypes, additionalInformation, description, observers));
     }
   }
 
@@ -118,7 +118,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.landproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

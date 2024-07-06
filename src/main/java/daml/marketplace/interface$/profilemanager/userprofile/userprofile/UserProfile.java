@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
+package daml.interface$.profilemanager.userprofile.userprofile;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,8 +16,8 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -26,20 +26,11 @@ import java.util.List;
 import java.util.Optional;
 
 public final class UserProfile {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
-
-  public static final Choice<UserProfile, GetBirthday, LocalDate> CHOICE_GetBirthday = 
-      Choice.create("GetBirthday", value$ -> value$.toValue(), value$ -> GetBirthday.valueDecoder()
-        .decode(value$), value$ -> PrimitiveValueDecoders.fromDate.decode(value$));
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
 
   public static final Choice<UserProfile, SetLastName, ContractId> CHOICE_SetLastName = 
       Choice.create("SetLastName", value$ -> value$.toValue(), value$ -> SetLastName.valueDecoder()
         .decode(value$), value$ ->
-        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
-
-  public static final Choice<UserProfile, SetSocialSecurityId, ContractId> CHOICE_SetSocialSecurityId = 
-      Choice.create("SetSocialSecurityId", value$ -> value$.toValue(), value$ ->
-        SetSocialSecurityId.valueDecoder().decode(value$), value$ ->
         new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<UserProfile, GetView, View> CHOICE_GetView = 
@@ -64,6 +55,10 @@ public final class UserProfile {
       Choice.create("GetFirstName", value$ -> value$.toValue(), value$ ->
         GetFirstName.valueDecoder().decode(value$), value$ -> PrimitiveValueDecoders.fromText
         .decode(value$));
+
+  public static final Choice<UserProfile, GetIdNumber, Long> CHOICE_GetIdNumber = 
+      Choice.create("GetIdNumber", value$ -> value$.toValue(), value$ -> GetIdNumber.valueDecoder()
+        .decode(value$), value$ -> PrimitiveValueDecoders.fromInt64.decode(value$));
 
   public static final Choice<UserProfile, GetGender, Optional<Gender>> CHOICE_GetGender = 
       Choice.create("GetGender", value$ -> value$.toValue(), value$ -> GetGender.valueDecoder()
@@ -93,15 +88,38 @@ public final class UserProfile {
       Choice.create("GetUsername", value$ -> value$.toValue(), value$ -> GetUsername.valueDecoder()
         .decode(value$), value$ -> PrimitiveValueDecoders.fromText.decode(value$));
 
+  public static final Choice<UserProfile, SetIdNumber, ContractId> CHOICE_SetIdNumber = 
+      Choice.create("SetIdNumber", value$ -> value$.toValue(), value$ -> SetIdNumber.valueDecoder()
+        .decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
+  public static final Choice<UserProfile, GetBirthday, LocalDate> CHOICE_GetBirthday = 
+      Choice.create("GetBirthday", value$ -> value$.toValue(), value$ -> GetBirthday.valueDecoder()
+        .decode(value$), value$ -> PrimitiveValueDecoders.fromDate.decode(value$));
+
   public static final Choice<UserProfile, GetCellphoneNumber, Optional<Long>> CHOICE_GetCellphoneNumber = 
       Choice.create("GetCellphoneNumber", value$ -> value$.toValue(), value$ ->
         GetCellphoneNumber.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromOptional(PrimitiveValueDecoders.fromInt64).decode(value$));
 
+  public static final Choice<UserProfile, GetPassword, String> CHOICE_GetPassword = 
+      Choice.create("GetPassword", value$ -> value$.toValue(), value$ -> GetPassword.valueDecoder()
+        .decode(value$), value$ -> PrimitiveValueDecoders.fromText.decode(value$));
+
   public static final Choice<UserProfile, GetContactMail, String> CHOICE_GetContactMail = 
       Choice.create("GetContactMail", value$ -> value$.toValue(), value$ ->
         GetContactMail.valueDecoder().decode(value$), value$ -> PrimitiveValueDecoders.fromText
         .decode(value$));
+
+  public static final Choice<UserProfile, SetPassword, ContractId> CHOICE_SetPassword = 
+      Choice.create("SetPassword", value$ -> value$.toValue(), value$ -> SetPassword.valueDecoder()
+        .decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
+  public static final Choice<UserProfile, SetSocialSecurityId, ContractId> CHOICE_SetSocialSecurityId = 
+      Choice.create("SetSocialSecurityId", value$ -> value$.toValue(), value$ ->
+        SetSocialSecurityId.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<UserProfile, SetFirstName, ContractId> CHOICE_SetFirstName = 
       Choice.create("SetFirstName", value$ -> value$.toValue(), value$ ->
@@ -168,28 +186,12 @@ public final class UserProfile {
   }
 
   public interface Exercises<Cmd> extends com.daml.ledger.javaapi.data.codegen.Exercises.Archive<Cmd> {
-    default Update<Exercised<LocalDate>> exerciseGetBirthday(GetBirthday arg) {
-      return makeExerciseCmd(CHOICE_GetBirthday, arg);
-    }
-
-    default Update<Exercised<LocalDate>> exerciseGetBirthday() {
-      return exerciseGetBirthday(new GetBirthday());
-    }
-
     default Update<Exercised<ContractId>> exerciseSetLastName(SetLastName arg) {
       return makeExerciseCmd(CHOICE_SetLastName, arg);
     }
 
     default Update<Exercised<ContractId>> exerciseSetLastName(String newLastName) {
       return exerciseSetLastName(new SetLastName(newLastName));
-    }
-
-    default Update<Exercised<ContractId>> exerciseSetSocialSecurityId(SetSocialSecurityId arg) {
-      return makeExerciseCmd(CHOICE_SetSocialSecurityId, arg);
-    }
-
-    default Update<Exercised<ContractId>> exerciseSetSocialSecurityId(Long newSocialSecurityId) {
-      return exerciseSetSocialSecurityId(new SetSocialSecurityId(newSocialSecurityId));
     }
 
     default Update<Exercised<View>> exerciseGetView(GetView arg) {
@@ -230,6 +232,14 @@ public final class UserProfile {
 
     default Update<Exercised<String>> exerciseGetFirstName() {
       return exerciseGetFirstName(new GetFirstName());
+    }
+
+    default Update<Exercised<Long>> exerciseGetIdNumber(GetIdNumber arg) {
+      return makeExerciseCmd(CHOICE_GetIdNumber, arg);
+    }
+
+    default Update<Exercised<Long>> exerciseGetIdNumber() {
+      return exerciseGetIdNumber(new GetIdNumber());
     }
 
     default Update<Exercised<Optional<Gender>>> exerciseGetGender(GetGender arg) {
@@ -281,6 +291,22 @@ public final class UserProfile {
       return exerciseGetUsername(new GetUsername());
     }
 
+    default Update<Exercised<ContractId>> exerciseSetIdNumber(SetIdNumber arg) {
+      return makeExerciseCmd(CHOICE_SetIdNumber, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetIdNumber(Long newIdNumber) {
+      return exerciseSetIdNumber(new SetIdNumber(newIdNumber));
+    }
+
+    default Update<Exercised<LocalDate>> exerciseGetBirthday(GetBirthday arg) {
+      return makeExerciseCmd(CHOICE_GetBirthday, arg);
+    }
+
+    default Update<Exercised<LocalDate>> exerciseGetBirthday() {
+      return exerciseGetBirthday(new GetBirthday());
+    }
+
     default Update<Exercised<Optional<Long>>> exerciseGetCellphoneNumber(GetCellphoneNumber arg) {
       return makeExerciseCmd(CHOICE_GetCellphoneNumber, arg);
     }
@@ -289,12 +315,36 @@ public final class UserProfile {
       return exerciseGetCellphoneNumber(new GetCellphoneNumber());
     }
 
+    default Update<Exercised<String>> exerciseGetPassword(GetPassword arg) {
+      return makeExerciseCmd(CHOICE_GetPassword, arg);
+    }
+
+    default Update<Exercised<String>> exerciseGetPassword() {
+      return exerciseGetPassword(new GetPassword());
+    }
+
     default Update<Exercised<String>> exerciseGetContactMail(GetContactMail arg) {
       return makeExerciseCmd(CHOICE_GetContactMail, arg);
     }
 
     default Update<Exercised<String>> exerciseGetContactMail() {
       return exerciseGetContactMail(new GetContactMail());
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetPassword(SetPassword arg) {
+      return makeExerciseCmd(CHOICE_SetPassword, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetPassword(String newPassword) {
+      return exerciseSetPassword(new SetPassword(newPassword));
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetSocialSecurityId(SetSocialSecurityId arg) {
+      return makeExerciseCmd(CHOICE_SetSocialSecurityId, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetSocialSecurityId(Long newSocialSecurityId) {
+      return exerciseSetSocialSecurityId(new SetSocialSecurityId(newSocialSecurityId));
     }
 
     default Update<Exercised<ContractId>> exerciseSetFirstName(SetFirstName arg) {
@@ -397,14 +447,15 @@ public final class UserProfile {
   public static final class INTERFACE_ extends InterfaceCompanion<UserProfile, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
-            View::fromJson,List.of(CHOICE_SetFirstName, CHOICE_SetUsername, CHOICE_Remove,
+            "daml.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            View::fromJson,List.of(CHOICE_SetUsername, CHOICE_SetPassword, CHOICE_Remove,
             CHOICE_GetTaxId, CHOICE_SetContactMail, CHOICE_SetLastName, CHOICE_Archive,
             CHOICE_GetBirthday, CHOICE_GetView, CHOICE_SetTaxId, CHOICE_GetSocialSecurityId,
-            CHOICE_SetCellphoneNumber, CHOICE_SetFullName, CHOICE_GetFullName, CHOICE_SetBirthday,
-            CHOICE_GetUsername, CHOICE_GetLastName, CHOICE_GetCellphoneNumber,
-            CHOICE_GetNationality, CHOICE_GetGender, CHOICE_GetFirstName, CHOICE_GetContactMail,
-            CHOICE_SetNationality, CHOICE_SetSocialSecurityId, CHOICE_SetGender));
+            CHOICE_SetCellphoneNumber, CHOICE_GetFullName, CHOICE_SetBirthday, CHOICE_GetUsername,
+            CHOICE_SetFirstName, CHOICE_GetIdNumber, CHOICE_GetLastName, CHOICE_GetCellphoneNumber,
+            CHOICE_GetNationality, CHOICE_GetGender, CHOICE_GetPassword, CHOICE_GetFirstName,
+            CHOICE_GetContactMail, CHOICE_SetNationality, CHOICE_SetSocialSecurityId,
+            CHOICE_SetGender, CHOICE_SetIdNumber, CHOICE_SetFullName));
     }
   }
 }

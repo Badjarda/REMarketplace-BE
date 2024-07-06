@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty;
+package daml.interface$.propertymanager.property.residenceproperty.residenceproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,9 +17,9 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.propertymanager.property.common.Orientation;
-import daml.marketplace.interface$.propertymanager.property.common.Parking;
-import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
+import daml.interface$.propertymanager.property.common.Orientation;
+import daml.interface$.propertymanager.property.common.Parking;
+import daml.interface$.propertymanager.property.common.ResidenceType;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -28,7 +28,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public final class ResidenceProperty {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Property.ResidenceProperty.ResidenceProperty", "ResidenceProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Property.ResidenceProperty.ResidenceProperty", "ResidenceProperty");
 
   public static final Choice<ResidenceProperty, SetResidencePropertyAddress, ContractId> CHOICE_SetResidencePropertyAddress = 
       Choice.create("SetResidencePropertyAddress", value$ -> value$.toValue(), value$ ->
@@ -69,6 +69,11 @@ public final class ResidenceProperty {
       Choice.create("GetResidencePropertyAddress", value$ -> value$.toValue(), value$ ->
         GetResidencePropertyAddress.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromText.decode(value$));
+
+  public static final Choice<ResidenceProperty, SetResidencePrice, ContractId> CHOICE_SetResidencePrice = 
+      Choice.create("SetResidencePrice", value$ -> value$.toValue(), value$ ->
+        SetResidencePrice.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<ResidenceProperty, GetResidenceOrientation, Orientation> CHOICE_GetResidenceOrientation = 
       Choice.create("GetResidenceOrientation", value$ -> value$.toValue(), value$ ->
@@ -213,6 +218,11 @@ public final class ResidenceProperty {
         SetResidenceDescription.valueDecoder().decode(value$), value$ ->
         new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
+  public static final Choice<ResidenceProperty, GetResidencePrice, BigDecimal> CHOICE_GetResidencePrice = 
+      Choice.create("GetResidencePrice", value$ -> value$.toValue(), value$ ->
+        GetResidencePrice.valueDecoder().decode(value$), value$ ->
+        PrimitiveValueDecoders.fromNumeric.decode(value$));
+
   public static final Choice<ResidenceProperty, SetResidenceBedrooms, ContractId> CHOICE_SetResidenceBedrooms = 
       Choice.create("SetResidenceBedrooms", value$ -> value$.toValue(), value$ ->
         SetResidenceBedrooms.valueDecoder().decode(value$), value$ ->
@@ -315,6 +325,14 @@ public final class ResidenceProperty {
 
     default Update<Exercised<String>> exerciseGetResidencePropertyAddress() {
       return exerciseGetResidencePropertyAddress(new GetResidencePropertyAddress());
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetResidencePrice(SetResidencePrice arg) {
+      return makeExerciseCmd(CHOICE_SetResidencePrice, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetResidencePrice(BigDecimal newResidencePrice) {
+      return exerciseSetResidencePrice(new SetResidencePrice(newResidencePrice));
     }
 
     default Update<Exercised<Orientation>> exerciseGetResidenceOrientation(
@@ -573,6 +591,14 @@ public final class ResidenceProperty {
       return exerciseSetResidenceDescription(new SetResidenceDescription(newResidenceDescription));
     }
 
+    default Update<Exercised<BigDecimal>> exerciseGetResidencePrice(GetResidencePrice arg) {
+      return makeExerciseCmd(CHOICE_GetResidencePrice, arg);
+    }
+
+    default Update<Exercised<BigDecimal>> exerciseGetResidencePrice() {
+      return exerciseGetResidencePrice(new GetResidencePrice());
+    }
+
     default Update<Exercised<ContractId>> exerciseSetResidenceBedrooms(SetResidenceBedrooms arg) {
       return makeExerciseCmd(CHOICE_SetResidenceBedrooms, arg);
     }
@@ -618,16 +644,16 @@ public final class ResidenceProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<ResidenceProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty.ResidenceProperty", ResidenceProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.residenceproperty.residenceproperty.ResidenceProperty", ResidenceProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_GetResidenceBedrooms, CHOICE_GetResidenceBathrooms,
-            CHOICE_Remove, CHOICE_GetResidenceOrientation, CHOICE_Archive,
-            CHOICE_SetResidenceGrossArea, CHOICE_GetResidenceInstrumentKey,
-            CHOICE_SetResidenceBedrooms, CHOICE_GetResidenceBuildDate, CHOICE_SetResidenceBackyard,
-            CHOICE_SetResidenceInstrumentKey, CHOICE_GetResidenceInstalledEquipment,
-            CHOICE_SetResidenceInstalledEquipment, CHOICE_GetResidencePropertyPostalCode,
-            CHOICE_GetResidenceFloors, CHOICE_GetResidencePropertyCounty,
-            CHOICE_SetResidenceUsableArea, CHOICE_SetResidencePropertyAddress,
-            CHOICE_SetResidenceParking, CHOICE_SetResidenceType, CHOICE_SetResidenceDescription,
+            CHOICE_GetResidenceOrientation, CHOICE_Archive, CHOICE_SetResidenceGrossArea,
+            CHOICE_GetResidenceInstrumentKey, CHOICE_SetResidenceBedrooms,
+            CHOICE_GetResidenceBuildDate, CHOICE_SetResidenceInstrumentKey,
+            CHOICE_GetResidenceInstalledEquipment, CHOICE_SetResidenceInstalledEquipment,
+            CHOICE_GetResidencePropertyPostalCode, CHOICE_GetResidenceFloors,
+            CHOICE_GetResidencePropertyCounty, CHOICE_SetResidenceUsableArea,
+            CHOICE_SetResidencePropertyAddress, CHOICE_SetResidenceParking, CHOICE_Remove,
+            CHOICE_GetResidencePrice, CHOICE_SetResidenceType, CHOICE_SetResidenceDescription,
             CHOICE_GetResidenceBackyard, CHOICE_GetResidenceGrossArea,
             CHOICE_GetResidenceUsableArea, CHOICE_GetResidenceAdditionalInformation,
             CHOICE_SetResidenceBuildDate, CHOICE_SetResidencePropertyDistrict, CHOICE_GetView,
@@ -635,7 +661,8 @@ public final class ResidenceProperty {
             CHOICE_SetResidencePropertyPostalCode, CHOICE_GetResidencePropertyAddress,
             CHOICE_GetResidenceParking, CHOICE_SetResidenceBathrooms, CHOICE_GetResidenceType,
             CHOICE_GetResidenceDescription, CHOICE_GetResidencePropertyDistrict,
-            CHOICE_SetResidencePropertyCounty, CHOICE_SetResidenceAdditionalInformation));
+            CHOICE_SetResidencePropertyCounty, CHOICE_SetResidenceAdditionalInformation,
+            CHOICE_SetResidencePrice, CHOICE_SetResidenceBackyard));
     }
   }
 }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,16 +17,19 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
+import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.account.account.Controllers;
 import daml.daml.finance.interface$.holding.holding.Holding;
+import daml.daml.finance.interface$.holding.transferable.Transferable;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
-import daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest;
-import daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
-import daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest;
+import daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
+import daml.interface$.custody.choices.depositrequest.DepositRequest;
+import daml.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
+import daml.interface$.custody.choices.transferrequest.TransferRequest;
+import daml.interface$.custody.choices.withdrawrequest.WithdrawRequest;
 import java.lang.Override;
 import java.lang.String;
 import java.math.BigDecimal;
@@ -34,7 +37,17 @@ import java.util.List;
 import java.util.Map;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.Custody.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.Custody.Service", "Service");
+
+  public static final Choice<Service, AtomicSwap, Tuple2<Transferable.ContractId, Transferable.ContractId>> CHOICE_AtomicSwap = 
+      Choice.create("AtomicSwap", value$ -> value$.toValue(), value$ -> AtomicSwap.valueDecoder()
+        .decode(value$), value$ ->
+        Tuple2.<daml.daml.finance.interface$.holding.transferable.Transferable.ContractId,
+        daml.daml.finance.interface$.holding.transferable.Transferable.ContractId>valueDecoder(v$0 ->
+          new Transferable.ContractId(v$0.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()),
+        v$1 ->
+          new Transferable.ContractId(v$1.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()))
+        .decode(value$));
 
   public static final Choice<Service, RequestCloseAccount, CloseAccountRequest.ContractId> CHOICE_RequestCloseAccount = 
       Choice.create("RequestCloseAccount", value$ -> value$.toValue(), value$ ->
@@ -59,6 +72,11 @@ public final class Service {
   public static final Choice<Service, OpenAccount, AccountKey> CHOICE_OpenAccount = 
       Choice.create("OpenAccount", value$ -> value$.toValue(), value$ -> OpenAccount.valueDecoder()
         .decode(value$), value$ -> AccountKey.valueDecoder().decode(value$));
+
+  public static final Choice<Service, RequestTransfer, TransferRequest.ContractId> CHOICE_RequestTransfer = 
+      Choice.create("RequestTransfer", value$ -> value$.toValue(), value$ ->
+        RequestTransfer.valueDecoder().decode(value$), value$ ->
+        new TransferRequest.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -101,6 +119,19 @@ public final class Service {
   }
 
   public interface Exercises<Cmd> extends com.daml.ledger.javaapi.data.codegen.Exercises.Archive<Cmd> {
+    default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwap(
+        AtomicSwap arg) {
+      return makeExerciseCmd(CHOICE_AtomicSwap, arg);
+    }
+
+    default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwap(
+        String seller, String buyer, AccountKey sellerAccount,
+        Transferable.ContractId transferableHoldingCid,
+        TransferRequest.ContractId transferRequestCid) {
+      return exerciseAtomicSwap(new AtomicSwap(seller, buyer, sellerAccount, transferableHoldingCid,
+          transferRequestCid));
+    }
+
     default Update<Exercised<CloseAccountRequest.ContractId>> exerciseRequestCloseAccount(
         RequestCloseAccount arg) {
       return makeExerciseCmd(CHOICE_RequestCloseAccount, arg);
@@ -148,6 +179,18 @@ public final class Service {
     default Update<Exercised<AccountKey>> exerciseOpenAccount(
         OpenAccountRequest.ContractId openAccountRequestCid) {
       return exerciseOpenAccount(new OpenAccount(openAccountRequestCid));
+    }
+
+    default Update<Exercised<TransferRequest.ContractId>> exerciseRequestTransfer(
+        RequestTransfer arg) {
+      return makeExerciseCmd(CHOICE_RequestTransfer, arg);
+    }
+
+    default Update<Exercised<TransferRequest.ContractId>> exerciseRequestTransfer(String seller,
+        AccountKey sellerAccount, AccountKey buyerAccount,
+        Transferable.ContractId fungibleHoldingCid) {
+      return exerciseRequestTransfer(new RequestTransfer(seller, sellerAccount, buyerAccount,
+          fungibleHoldingCid));
     }
 
     default Update<Exercised<Unit>> exerciseArchive(daml.da.internal.template.Archive arg) {
@@ -214,10 +257,11 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
-            View::fromJson,List.of(CHOICE_Deposit, CHOICE_RequestDeposit, CHOICE_Withdrawal,
-            CHOICE_OpenAccount, CHOICE_Archive, CHOICE_RequestCloseAccount, CHOICE_RequestWithdraw,
-            CHOICE_RequestOpenAccount, CHOICE_CloseAccount));
+            "daml.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            View::fromJson,List.of(CHOICE_RequestDeposit, CHOICE_Withdrawal, CHOICE_OpenAccount,
+            CHOICE_Archive, CHOICE_RequestCloseAccount, CHOICE_RequestWithdraw,
+            CHOICE_RequestOpenAccount, CHOICE_Deposit, CHOICE_AtomicSwap, CHOICE_RequestTransfer,
+            CHOICE_CloseAccount));
     }
   }
 }

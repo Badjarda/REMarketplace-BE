@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
+import daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CloseAccount extends DamlRecord<CloseAccount> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final CloseAccountRequest.ContractId closeAccountRequestCid;
 
@@ -59,7 +59,7 @@ public class CloseAccount extends DamlRecord<CloseAccount> {
   public static JsonLfDecoder<CloseAccount> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("closeAccountRequestCid"), name -> {
           switch (name) {
-            case "closeAccountRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId::new));
+            case "closeAccountRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class CloseAccount extends DamlRecord<CloseAccount> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.custody.service.CloseAccount(%s)",
+    return String.format("daml.interface$.custody.service.CloseAccount(%s)",
         this.closeAccountRequestCid);
   }
 }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.common.removable;
+package daml.interface$.common.removable;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -21,7 +21,7 @@ import java.lang.String;
 import java.util.List;
 
 public final class Removable {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.Common.Removable", "Removable");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.Common.Removable", "Removable");
 
   public static final Choice<Removable, Remove, Unit> CHOICE_Remove = 
       Choice.create("Remove", value$ -> value$.toValue(), value$ -> Remove.valueDecoder()
@@ -98,7 +98,7 @@ public final class Removable {
   public static final class INTERFACE_ extends InterfaceCompanion<Removable, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.common.removable.Removable", Removable.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.common.removable.Removable", Removable.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Remove, CHOICE_Archive));
     }
   }

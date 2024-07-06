@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.interface$.propertymanager.property.common.GarageType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SetGarageType extends DamlRecord<SetGarageType> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final GarageType newGarageType;
 
@@ -58,7 +58,7 @@ public class SetGarageType extends DamlRecord<SetGarageType> {
   public static JsonLfDecoder<SetGarageType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newGarageType"), name -> {
           switch (name) {
-            case "newGarageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.GarageType.jsonDecoder());
+            case "newGarageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.GarageType.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetGarageType extends DamlRecord<SetGarageType> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageType(%s)",
+    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageType(%s)",
         this.newGarageType);
   }
 }

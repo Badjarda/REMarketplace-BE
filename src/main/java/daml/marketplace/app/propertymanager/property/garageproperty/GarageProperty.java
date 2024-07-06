@@ -1,4 +1,4 @@
-package daml.marketplace.app.propertymanager.property.garageproperty;
+package daml.app.propertymanager.property.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -37,7 +37,7 @@ import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.util.disclosure.Disclosure;
-import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.interface$.propertymanager.property.common.GarageType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -53,7 +53,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class GarageProperty extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "App.PropertyManager.Property.GarageProperty", "GarageProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "App.PropertyManager.Property.GarageProperty", "GarageProperty");
 
   public static final Choice<GarageProperty, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -62,7 +62,7 @@ public final class GarageProperty extends Template {
 
   public static final ContractCompanion.WithKey<Contract, ContractId, GarageProperty, Tuple2<String, String>> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.marketplace.app.propertymanager.property.garageproperty.GarageProperty", TEMPLATE_ID,
+        "daml.app.propertymanager.property.garageproperty.GarageProperty", TEMPLATE_ID,
         ContractId::new, v -> GarageProperty.templateValueDecoder().decode(v),
         GarageProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
         e -> Tuple2.<java.lang.String,
@@ -76,6 +76,8 @@ public final class GarageProperty extends Template {
   public final Id id;
 
   public final InstrumentKey instrument;
+
+  public final BigDecimal garagePrice;
 
   public final String propertyAddress;
 
@@ -100,14 +102,15 @@ public final class GarageProperty extends Template {
   public final Map<String, Set<String>> observers;
 
   public GarageProperty(String operator, String user, Id id, InstrumentKey instrument,
-      String propertyAddress, String propertyPostalCode, String propertyDistrict,
-      String propertyCounty, BigDecimal garageArea, GarageType garageType, Long vehicleCapacity,
-      String installedEquipment, String additionalInformation, String description,
-      Map<String, Set<String>> observers) {
+      BigDecimal garagePrice, String propertyAddress, String propertyPostalCode,
+      String propertyDistrict, String propertyCounty, BigDecimal garageArea, GarageType garageType,
+      Long vehicleCapacity, String installedEquipment, String additionalInformation,
+      String description, Map<String, Set<String>> observers) {
     this.operator = operator;
     this.user = user;
     this.id = id;
     this.instrument = instrument;
+    this.garagePrice = garagePrice;
     this.propertyAddress = propertyAddress;
     this.propertyPostalCode = propertyPostalCode;
     this.propertyDistrict = propertyDistrict;
@@ -160,13 +163,14 @@ public final class GarageProperty extends Template {
   }
 
   public static Update<Created<ContractId>> create(String operator, String user, Id id,
-      InstrumentKey instrument, String propertyAddress, String propertyPostalCode,
-      String propertyDistrict, String propertyCounty, BigDecimal garageArea, GarageType garageType,
-      Long vehicleCapacity, String installedEquipment, String additionalInformation,
-      String description, Map<String, Set<String>> observers) {
-    return new GarageProperty(operator, user, id, instrument, propertyAddress, propertyPostalCode,
-        propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity,
-        installedEquipment, additionalInformation, description, observers).create();
+      InstrumentKey instrument, BigDecimal garagePrice, String propertyAddress,
+      String propertyPostalCode, String propertyDistrict, String propertyCounty,
+      BigDecimal garageArea, GarageType garageType, Long vehicleCapacity, String installedEquipment,
+      String additionalInformation, String description, Map<String, Set<String>> observers) {
+    return new GarageProperty(operator, user, id, instrument, garagePrice, propertyAddress,
+        propertyPostalCode, propertyDistrict, propertyCounty, garageArea, garageType,
+        vehicleCapacity, installedEquipment, additionalInformation, description,
+        observers).create();
   }
 
   @Override
@@ -193,11 +197,12 @@ public final class GarageProperty extends Template {
   }
 
   public DamlRecord toValue() {
-    ArrayList<DamlRecord.Field> fields = new ArrayList<DamlRecord.Field>(15);
+    ArrayList<DamlRecord.Field> fields = new ArrayList<DamlRecord.Field>(16);
     fields.add(new DamlRecord.Field("operator", new Party(this.operator)));
     fields.add(new DamlRecord.Field("user", new Party(this.user)));
     fields.add(new DamlRecord.Field("id", this.id.toValue()));
     fields.add(new DamlRecord.Field("instrument", this.instrument.toValue()));
+    fields.add(new DamlRecord.Field("garagePrice", new Numeric(this.garagePrice)));
     fields.add(new DamlRecord.Field("propertyAddress", new Text(this.propertyAddress)));
     fields.add(new DamlRecord.Field("propertyPostalCode", new Text(this.propertyPostalCode)));
     fields.add(new DamlRecord.Field("propertyDistrict", new Text(this.propertyDistrict)));
@@ -217,55 +222,57 @@ public final class GarageProperty extends Template {
       IllegalArgumentException {
     return value$ -> {
       Value recordValue$ = value$;
-      List<DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(15,0, recordValue$);
+      List<DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(16,0, recordValue$);
       String operator = PrimitiveValueDecoders.fromParty.decode(fields$.get(0).getValue());
       String user = PrimitiveValueDecoders.fromParty.decode(fields$.get(1).getValue());
       Id id = Id.valueDecoder().decode(fields$.get(2).getValue());
       InstrumentKey instrument = InstrumentKey.valueDecoder().decode(fields$.get(3).getValue());
-      String propertyAddress = PrimitiveValueDecoders.fromText.decode(fields$.get(4).getValue());
-      String propertyPostalCode = PrimitiveValueDecoders.fromText.decode(fields$.get(5).getValue());
-      String propertyDistrict = PrimitiveValueDecoders.fromText.decode(fields$.get(6).getValue());
-      String propertyCounty = PrimitiveValueDecoders.fromText.decode(fields$.get(7).getValue());
-      BigDecimal garageArea = PrimitiveValueDecoders.fromNumeric.decode(fields$.get(8).getValue());
-      GarageType garageType = GarageType.valueDecoder().decode(fields$.get(9).getValue());
-      Long vehicleCapacity = PrimitiveValueDecoders.fromInt64.decode(fields$.get(10).getValue());
+      BigDecimal garagePrice = PrimitiveValueDecoders.fromNumeric.decode(fields$.get(4).getValue());
+      String propertyAddress = PrimitiveValueDecoders.fromText.decode(fields$.get(5).getValue());
+      String propertyPostalCode = PrimitiveValueDecoders.fromText.decode(fields$.get(6).getValue());
+      String propertyDistrict = PrimitiveValueDecoders.fromText.decode(fields$.get(7).getValue());
+      String propertyCounty = PrimitiveValueDecoders.fromText.decode(fields$.get(8).getValue());
+      BigDecimal garageArea = PrimitiveValueDecoders.fromNumeric.decode(fields$.get(9).getValue());
+      GarageType garageType = GarageType.valueDecoder().decode(fields$.get(10).getValue());
+      Long vehicleCapacity = PrimitiveValueDecoders.fromInt64.decode(fields$.get(11).getValue());
       String installedEquipment = PrimitiveValueDecoders.fromText
-          .decode(fields$.get(11).getValue());
-      String additionalInformation = PrimitiveValueDecoders.fromText
           .decode(fields$.get(12).getValue());
-      String description = PrimitiveValueDecoders.fromText.decode(fields$.get(13).getValue());
+      String additionalInformation = PrimitiveValueDecoders.fromText
+          .decode(fields$.get(13).getValue());
+      String description = PrimitiveValueDecoders.fromText.decode(fields$.get(14).getValue());
       Map<String, Set<String>> observers = PrimitiveValueDecoders.fromGenMap(
             PrimitiveValueDecoders.fromText,
             Set.<java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty))
-          .decode(fields$.get(14).getValue());
-      return new GarageProperty(operator, user, id, instrument, propertyAddress, propertyPostalCode,
-          propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity,
-          installedEquipment, additionalInformation, description, observers);
+          .decode(fields$.get(15).getValue());
+      return new GarageProperty(operator, user, id, instrument, garagePrice, propertyAddress,
+          propertyPostalCode, propertyDistrict, propertyCounty, garageArea, garageType,
+          vehicleCapacity, installedEquipment, additionalInformation, description, observers);
     } ;
   }
 
   public static JsonLfDecoder<GarageProperty> jsonDecoder() {
-    return JsonLfDecoders.record(Arrays.asList("operator", "user", "id", "instrument", "propertyAddress", "propertyPostalCode", "propertyDistrict", "propertyCounty", "garageArea", "garageType", "vehicleCapacity", "installedEquipment", "additionalInformation", "description", "observers"), name -> {
+    return JsonLfDecoders.record(Arrays.asList("operator", "user", "id", "instrument", "garagePrice", "propertyAddress", "propertyPostalCode", "propertyDistrict", "propertyCounty", "garageArea", "garageType", "vehicleCapacity", "installedEquipment", "additionalInformation", "description", "observers"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "id": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, daml.daml.finance.interface$.types.common.types.Id.jsonDecoder());
             case "instrument": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, daml.daml.finance.interface$.types.common.types.InstrumentKey.jsonDecoder());
-            case "propertyAddress": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "garageArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, daml.marketplace.interface$.propertymanager.property.common.GarageType.jsonDecoder());
-            case "vehicleCapacity": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
-            case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
+            case "garagePrice": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "propertyAddress": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "garageArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.interface$.propertymanager.property.common.GarageType.jsonDecoder());
+            case "vehicleCapacity": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
+            case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
+            case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(15, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
         }
-        , (Object[] args) -> new GarageProperty(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7]), JsonLfDecoders.cast(args[8]), JsonLfDecoders.cast(args[9]), JsonLfDecoders.cast(args[10]), JsonLfDecoders.cast(args[11]), JsonLfDecoders.cast(args[12]), JsonLfDecoders.cast(args[13]), JsonLfDecoders.cast(args[14])));
+        , (Object[] args) -> new GarageProperty(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7]), JsonLfDecoders.cast(args[8]), JsonLfDecoders.cast(args[9]), JsonLfDecoders.cast(args[10]), JsonLfDecoders.cast(args[11]), JsonLfDecoders.cast(args[12]), JsonLfDecoders.cast(args[13]), JsonLfDecoders.cast(args[14]), JsonLfDecoders.cast(args[15])));
   }
 
   public static GarageProperty fromJson(String json) throws JsonLfDecoder.Error {
@@ -278,6 +285,7 @@ public final class GarageProperty extends Template {
         JsonLfEncoders.Field.of("user", apply(JsonLfEncoders::party, user)),
         JsonLfEncoders.Field.of("id", apply(Id::jsonEncoder, id)),
         JsonLfEncoders.Field.of("instrument", apply(InstrumentKey::jsonEncoder, instrument)),
+        JsonLfEncoders.Field.of("garagePrice", apply(JsonLfEncoders::numeric, garagePrice)),
         JsonLfEncoders.Field.of("propertyAddress", apply(JsonLfEncoders::text, propertyAddress)),
         JsonLfEncoders.Field.of("propertyPostalCode", apply(JsonLfEncoders::text, propertyPostalCode)),
         JsonLfEncoders.Field.of("propertyDistrict", apply(JsonLfEncoders::text, propertyDistrict)),
@@ -309,6 +317,7 @@ public final class GarageProperty extends Template {
     GarageProperty other = (GarageProperty) object;
     return Objects.equals(this.operator, other.operator) && Objects.equals(this.user, other.user) &&
         Objects.equals(this.id, other.id) && Objects.equals(this.instrument, other.instrument) &&
+        Objects.equals(this.garagePrice, other.garagePrice) &&
         Objects.equals(this.propertyAddress, other.propertyAddress) &&
         Objects.equals(this.propertyPostalCode, other.propertyPostalCode) &&
         Objects.equals(this.propertyDistrict, other.propertyDistrict) &&
@@ -324,16 +333,16 @@ public final class GarageProperty extends Template {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.operator, this.user, this.id, this.instrument, this.propertyAddress,
-        this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.garageArea,
-        this.garageType, this.vehicleCapacity, this.installedEquipment, this.additionalInformation,
-        this.description, this.observers);
+    return Objects.hash(this.operator, this.user, this.id, this.instrument, this.garagePrice,
+        this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
+        this.garageArea, this.garageType, this.vehicleCapacity, this.installedEquipment,
+        this.additionalInformation, this.description, this.observers);
   }
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.propertymanager.property.garageproperty.GarageProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-        this.operator, this.user, this.id, this.instrument, this.propertyAddress,
+    return String.format("daml.app.propertymanager.property.garageproperty.GarageProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+        this.operator, this.user, this.id, this.instrument, this.garagePrice, this.propertyAddress,
         this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.garageArea,
         this.garageType, this.vehicleCapacity, this.installedEquipment, this.additionalInformation,
         this.description, this.observers);
@@ -359,9 +368,9 @@ public final class GarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId toInterface(
-        daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId(this.contractId);
+    public daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId toInterface(
+        daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -369,7 +378,7 @@ public final class GarageProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId interfaceContractId) {
+        daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -428,9 +437,9 @@ public final class GarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.CreateAnd toInterface(
-        daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.CreateAnd toInterface(
+        daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -449,9 +458,9 @@ public final class GarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ByKey toInterface(
-        daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ByKey toInterface(
+        daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Disclosure.ByKey toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory;
+import daml.interface$.propertymanager.property.apartmentproperty.factory.Factory;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,25 +24,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class Approve extends DamlRecord<Approve> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final String operator;
 
   public final Factory.ContractId apartmentPropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid;
 
   public Approve(String operator, Factory.ContractId apartmentPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+      daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+      daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+      daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+      daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
     this.operator = operator;
     this.apartmentPropertyFactoryCid = apartmentPropertyFactoryCid;
     this.landPropertyFactoryCid = landPropertyFactoryCid;
@@ -67,14 +67,14 @@ public class Approve extends DamlRecord<Approve> {
       String operator = PrimitiveValueDecoders.fromParty.decode(fields$.get(0).getValue());
       Factory.ContractId apartmentPropertyFactoryCid =
           new Factory.ContractId(fields$.get(1).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected apartmentPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(fields$.get(2).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected landPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId(fields$.get(3).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected residencePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId(fields$.get(4).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected garagePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected warehousePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid =
+          new daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(fields$.get(2).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected landPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId(fields$.get(3).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected residencePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId(fields$.get(4).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected garagePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected warehousePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       return new Approve(operator, apartmentPropertyFactoryCid, landPropertyFactoryCid,
           residencePropertyFactoryCid, garagePropertyFactoryCid, warehousePropertyFactoryCid);
     } ;
@@ -95,11 +95,11 @@ public class Approve extends DamlRecord<Approve> {
     return JsonLfDecoders.record(Arrays.asList("operator", "apartmentPropertyFactoryCid", "landPropertyFactoryCid", "residencePropertyFactoryCid", "garagePropertyFactoryCid", "warehousePropertyFactoryCid"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "apartmentPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory.ContractId::new));
-            case "landPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId::new));
-            case "residencePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId::new));
-            case "garagePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId::new));
-            case "warehousePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId::new));
+            case "apartmentPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.apartmentproperty.factory.Factory.ContractId::new));
+            case "landPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId::new));
+            case "residencePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId::new));
+            case "garagePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId::new));
+            case "warehousePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId::new));
             default: return null;
           }
         }
@@ -149,7 +149,7 @@ public class Approve extends DamlRecord<Approve> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.service.Approve(%s, %s, %s, %s, %s, %s)",
+    return String.format("daml.interface$.propertymanager.service.Approve(%s, %s, %s, %s, %s, %s)",
         this.operator, this.apartmentPropertyFactoryCid, this.landPropertyFactoryCid,
         this.residencePropertyFactoryCid, this.garagePropertyFactoryCid,
         this.warehousePropertyFactoryCid);

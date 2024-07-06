@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.operator;
+package daml.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,8 +11,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.role.user.Request;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.role.user.Request;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ApproveUserRole extends DamlRecord<ApproveUserRole> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final Request.ContractId userRoleRequestCid;
 
@@ -65,8 +65,8 @@ public class ApproveUserRole extends DamlRecord<ApproveUserRole> {
   public static JsonLfDecoder<ApproveUserRole> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRoleRequestCid", "userRole"), name -> {
           switch (name) {
-            case "userRoleRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.role.user.Request.ContractId::new));
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "userRoleRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.role.user.Request.ContractId::new));
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserRoleKey.jsonDecoder());
             default: return null;
           }
         }
@@ -106,7 +106,7 @@ public class ApproveUserRole extends DamlRecord<ApproveUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.role.operator.ApproveUserRole(%s, %s)",
+    return String.format("daml.interface$.role.operator.ApproveUserRole(%s, %s)",
         this.userRoleRequestCid, this.userRole);
   }
 }

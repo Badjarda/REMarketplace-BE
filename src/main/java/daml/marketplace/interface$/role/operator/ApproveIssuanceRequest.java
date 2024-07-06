@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.operator;
+package daml.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.issuance.service.Request;
+import daml.interface$.issuance.service.Request;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ApproveIssuanceRequest extends DamlRecord<ApproveIssuanceRequest> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final Request.ContractId issuanceServiceRequestCid;
 
@@ -60,7 +60,7 @@ public class ApproveIssuanceRequest extends DamlRecord<ApproveIssuanceRequest> {
   public static JsonLfDecoder<ApproveIssuanceRequest> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("issuanceServiceRequestCid"), name -> {
           switch (name) {
-            case "issuanceServiceRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.issuance.service.Request.ContractId::new));
+            case "issuanceServiceRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.issuance.service.Request.ContractId::new));
             default: return null;
           }
         }
@@ -98,7 +98,7 @@ public class ApproveIssuanceRequest extends DamlRecord<ApproveIssuanceRequest> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.role.operator.ApproveIssuanceRequest(%s)",
+    return String.format("daml.interface$.role.operator.ApproveIssuanceRequest(%s)",
         this.issuanceServiceRequestCid);
   }
 }

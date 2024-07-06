@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SetGarageInstalledEquipment extends DamlRecord<SetGarageInstalledEquipment> {
-  public static final String _packageId = "ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9";
+  public static final String _packageId = "7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411";
 
   public final String newGarageInstalledEquipment;
 
@@ -99,7 +99,7 @@ public class SetGarageInstalledEquipment extends DamlRecord<SetGarageInstalledEq
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageInstalledEquipment(%s)",
+    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageInstalledEquipment(%s)",
         this.newGarageInstalledEquipment);
   }
 }

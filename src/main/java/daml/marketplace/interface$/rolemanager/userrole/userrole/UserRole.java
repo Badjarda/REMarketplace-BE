@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.userrole.userrole;
+package daml.interface$.rolemanager.userrole.userrole;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,13 +16,13 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
 public final class UserRole {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.RoleManager.UserRole.UserRole", "UserRole");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.RoleManager.UserRole.UserRole", "UserRole");
 
   public static final Choice<UserRole, SetPermissions, ContractId> CHOICE_SetPermissions = 
       Choice.create("SetPermissions", value$ -> value$.toValue(), value$ ->
@@ -150,7 +150,7 @@ public final class UserRole {
   public static final class INTERFACE_ extends InterfaceCompanion<UserRole, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole", UserRole.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.rolemanager.userrole.userrole.UserRole", UserRole.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_AddPermission, CHOICE_Remove, CHOICE_Archive,
             CHOICE_GetView, CHOICE_SetPermissions, CHOICE_RemovePermission));
     }

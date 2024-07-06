@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,7 +17,7 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.interface$.propertymanager.property.common.GarageType;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -25,7 +25,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public final class GarageProperty {
-  public static final Identifier TEMPLATE_ID = new Identifier("ab9bbdb36a2cfacb7b3bd66e0d472fb99ff4b9d98bdf81e76a5b8bd3b57250a9", "Interface.PropertyManager.Property.GarageProperty.GarageProperty", "GarageProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("7410dc0c147f7a1f02e29af653f3db7c67fc88031d45c6c69171d322a8445411", "Interface.PropertyManager.Property.GarageProperty.GarageProperty", "GarageProperty");
 
   public static final Choice<GarageProperty, GetGaragePropertyAddress, String> CHOICE_GetGaragePropertyAddress = 
       Choice.create("GetGaragePropertyAddress", value$ -> value$.toValue(), value$ ->
@@ -47,10 +47,10 @@ public final class GarageProperty {
         GetGaragePropertyCounty.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromText.decode(value$));
 
-  public static final Choice<GarageProperty, SetVehicleCapacity, ContractId> CHOICE_SetVehicleCapacity = 
-      Choice.create("SetVehicleCapacity", value$ -> value$.toValue(), value$ ->
-        SetVehicleCapacity.valueDecoder().decode(value$), value$ ->
-        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+  public static final Choice<GarageProperty, GetGaragePrice, BigDecimal> CHOICE_GetGaragePrice = 
+      Choice.create("GetGaragePrice", value$ -> value$.toValue(), value$ ->
+        GetGaragePrice.valueDecoder().decode(value$), value$ -> PrimitiveValueDecoders.fromNumeric
+        .decode(value$));
 
   public static final Choice<GarageProperty, GetGarageAdditionalInformation, String> CHOICE_GetGarageAdditionalInformation = 
       Choice.create("GetGarageAdditionalInformation", value$ -> value$.toValue(), value$ ->
@@ -130,6 +130,16 @@ public final class GarageProperty {
         SetGaragePropertyCounty.valueDecoder().decode(value$), value$ ->
         new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
+  public static final Choice<GarageProperty, SetVehicleCapacity, ContractId> CHOICE_SetVehicleCapacity = 
+      Choice.create("SetVehicleCapacity", value$ -> value$.toValue(), value$ ->
+        SetVehicleCapacity.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
+  public static final Choice<GarageProperty, SetGaragePrice, ContractId> CHOICE_SetGaragePrice = 
+      Choice.create("SetGaragePrice", value$ -> value$.toValue(), value$ ->
+        SetGaragePrice.valueDecoder().decode(value$), value$ ->
+        new ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+
   public static final Choice<GarageProperty, GetVehicleCapacity, Long> CHOICE_GetVehicleCapacity = 
       Choice.create("GetVehicleCapacity", value$ -> value$.toValue(), value$ ->
         GetVehicleCapacity.valueDecoder().decode(value$), value$ -> PrimitiveValueDecoders.fromInt64
@@ -207,12 +217,12 @@ public final class GarageProperty {
       return exerciseGetGaragePropertyCounty(new GetGaragePropertyCounty());
     }
 
-    default Update<Exercised<ContractId>> exerciseSetVehicleCapacity(SetVehicleCapacity arg) {
-      return makeExerciseCmd(CHOICE_SetVehicleCapacity, arg);
+    default Update<Exercised<BigDecimal>> exerciseGetGaragePrice(GetGaragePrice arg) {
+      return makeExerciseCmd(CHOICE_GetGaragePrice, arg);
     }
 
-    default Update<Exercised<ContractId>> exerciseSetVehicleCapacity(Long newVehicleCapacity) {
-      return exerciseSetVehicleCapacity(new SetVehicleCapacity(newVehicleCapacity));
+    default Update<Exercised<BigDecimal>> exerciseGetGaragePrice() {
+      return exerciseGetGaragePrice(new GetGaragePrice());
     }
 
     default Update<Exercised<String>> exerciseGetGarageAdditionalInformation(
@@ -358,6 +368,22 @@ public final class GarageProperty {
       return exerciseSetGaragePropertyCounty(new SetGaragePropertyCounty(newGaragePropertyCounty));
     }
 
+    default Update<Exercised<ContractId>> exerciseSetVehicleCapacity(SetVehicleCapacity arg) {
+      return makeExerciseCmd(CHOICE_SetVehicleCapacity, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetVehicleCapacity(Long newVehicleCapacity) {
+      return exerciseSetVehicleCapacity(new SetVehicleCapacity(newVehicleCapacity));
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetGaragePrice(SetGaragePrice arg) {
+      return makeExerciseCmd(CHOICE_SetGaragePrice, arg);
+    }
+
+    default Update<Exercised<ContractId>> exerciseSetGaragePrice(BigDecimal newGaragePrice) {
+      return exerciseSetGaragePrice(new SetGaragePrice(newGaragePrice));
+    }
+
     default Update<Exercised<Long>> exerciseGetVehicleCapacity(GetVehicleCapacity arg) {
       return makeExerciseCmd(CHOICE_GetVehicleCapacity, arg);
     }
@@ -421,17 +447,18 @@ public final class GarageProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<GarageProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty", GarageProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty", GarageProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_GetGarageAdditionalInformation,
             CHOICE_GetGarageDescription, CHOICE_GetGaragePropertyCounty,
             CHOICE_GetGaragePropertyPostalCode, CHOICE_GetGaragePropertyAddress, CHOICE_Archive,
             CHOICE_GetView, CHOICE_GetGarageInstrumentKey, CHOICE_SetGarageDescription,
             CHOICE_GetGarageType, CHOICE_GetVehicleCapacity, CHOICE_SetGaragePropertyCounty,
-            CHOICE_SetGaragePropertyDistrict, CHOICE_Remove, CHOICE_SetGaragePropertyPostalCode,
-            CHOICE_GetGarageInstalledEquipment, CHOICE_GetGaragePropertyDistrict,
-            CHOICE_SetGarageAdditionalInformation, CHOICE_SetGarageInstrumentKey,
-            CHOICE_SetGaragePropertyAddress, CHOICE_SetVehicleCapacity, CHOICE_GetGarageArea,
-            CHOICE_SetGarageInstalledEquipment, CHOICE_SetGarageArea, CHOICE_SetGarageType));
+            CHOICE_SetGaragePropertyDistrict, CHOICE_Remove, CHOICE_GetGaragePrice,
+            CHOICE_SetGaragePropertyPostalCode, CHOICE_GetGarageInstalledEquipment,
+            CHOICE_GetGaragePropertyDistrict, CHOICE_SetGarageAdditionalInformation,
+            CHOICE_SetGarageInstrumentKey, CHOICE_SetGaragePropertyAddress,
+            CHOICE_SetVehicleCapacity, CHOICE_GetGarageArea, CHOICE_SetGarageInstalledEquipment,
+            CHOICE_SetGarageArea, CHOICE_SetGarageType, CHOICE_SetGaragePrice));
     }
   }
 }
