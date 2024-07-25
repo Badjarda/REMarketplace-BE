@@ -2,6 +2,7 @@ package business.userproperty.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import daml.marketplace.interface$.propertymanager.property.common.Orientation;
 import daml.marketplace.interface$.propertymanager.property.common.Parking;
@@ -17,6 +18,7 @@ public class ResidencePropertyDTO {
   private final String operator;
   private final String user;
   private final String propertyId;
+  private final BigDecimal residencePrice;
   
   private final String propertyAddress;
 
@@ -51,4 +53,6 @@ public class ResidencePropertyDTO {
   private final String additionalInformation;
 
   private final String description;
+
+  private final List<String> photoReferences;
 }

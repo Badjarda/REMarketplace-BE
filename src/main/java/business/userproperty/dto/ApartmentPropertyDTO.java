@@ -2,6 +2,8 @@ package business.userproperty.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,7 @@ public class ApartmentPropertyDTO {
   private final String operator;
   private final String user;
   private final String propertyId;
+  private final BigDecimal apartmentPrice;
   private final String propertyAddress;
 
   private final String propertyPostalCode;
@@ -43,6 +46,8 @@ public class ApartmentPropertyDTO {
   private final String additionalInformation;
 
   private final String description;
+
+  private final List<String> photoReferences;
 
 }
 

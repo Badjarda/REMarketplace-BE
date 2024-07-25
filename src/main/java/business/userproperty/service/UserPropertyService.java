@@ -125,9 +125,9 @@ public class UserPropertyService {
     return "Declined Property Service!\n";
   }
 
-  public String requestCreateApartmentProperty (String operator, String user, String propertyId, String propertyAddress, String propertyPostalCode, 
+  public String requestCreateApartmentProperty (String operator, String user, String propertyId, BigDecimal apartmentPrice,String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floor,Long parkingSpaces, 
-   Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description) {
+   Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -145,9 +145,9 @@ public class UserPropertyService {
       String version = "0"; //Checkar como fazer sem ser hard coded
       var apartmentPropertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
 
-      command = serviceId.exerciseRequestCreateApartmentProperty(userPropertyId, apartmentPropertyKey, propertyAddress, propertyPostalCode, 
+      command = serviceId.exerciseRequestCreateApartmentProperty(userPropertyId, apartmentPropertyKey, apartmentPrice, propertyAddress, propertyPostalCode, 
       propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, bathrooms, floor, parkingSpaces, elevator, buildDate, 
-      installedEquipment, additionalInformation, description, observersMap)
+      installedEquipment, additionalInformation, description, photoReferences, observersMap)
           .commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -158,9 +158,9 @@ public class UserPropertyService {
     return "Success Create Request Apartment\n";
   }
 
-  public String requestCreateGarageProperty (String operator, String user, String propertyId, String propertyAddress, 
+  public String requestCreateGarageProperty (String operator, String user, String propertyId, BigDecimal garagePrice, String propertyAddress, 
     String propertyPostalCode, String propertyDistrict,String propertyCounty, BigDecimal garageArea, GarageType garageType, 
-    Long vehicleCapacity, String installedEquipment,String additionalInformation,String description) {
+    Long vehicleCapacity, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -178,8 +178,8 @@ public class UserPropertyService {
       String version = "0"; //Checkar como fazer sem ser hard coded
       var garagePropertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
 
-      command = serviceId.exerciseRequestCreateGarageProperty(userPropertyId, garagePropertyKey, propertyAddress, propertyPostalCode, 
-      propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity, installedEquipment, additionalInformation, description, observersMap)
+      command = serviceId.exerciseRequestCreateGarageProperty(userPropertyId, garagePropertyKey, garagePrice, propertyAddress, propertyPostalCode, 
+      propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity, installedEquipment, additionalInformation, description, photoReferences, observersMap)
           .commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -190,9 +190,9 @@ public class UserPropertyService {
     return "Success Create Request Garage\n";
   }
 
-  public String requestCreateLandProperty (String operator, String user, String propertyId,  String propertyAddress, String propertyPostalCode, 
+  public String requestCreateLandProperty (String operator, String user, String propertyId,  BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,LandType landType,BigDecimal totalLandArea,BigDecimal minimumSurfaceForSale,BigDecimal buildableArea,
-   Long buildableFloors,Boolean accessByRoad, String installedEquipment,List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description) {
+   Long buildableFloors,Boolean accessByRoad, String installedEquipment,List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -210,9 +210,9 @@ public class UserPropertyService {
       String version = "0"; //Checkar como fazer sem ser hard coded
       var landPropertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
 
-      command = serviceId.exerciseRequestCreateLandProperty(userPropertyId, landPropertyKey, propertyAddress, propertyPostalCode, 
+      command = serviceId.exerciseRequestCreateLandProperty(userPropertyId, landPropertyKey, landPrice, propertyAddress, propertyPostalCode, 
       propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, 
-      installedEquipment, viableConstructionTypes, additionalInformation, description, observersMap)
+      installedEquipment, viableConstructionTypes, additionalInformation, description, photoReferences, observersMap)
           .commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -223,9 +223,9 @@ public class UserPropertyService {
     return "Success Create Request Land\n";
   }
 
-  public String requestCreateResidenceProperty (String operator, String user, String propertyId,  String propertyAddress, String propertyPostalCode, 
+  public String requestCreateResidenceProperty (String operator, String user, String propertyId,  BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floors,ResidenceType residenceType, 
-   String backyard,Parking parking,LocalDate buildDate, Orientation orientation,String installedEquipment,String additionalInformation,String description) {
+   String backyard,Parking parking,LocalDate buildDate, Orientation orientation,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -243,8 +243,8 @@ public class UserPropertyService {
       String version = "0"; //Checkar como fazer sem ser hard coded
       var residencePropertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
 
-      command = serviceId.exerciseRequestCreateResidenceProperty(userPropertyId, residencePropertyKey, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty,
-       grossArea, usableArea, bedrooms, bathrooms, floors, residenceType, backyard, parking, buildDate, orientation, installedEquipment, additionalInformation, description, observersMap).commands();
+      command = serviceId.exerciseRequestCreateResidenceProperty(userPropertyId, residencePropertyKey, residencePrice, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty,
+       grossArea, usableArea, bedrooms, bathrooms, floors, residenceType, backyard, parking, buildDate, orientation, installedEquipment, additionalInformation, description, photoReferences, observersMap).commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Residence : " + e.getMessage();
@@ -254,9 +254,9 @@ public class UserPropertyService {
     return "Success Create Request Residence\n";
   }
 
-  public String requestCreateWarehouseProperty (String operator, String user, String propertyId, String propertyAddress, String propertyPostalCode, 
+  public String requestCreateWarehouseProperty (String operator, String user, String propertyId, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty, WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors, 
-  LocalDate buildDate,String installedEquipment,String additionalInformation,String description) {
+  LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -274,9 +274,9 @@ public class UserPropertyService {
       String version = "0"; //Checkar como fazer sem ser hard coded
       var warehousePropertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
 
-      command = serviceId.exerciseRequestCreateWarehouseProperty(userPropertyId, warehousePropertyKey, propertyAddress, propertyPostalCode, 
+      command = serviceId.exerciseRequestCreateWarehouseProperty(userPropertyId, warehousePropertyKey, warehousePrice, propertyAddress, propertyPostalCode, 
       propertyDistrict, propertyCounty, warehouseType, grossArea, usableArea, floors, buildDate, installedEquipment, 
-      additionalInformation, description, observersMap)
+      additionalInformation, description, photoReferences, observersMap)
           .commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -287,9 +287,9 @@ public class UserPropertyService {
     return "Success Create Request Warehouse\n";
   }
 
-  public String modifyUserApartmentPropertyFields(String operator, String user, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserApartmentPropertyFields(String operator, String user, BigDecimal apartmentPrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floor,Long parkingSpaces, 
-  Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description) {
+  Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -299,9 +299,12 @@ public class UserPropertyService {
       PropertyKey key = new PropertyKey(operatorParty, userParty, new Id(apartmentIdString));
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
+      
+      transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPrice(apartmentPrice, key).commands(),
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty), null);
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPropertyPostalCode(propertyPostalCode, key).commands(),
       Arrays.asList(userParty), null);
@@ -344,6 +347,9 @@ public class UserPropertyService {
 
       transactionService.submitTransaction(serviceId.exerciseUpdateApartmentDescription(description, key).commands(),
       Arrays.asList(userParty), null);
+      
+      transactionService.submitTransaction(serviceId.exerciseUpdateApartmentPhotoReferences(photoReferences, key).commands(),
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Apartment Property: " + e.getMessage();
@@ -353,9 +359,9 @@ public class UserPropertyService {
     return "Success Updating User Apartment Property:\n";
   }
 
-  public String modifyUserGaragePropertyFields(String operator, String user, String propertyAddress, 
+  public String modifyUserGaragePropertyFields(String operator, String user, BigDecimal garagePrice, String propertyAddress, 
   String propertyPostalCode, String propertyDistrict,String propertyCounty, BigDecimal garageArea, GarageType garageType, 
-  Long vehicleCapacity, String installedEquipment,String additionalInformation,String description) {
+  Long vehicleCapacity, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -366,8 +372,11 @@ public class UserPropertyService {
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
+      transactionService.submitTransaction(serviceId.exerciseUpdateGaragePrice(garagePrice, key).commands(),
+      Arrays.asList(userParty), null);
+
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty), null);
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateGaragePropertyPostalCode(propertyPostalCode, key).commands(),
       Arrays.asList(userParty), null);
@@ -393,6 +402,9 @@ public class UserPropertyService {
       transactionService.submitTransaction(serviceId.exerciseUpdateGarageDescription(description, key).commands(),
       Arrays.asList(userParty), null);
 
+      transactionService.submitTransaction(serviceId.exerciseUpdateGaragePhotoReferences(photoReferences, key).commands(),
+      Arrays.asList(userParty), null);
+
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Garage Property: " + e.getMessage();
     } catch (Exception e) {
@@ -401,10 +413,10 @@ public class UserPropertyService {
     return "Success Updating User Garage Property:\n";
   }
 
-  public String modifyUserLandPropertyFields(String operator, String user, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserLandPropertyFields(String operator, String user, BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,LandType landType,BigDecimal totalLandArea,BigDecimal minimumSurfaceForSale,
   BigDecimal buildableArea,Long buildableFloors,Boolean accessByRoad, String installedEquipment,
-  List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description) {
+  List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -414,6 +426,9 @@ public class UserPropertyService {
       PropertyKey key = new PropertyKey(operatorParty, userParty, new Id(landIdString));
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
+
+      transactionService.submitTransaction(serviceId.exerciseUpdateLandPrice(landPrice, key).commands(),
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateLandPropertyAddress(propertyAddress, key).commands(),
           Arrays.asList(userParty), null);
@@ -454,6 +469,9 @@ public class UserPropertyService {
       transactionService.submitTransaction(serviceId.exerciseUpdateLandDescription(description, key).commands(),
       Arrays.asList(userParty), null);
 
+      transactionService.submitTransaction(serviceId.exerciseUpdateLandPhotoReferences(photoReferences, key).commands(),
+      Arrays.asList(userParty), null);
+
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Land Property: " + e.getMessage();
     } catch (Exception e) {
@@ -462,9 +480,9 @@ public class UserPropertyService {
     return "Success Updating User Land Property:\n";
   }
 
-  public String modifyUserResidencePropertyFields(String operator, String user, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserResidencePropertyFields(String operator, String user, BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea, Long bedrooms, Long bathrooms, Long floors, ResidenceType residenceType, 
-  String backyard,Parking parking,LocalDate buildDate, Orientation orientation, String installedEquipment,String additionalInformation,String description) {
+  String backyard,Parking parking,LocalDate buildDate, Orientation orientation, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -474,6 +492,9 @@ public class UserPropertyService {
       PropertyKey key = new PropertyKey(operatorParty, userParty, new Id(residenceIdString));
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
+
+      transactionService.submitTransaction(serviceId.exerciseUpdateResidencePrice(residencePrice, key).commands(),
+          Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidencePropertyAddress(propertyAddress, key).commands(),
           Arrays.asList(userParty), null);
@@ -525,6 +546,9 @@ public class UserPropertyService {
 
       transactionService.submitTransaction(serviceId.exerciseUpdateResidenceDescription(description, key).commands(),
       Arrays.asList(userParty), null);
+      
+      transactionService.submitTransaction(serviceId.exerciseUpdateResidencePhotoReferences(photoReferences, key).commands(),
+      Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Residence Property: " + e.getMessage();
@@ -534,9 +558,9 @@ public class UserPropertyService {
     return "Success Updating User Residence Property:\n";
   }
 
-  public String modifyUserWarehousePropertyFields(String operator, String user, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserWarehousePropertyFields(String operator, String user, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty, WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors, 
-  LocalDate buildDate,String installedEquipment,String additionalInformation,String description) {
+  LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -547,8 +571,11 @@ public class UserPropertyService {
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
+      transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePrice(warehousePrice, key).commands(),
+      Arrays.asList(userParty), null);
+
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyAddress(propertyAddress, key).commands(),
-          Arrays.asList(userParty), null);
+      Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePropertyPostalCode(propertyPostalCode, key).commands(),
       Arrays.asList(userParty), null);
@@ -581,6 +608,9 @@ public class UserPropertyService {
       Arrays.asList(userParty), null);
 
       transactionService.submitTransaction(serviceId.exerciseUpdateWarehouseDescription(description, key).commands(),
+      Arrays.asList(userParty), null);
+
+      transactionService.submitTransaction(serviceId.exerciseUpdateWarehousePhotoReferences(photoReferences, key).commands(),
       Arrays.asList(userParty), null);
 
     } catch (IllegalArgumentException | IllegalStateException e) {

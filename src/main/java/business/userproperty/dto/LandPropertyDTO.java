@@ -16,7 +16,7 @@ public class LandPropertyDTO {
   private final String operator;
   private final String user;
   private final String propertyId;
-  
+  private final BigDecimal landPrice;
   private final String propertyAddress;
 
   private final String propertyPostalCode;
@@ -44,4 +44,6 @@ public class LandPropertyDTO {
   private final String additionalInformation;
 
   private final String description;
+
+  private final List<String> photoReferences;
 }

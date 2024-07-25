@@ -41,13 +41,13 @@ public class UserPropertyResource {
   @Path("/requestCreateApartment")
   public String requestCreateApartment(ApartmentPropertyDTO request) {
     return userPropertyService.requestCreateApartmentProperty(request.getOperator(), request.getUser(),
-        request.getPropertyId(),
+        request.getPropertyId(), request.getApartmentPrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(), request.getGrossArea(),
         request.getUsableArea(), request.getBedrooms(), request.getBathrooms(), request.getFloor(),
         request.getParkingSpaces(), request.getElevator(),
         request.getBuildDate(), request.getInstalledEquipment(), request.getAdditionalInformation(),
-        request.getDescription());
+        request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
@@ -56,11 +56,11 @@ public class UserPropertyResource {
   @Path("/requestCreateGarage")
   public String requestCreateGarage(GaragePropertyDTO request) {
     return userPropertyService.requestCreateGarageProperty(request.getOperator(), request.getUser(),
-        request.getPropertyId(),
+        request.getPropertyId(), request.getGaragePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getGarageArea(), request.getGarageType(), request.getVehicleCapacity(), request.getInstalledEquipment(),
-        request.getAdditionalInformation(), request.getDescription());
+        request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
@@ -69,14 +69,14 @@ public class UserPropertyResource {
   @Path("/requestCreateLand")
   public String requestCreateLand(LandPropertyDTO request) {
     return userPropertyService.requestCreateLandProperty(request.getOperator(), request.getUser(),
-        request.getPropertyId(),
+        request.getPropertyId(), request.getLandPrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getLandType(), request.getTotalLandArea(), request.getMinimumSurfaceForSale(),
         request.getBuildableArea(),
         request.getBuildableFloors(), request.getAccessByRoad(), request.getInstalledEquipment(),
         request.getViableConstructionTypes(),
-        request.getAdditionalInformation(), request.getDescription());
+        request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
@@ -85,14 +85,14 @@ public class UserPropertyResource {
   @Path("/requestCreateResidence")
   public String requestCreateResidence(ResidencePropertyDTO request) {
     return userPropertyService.requestCreateResidenceProperty(request.getOperator(), request.getUser(),
-        request.getPropertyId(),
+        request.getPropertyId(), request.getResidencePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getGrossArea(), request.getUsableArea(), request.getBedrooms(), request.getBathrooms(),
         request.getFloors(),
         request.getResidenceType(), request.getBackyard(), request.getParking(), request.getBuildDate(),
         request.getOrientation(),
-        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription());
+        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
@@ -101,76 +101,76 @@ public class UserPropertyResource {
   @Path("/requestCreateWarehouse")
   public String requestCreateWarehouse(WarehousePropertyDTO request) {
     return userPropertyService.requestCreateWarehouseProperty(request.getOperator(), request.getUser(),
-        request.getPropertyId(),
+        request.getPropertyId(), request.getWarehousePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getWarehouseType(), request.getGrossArea(), request.getUsableArea(), request.getFloors(),
         request.getBuildDate(),
-        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription());
+        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateApartmentProperty")
   public String updateApartmentProperty(ApartmentPropertyDTO request) {
-    return userPropertyService.modifyUserApartmentPropertyFields(request.getOperator(), request.getUser(),
+    return userPropertyService.modifyUserApartmentPropertyFields(request.getOperator(), request.getUser(),request.getApartmentPrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getGrossArea(), request.getUsableArea(),
         request.getBedrooms(), request.getBathrooms(), request.getFloor(), request.getParkingSpaces(),
         request.getElevator(), request.getBuildDate(),
-        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription());
+        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateGarageProperty")
   public String updateGarageProperty(GaragePropertyDTO request) {
-    return userPropertyService.modifyUserGaragePropertyFields(request.getOperator(), request.getUser(),
+    return userPropertyService.modifyUserGaragePropertyFields(request.getOperator(), request.getUser(),request.getGaragePrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getGarageArea(), request.getGarageType(),
         request.getVehicleCapacity(), request.getInstalledEquipment(), request.getAdditionalInformation(),
-        request.getDescription());
+        request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateLandProperty")
   public String updateLandProperty(LandPropertyDTO request) {
-    return userPropertyService.modifyUserLandPropertyFields(request.getOperator(), request.getUser(),
+    return userPropertyService.modifyUserLandPropertyFields(request.getOperator(), request.getUser(),request.getLandPrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getLandType(), request.getTotalLandArea(),
         request.getMinimumSurfaceForSale(), request.getBuildableArea(), request.getBuildableFloors(),
         request.getAccessByRoad(), request.getInstalledEquipment(),
-        request.getViableConstructionTypes(), request.getAdditionalInformation(), request.getDescription());
+        request.getViableConstructionTypes(), request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateResidenceProperty")
   public String updateResidenceProperty(ResidencePropertyDTO request) {
-    return userPropertyService.modifyUserResidencePropertyFields(request.getOperator(), request.getUser(),
+    return userPropertyService.modifyUserResidencePropertyFields(request.getOperator(), request.getUser(),request.getResidencePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getGrossArea(), request.getUsableArea(), request.getBedrooms(), request.getBathrooms(),
         request.getFloors(),
         request.getResidenceType(), request.getBackyard(), request.getParking(), request.getBuildDate(),
         request.getOrientation(),
-        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription());
+        request.getInstalledEquipment(), request.getAdditionalInformation(), request.getDescription(), request.getPhotoReferences());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateWarehouseProperty")
   public String updateWarehouseProperty(WarehousePropertyDTO request) {
-    return userPropertyService.modifyUserWarehousePropertyFields(request.getOperator(), request.getUser(),
+    return userPropertyService.modifyUserWarehousePropertyFields(request.getOperator(), request.getUser(),request.getWarehousePrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getWarehouseType(), request.getGrossArea(),
         request.getUsableArea(), request.getFloors(), request.getBuildDate(), request.getInstalledEquipment(),
         request.getAdditionalInformation(),
-        request.getDescription());
+        request.getDescription(), request.getPhotoReferences());
   }
 }

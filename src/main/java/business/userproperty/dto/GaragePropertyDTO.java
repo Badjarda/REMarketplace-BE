@@ -1,6 +1,7 @@
 package business.userproperty.dto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import daml.marketplace.interface$.propertymanager.property.common.GarageType;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ public class GaragePropertyDTO {
   private final String operator;
   private final String user;
   private final String propertyId;
+  private final BigDecimal garagePrice;
   
   private final String propertyAddress;
 
@@ -34,4 +36,6 @@ public class GaragePropertyDTO {
   private final String additionalInformation;
 
   private final String description;
+
+  private final List<String> photoReferences;
 }

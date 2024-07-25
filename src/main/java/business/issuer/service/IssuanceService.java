@@ -168,7 +168,7 @@ public class IssuanceService {
       String accountIdString = userAccountRepository.findById(operatorParty + userParty).getAccountId();
       AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
 
-      command = serviceId.exerciseRequestIssue(issuanceId, serviceId, quantity, accountKey).commands();
+      command = serviceId.exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
       transactionService.submitTransaction(command, Arrays.asList(userParty), null);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Fungible : " + e.getMessage();

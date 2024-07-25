@@ -1,6 +1,7 @@
 package business.userprofile.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
@@ -32,6 +33,8 @@ public class UserProfileDTO {
 
   private String fullName;
 
+  private String password;
+
   private LocalDate birthday;
 
   private Optional<Gender> gender;
@@ -42,7 +45,11 @@ public class UserProfileDTO {
 
   private Optional<Long> cellphoneNumber;
 
+  private Long idNumber;
+
   private Long taxId;
 
   private Long socialSecurityId;
+
+  private List<String> photoReferences;
 }

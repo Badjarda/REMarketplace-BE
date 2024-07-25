@@ -105,9 +105,9 @@ public class UserProfileService {
   }
 
   public String requestCreateUserProfile(String operator, String user, String publicString, String profileId,
-      String username, String firstName, String lastName, String fullName, LocalDate birthday,
+      String username, String firstName, String lastName, String fullName, String password, LocalDate birthday,
       Optional<Gender> gender, Nationality nationality, String contactMail, Optional<Long> cellphoneNumber,
-      Long taxId, Long socialSecurityId) {
+      Long idNumber, Long taxId, Long socialSecurityId, List<String> photoReferences) {
     try {
       System.out.println("ola1 " + user);
       System.out.println("Creating a new Profile:\n");
@@ -116,13 +116,16 @@ public class UserProfileService {
       System.out.println("FirstName: " + firstName);
       System.out.println("LastName: " + lastName);
       System.out.println("FullName: " + fullName);
+      System.out.println("Password: " + password);
       System.out.println("Birthday: " + birthday);
       System.out.println("Gender: " + gender);
       System.out.println("Nationality: " + nationality);
       System.out.println("ContactMail: " + contactMail);
       System.out.println("CellphoneNumber: " + cellphoneNumber);
+      System.out.println("IdNumber: " + idNumber);
       System.out.println("TaxId: " + taxId);
       System.out.println("SocialSecurityId: " + socialSecurityId);
+      System.out.println("Photo References: " + photoReferences.toString());
 
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -142,8 +145,8 @@ public class UserProfileService {
       System.out.println("ola5 " + user);
       command = serviceId
           .exerciseRequestCreateUserProfile(userProfileKeyId, username, firstName,
-              lastName, fullName, birthday, gender, nationality, contactMail,
-              cellphoneNumber, taxId, socialSecurityId, observersMap)
+              lastName, fullName, password, birthday, gender, nationality, contactMail,
+              cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences, observersMap)
           .commands();
       System.out.println("ola6 " + user);
       transactionService.submitTransaction(command, Arrays.asList(userParty), Arrays.asList(publicParty));
