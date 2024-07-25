@@ -1,4 +1,4 @@
-package daml.app.propertymanager.service;
+package daml.marketplace.app.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -47,7 +47,7 @@ public final class Request extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Request> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.propertymanager.service.Request", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.propertymanager.service.Request", TEMPLATE_ID,
         ContractId::new, v -> Request.templateValueDecoder().decode(v), Request::fromJson,
         Contract::new, List.of(CHOICE_Archive));
 
@@ -171,7 +171,7 @@ public final class Request extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.propertymanager.service.Request(%s, %s)", this.operator,
+    return String.format("daml.marketplace.app.propertymanager.service.Request(%s, %s)", this.operator,
         this.user);
   }
 
@@ -186,13 +186,13 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.service.Request.ContractId toInterface(
-        daml.interface$.propertymanager.service.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.service.Request.ContractId(this.contractId);
+    public daml.marketplace.interface$.propertymanager.service.Request.ContractId toInterface(
+        daml.marketplace.interface$.propertymanager.service.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.service.Request.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.propertymanager.service.Request.ContractId interfaceContractId) {
+        daml.marketplace.interface$.propertymanager.service.Request.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -244,9 +244,9 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.service.Request.CreateAnd toInterface(
-        daml.interface$.propertymanager.service.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.service.Request.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.propertymanager.service.Request.CreateAnd toInterface(
+        daml.marketplace.interface$.propertymanager.service.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.service.Request.CreateAnd(COMPANION, this.createArguments);
     }
   }
 }

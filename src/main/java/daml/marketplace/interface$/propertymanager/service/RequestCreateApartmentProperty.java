@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -285,7 +285,7 @@ public class RequestCreateApartmentProperty extends DamlRecord<RequestCreateApar
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.RequestCreateApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.RequestCreateApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.id, this.apartmentInstrument, this.apartmentPrice, this.propertyAddress,
         this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.grossArea,
         this.usableArea, this.bedrooms, this.bathrooms, this.floor, this.parkingSpaces,

@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.factory;
+package daml.marketplace.interface$.rolemanager.userrole.factory;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -15,8 +15,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.interface$.common.types.UserRoleKey;
-import daml.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -86,8 +86,8 @@ public class Create extends DamlRecord<Create> {
   public static JsonLfDecoder<Create> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRole", "permissions", "description", "observers"), name -> {
           switch (name) {
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.common.types.UserRoleKey.jsonDecoder());
-            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
@@ -133,7 +133,7 @@ public class Create extends DamlRecord<Create> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.factory.Create(%s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.factory.Create(%s, %s, %s, %s)",
         this.userRole, this.permissions, this.description, this.observers);
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.service;
+package daml.marketplace.interface$.rolemanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,8 +18,8 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.interface$.common.types.UserRoleKey;
-import daml.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
@@ -162,7 +162,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.rolemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.rolemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_UpdateUserRole, CHOICE_DeleteUserRole,
             CHOICE_AddPermissionToUserRole, CHOICE_Archive, CHOICE_RemovePermissionInUserRole,
             CHOICE_CreateUserRole));

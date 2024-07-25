@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,7 +98,7 @@ public class SetTotalLandArea extends DamlRecord<SetTotalLandArea> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.SetTotalLandArea(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.SetTotalLandArea(%s)",
         this.newTotalLandArea);
   }
 }

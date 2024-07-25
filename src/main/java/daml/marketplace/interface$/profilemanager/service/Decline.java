@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.service;
+package daml.marketplace.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Decline extends DamlRecord<Decline> {
 
   @Override
   public String toString() {
-    return "daml.interface$.profilemanager.service.Decline";
+    return "daml.marketplace.interface$.profilemanager.service.Decline";
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.service;
+package daml.marketplace.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -13,7 +13,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.UserProfileKey;
+import daml.marketplace.interface$.common.types.UserProfileKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -68,7 +68,7 @@ public class UpdatePhotoReferences extends DamlRecord<UpdatePhotoReferences> {
     return JsonLfDecoders.record(Arrays.asList("newPhotoReferences", "userProfileKey"), name -> {
           switch (name) {
             case "newPhotoReferences": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text));
-            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserProfileKey.jsonDecoder());
+            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserProfileKey.jsonDecoder());
             default: return null;
           }
         }
@@ -108,7 +108,7 @@ public class UpdatePhotoReferences extends DamlRecord<UpdatePhotoReferences> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.profilemanager.service.UpdatePhotoReferences(%s, %s)",
+    return String.format("daml.marketplace.interface$.profilemanager.service.UpdatePhotoReferences(%s, %s)",
         this.newPhotoReferences, this.userProfileKey);
   }
 }

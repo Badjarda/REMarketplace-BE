@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Decline extends DamlRecord<Decline> {
 
   @Override
   public String toString() {
-    return "daml.interface$.role.operator.Decline";
+    return "daml.marketplace.interface$.role.operator.Decline";
   }
 }

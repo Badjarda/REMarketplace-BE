@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.userrole;
+package daml.marketplace.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -58,7 +58,7 @@ public class SetCid extends DamlRecord<SetCid> {
   public static JsonLfDecoder<SetCid> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newCid"), name -> {
           switch (name) {
-            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.rolemanager.userrole.userrole.UserRole.ContractId::new));
+            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.ContractId::new));
             default: return null;
           }
         }
@@ -96,6 +96,6 @@ public class SetCid extends DamlRecord<SetCid> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.userrole.SetCid(%s)", this.newCid);
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.userrole.SetCid(%s)", this.newCid);
   }
 }

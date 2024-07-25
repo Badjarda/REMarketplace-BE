@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.choices.requestcreategarageproperty;
+package daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -19,7 +19,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -175,7 +175,7 @@ public class View extends DamlRecord<View> {
             case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "garageArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.interface$.propertymanager.property.common.GarageType.jsonDecoder());
+            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.marketplace.interface$.propertymanager.property.common.GarageType.jsonDecoder());
             case "vehicleCapacity": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
             case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
@@ -253,7 +253,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.choices.requestcreategarageproperty.View(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.View(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.garageInstrument, this.garagePrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.garageArea, this.garageType, this.vehicleCapacity, this.installedEquipment,

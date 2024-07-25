@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,7 +17,7 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -476,7 +476,7 @@ public final class GarageProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<GarageProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty", GarageProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GarageProperty", GarageProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_GetGarageDescription, CHOICE_GetGaragePropertyCounty,
             CHOICE_GetGaragePropertyPostalCode, CHOICE_GetGaragePropertyAddress, CHOICE_Archive,
             CHOICE_GetView, CHOICE_GetGarageInstrumentKey, CHOICE_SetGarageDescription,

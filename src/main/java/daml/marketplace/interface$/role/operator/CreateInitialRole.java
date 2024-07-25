@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -15,7 +15,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -81,7 +81,7 @@ public class CreateInitialRole extends DamlRecord<CreateInitialRole> {
     return JsonLfDecoders.record(Arrays.asList("userDescription", "userPermissions", "observers"), name -> {
           switch (name) {
             case "userDescription": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "userPermissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "userPermissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -124,7 +124,7 @@ public class CreateInitialRole extends DamlRecord<CreateInitialRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.CreateInitialRole(%s, %s, %s)",
+    return String.format("daml.marketplace.interface$.role.operator.CreateInitialRole(%s, %s, %s)",
         this.userDescription, this.userPermissions, this.observers);
   }
 }

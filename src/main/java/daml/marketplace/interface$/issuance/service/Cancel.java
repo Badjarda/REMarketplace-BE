@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Cancel extends DamlRecord<Cancel> {
 
   @Override
   public String toString() {
-    return "daml.interface$.issuance.service.Cancel";
+    return "daml.marketplace.interface$.issuance.service.Cancel";
   }
 }

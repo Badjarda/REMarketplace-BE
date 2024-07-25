@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
+package daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Remove extends DamlRecord<Remove> {
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Remove";
+    return "daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Remove";
   }
 }

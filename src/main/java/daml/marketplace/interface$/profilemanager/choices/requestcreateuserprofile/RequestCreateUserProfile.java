@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.choices.requestcreateuserprofile;
+package daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class RequestCreateUserProfile {
   public static final class INTERFACE_ extends InterfaceCompanion<RequestCreateUserProfile, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile", RequestCreateUserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile", RequestCreateUserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

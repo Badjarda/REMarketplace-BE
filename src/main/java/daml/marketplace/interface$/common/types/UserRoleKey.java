@@ -1,4 +1,4 @@
-package daml.interface$.common.types;
+package daml.marketplace.interface$.common.types;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -104,7 +104,7 @@ public class UserRoleKey extends DamlRecord<UserRoleKey> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.common.types.UserRoleKey(%s, %s)", this.operator,
+    return String.format("daml.marketplace.interface$.common.types.UserRoleKey(%s, %s)", this.operator,
         this.id);
   }
 }

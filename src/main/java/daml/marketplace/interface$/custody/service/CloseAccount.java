@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
+import daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class CloseAccount extends DamlRecord<CloseAccount> {
   public static JsonLfDecoder<CloseAccount> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("closeAccountRequestCid"), name -> {
           switch (name) {
-            case "closeAccountRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId::new));
+            case "closeAccountRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class CloseAccount extends DamlRecord<CloseAccount> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.CloseAccount(%s)",
+    return String.format("daml.marketplace.interface$.custody.service.CloseAccount(%s)",
         this.closeAccountRequestCid);
   }
 }

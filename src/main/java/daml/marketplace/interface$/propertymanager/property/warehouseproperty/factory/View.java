@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.factory;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,7 +96,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.factory.View(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.View(%s)",
         this.operator);
   }
 }

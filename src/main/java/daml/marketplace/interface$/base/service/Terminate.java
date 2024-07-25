@@ -1,4 +1,4 @@
-package daml.interface$.base.service;
+package daml.marketplace.interface$.base.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,6 +96,6 @@ public class Terminate extends DamlRecord<Terminate> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.base.service.Terminate(%s)", this.actor);
+    return String.format("daml.marketplace.interface$.base.service.Terminate(%s)", this.actor);
   }
 }

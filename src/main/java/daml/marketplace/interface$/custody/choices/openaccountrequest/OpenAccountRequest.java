@@ -1,4 +1,4 @@
-package daml.interface$.custody.choices.openaccountrequest;
+package daml.marketplace.interface$.custody.choices.openaccountrequest;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class OpenAccountRequest {
   public static final class INTERFACE_ extends InterfaceCompanion<OpenAccountRequest, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.custody.choices.openaccountrequest.OpenAccountRequest", OpenAccountRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest", OpenAccountRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

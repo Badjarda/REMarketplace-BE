@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.service;
+package daml.marketplace.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.rolemanager.userrole.factory.Factory;
+import daml.marketplace.interface$.rolemanager.userrole.factory.Factory;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class View extends DamlRecord<View> {
   public static JsonLfDecoder<View> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRoleFactoryCid"), name -> {
           switch (name) {
-            case "userRoleFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.rolemanager.userrole.factory.Factory.ContractId::new));
+            case "userRoleFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.service.View(%s)", this.userRoleFactoryCid);
+    return String.format("daml.marketplace.interface$.rolemanager.service.View(%s)", this.userRoleFactoryCid);
   }
 }

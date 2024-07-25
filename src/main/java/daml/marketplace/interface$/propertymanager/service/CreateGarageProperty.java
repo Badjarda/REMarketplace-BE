@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty;
+import daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class CreateGarageProperty extends DamlRecord<CreateGarageProperty> {
   public static JsonLfDecoder<CreateGarageProperty> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("createGaragePropertyRequest"), name -> {
           switch (name) {
-            case "createGaragePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId::new));
+            case "createGaragePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId::new));
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class CreateGarageProperty extends DamlRecord<CreateGarageProperty> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.CreateGarageProperty(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.CreateGarageProperty(%s)",
         this.createGaragePropertyRequest);
   }
 }

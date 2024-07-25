@@ -1,4 +1,4 @@
-package daml.app.propertymanager.model;
+package daml.marketplace.app.propertymanager.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -36,8 +36,8 @@ import daml.da.set.types.Set;
 import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.common.removable.Removable;
-import daml.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.common.removable.Removable;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -61,7 +61,7 @@ public final class RequestCreateGarageProperty extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, RequestCreateGarageProperty, Tuple2<String, Id>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.propertymanager.model.RequestCreateGarageProperty",
+      new ContractCompanion.WithKey<>("daml.marketplace.app.propertymanager.model.RequestCreateGarageProperty",
         TEMPLATE_ID, ContractId::new,
         v -> RequestCreateGarageProperty.templateValueDecoder().decode(v),
         RequestCreateGarageProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
@@ -275,7 +275,7 @@ public final class RequestCreateGarageProperty extends Template {
             case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "garageArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.interface$.propertymanager.property.common.GarageType.jsonDecoder());
+            case "garageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.marketplace.interface$.propertymanager.property.common.GarageType.jsonDecoder());
             case "vehicleCapacity": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
             case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
@@ -357,7 +357,7 @@ public final class RequestCreateGarageProperty extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.propertymanager.model.RequestCreateGarageProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.app.propertymanager.model.RequestCreateGarageProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.garageInstrument, this.garagePrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.garageArea, this.garageType, this.vehicleCapacity, this.installedEquipment,
@@ -384,9 +384,9 @@ public final class RequestCreateGarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId toInterface(
-        daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(this.contractId);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -394,7 +394,7 @@ public final class RequestCreateGarageProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId interfaceContractId) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -453,9 +453,9 @@ public final class RequestCreateGarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.CreateAnd toInterface(
-        daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.CreateAnd toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -474,9 +474,9 @@ public final class RequestCreateGarageProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ByKey toInterface(
-        daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ByKey toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Removable.ByKey toInterface(Removable.INTERFACE_ interfaceCompanion) {

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
+package daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -619,7 +619,7 @@ public final class ApartmentProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<ApartmentProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty", ApartmentProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty", ApartmentProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetApartmentPropertyCounty, CHOICE_GetApartmentFloor,
             CHOICE_GetApartmentElevator, CHOICE_GetView, CHOICE_SetApartmentBedrooms,
             CHOICE_SetApartmentElevator, CHOICE_SetApartmentUsableArea,

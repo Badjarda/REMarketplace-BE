@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.userprofile.userprofile;
+package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class GetPassword extends DamlRecord<GetPassword> {
 
   @Override
   public String toString() {
-    return "daml.interface$.profilemanager.userprofile.userprofile.GetPassword";
+    return "daml.marketplace.interface$.profilemanager.userprofile.userprofile.GetPassword";
   }
 }

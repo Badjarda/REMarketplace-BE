@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.userprofile.userprofile;
+package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -97,7 +97,7 @@ public class SetTaxId extends DamlRecord<SetTaxId> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.profilemanager.userprofile.userprofile.SetTaxId(%s)",
+    return String.format("daml.marketplace.interface$.profilemanager.userprofile.userprofile.SetTaxId(%s)",
         this.newTaxId);
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.residenceproperty.residenceproperty;
+package daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -89,6 +89,6 @@ public class GetResidenceAdditionalInformation extends DamlRecord<GetResidenceAd
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.residenceproperty.residenceproperty.GetResidenceAdditionalInformation";
+    return "daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty.GetResidenceAdditionalInformation";
   }
 }

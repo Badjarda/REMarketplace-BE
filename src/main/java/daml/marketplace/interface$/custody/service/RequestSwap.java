@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -137,7 +137,7 @@ public class RequestSwap extends DamlRecord<RequestSwap> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.RequestSwap(%s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.custody.service.RequestSwap(%s, %s, %s, %s, %s)",
         this.seller, this.sellerAccount, this.buyerAccount, this.fungibleHoldingCid,
         this.fungibleAmount);
   }

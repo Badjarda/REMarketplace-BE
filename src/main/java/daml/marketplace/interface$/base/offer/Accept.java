@@ -1,4 +1,4 @@
-package daml.interface$.base.offer;
+package daml.marketplace.interface$.base.offer;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Accept extends DamlRecord<Accept> {
 
   @Override
   public String toString() {
-    return "daml.interface$.base.offer.Accept";
+    return "daml.marketplace.interface$.base.offer.Accept";
   }
 }

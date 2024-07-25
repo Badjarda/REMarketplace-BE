@@ -1,4 +1,4 @@
-package daml.interface$.common.removable;
+package daml.marketplace.interface$.common.removable;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,6 +98,6 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.common.removable.View(%s)", this.removers);
+    return String.format("daml.marketplace.interface$.common.removable.View(%s)", this.removers);
   }
 }

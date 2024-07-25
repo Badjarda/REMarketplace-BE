@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.userrole;
+package daml.marketplace.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -60,7 +60,7 @@ public class SetPermissions extends DamlRecord<SetPermissions> {
   public static JsonLfDecoder<SetPermissions> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("permissions"), name -> {
           switch (name) {
-            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
+            case "permissions": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder()));
             default: return null;
           }
         }
@@ -98,7 +98,7 @@ public class SetPermissions extends DamlRecord<SetPermissions> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.userrole.SetPermissions(%s)",
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.userrole.SetPermissions(%s)",
         this.permissions);
   }
 }

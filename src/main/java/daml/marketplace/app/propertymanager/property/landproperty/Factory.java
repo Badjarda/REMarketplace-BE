@@ -1,4 +1,4 @@
-package daml.app.propertymanager.property.landproperty;
+package daml.marketplace.app.propertymanager.property.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -51,7 +51,7 @@ public final class Factory extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Factory> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.propertymanager.property.landproperty.Factory",
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.propertymanager.property.landproperty.Factory",
         TEMPLATE_ID, ContractId::new, v -> Factory.templateValueDecoder().decode(v),
         Factory::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -181,7 +181,7 @@ public final class Factory extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.propertymanager.property.landproperty.Factory(%s, %s)",
+    return String.format("daml.marketplace.app.propertymanager.property.landproperty.Factory(%s, %s)",
         this.operator, this.observers);
   }
 
@@ -196,9 +196,9 @@ public final class Factory extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId toInterface(
-        daml.interface$.propertymanager.property.landproperty.factory.Factory.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(this.contractId);
+    public daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId toInterface(
+        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -206,7 +206,7 @@ public final class Factory extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId interfaceContractId) {
+        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -263,9 +263,9 @@ public final class Factory extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.property.landproperty.factory.Factory.CreateAnd toInterface(
-        daml.interface$.propertymanager.property.landproperty.factory.Factory.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.property.landproperty.factory.Factory.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.CreateAnd toInterface(
+        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

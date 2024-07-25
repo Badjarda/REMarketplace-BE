@@ -1,4 +1,4 @@
-package daml.app.propertymanager.property.landproperty;
+package daml.marketplace.app.propertymanager.property.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -38,8 +38,8 @@ import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.util.disclosure.Disclosure;
-import daml.interface$.propertymanager.property.common.LandType;
-import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
 import java.lang.Boolean;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
@@ -64,7 +64,7 @@ public final class LandProperty extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, LandProperty, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.propertymanager.property.landproperty.LandProperty",
+      new ContractCompanion.WithKey<>("daml.marketplace.app.propertymanager.property.landproperty.LandProperty",
         TEMPLATE_ID, ContractId::new, v -> LandProperty.templateValueDecoder().decode(v),
         LandProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
         e -> Tuple2.<java.lang.String,
@@ -299,14 +299,14 @@ public final class LandProperty extends Template {
             case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "landType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, daml.interface$.propertymanager.property.common.LandType.jsonDecoder());
+            case "landType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, daml.marketplace.interface$.propertymanager.property.common.LandType.jsonDecoder());
             case "totalLandArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "minimumSurfaceForSale": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "buildableArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "buildableFloors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
             case "accessByRoad": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.bool);
             case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(15, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "viableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
+            case "viableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
             case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(17, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(18, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "photoReferences": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(19, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text));
@@ -395,7 +395,7 @@ public final class LandProperty extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.propertymanager.property.landproperty.LandProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.app.propertymanager.property.landproperty.LandProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.instrument, this.landPrice, this.propertyAddress,
         this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.landType,
         this.totalLandArea, this.minimumSurfaceForSale, this.buildableArea, this.buildableFloors,
@@ -423,9 +423,9 @@ public final class LandProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId toInterface(
-        daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId(this.contractId);
+    public daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId toInterface(
+        daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -433,7 +433,7 @@ public final class LandProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId interfaceContractId) {
+        daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -492,9 +492,9 @@ public final class LandProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.CreateAnd toInterface(
-        daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.CreateAnd toInterface(
+        daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -513,9 +513,9 @@ public final class LandProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ByKey toInterface(
-        daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ByKey toInterface(
+        daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Disclosure.ByKey toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

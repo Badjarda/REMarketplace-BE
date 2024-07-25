@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,8 +17,8 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.propertymanager.property.common.LandType;
-import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
 import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
@@ -585,7 +585,7 @@ public final class LandProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<LandProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty", LandProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty", LandProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetLandPrice, CHOICE_GetLandBuildableArea,
             CHOICE_GetTotalLandArea, CHOICE_GetLandBuildableFloors, CHOICE_SetLandBuildableArea,
             CHOICE_SetLandPropertyDistrict, CHOICE_SetLandPropertyPostalCode,

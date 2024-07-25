@@ -1,4 +1,4 @@
-package daml.app.issuance.model;
+package daml.marketplace.app.issuance.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -34,7 +34,7 @@ import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.interface$.common.removable.Removable;
+import daml.marketplace.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -57,7 +57,7 @@ public final class Issuance extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Issuance, Tuple2<String, Id>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.issuance.model.Issuance", TEMPLATE_ID,
+      new ContractCompanion.WithKey<>("daml.marketplace.app.issuance.model.Issuance", TEMPLATE_ID,
         ContractId::new, v -> Issuance.templateValueDecoder().decode(v), Issuance::fromJson,
         Contract::new, List.of(CHOICE_Archive), e -> Tuple2.<java.lang.String,
         daml.daml.finance.interface$.types.common.types.Id>valueDecoder(PrimitiveValueDecoders.fromParty,
@@ -230,7 +230,7 @@ public final class Issuance extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.issuance.model.Issuance(%s, %s, %s, %s, %s)", this.operator,
+    return String.format("daml.marketplace.app.issuance.model.Issuance(%s, %s, %s, %s, %s)", this.operator,
         this.user, this.id, this.description, this.quantity);
   }
 
@@ -254,9 +254,9 @@ public final class Issuance extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.issuance.Issuance.ContractId toInterface(
-        daml.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.issuance.Issuance.ContractId(this.contractId);
+    public daml.marketplace.interface$.issuance.issuance.Issuance.ContractId toInterface(
+        daml.marketplace.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.issuance.Issuance.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -264,7 +264,7 @@ public final class Issuance extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.issuance.issuance.Issuance.ContractId interfaceContractId) {
+        daml.marketplace.interface$.issuance.issuance.Issuance.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -322,9 +322,9 @@ public final class Issuance extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.issuance.Issuance.CreateAnd toInterface(
-        daml.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.issuance.Issuance.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.issuance.issuance.Issuance.CreateAnd toInterface(
+        daml.marketplace.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.issuance.Issuance.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -343,9 +343,9 @@ public final class Issuance extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.issuance.Issuance.ByKey toInterface(
-        daml.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.issuance.Issuance.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.issuance.issuance.Issuance.ByKey toInterface(
+        daml.marketplace.interface$.issuance.issuance.Issuance.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.issuance.Issuance.ByKey(COMPANION, this.contractKey);
     }
 
     public Removable.ByKey toInterface(Removable.INTERFACE_ interfaceCompanion) {

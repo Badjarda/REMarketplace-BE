@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,7 +98,7 @@ public class TerminateUserRoleManagerService extends DamlRecord<TerminateUserRol
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.TerminateUserRoleManagerService(%s)",
+    return String.format("daml.marketplace.interface$.role.operator.TerminateUserRoleManagerService(%s)",
         this.user);
   }
 }

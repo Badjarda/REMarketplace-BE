@@ -1,4 +1,4 @@
-package daml.app.role.user;
+package daml.marketplace.app.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -50,7 +50,7 @@ public final class Role extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Role, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.role.user.Role", TEMPLATE_ID, ContractId::new,
+      new ContractCompanion.WithKey<>("daml.marketplace.app.role.user.Role", TEMPLATE_ID, ContractId::new,
         v -> Role.templateValueDecoder().decode(v), Role::fromJson, Contract::new,
         List.of(CHOICE_Archive), e -> Tuple2.<java.lang.String,
         java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty,
@@ -194,7 +194,7 @@ public final class Role extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.role.user.Role(%s, %s)", this.operator, this.user);
+    return String.format("daml.marketplace.app.role.user.Role(%s, %s)", this.operator, this.user);
   }
 
   /**
@@ -217,13 +217,13 @@ public final class Role extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.role.user.Role.ContractId toInterface(
-        daml.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.role.user.Role.ContractId(this.contractId);
+    public daml.marketplace.interface$.role.user.Role.ContractId toInterface(
+        daml.marketplace.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.role.user.Role.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.role.user.Role.ContractId interfaceContractId) {
+        daml.marketplace.interface$.role.user.Role.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -277,9 +277,9 @@ public final class Role extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.role.user.Role.CreateAnd toInterface(
-        daml.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.role.user.Role.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.role.user.Role.CreateAnd toInterface(
+        daml.marketplace.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.role.user.Role.CreateAnd(COMPANION, this.createArguments);
     }
   }
 
@@ -294,9 +294,9 @@ public final class Role extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.role.user.Role.ByKey toInterface(
-        daml.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.role.user.Role.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.role.user.Role.ByKey toInterface(
+        daml.marketplace.interface$.role.user.Role.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.role.user.Role.ByKey(COMPANION, this.contractKey);
     }
   }
 }

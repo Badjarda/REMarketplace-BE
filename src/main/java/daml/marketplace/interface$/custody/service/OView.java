@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -135,7 +135,7 @@ public class OView extends DamlRecord<OView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.OView(%s, %s, %s, %s, %s)", this.user,
+    return String.format("daml.marketplace.interface$.custody.service.OView(%s, %s, %s, %s, %s)", this.user,
         this.operator, this.accountFactoryCid, this.holdingFactoryKey, this.claimRuleCid);
   }
 }

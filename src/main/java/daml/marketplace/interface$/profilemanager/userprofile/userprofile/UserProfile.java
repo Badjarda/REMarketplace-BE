@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.userprofile.userprofile;
+package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,8 +16,8 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.interface$.profilemanager.userprofile.common.Gender;
-import daml.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -474,7 +474,7 @@ public final class UserProfile {
   public static final class INTERFACE_ extends InterfaceCompanion<UserProfile, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetUsername, CHOICE_SetPassword, CHOICE_Remove,
             CHOICE_GetPhotoReferences, CHOICE_GetTaxId, CHOICE_SetContactMail, CHOICE_SetLastName,
             CHOICE_Archive, CHOICE_GetBirthday, CHOICE_SetTaxId, CHOICE_GetSocialSecurityId,

@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Decline extends DamlRecord<Decline> {
 
   @Override
   public String toString() {
-    return "daml.interface$.issuance.service.Decline";
+    return "daml.marketplace.interface$.issuance.service.Decline";
   }
 }

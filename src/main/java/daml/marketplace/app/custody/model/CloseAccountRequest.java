@@ -1,4 +1,4 @@
-package daml.app.custody.model;
+package daml.marketplace.app.custody.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -27,7 +27,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
-import daml.interface$.common.removable.Removable;
+import daml.marketplace.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -49,7 +49,7 @@ public final class CloseAccountRequest extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, CloseAccountRequest> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.custody.model.CloseAccountRequest", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.custody.model.CloseAccountRequest", TEMPLATE_ID,
         ContractId::new, v -> CloseAccountRequest.templateValueDecoder().decode(v),
         CloseAccountRequest::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -183,7 +183,7 @@ public final class CloseAccountRequest extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.custody.model.CloseAccountRequest(%s, %s, %s)", this.operator,
+    return String.format("daml.marketplace.app.custody.model.CloseAccountRequest(%s, %s, %s)", this.operator,
         this.user, this.account);
   }
 
@@ -198,9 +198,9 @@ public final class CloseAccountRequest extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId toInterface(
-        daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId(this.contractId);
+    public daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId toInterface(
+        daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -208,7 +208,7 @@ public final class CloseAccountRequest extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId interfaceContractId) {
+        daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -264,9 +264,9 @@ public final class CloseAccountRequest extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.CreateAnd toInterface(
-        daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.CreateAnd toInterface(
+        daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {

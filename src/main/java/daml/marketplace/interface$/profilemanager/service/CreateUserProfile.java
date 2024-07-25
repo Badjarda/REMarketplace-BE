@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.service;
+package daml.marketplace.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile;
+import daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class CreateUserProfile extends DamlRecord<CreateUserProfile> {
   public static JsonLfDecoder<CreateUserProfile> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("createUserProfileRequest"), name -> {
           switch (name) {
-            case "createUserProfileRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId::new));
+            case "createUserProfileRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId::new));
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class CreateUserProfile extends DamlRecord<CreateUserProfile> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.profilemanager.service.CreateUserProfile(%s)",
+    return String.format("daml.marketplace.interface$.profilemanager.service.CreateUserProfile(%s)",
         this.createUserProfileRequest);
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -20,7 +20,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -178,7 +178,7 @@ public class RequestCreateWarehouseProperty extends DamlRecord<RequestCreateWare
             case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "warehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, daml.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
+            case "warehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, daml.marketplace.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
             case "grossArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "usableArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "floors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
@@ -260,7 +260,7 @@ public class RequestCreateWarehouseProperty extends DamlRecord<RequestCreateWare
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.RequestCreateWarehouseProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.RequestCreateWarehouseProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.id, this.warehouseInstrument, this.warehousePrice, this.propertyAddress,
         this.propertyPostalCode, this.propertyDistrict, this.propertyCounty, this.warehouseType,
         this.grossArea, this.usableArea, this.floors, this.buildDate, this.installedEquipment,

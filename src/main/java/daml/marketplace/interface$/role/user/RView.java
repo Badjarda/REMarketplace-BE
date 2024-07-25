@@ -1,4 +1,4 @@
-package daml.interface$.role.user;
+package daml.marketplace.interface$.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -103,6 +103,6 @@ public class RView extends DamlRecord<RView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.user.RView(%s, %s)", this.operator, this.user);
+    return String.format("daml.marketplace.interface$.role.user.RView(%s, %s)", this.operator, this.user);
   }
 }

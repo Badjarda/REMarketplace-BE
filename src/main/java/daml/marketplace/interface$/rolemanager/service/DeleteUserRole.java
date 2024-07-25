@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.service;
+package daml.marketplace.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -58,7 +58,7 @@ public class DeleteUserRole extends DamlRecord<DeleteUserRole> {
   public static JsonLfDecoder<DeleteUserRole> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRole"), name -> {
           switch (name) {
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
             default: return null;
           }
         }
@@ -96,6 +96,6 @@ public class DeleteUserRole extends DamlRecord<DeleteUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.service.DeleteUserRole(%s)", this.userRole);
+    return String.format("daml.marketplace.interface$.rolemanager.service.DeleteUserRole(%s)", this.userRole);
   }
 }

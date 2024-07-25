@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
+package daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,7 +98,7 @@ public class SetApartmentElevator extends DamlRecord<SetApartmentElevator> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.SetApartmentElevator(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.SetApartmentElevator(%s)",
         this.newApartmentElevator);
   }
 }

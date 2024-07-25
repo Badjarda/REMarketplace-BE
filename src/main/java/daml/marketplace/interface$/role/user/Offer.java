@@ -1,4 +1,4 @@
-package daml.interface$.role.user;
+package daml.marketplace.interface$.role.user;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -111,7 +111,7 @@ public final class Offer {
   public static final class INTERFACE_ extends InterfaceCompanion<Offer, ContractId, OView> {
     INTERFACE_() {
       super(
-            "daml.interface$.role.user.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
+            "daml.marketplace.interface$.role.user.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
             OView::fromJson,List.of(CHOICE_Archive, CHOICE_Accept, CHOICE_Decline));
     }
   }

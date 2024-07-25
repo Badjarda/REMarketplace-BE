@@ -1,4 +1,4 @@
-package daml.interface$.issuance.choices.deissuerequest;
+package daml.marketplace.interface$.issuance.choices.deissuerequest;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class DeIssueRequest {
   public static final class INTERFACE_ extends InterfaceCompanion<DeIssueRequest, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.issuance.choices.deissuerequest.DeIssueRequest", DeIssueRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.issuance.choices.deissuerequest.DeIssueRequest", DeIssueRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

@@ -1,4 +1,4 @@
-package daml.app.propertymanager.model;
+package daml.marketplace.app.propertymanager.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -37,8 +37,8 @@ import daml.da.set.types.Set;
 import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.common.removable.Removable;
-import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.common.removable.Removable;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -64,7 +64,7 @@ public final class RequestCreateWarehouseProperty extends Template {
 
   public static final ContractCompanion.WithKey<Contract, ContractId, RequestCreateWarehouseProperty, Tuple2<String, Id>> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.app.propertymanager.model.RequestCreateWarehouseProperty", TEMPLATE_ID,
+        "daml.marketplace.app.propertymanager.model.RequestCreateWarehouseProperty", TEMPLATE_ID,
         ContractId::new, v -> RequestCreateWarehouseProperty.templateValueDecoder().decode(v),
         RequestCreateWarehouseProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
         e -> Tuple2.<java.lang.String,
@@ -287,7 +287,7 @@ public final class RequestCreateWarehouseProperty extends Template {
             case "propertyPostalCode": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyDistrict": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "propertyCounty": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "warehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, daml.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
+            case "warehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, daml.marketplace.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
             case "grossArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "usableArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
             case "floors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
@@ -377,7 +377,7 @@ public final class RequestCreateWarehouseProperty extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.propertymanager.model.RequestCreateWarehouseProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.app.propertymanager.model.RequestCreateWarehouseProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.warehouseInstrument, this.warehousePrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.warehouseType, this.grossArea, this.usableArea, this.floors, this.buildDate,
@@ -405,9 +405,9 @@ public final class RequestCreateWarehouseProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId toInterface(
-        daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(this.contractId);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -415,7 +415,7 @@ public final class RequestCreateWarehouseProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId interfaceContractId) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -475,9 +475,9 @@ public final class RequestCreateWarehouseProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.CreateAnd toInterface(
-        daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.CreateAnd toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -496,9 +496,9 @@ public final class RequestCreateWarehouseProperty extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ByKey toInterface(
-        daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ByKey toInterface(
+        daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Removable.ByKey toInterface(Removable.INTERFACE_ interfaceCompanion) {

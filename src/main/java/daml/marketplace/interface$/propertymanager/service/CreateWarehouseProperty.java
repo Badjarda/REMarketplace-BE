@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty;
+import daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -61,7 +61,7 @@ public class CreateWarehouseProperty extends DamlRecord<CreateWarehouseProperty>
   public static JsonLfDecoder<CreateWarehouseProperty> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("createWarehousePropertyRequest"), name -> {
           switch (name) {
-            case "createWarehousePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId::new));
+            case "createWarehousePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId::new));
             default: return null;
           }
         }
@@ -99,7 +99,7 @@ public class CreateWarehouseProperty extends DamlRecord<CreateWarehouseProperty>
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.CreateWarehouseProperty(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.CreateWarehouseProperty(%s)",
         this.createWarehousePropertyRequest);
   }
 }

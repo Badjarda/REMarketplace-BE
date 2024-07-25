@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Withdraw extends DamlRecord<Withdraw> {
 
   @Override
   public String toString() {
-    return "daml.interface$.custody.service.Withdraw";
+    return "daml.marketplace.interface$.custody.service.Withdraw";
   }
 }
