@@ -4,6 +4,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -227,7 +229,7 @@ public class WorkflowResourceTest {
 
                 completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
                         try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
+                                Thread.sleep(4000); // Adjust sleep time as needed
                         } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                                 throw new RuntimeException(e);
@@ -293,12 +295,12 @@ public class WorkflowResourceTest {
                 }));
 
                 // ############### Profile Create Requests ###############
-
-                UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, "Profile" + uuid2, "DuarteCosta", "Duarte",
-                                "Costa", "Duarte Ferreira da Costa",
+                List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
+                UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
+                                "Costa", "Duarte Ferreira da Costa", "passwordTest", 
                                 LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE,
-                                "ola@gmail.com",
-                                Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L);
+                                "ola@gmail.com", Optional.of((long) 912345678L), (long) 212345678L, 
+                                (long) 12345678901L, (long) 987654321L, photoReferences);
                 given()
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(profileDTO)
@@ -319,15 +321,10 @@ public class WorkflowResourceTest {
                 }));
 
                 completionFuture.thenRun(
-                                () -> System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3,
-                                                "Profile" + uuid3,
-                                                "João Maria", "João",
-                                                "Maria", "João Barreiro Maria",
-                                                LocalDate.of(2002, 10, 10), Optional.of(Gender.MALE),
-                                                Nationality.PORTUGUESE,
-                                                "adeus@gmail.com",
-                                                Optional.of((long) 912445677L), (long) 212355578L,
-                                                (long) 12345278101L)))
+                                () -> System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4, "Profile" + uuid2, "PauloSeixo", 
+                                "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234", LocalDate.of(2000, 1, 1), 
+                                Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, 
+                                (long) 12345678901L, (long) 987654321L, photoReferences)))
                                 .thenRun(() -> {
                                 })
                                 .join();

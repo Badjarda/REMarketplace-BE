@@ -252,7 +252,7 @@ public class Transactions {
 
   public void handleTransaction(TransactionOuterClass.Transaction transaction) {
     for (Event event : transaction.getEventsList()) {
-      // System.out.println(event.toString());
+      System.out.println(event.toString());
       handleEvent(event);
     }
   }
@@ -273,6 +273,7 @@ public class Transactions {
       handleUserRoleFactoryCreatedEvent(created, contractId);
     } else if (templateId
         .equals(daml.marketplace.app.profilemanager.userprofile.Factory.TEMPLATE_ID.toProto())) {
+      System.out.println("Transactions!!!");
       handleUserProfileFactoryCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.profilemanager.service.Offer.TEMPLATE_ID.toProto())) {
       handleProfileServiceOfferCreatedEvent(created, contractId);
@@ -542,6 +543,7 @@ public class Transactions {
 
   private void handleUserProfileFactoryCreatedEvent(CreatedEvent event, String contractId) {
     String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
+    System.out.println("StoredParty: " + partyId);
     userProfileFactoryRepository.persist(new UserProfileFactory(partyId, contractId));
   }
 
