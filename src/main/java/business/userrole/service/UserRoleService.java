@@ -42,10 +42,7 @@ public class UserRoleService {
     String userParty = userRepository.findById(user).getPartyId();
     String offerContractId = userRoleOfferRepository.findById(operatorParty+userParty).getContractId();
     List<com.daml.ledger.javaapi.data.Command> command = null;
-    
-    var userAcceptId = new daml.marketplace.interface$.role.user.Offer.ContractId(
-        offerContractId);
-
+    var userAcceptId = new daml.marketplace.interface$.role.user.Offer.ContractId(offerContractId);
     if (action.equals("accept"))
       command = userAcceptId.exerciseAccept().commands();
     else if (action.equals("decline"))

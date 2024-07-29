@@ -507,7 +507,7 @@ public class Transactions {
   private void handleRoleUserRoleCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String roleId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String roleId = event.getContractKey().getRecord().getRecordId().getPackageId();
     userRoleAppRepository
         .persist(new UserRoleApp(operatorId + userId, contractId, roleId));
   }
@@ -957,8 +957,7 @@ public class Transactions {
     if(readAs != null){
         commandsSubmission.withReadAs(readAs);
     }              
-        
-    Transaction response = client.getCommandClient().submitAndWaitForTransaction(commandsSubmission).blockingGet().toProto();  
+    Transaction response = client.getCommandClient().submitAndWaitForTransaction(commandsSubmission).blockingGet().toProto();
     return response;      
   }
   

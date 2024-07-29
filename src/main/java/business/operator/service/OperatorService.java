@@ -257,7 +257,6 @@ public class OperatorService {
 
             var operatorId = new daml.marketplace.interface$.role.operator.Role.ContractId(
                     operatorContractId);
-            System.out.println("operatorParty: " + operatorParty);
             String userProfileFactoryCid = userProfileFactoryRepository.findById(operatorParty).getContractId();
             var userProfileFactoryContractid = new daml.marketplace.interface$.profilemanager.userprofile.factory.Factory.ContractId(
                     userProfileFactoryCid);

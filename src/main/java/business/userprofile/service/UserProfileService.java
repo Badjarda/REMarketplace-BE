@@ -19,6 +19,7 @@ import business.profilemanager.entity.repository.UserProfileManagerRepository;
 import business.user.entity.repository.UserRepository;
 import business.userprofile.entity.repository.ProfileServiceOfferRepository;
 import business.userprofile.entity.repository.UserProfileRepository;
+import business.userrole.entity.repository.UserRoleInterfaceRepository;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.marketplace.interface$.common.types.UserProfileKey;
@@ -34,6 +35,9 @@ public class UserProfileService {
 
   @Inject
   UserRepository userRepository;
+
+  @Inject
+  UserRoleInterfaceRepository userRoleInterfaceRepository;
 
   @Inject
   Transactions transactionService;
@@ -67,12 +71,11 @@ public class UserProfileService {
 
     var serviceAcceptId = new daml.marketplace.interface$.profilemanager.service.Offer.ContractId(
         offerContractId);
-
     if (action.equals("accept"))
       command = serviceAcceptId.exerciseAccept().commands();
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
-
+    
     Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
     transactionService.handleTransaction(transaction);
   }
@@ -94,7 +97,6 @@ public class UserProfileService {
   public String declineProfileService(String operator, String user) {
     try {
       handleProfileServiceOffer(operator, user, "decline");
-
     } catch (IllegalArgumentException | IllegalStateException e) {
       // Handle input validation or contract existence check errors
       return "Error declining Profile Service: " + e.getMessage() + "\n";
@@ -110,7 +112,7 @@ public class UserProfileService {
       Optional<Gender> gender, Nationality nationality, String contactMail, Optional<Long> cellphoneNumber,
       Long idNumber, Long taxId, Long socialSecurityId, List<String> photoReferences) {
     try {
-      System.out.println("ola1 " + user);
+      /**
       System.out.println("Creating a new Profile:\n");
       System.out.println("ProfileId: " + profileId);
       System.out.println("Username: " + username);
@@ -126,39 +128,31 @@ public class UserProfileService {
       System.out.println("IdNumber: " + idNumber);
       System.out.println("TaxId: " + taxId);
       System.out.println("SocialSecurityId: " + socialSecurityId);
-      System.out.println("Photo References: " + photoReferences.toString());
-
+      System.out.println("Photo References: " + photoReferences.toString()); */
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String publicParty = userRepository.findById(publicString).getPartyId();
-      System.out.println("ola2 " + user);
       List<com.daml.ledger.javaapi.data.Command> command = null;
       String servicId = userProfileManagerRepository.findById(operatorParty + userParty).getContractId();
-      System.out.println("ola3 " + user);
       Id userProfileKeyId = new Id(profileId);
-      daml.marketplace.interface$.profilemanager.service.Service.ContractId serviceId = new daml.marketplace.interface$.profilemanager.service.Service.ContractId(
+      var serviceId = new daml.marketplace.interface$.profilemanager.service.Service.ContractId(
           servicId);
-      System.out.println("ola4 " + user);
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
       Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
       observersMap.put("Default", observers);
-      System.out.println("ola5 " + user);
       command = serviceId
           .exerciseRequestCreateUserProfile(userProfileKeyId, username, firstName,
               lastName, fullName, password, birthday, gender, nationality, contactMail,
               cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences, observersMap)
           .commands();
-      System.out.println("ola6 " + user);
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), Arrays.asList(publicParty));
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), Arrays.asList(publicParty));
       transactionService.handleTransaction(transaction);
-      System.out.println("ola7 " + user);
     } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error request Create User Profile: " + e.getMessage();
+      return "Error Request Create User Profile: " + e.getMessage();
     } catch (Exception e) {
-      return "Error request Create User Profile : " + e.getMessage();
+      return "Error Request Create User Profile : " + e.getMessage();
     }
-    System.out.println("ola8 " + user);
     return "Success Create User Profile Request!\n";
   }
 

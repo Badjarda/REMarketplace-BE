@@ -110,42 +110,37 @@ public class WorkflowResourceTest {
         System.out.println(userProfileService.acceptProfileService(uuid1, uuid2));
         System.out.println(userProfileService.acceptProfileService(uuid1, uuid3));
 
-        sleep(5000);
-        /*
         // Create Profile Requests
         List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
+        /** 
         UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
                         "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
                         Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
                         Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
-                        photoReferences);
-        given()
+                        photoReferences);*/
+        
+        System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
+                        "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
+                        Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
+                        Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
+                        photoReferences));
+        /**given()
             .contentType(MediaType.APPLICATION_JSON)
             .body(profileDTO)
             .post("/userProfile/requestCreateUserProfile")
             .then()
             .statusCode(200)
             .body(is("Success Create User Profile Request!\n"));
+        */
 
-        completionFuture.thenRun(() -> System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
+        System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
                         "Profile" + uuid2, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
                         LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com",
                         Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
-                        photoReferences))).join();
-
+                        photoReferences));
+        
         // Accept Profile Request
-        completionFuture.thenRun(() -> System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2)))
-                        .thenRun(() -> System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3)))
-                        .join();
-        */
-    }
-
-    private void sleep(long milliseconds) {
-        try {
-            Thread.sleep(milliseconds);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException(e);
-        }
+        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
+        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
     }
 }
