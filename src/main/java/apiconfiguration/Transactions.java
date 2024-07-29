@@ -1,18 +1,12 @@
 package apiconfiguration;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import com.daml.ledger.api.v1.EventOuterClass.CreatedEvent;
 import com.daml.ledger.api.v1.EventOuterClass.Event;
-import com.daml.ledger.api.v1.LedgerOffsetOuterClass.LedgerOffset.LedgerBoundary;
-import com.daml.ledger.api.v1.TransactionFilterOuterClass;
 import com.daml.ledger.api.v1.TransactionOuterClass;
-import com.daml.ledger.api.v1.TransactionServiceGrpc;
 import com.daml.ledger.api.v1.TransactionServiceOuterClass;
-import com.daml.ledger.api.v1.TransactionServiceOuterClass.GetTransactionsRequest;
 import com.daml.ledger.api.v1.ValueOuterClass.Identifier;
 import com.daml.ledger.javaapi.data.CommandsSubmission;
 import com.daml.ledger.rxjava.DamlLedgerClient;
@@ -42,7 +36,6 @@ import business.issuer.entity.repository.IssueRequestRepository;
 import business.operator.entity.model.Operator;
 
 import business.operator.entity.repository.OperatorRepository;
-import business.party.entity.model.Party;
 import business.party.entity.repository.PartyRepository;
 
 import business.rolemanager.entity.model.UserRoleFactory;
@@ -120,8 +113,8 @@ import business.propertymanager.entity.repository.WarehousePropertyFactoryReposi
 import daml.marketplace.app.role.operator.Role;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 
-import io.grpc.stub.StreamObserver;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -230,18 +223,10 @@ public class Transactions {
 
   private ManagedChannel channel;
 
-  private TransactionServiceGrpc.TransactionServiceStub stubUpdate;
-
   private DamlLedgerClient client;
 
-  private boolean observerRunning = false;
-
   public Transactions() {
-
     channel = ManagedChannelBuilder.forAddress("localhost", 6865).usePlaintext().build();
-
-    stubUpdate = TransactionServiceGrpc.newStub(channel);
-
   }
 
   public void handleTransactions(TransactionServiceOuterClass.GetTransactionsResponse response) {
@@ -252,7 +237,7 @@ public class Transactions {
 
   public void handleTransaction(TransactionOuterClass.Transaction transaction) {
     for (Event event : transaction.getEventsList()) {
-      System.out.println(event.toString());
+      //System.out.println(event.toString());
       handleEvent(event);
     }
   }
@@ -273,7 +258,6 @@ public class Transactions {
       handleUserRoleFactoryCreatedEvent(created, contractId);
     } else if (templateId
         .equals(daml.marketplace.app.profilemanager.userprofile.Factory.TEMPLATE_ID.toProto())) {
-      System.out.println("Transactions!!!");
       handleUserProfileFactoryCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.profilemanager.service.Offer.TEMPLATE_ID.toProto())) {
       handleProfileServiceOfferCreatedEvent(created, contractId);
@@ -543,7 +527,6 @@ public class Transactions {
 
   private void handleUserProfileFactoryCreatedEvent(CreatedEvent event, String contractId) {
     String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    System.out.println("StoredParty: " + partyId);
     userProfileFactoryRepository.persist(new UserProfileFactory(partyId, contractId));
   }
 
@@ -968,74 +951,15 @@ public class Transactions {
 
   // ------------------------------------------------------------------------
 
-  private StreamObserver<TransactionServiceOuterClass.GetTransactionsResponse> responseObserver = new StreamObserver<TransactionServiceOuterClass.GetTransactionsResponse>() {
-    @Override
-    public void onNext(TransactionServiceOuterClass.GetTransactionsResponse response) {
-      // Handle the received GetUpdatesResponse
-      // System.out.println("Received GetUpdatesResponse: {}" + response + "\n");
-      handleTransactions(response);
-    }
-
-    @Override
-    public void onError(Throwable t) {
-      // Handle error (if any)
-      System.out.println("Error occurred" + t + " \n");
-    }
-
-    @Override
-    public void onCompleted() {
-      // Handle completion of the stream
-      System.out.println("Stream completed!\n");
-    }
-  };
-
-  public void update() {
-    // when new parties are created we when to update
-    if (observerRunning) {
-      channel.shutdownNow();
-
-      channel = ManagedChannelBuilder.forAddress("localhost", 6865)
-          .usePlaintext()
-          .build();
-      stubUpdate = TransactionServiceGrpc.newStub(channel);
-    }
-
-    List<Party> partyList = partyRepository.listAll();
-
-    TransactionFilterOuterClass.Filters filter = TransactionFilterOuterClass.Filters.newBuilder().build();
-    Map<String, TransactionFilterOuterClass.Filters> values = new HashMap<>();
-
-    for (Party party : partyList) {
-      values.put(party.getPartyId(), filter);
-    }
-    // offset where it starts to query transactions --set to the begin
-    com.daml.ledger.api.v1.LedgerOffsetOuterClass.LedgerOffset offset = com.daml.ledger.api.v1.LedgerOffsetOuterClass.LedgerOffset
-        .newBuilder().setBoundary(LedgerBoundary.LEDGER_END).build();
-
-    TransactionFilterOuterClass.TransactionFilter transactionFilter = TransactionFilterOuterClass.TransactionFilter
-        .newBuilder().putAllFiltersByParty(values).build();
-
-    GetTransactionsRequest transRequest = TransactionServiceOuterClass.GetTransactionsRequest.newBuilder()
-        .setFilter(transactionFilter).setBegin(offset).build();
-
-    stubUpdate.getTransactions(transRequest, responseObserver);
-
-    observerRunning = true;
-  }
-
-  public void submitTransaction(List<com.daml.ledger.javaapi.data.Command> commands, List<String> actAs, List<String> readAs)
-      throws IllegalArgumentException, IllegalStateException, Exception {
+  public Transaction submitTransaction(List<com.daml.ledger.javaapi.data.Command> commands, List<String> actAs, List<String> readAs) throws IllegalArgumentException,IllegalStateException, Exception{
     client = clientProvider.getClient();
-    CommandsSubmission commandsSubmission;
-    if(readAs == null){
-      commandsSubmission = CommandsSubmission.create(APP_ID, UUID.randomUUID().toString(),
-        commands).withActAs(actAs);
-    }else{
-      commandsSubmission = CommandsSubmission.create(APP_ID, UUID.randomUUID().toString(),
-        commands).withActAs(actAs).withReadAs(readAs);
-    }
-    
-
-    client.getCommandClient().submitAndWait(commandsSubmission).blockingGet();
+    CommandsSubmission commandsSubmission = CommandsSubmission.create(APP_ID,UUID.randomUUID().toString(),commands).withActAs(actAs); 
+    if(readAs != null){
+        commandsSubmission.withReadAs(readAs);
+    }              
+        
+    Transaction response = client.getCommandClient().submitAndWaitForTransaction(commandsSubmission).blockingGet().toProto();  
+    return response;      
   }
+  
 }

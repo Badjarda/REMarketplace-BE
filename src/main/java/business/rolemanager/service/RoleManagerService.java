@@ -6,16 +6,19 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Unit;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
+import daml.da.set.types.Set;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
 import business.operator.entity.repository.OperatorRepository;
 import business.user.entity.repository.UserRepository;
 import business.userrole.entity.repository.UserRoleOfferRepository;
 import business.userrole.entity.repository.UserRoleRepository;
-import daml.da.set.types.Set;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 import business.rolemanager.entity.repository.UserRoleManagerRepository;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.marketplace.app.rolemanager.userrole.userrole.Factory;
@@ -64,7 +67,8 @@ public class RoleManagerService {
             List<com.daml.ledger.javaapi.data.Command> createCommands = Factory.create(operatorParty, observersMap)
                     .commands();
 
-            transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+            Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating User Role Factory: " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -113,7 +117,8 @@ public class RoleManagerService {
             default:
                 break;
         }
-        transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+        Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+        transactionService.handleTransaction(transaction);
     }
 
     public String createUserRole(String operator, String user, String id,

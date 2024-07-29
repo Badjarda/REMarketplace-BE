@@ -23,13 +23,6 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/update")
-    public void update() {
-        transactions.update();
-    }
-
-    @POST
-    @Produces(MediaType.TEXT_PLAIN)
     @Path("/createUser/{name}/{party}")
     public String createUser(String name, String party) {
         return userService.createUser(name, party);

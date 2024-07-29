@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Unit;
 
 import apiconfiguration.Transactions;
@@ -61,7 +62,8 @@ public class PropertyManagerService {
       List<com.daml.ledger.javaapi.data.Command> createCommands = daml.marketplace.app.propertymanager.property.apartmentproperty.Factory
           .create(operatorParty, observersMap)
           .commands();
-      transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error creating Apartment Property Factory: " + e.getMessage() + "\n";
     } catch (Exception e) {
@@ -75,7 +77,8 @@ public class PropertyManagerService {
       List<com.daml.ledger.javaapi.data.Command> createCommands = daml.marketplace.app.propertymanager.property.garageproperty.Factory
           .create(operatorParty, observersMap)
           .commands();
-      transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error creating Garage Property Factory: " + e.getMessage() + "\n";
     } catch (Exception e) {
@@ -89,7 +92,8 @@ public class PropertyManagerService {
       List<com.daml.ledger.javaapi.data.Command> createCommands = daml.marketplace.app.propertymanager.property.landproperty.Factory
           .create(operatorParty, observersMap)
           .commands();
-      transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error creating Land Property Factory: " + e.getMessage() + "\n";
     } catch (Exception e) {
@@ -103,7 +107,8 @@ public class PropertyManagerService {
       List<com.daml.ledger.javaapi.data.Command> createCommands = daml.marketplace.app.propertymanager.property.residenceproperty.Factory
           .create(operatorParty, observersMap)
           .commands();
-      transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error creating Residence Property Factory: " + e.getMessage() + "\n";
     } catch (Exception e) {
@@ -117,7 +122,8 @@ public class PropertyManagerService {
       List<com.daml.ledger.javaapi.data.Command> createCommands = daml.marketplace.app.propertymanager.property.warehouseproperty.Factory
           .create(operatorParty, observersMap)
           .commands();
-      transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      Transaction transaction = transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error creating Warehouse Property Factory: " + e.getMessage() + "\n";
     } catch (Exception e) {

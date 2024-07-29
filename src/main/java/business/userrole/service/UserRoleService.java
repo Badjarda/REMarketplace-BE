@@ -1,6 +1,9 @@
 package business.userrole.service;
 
 import java.util.List;
+
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
+
 import java.util.Arrays;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
@@ -35,22 +38,20 @@ public class UserRoleService {
 
   private void handleUserRoleOffer(String operator, String user, String action)
       throws IllegalArgumentException, IllegalStateException, Exception {
-
     String operatorParty = userRepository.findById(operator).getPartyId();
     String userParty = userRepository.findById(user).getPartyId();
     String offerContractId = userRoleOfferRepository.findById(operatorParty+userParty).getContractId();
     List<com.daml.ledger.javaapi.data.Command> command = null;
-
-    daml.marketplace.interface$.role.user.Offer.ContractId userAcceptId = new daml.marketplace.interface$.role.user.Offer.ContractId(
+    
+    var userAcceptId = new daml.marketplace.interface$.role.user.Offer.ContractId(
         offerContractId);
 
     if (action.equals("accept"))
       command = userAcceptId.exerciseAccept().commands();
     else if (action.equals("decline"))
       command = userAcceptId.exerciseDecline().commands();
-
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
-
+    Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+    transactionService.handleTransaction(transaction);
   }
 
   public String acceptUserRole(String operator, String user) {
@@ -63,14 +64,12 @@ public class UserRoleService {
       // Handle other exceptions
       return "Error accepting User role : " + e.getMessage() + "\n";
     }
-
     return "Accepted User Role!\n";
   }
 
   public String declineUserRole(String operator, String user) {
     try {
       handleUserRoleOffer(operator, user, "decline");
-
     } catch (IllegalArgumentException | IllegalStateException e) {
       // Handle input validation or contract existence check errors
       return "Error declining User role: " + e.getMessage() + "\n";

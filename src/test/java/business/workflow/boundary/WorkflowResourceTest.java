@@ -8,17 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 import org.junit.jupiter.api.Test;
 
 import apiconfiguration.Transactions;
-
 import business.operator.service.OperatorService;
 import business.party.service.PartyService;
 import business.profilemanager.service.ProfileManagerService;
-import business.rolemanager.dto.UserRoleRequestDTO;
-import business.rolemanager.dto.UserRolePermissionsDTO;
 import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
 import business.userprofile.dto.ProfileServiceOfferDTO;
@@ -33,333 +29,123 @@ import jakarta.ws.rs.core.MediaType;
 
 @QuarkusTest
 public class WorkflowResourceTest {
-        @Inject
-        PartyService partyService;
+    @Inject
+    PartyService partyService;
 
-        @Inject
-        UserService userService;
+    @Inject
+    UserService userService;
 
-        @Inject
-        OperatorService operatorService;
+    @Inject
+    OperatorService operatorService;
 
-        @Inject
-        Transactions transactionService;
+    @Inject
+    Transactions transactionService;
 
-        @Inject
-        RoleManagerService roleManagerService;
+    @Inject
+    RoleManagerService roleManagerService;
 
-        @Inject
-        UserRoleService userRoleService;
+    @Inject
+    UserRoleService userRoleService;
 
-        @Inject
-        ProfileManagerService profileManagerService;
+    @Inject
+    ProfileManagerService profileManagerService;
 
-        @Inject
-        UserProfileService userProfileService;
+    @Inject
+    UserProfileService userProfileService;
 
-        @Test
-        public void testWorkflow() {
+    @Test
+    public void testWorkflow() {
+        String uuid1 = UUID.randomUUID().toString(); // Operator
+        String uuid2 = UUID.randomUUID().toString(); // Seller
+        String uuid3 = UUID.randomUUID().toString(); // Buyer
+        String uuid4 = UUID.randomUUID().toString(); // Public
 
-                System.out.println("!!!!!   TESTE   !!!!!");
-                String uuid1 = UUID.randomUUID().toString(); // Operator
-                System.out.println("uuid1 : " + uuid1 + "\n");
-                String uuid2 = UUID.randomUUID().toString(); // Seller
-                System.out.println("uuid2 : " + uuid2 + "\n");
-                String uuid3 = UUID.randomUUID().toString(); // Buyer
-                System.out.println("uuid3 : " + uuid3 + "\n");
-                String uuid4 = UUID.randomUUID().toString(); // Public
-                System.out.println("uuid4 : " + uuid4 + "\n");
+        // Creating the parties
+        System.out.println(partyService.createParty(uuid1));
+        System.out.println(partyService.createParty(uuid2));
+        System.out.println(partyService.createParty(uuid3));
+        System.out.println(partyService.createParty(uuid4));
 
-                System.out.println("############################################\n");
+        // Creating the Users
+        System.out.println(userService.createUser(uuid1, uuid1));
+        System.out.println(userService.createUser(uuid2, uuid2));
+        System.out.println(userService.createUser(uuid3, uuid3));
+        System.out.println(userService.createUser(uuid4, uuid4));
 
-                // ############### Creating the parties ###############
+        // Create User Factory
+        System.out.println(roleManagerService.createUserFactory(uuid1));
 
-                // given()
-                // .pathParam("name", uuid)
-                // .when().post("/party/createParty/{name}")
-                // .then()
-                // .statusCode(200)
-                // .body(is("Party " + uuid + " Successfully created!\n"));
+        // Create Operator Role
+        System.out.println(operatorService.createOperatorRole(uuid1));
 
-                System.out.println(partyService.createParty(uuid1));
-                System.out.println(partyService.createParty(uuid2));
-                System.out.println(partyService.createParty(uuid3));
-                System.out.println(partyService.createParty(uuid4));
+        // Create Initial Role
+        System.out.println(operatorService.createInitialRole(uuid1, uuid4));
 
-                System.out.println("############################################\n");
+        // Offer User Role
+        System.out.println(operatorService.offerUserRole(uuid1, uuid2, "RegisteredUserRole"));
+        System.out.println(operatorService.offerUserRole(uuid1, uuid3, "RegisteredUserRole"));
 
-                // ############### Creating the User ###############
-                /**
-                 * given()
-                 * .pathParam("name", uuid1)
-                 * .pathParam("party", uuid1)
-                 * .when().post("/user/createUser/{name}/{party}")
-                 * .then()
-                 * .statusCode(200)
-                 * .body(is("User "+ uuid1 + " Successfully created!\n"));
-                 */
 
-                System.out.println(userService.createUser(uuid1, uuid1));
-                System.out.println(userService.createUser(uuid2, uuid2));
-                System.out.println(userService.createUser(uuid3, uuid3));
-                System.out.println(userService.createUser(uuid4, uuid4));
+        // Accept User Role
+        System.out.println(userRoleService.acceptUserRole(uuid1, uuid2));
+        System.out.println(userRoleService.acceptUserRole(uuid1, uuid3));
+        
+        // Create User Profile Factory
+        System.out.println(profileManagerService.createUserProfileFactory(uuid1));
 
-                System.out.println("############################################\n");
 
-                // ############### Update() ###############
+        // Offer User Profile Service
+        System.out.println(operatorService.offerUserProfileService(uuid1, uuid2));
+        System.out.println(operatorService.offerUserProfileService(uuid1, uuid3));
+        
+        // Accept Profile Service
+        //ProfileServiceOfferDTO offer = new ProfileServiceOfferDTO(uuid1, uuid2);
+        //given()
+            //.contentType(MediaType.APPLICATION_JSON)
+            //.body(offer)
+            //.post("/userProfile/acceptProfileService")
+            //.then()
+            //.statusCode(200)
+            //.body(is("Accepted Profile Service!\n"));
+        System.out.println(userProfileService.acceptProfileService(uuid1, uuid2));
+        System.out.println(userProfileService.acceptProfileService(uuid1, uuid3));
 
-                transactionService.update();
+        sleep(5000);
+        /*
+        // Create Profile Requests
+        List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
+        UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
+                        "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
+                        Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
+                        Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
+                        photoReferences);
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(profileDTO)
+            .post("/userProfile/requestCreateUserProfile")
+            .then()
+            .statusCode(200)
+            .body(is("Success Create User Profile Request!\n"));
 
-                // ############### CreateUserFactory ###############
-                /**
-                 * given()
-                 * .pathParam("operator", uuid)
-                 * .when().post("/roleManager/createUserFactory/{operator}")
-                 * .then()
-                 * .statusCode(200)
-                 * .body(is("Created User Role Factory!\n"));
-                 */
+        completionFuture.thenRun(() -> System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
+                        "Profile" + uuid2, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
+                        LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com",
+                        Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
+                        photoReferences))).join();
 
-                System.out.println(roleManagerService.createUserFactory(uuid1));
+        // Accept Profile Request
+        completionFuture.thenRun(() -> System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2)))
+                        .thenRun(() -> System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3)))
+                        .join();
+        */
+    }
 
-                System.out.println("############################################\n");
-
-                CompletableFuture<Void> completionFuture = CompletableFuture.completedFuture(null);
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### createOperatorRole ###############
-                /**
-                 * given()
-                 * .pathParam("operator", uuid)
-                 * .when().post("/operator/createOperator/{operator}")
-                 * .then()
-                 * .statusCode(200)
-                 * .body(is("Operator Role " + uuid + " successfully created!\n"));
-                 */
-
-                // ############### createInitialRole ###############
-
-                completionFuture.thenRun(() -> System.out.println(operatorService.createOperatorRole(uuid1)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                completionFuture.thenRun(() -> System.out.println(operatorService.createInitialRole(uuid1, uuid4)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-                // ############### offerUserRole ###############
-
-                completionFuture.thenRun(() -> System.out
-                                .println(operatorService.offerUserRole(uuid1, uuid2, "RegisteredUserRole")))
-                                .thenRun(() -> System.out.println(
-                                                operatorService.offerUserRole(uuid1, uuid3, "RegisteredUserRole")))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### acceptUserRole ###############
-
-                completionFuture.thenRun(() -> System.out.println(userRoleService.acceptUserRole(uuid1, uuid2)))
-                                .thenRun(() -> System.out.println(userRoleService.acceptUserRole(uuid1, uuid3)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### Profile Service ###############
-
-                completionFuture.thenRun(
-                                () -> System.out.println(profileManagerService.createUserProfileFactory(uuid1)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(4000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### Offer User Profile Service ###############
-
-                completionFuture.thenRun(
-                                () -> System.out.println(operatorService.offerUserProfileService(uuid1, uuid2)))
-                                .thenRun(() -> System.out
-                                                .println(operatorService.offerUserProfileService(uuid1, uuid3)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### acceptProfileService ###############
-
-                ProfileServiceOfferDTO offer = new ProfileServiceOfferDTO(uuid1, uuid2);
-                given()
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .body(offer)
-                                .post("/userProfile/acceptProfileService")
-                                .then()
-                                .statusCode(200)
-                                .body(is("Accepted Profile Service!\n"));
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                completionFuture.thenRun(
-                                () -> System.out.println(userProfileService.acceptProfileService(uuid1, uuid3)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### Profile Create Requests ###############
-                List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
-                UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
-                                "Costa", "Duarte Ferreira da Costa", "passwordTest", 
-                                LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE,
-                                "ola@gmail.com", Optional.of((long) 912345678L), (long) 212345678L, 
-                                (long) 12345678901L, (long) 987654321L, photoReferences);
-                given()
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .body(profileDTO)
-                                .post("/userProfile/requestCreateUserProfile")
-                                .then()
-                                .statusCode(200)
-                                .body(is("Success Create User Profile Request!\n"));
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                completionFuture.thenRun(
-                                () -> System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4, "Profile" + uuid2, "PauloSeixo", 
-                                "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234", LocalDate.of(2000, 1, 1), 
-                                Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, 
-                                (long) 12345678901L, (long) 987654321L, photoReferences)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
-                // ############### Profile Request Accept ###############
-
-                completionFuture.thenRun(
-                                () -> System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2)))
-                                .thenRun(() -> System.out
-                                                .println(operatorService.acceptRequestCreateProfile(uuid1, uuid3)))
-                                .thenRun(() -> {
-                                })
-                                .join();
-                System.out.println("############################################\n");
-
-                completionFuture = completionFuture.thenCompose(result -> CompletableFuture.runAsync(() -> {
-                        try {
-                                Thread.sleep(5000); // Adjust sleep time as needed
-                        } catch (InterruptedException e) {
-                                Thread.currentThread().interrupt();
-                                throw new RuntimeException(e);
-                        }
-                }));
-
+    private void sleep(long milliseconds) {
+        try {
+            Thread.sleep(milliseconds);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
         }
-
+    }
 }

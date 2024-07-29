@@ -3,6 +3,7 @@ package business.issuer.service;
 import java.util.List;
 import java.util.Map;
 
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Unit;
 
 import java.math.BigDecimal;
@@ -64,7 +65,7 @@ public class IssuanceService {
 
   private void handleIssuanceServiceOffer(String operator, String user, String action)
       throws IllegalArgumentException, IllegalStateException, Exception {
-
+    
     String operatorParty = userRepository.findById(operator).getPartyId();
     String userParty = userRepository.findById(user).getPartyId();
     String offerContractId = issuanceServiceOfferRepository.findById(operatorParty + userParty)
@@ -79,7 +80,8 @@ public class IssuanceService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+    Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+    transactionService.handleTransaction(transaction);
   }
 
   public String acceptIssuanceService(String operator, String user) {
@@ -92,7 +94,6 @@ public class IssuanceService {
       // Handle other exceptions
       return "Error accepting Issuance Service : " + e.getMessage() + "\n";
     }
-
     return "Accepted Issuance Service!\n";
   }
 
@@ -135,7 +136,8 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
 
       command = serviceId.exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Transferable : " + e.getMessage();
     } catch (Exception e) {
@@ -169,7 +171,8 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
 
       command = serviceId.exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Fungible : " + e.getMessage();
     } catch (Exception e) {
@@ -199,7 +202,8 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdString));
 
       command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Transfer Currency : " + e.getMessage();
     } catch (Exception e) {
@@ -229,7 +233,8 @@ public class IssuanceService {
       AccountKey accountKey = new AccountKey(operatorParty, buyerParty, new Id(accountIdString));
 
       command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
+      transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Transfer Property : " + e.getMessage();
     } catch (Exception e) {

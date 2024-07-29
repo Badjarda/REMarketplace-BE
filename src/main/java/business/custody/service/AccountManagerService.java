@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Command;
 import com.daml.ledger.javaapi.data.Unit;
 import apiconfiguration.Transactions;
@@ -85,8 +86,8 @@ public class AccountManagerService {
             List<Command> accFactoryCommands = daml.daml.finance.account.account.Factory
                     .create(operatorParty, observersMap)
                     .commands();
-            transactionService.submitTransaction(accFactoryCommands,
-                    Arrays.asList(operatorParty), null);
+            Transaction transaction = transactionService.submitTransaction(accFactoryCommands, Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Account Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -101,8 +102,8 @@ public class AccountManagerService {
             List<Command> holdingFacCommands = daml.daml.finance.holding.factory.Factory
                     .create(operatorParty, holdingId, observersMap)
                     .commands();
-            transactionService.submitTransaction(holdingFacCommands,
-                    Arrays.asList(operatorParty), null);
+            Transaction transaction = transactionService.submitTransaction(holdingFacCommands, Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Holding Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -117,8 +118,9 @@ public class AccountManagerService {
             List<Command> settlementFactoryCommands = daml.daml.finance.settlement.factory.Factory
                     .create(operatorParty, observers)
                     .commands();
-            transactionService.submitTransaction(settlementFactoryCommands,
+            Transaction transaction = transactionService.submitTransaction(settlementFactoryCommands,
                     Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Settlement Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -140,8 +142,9 @@ public class AccountManagerService {
             List<Command> createHoldingFactoryRefCommand = daml.daml.finance.interface$.holding.factory.Reference
                     .create(factoryView, holdFactoryContractid, observersMap)
                     .commands();
-            transactionService.submitTransaction(createHoldingFactoryRefCommand,
+            Transaction transaction = transactionService.submitTransaction(createHoldingFactoryRefCommand,
                     Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Holding Factory Reference : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -162,9 +165,9 @@ public class AccountManagerService {
             List<Command> createSettlementCommand = daml.daml.finance.settlement.routeprovider.intermediatedstatic.IntermediatedStatic
                     .create(operatorParty, observers, paths)
                     .commands();
-            transactionService.submitTransaction(createSettlementCommand,
+            Transaction transaction = transactionService.submitTransaction(createSettlementCommand,
                     Arrays.asList(operatorParty), null);
-
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Route Settlement: " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -192,8 +195,9 @@ public class AccountManagerService {
                     .create(operatorParty, claimers, settlers, routeProviderContractid, settlementFactoryContractid,
                             bool)
                     .commands();
-            transactionService.submitTransaction(createLifecycleClaimRuleCommand,
+            Transaction transaction = transactionService.submitTransaction(createLifecycleClaimRuleCommand,
                     Arrays.asList(operatorParty), null);
+            transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Lifecycle Claim Rule : " + e.getMessage() + "\n";
         } catch (Exception e) {

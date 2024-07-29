@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Unit;
 
 import java.time.LocalDate;
@@ -72,8 +73,8 @@ public class UserProfileService {
     else if (action.equals("decline"))
       command = serviceAcceptId.exerciseDecline().commands();
 
-    transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
-
+    Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
+    transactionService.handleTransaction(transaction);
   }
 
   public String acceptProfileService(String operator, String user) {
@@ -149,7 +150,8 @@ public class UserProfileService {
               cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences, observersMap)
           .commands();
       System.out.println("ola6 " + user);
-      transactionService.submitTransaction(command, Arrays.asList(userParty), Arrays.asList(publicParty));
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), Arrays.asList(publicParty));
+      transactionService.handleTransaction(transaction);
       System.out.println("ola7 " + user);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Create User Profile: " + e.getMessage();
@@ -174,47 +176,59 @@ public class UserProfileService {
       UserProfileKey key = new UserProfileKey(operatorParty, userParty, new Id(profileIdString));
       var serviceId = new daml.marketplace.interface$.profilemanager.service.Service.ContractId(
           servicId);
-      transactionService.submitTransaction(serviceId.exerciseUpdateUsername(username, key).commands(),
+      Transaction transaction = transactionService.submitTransaction(serviceId.exerciseUpdateUsername(username, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(
+      transaction = transactionService.submitTransaction(
           serviceId.exerciseUpdateFirstName(firstName, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(serviceId.exerciseUpdateLastName(lastName, key).commands(),
+      transaction = transactionService.submitTransaction(serviceId.exerciseUpdateLastName(lastName, key).commands(),
           Arrays.asList(userParty),null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(serviceId.exerciseUpdateFullName(fullName, key).commands(),
+      transaction =  transactionService.submitTransaction(serviceId.exerciseUpdateFullName(fullName, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(serviceId.exerciseUpdateBirthday(birthday, key).commands(),
+      transaction =  transactionService.submitTransaction(serviceId.exerciseUpdateBirthday(birthday, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      if (gender.isPresent())
-        transactionService.submitTransaction(
+      if (gender.isPresent()){
+        transaction = transactionService.submitTransaction(
             serviceId.exerciseUpdateGender(gender, key).commands(),
             Arrays.asList(userParty), null);
+        transactionService.handleTransaction(transaction);
+      }
 
-      transactionService.submitTransaction(
+      transaction = transactionService.submitTransaction(
           serviceId.exerciseUpdateNationality(nationality, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(
+      transaction = transactionService.submitTransaction(
           serviceId.exerciseUpdateContactMail(contactMail, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      if (cellphoneNumber.isPresent())
-        transactionService.submitTransaction(
+      if (cellphoneNumber.isPresent()){
+        transaction = transactionService.submitTransaction(
             serviceId.exerciseUpdateCellphoneNumber(cellphoneNumber, key)
                 .commands(),
             Arrays.asList(userParty), null);
-
-      transactionService.submitTransaction(serviceId.exerciseUpdateTaxId(taxId, key).commands(),
+        transactionService.handleTransaction(transaction);
+      }
+      transaction = transactionService.submitTransaction(serviceId.exerciseUpdateTaxId(taxId, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
-      transactionService.submitTransaction(
+      transaction = transactionService.submitTransaction(
           serviceId.exerciseUpdateSocialSecurityId(socialSecurityId, key).commands(),
           Arrays.asList(userParty), null);
+      transactionService.handleTransaction(transaction);
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Updating User Profile: " + e.getMessage();
