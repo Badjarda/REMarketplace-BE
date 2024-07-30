@@ -48,9 +48,9 @@ public class UserProfileResource {
   @Path("/updateProfile")
   public String updateProfile(UserProfileDTO request) {
     return userProfileService.modifyUserProfileFields(request.getOperator(), request.getUser(), request.getUsername(),
-        request.getFirstName(), request.getLastName(), request.getFullName(),
+        request.getFirstName(), request.getLastName(), request.getFullName(), request.getPassword(),
         request.getBirthday(), request.getGender(), request.getNationality(), request.getContactMail(),
-        request.getCellphoneNumber(), request.getTaxId(), request.getSocialSecurityId());
+        request.getCellphoneNumber(), request.getIdNumber(), request.getTaxId(), request.getSocialSecurityId(), request.getPhotoReferences());
   }
 
 }

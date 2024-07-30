@@ -553,8 +553,8 @@ public class Transactions {
   }
 
   private void handleUserProfileReferenceInterfaceCreatedEvent(CreatedEvent event, String contractId) {
-    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
-    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
     userProfileReferenceInterfaceRepository.persist(new UserProfileReferenceInterface(operatorId+userId, contractId));
   }
 
@@ -598,7 +598,7 @@ public class Transactions {
   private void handleUserProfileCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String profileId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String profileId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     userProfileRepository.persist(new UserProfile(operatorId + userId, contractId, profileId));
   }
 

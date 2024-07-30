@@ -134,7 +134,7 @@ public class WorkflowResourceTest {
         */
 
         System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
-                        "Profile" + uuid2, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
+                        "Profile" + uuid3, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
                         LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com",
                         Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
@@ -142,5 +142,8 @@ public class WorkflowResourceTest {
         // Accept Profile Request
         System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
         System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
+
+        //Modify Profile
+        System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
     }
 }
