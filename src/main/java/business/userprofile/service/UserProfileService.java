@@ -146,7 +146,7 @@ public class UserProfileService {
               lastName, fullName, password, birthday, gender, nationality, contactMail,
               cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), Arrays.asList(publicParty));
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), Arrays.asList(publicParty));
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create User Profile: " + e.getMessage();
