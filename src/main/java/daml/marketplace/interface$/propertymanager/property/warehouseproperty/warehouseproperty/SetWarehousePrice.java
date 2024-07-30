@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,7 +98,7 @@ public class SetWarehousePrice extends DamlRecord<SetWarehousePrice> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePrice(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePrice(%s)",
         this.newWarehousePrice);
   }
 }

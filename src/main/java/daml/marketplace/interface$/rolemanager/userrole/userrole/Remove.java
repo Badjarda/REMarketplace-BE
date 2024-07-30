@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.userrole;
+package daml.marketplace.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Remove extends DamlRecord<Remove> {
 
   @Override
   public String toString() {
-    return "daml.interface$.rolemanager.userrole.userrole.Remove";
+    return "daml.marketplace.interface$.rolemanager.userrole.userrole.Remove";
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -58,7 +58,7 @@ public class SetCid extends DamlRecord<SetCid> {
   public static JsonLfDecoder<SetCid> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newCid"), name -> {
           switch (name) {
-            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty.ContractId::new));
+            case "newCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty.ContractId::new));
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetCid extends DamlRecord<SetCid> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetCid(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetCid(%s)",
         this.newCid);
   }
 }

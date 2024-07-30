@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class GetWarehouseFloors extends DamlRecord<GetWarehouseFloors> {
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.GetWarehouseFloors";
+    return "daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.GetWarehouseFloors";
   }
 }

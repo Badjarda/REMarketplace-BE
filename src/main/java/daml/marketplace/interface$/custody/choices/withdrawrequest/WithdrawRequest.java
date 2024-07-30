@@ -1,4 +1,4 @@
-package daml.interface$.custody.choices.withdrawrequest;
+package daml.marketplace.interface$.custody.choices.withdrawrequest;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class WithdrawRequest {
   public static final class INTERFACE_ extends InterfaceCompanion<WithdrawRequest, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.custody.choices.withdrawrequest.WithdrawRequest", WithdrawRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest", WithdrawRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

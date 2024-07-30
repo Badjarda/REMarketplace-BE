@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.userprofile.userprofile;
+package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -58,7 +58,7 @@ public class SetNationality extends DamlRecord<SetNationality> {
   public static JsonLfDecoder<SetNationality> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newNationality"), name -> {
           switch (name) {
-            case "newNationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
+            case "newNationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetNationality extends DamlRecord<SetNationality> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.profilemanager.userprofile.userprofile.SetNationality(%s)",
+    return String.format("daml.marketplace.interface$.profilemanager.userprofile.userprofile.SetNationality(%s)",
         this.newNationality);
   }
 }

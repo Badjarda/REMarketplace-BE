@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.custody.choices.depositrequest.DepositRequest;
+import daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class Deposit extends DamlRecord<Deposit> {
   public static JsonLfDecoder<Deposit> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("depositRequestCid"), name -> {
           switch (name) {
-            case "depositRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.depositrequest.DepositRequest.ContractId::new));
+            case "depositRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class Deposit extends DamlRecord<Deposit> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.Deposit(%s)", this.depositRequestCid);
+    return String.format("daml.marketplace.interface$.custody.service.Deposit(%s)", this.depositRequestCid);
   }
 }

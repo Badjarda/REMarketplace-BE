@@ -1,4 +1,4 @@
-package daml.interface$.common.types;
+package daml.marketplace.interface$.common.types;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -112,7 +112,7 @@ public class PropertyKey extends DamlRecord<PropertyKey> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.common.types.PropertyKey(%s, %s, %s)", this.operator,
+    return String.format("daml.marketplace.interface$.common.types.PropertyKey(%s, %s, %s)", this.operator,
         this.user, this.id);
   }
 }

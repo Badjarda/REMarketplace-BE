@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -99,7 +99,7 @@ public class TerminateUserProfileManagerService extends DamlRecord<TerminateUser
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.TerminateUserProfileManagerService(%s)",
+    return String.format("daml.marketplace.interface$.role.operator.TerminateUserProfileManagerService(%s)",
         this.user);
   }
 }

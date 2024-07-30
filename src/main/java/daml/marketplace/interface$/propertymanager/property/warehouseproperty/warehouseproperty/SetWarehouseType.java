@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class SetWarehouseType extends DamlRecord<SetWarehouseType> {
   public static JsonLfDecoder<SetWarehouseType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newWarehouseType"), name -> {
           switch (name) {
-            case "newWarehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
+            case "newWarehouseType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.WarehouseType.jsonDecoder());
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class SetWarehouseType extends DamlRecord<SetWarehouseType> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehouseType(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehouseType(%s)",
         this.newWarehouseType);
   }
 }

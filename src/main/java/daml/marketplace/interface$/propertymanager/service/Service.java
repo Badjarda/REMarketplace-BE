@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -20,14 +20,14 @@ import daml.da.set.types.Set;
 import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.common.types.PropertyKey;
-import daml.interface$.propertymanager.property.common.GarageType;
-import daml.interface$.propertymanager.property.common.LandType;
-import daml.interface$.propertymanager.property.common.Orientation;
-import daml.interface$.propertymanager.property.common.Parking;
-import daml.interface$.propertymanager.property.common.ResidenceType;
-import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
-import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.Orientation;
+import daml.marketplace.interface$.propertymanager.property.common.Parking;
+import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
@@ -109,18 +109,18 @@ public final class Service {
       Choice.create("CreateGarageProperty", value$ -> value$.toValue(), value$ ->
         CreateGarageProperty.valueDecoder().decode(value$), value$ ->
         Tuple2.<daml.daml.finance.interface$.types.common.types.InstrumentKey,
-        daml.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
+        daml.marketplace.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
         PropertyKey.valueDecoder()).decode(value$));
 
-  public static final Choice<Service, RequestCreateResidenceProperty, daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId> CHOICE_RequestCreateResidenceProperty = 
+  public static final Choice<Service, RequestCreateResidenceProperty, daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId> CHOICE_RequestCreateResidenceProperty = 
       Choice.create("RequestCreateResidenceProperty", value$ -> value$.toValue(), value$ ->
         RequestCreateResidenceProperty.valueDecoder().decode(value$), value$ ->
-        new daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Service, RequestCreateLandProperty, daml.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId> CHOICE_RequestCreateLandProperty = 
+  public static final Choice<Service, RequestCreateLandProperty, daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId> CHOICE_RequestCreateLandProperty = 
       Choice.create("RequestCreateLandProperty", value$ -> value$.toValue(), value$ ->
         RequestCreateLandProperty.valueDecoder().decode(value$), value$ ->
-        new daml.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, UpdateLandAdditionalInformation, Unit> CHOICE_UpdateLandAdditionalInformation = 
       Choice.create("UpdateLandAdditionalInformation", value$ -> value$.toValue(), value$ ->
@@ -216,7 +216,7 @@ public final class Service {
       Choice.create("CreateResidenceProperty", value$ -> value$.toValue(), value$ ->
         CreateResidenceProperty.valueDecoder().decode(value$), value$ ->
         Tuple2.<daml.daml.finance.interface$.types.common.types.InstrumentKey,
-        daml.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
+        daml.marketplace.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
         PropertyKey.valueDecoder()).decode(value$));
 
   public static final Choice<Service, UpdateLandPrice, Unit> CHOICE_UpdateLandPrice = 
@@ -278,7 +278,7 @@ public final class Service {
       Choice.create("CreateWarehouseProperty", value$ -> value$.toValue(), value$ ->
         CreateWarehouseProperty.valueDecoder().decode(value$), value$ ->
         Tuple2.<daml.daml.finance.interface$.types.common.types.InstrumentKey,
-        daml.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
+        daml.marketplace.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
         PropertyKey.valueDecoder()).decode(value$));
 
   public static final Choice<Service, UpdateWarehousePropertyCounty, Unit> CHOICE_UpdateWarehousePropertyCounty = 
@@ -290,7 +290,7 @@ public final class Service {
       Choice.create("CreateApartmentProperty", value$ -> value$.toValue(), value$ ->
         CreateApartmentProperty.valueDecoder().decode(value$), value$ ->
         Tuple2.<daml.daml.finance.interface$.types.common.types.InstrumentKey,
-        daml.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
+        daml.marketplace.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
         PropertyKey.valueDecoder()).decode(value$));
 
   public static final Choice<Service, UpdateResidenceParking, Unit> CHOICE_UpdateResidenceParking = 
@@ -338,10 +338,10 @@ public final class Service {
         UpdateWarehousePropertyPostalCode.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Service, RequestCreateGarageProperty, daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId> CHOICE_RequestCreateGarageProperty = 
+  public static final Choice<Service, RequestCreateGarageProperty, daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId> CHOICE_RequestCreateGarageProperty = 
       Choice.create("RequestCreateGarageProperty", value$ -> value$.toValue(), value$ ->
         RequestCreateGarageProperty.valueDecoder().decode(value$), value$ ->
-        new daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, UpdateResidenceBuildDate, Unit> CHOICE_UpdateResidenceBuildDate = 
       Choice.create("UpdateResidenceBuildDate", value$ -> value$.toValue(), value$ ->
@@ -353,10 +353,10 @@ public final class Service {
         UpdateWarehouseDescription.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Service, RequestCreateWarehouseProperty, daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId> CHOICE_RequestCreateWarehouseProperty = 
+  public static final Choice<Service, RequestCreateWarehouseProperty, daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId> CHOICE_RequestCreateWarehouseProperty = 
       Choice.create("RequestCreateWarehouseProperty", value$ -> value$.toValue(), value$ ->
         RequestCreateWarehouseProperty.valueDecoder().decode(value$), value$ ->
-        new daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, UpdateResidenceType, Unit> CHOICE_UpdateResidenceType = 
       Choice.create("UpdateResidenceType", value$ -> value$.toValue(), value$ ->
@@ -403,10 +403,10 @@ public final class Service {
         UpdateTotalLandArea.valueDecoder().decode(value$), value$ -> PrimitiveValueDecoders.fromUnit
         .decode(value$));
 
-  public static final Choice<Service, RequestCreateApartmentProperty, daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId> CHOICE_RequestCreateApartmentProperty = 
+  public static final Choice<Service, RequestCreateApartmentProperty, daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId> CHOICE_RequestCreateApartmentProperty = 
       Choice.create("RequestCreateApartmentProperty", value$ -> value$.toValue(), value$ ->
         RequestCreateApartmentProperty.valueDecoder().decode(value$), value$ ->
-        new daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, UpdateResidenceOrientation, Unit> CHOICE_UpdateResidenceOrientation = 
       Choice.create("UpdateResidenceOrientation", value$ -> value$.toValue(), value$ ->
@@ -497,7 +497,7 @@ public final class Service {
       Choice.create("CreateLandProperty", value$ -> value$.toValue(), value$ ->
         CreateLandProperty.valueDecoder().decode(value$), value$ ->
         Tuple2.<daml.daml.finance.interface$.types.common.types.InstrumentKey,
-        daml.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
+        daml.marketplace.interface$.common.types.PropertyKey>valueDecoder(InstrumentKey.valueDecoder(),
         PropertyKey.valueDecoder()).decode(value$));
 
   public static final Choice<Service, UpdateLandType, Unit> CHOICE_UpdateLandType = 
@@ -684,16 +684,16 @@ public final class Service {
     }
 
     default Update<Exercised<Tuple2<InstrumentKey, PropertyKey>>> exerciseCreateGarageProperty(
-        daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId createGaragePropertyRequest) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId createGaragePropertyRequest) {
       return exerciseCreateGarageProperty(new CreateGarageProperty(createGaragePropertyRequest));
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId>> exerciseRequestCreateResidenceProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId>> exerciseRequestCreateResidenceProperty(
         RequestCreateResidenceProperty arg) {
       return makeExerciseCmd(CHOICE_RequestCreateResidenceProperty, arg);
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId>> exerciseRequestCreateResidenceProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId>> exerciseRequestCreateResidenceProperty(
         Id id, InstrumentKey residenceInstrument, BigDecimal residencePrice, String propertyAddress,
         String propertyPostalCode, String propertyDistrict, String propertyCounty,
         BigDecimal grossArea, BigDecimal usableArea, Long bedrooms, Long bathrooms, Long floors,
@@ -707,12 +707,12 @@ public final class Service {
           additionalInformation, description, photoReferences, observers));
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId>> exerciseRequestCreateLandProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId>> exerciseRequestCreateLandProperty(
         RequestCreateLandProperty arg) {
       return makeExerciseCmd(CHOICE_RequestCreateLandProperty, arg);
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId>> exerciseRequestCreateLandProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId>> exerciseRequestCreateLandProperty(
         Id id, InstrumentKey landInstrument, BigDecimal landPrice, String propertyAddress,
         String propertyPostalCode, String propertyDistrict, String propertyCounty,
         LandType landType, BigDecimal totalLandArea, BigDecimal minimumSurfaceForSale,
@@ -921,7 +921,7 @@ public final class Service {
     }
 
     default Update<Exercised<Tuple2<InstrumentKey, PropertyKey>>> exerciseCreateResidenceProperty(
-        daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId createResidencePropertyRequest) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId createResidencePropertyRequest) {
       return exerciseCreateResidenceProperty(new CreateResidenceProperty(createResidencePropertyRequest));
     }
 
@@ -1048,7 +1048,7 @@ public final class Service {
     }
 
     default Update<Exercised<Tuple2<InstrumentKey, PropertyKey>>> exerciseCreateWarehouseProperty(
-        daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId createWarehousePropertyRequest) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId createWarehousePropertyRequest) {
       return exerciseCreateWarehouseProperty(new CreateWarehouseProperty(createWarehousePropertyRequest));
     }
 
@@ -1069,7 +1069,7 @@ public final class Service {
     }
 
     default Update<Exercised<Tuple2<InstrumentKey, PropertyKey>>> exerciseCreateApartmentProperty(
-        daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId createApartmentPropertyRequest) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId createApartmentPropertyRequest) {
       return exerciseCreateApartmentProperty(new CreateApartmentProperty(createApartmentPropertyRequest));
     }
 
@@ -1168,12 +1168,12 @@ public final class Service {
           propertyKey));
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId>> exerciseRequestCreateGarageProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId>> exerciseRequestCreateGarageProperty(
         RequestCreateGarageProperty arg) {
       return makeExerciseCmd(CHOICE_RequestCreateGarageProperty, arg);
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId>> exerciseRequestCreateGarageProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId>> exerciseRequestCreateGarageProperty(
         Id id, InstrumentKey garageInstrument, BigDecimal garagePrice, String propertyAddress,
         String propertyPostalCode, String propertyDistrict, String propertyCounty,
         BigDecimal garageArea, GarageType garageType, Long vehicleCapacity,
@@ -1206,12 +1206,12 @@ public final class Service {
           propertyKey));
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId>> exerciseRequestCreateWarehouseProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId>> exerciseRequestCreateWarehouseProperty(
         RequestCreateWarehouseProperty arg) {
       return makeExerciseCmd(CHOICE_RequestCreateWarehouseProperty, arg);
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId>> exerciseRequestCreateWarehouseProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId>> exerciseRequestCreateWarehouseProperty(
         Id id, InstrumentKey warehouseInstrument, BigDecimal warehousePrice, String propertyAddress,
         String propertyPostalCode, String propertyDistrict, String propertyCounty,
         WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors,
@@ -1314,12 +1314,12 @@ public final class Service {
       return exerciseUpdateTotalLandArea(new UpdateTotalLandArea(newTotalLandArea, propertyKey));
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId>> exerciseRequestCreateApartmentProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId>> exerciseRequestCreateApartmentProperty(
         RequestCreateApartmentProperty arg) {
       return makeExerciseCmd(CHOICE_RequestCreateApartmentProperty, arg);
     }
 
-    default Update<Exercised<daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId>> exerciseRequestCreateApartmentProperty(
+    default Update<Exercised<daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId>> exerciseRequestCreateApartmentProperty(
         Id id, InstrumentKey apartmentInstrument, BigDecimal apartmentPrice, String propertyAddress,
         String propertyPostalCode, String propertyDistrict, String propertyCounty,
         BigDecimal grossArea, BigDecimal usableArea, Long bedrooms, Long bathrooms, Long floor,
@@ -1514,7 +1514,7 @@ public final class Service {
     }
 
     default Update<Exercised<Tuple2<InstrumentKey, PropertyKey>>> exerciseCreateLandProperty(
-        daml.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId createLandPropertyRequest) {
+        daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId createLandPropertyRequest) {
       return exerciseCreateLandProperty(new CreateLandProperty(createLandPropertyRequest));
     }
 
@@ -1587,7 +1587,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_UpdateApartmentInstalledEquipment,
             CHOICE_UpdateLandViableConstructionTypes, CHOICE_UpdateWarehouseInstalledEquipment,
             CHOICE_UpdateApartmentPrice, CHOICE_UpdateApartmentPropertyDistrict,

@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -128,7 +128,7 @@ public class OfferCustodianService extends DamlRecord<OfferCustodianService> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.OfferCustodianService(%s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.role.operator.OfferCustodianService(%s, %s, %s, %s)",
         this.user, this.accountFactoryCid, this.holdingFactoryKey, this.claimRuleCid);
   }
 }

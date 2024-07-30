@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.userprofile.factory;
+package daml.marketplace.interface$.profilemanager.userprofile.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,10 +17,10 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
-import daml.interface$.common.types.UserProfileKey;
-import daml.interface$.profilemanager.userprofile.common.Gender;
-import daml.interface$.profilemanager.userprofile.common.Nationality;
-import daml.interface$.profilemanager.userprofile.userprofile.UserProfile;
+import daml.marketplace.interface$.common.types.UserProfileKey;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -114,7 +114,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.profilemanager.userprofile.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.profilemanager.userprofile.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

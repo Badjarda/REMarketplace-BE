@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -58,7 +58,7 @@ public class SetLandType extends DamlRecord<SetLandType> {
   public static JsonLfDecoder<SetLandType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newLandType"), name -> {
           switch (name) {
-            case "newLandType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.LandType.jsonDecoder());
+            case "newLandType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.LandType.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetLandType extends DamlRecord<SetLandType> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.SetLandType(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.SetLandType(%s)",
         this.newLandType);
   }
 }

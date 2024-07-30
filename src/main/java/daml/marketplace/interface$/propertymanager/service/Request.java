@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,7 +16,7 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.interface$.propertymanager.property.apartmentproperty.factory.Factory;
+import daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
@@ -94,10 +94,10 @@ public final class Request {
 
     default Update<Exercised<Service.ContractId>> exerciseApprove(String operator,
         Factory.ContractId apartmentPropertyFactoryCid,
-        daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-        daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-        daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-        daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+        daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+        daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+        daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
       return exerciseApprove(new Approve(operator, apartmentPropertyFactoryCid,
           landPropertyFactoryCid, residencePropertyFactoryCid, garagePropertyFactoryCid,
           warehousePropertyFactoryCid));
@@ -131,7 +131,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, RView> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.service.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
             RView::fromJson,List.of(CHOICE_Archive, CHOICE_Cancel, CHOICE_Reject, CHOICE_Approve));
     }
   }

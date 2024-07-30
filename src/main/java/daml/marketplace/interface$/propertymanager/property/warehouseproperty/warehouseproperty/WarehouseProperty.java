@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,7 +17,7 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -536,7 +536,7 @@ public final class WarehouseProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<WarehouseProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty", WarehouseProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty", WarehouseProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetWarehousePropertyCounty,
             CHOICE_GetWarehousePropertyAddress, CHOICE_SetWarehouseAdditionalInformation,
             CHOICE_SetWarehouseBuildDate, CHOICE_GetWarehouseGrossArea, CHOICE_SetWarehousePrice,

@@ -1,4 +1,4 @@
-package daml.interface$.role.user;
+package daml.marketplace.interface$.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Decline extends DamlRecord<Decline> {
 
   @Override
   public String toString() {
-    return "daml.interface$.role.user.Decline";
+    return "daml.marketplace.interface$.role.user.Decline";
   }
 }

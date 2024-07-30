@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,7 +96,7 @@ public class SetLandDescription extends DamlRecord<SetLandDescription> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.SetLandDescription(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.SetLandDescription(%s)",
         this.newLandDescription);
   }
 }

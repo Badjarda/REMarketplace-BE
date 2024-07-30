@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.service;
+package daml.marketplace.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Reject extends DamlRecord<Reject> {
 
   @Override
   public String toString() {
-    return "daml.interface$.profilemanager.service.Reject";
+    return "daml.marketplace.interface$.profilemanager.service.Reject";
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -103,7 +103,7 @@ public class RView extends DamlRecord<RView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.RView(%s, %s)", this.operator,
+    return String.format("daml.marketplace.interface$.propertymanager.service.RView(%s, %s)", this.operator,
         this.user);
   }
 }

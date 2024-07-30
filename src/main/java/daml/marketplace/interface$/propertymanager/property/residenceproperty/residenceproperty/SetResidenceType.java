@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.residenceproperty.residenceproperty;
+package daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.property.common.ResidenceType;
+import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class SetResidenceType extends DamlRecord<SetResidenceType> {
   public static JsonLfDecoder<SetResidenceType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newResidenceType"), name -> {
           switch (name) {
-            case "newResidenceType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.ResidenceType.jsonDecoder());
+            case "newResidenceType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.ResidenceType.jsonDecoder());
             default: return null;
           }
         }
@@ -97,7 +97,7 @@ public class SetResidenceType extends DamlRecord<SetResidenceType> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.residenceproperty.residenceproperty.SetResidenceType(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty.SetResidenceType(%s)",
         this.newResidenceType);
   }
 }

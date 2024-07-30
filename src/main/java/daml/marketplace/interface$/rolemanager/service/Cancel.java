@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.service;
+package daml.marketplace.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Cancel extends DamlRecord<Cancel> {
 
   @Override
   public String toString() {
-    return "daml.interface$.rolemanager.service.Cancel";
+    return "daml.marketplace.interface$.rolemanager.service.Cancel";
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.choices.requestcreateresidenceproperty;
+package daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class RequestCreateResidenceProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<RequestCreateResidenceProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty", RequestCreateResidenceProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty", RequestCreateResidenceProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

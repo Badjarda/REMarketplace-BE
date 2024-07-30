@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.factory;
+package daml.marketplace.interface$.rolemanager.userrole.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,9 +17,9 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
-import daml.interface$.common.types.UserRoleKey;
-import daml.interface$.rolemanager.userrole.permission.Permission;
-import daml.interface$.rolemanager.userrole.userrole.UserRole;
+import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
@@ -105,7 +105,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.rolemanager.userrole.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.rolemanager.userrole.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

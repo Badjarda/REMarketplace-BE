@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -88,6 +88,6 @@ public class GetGaragePhotoReferences extends DamlRecord<GetGaragePhotoReference
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.garageproperty.garageproperty.GetGaragePhotoReferences";
+    return "daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GetGaragePhotoReferences";
   }
 }

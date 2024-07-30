@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -68,7 +68,7 @@ public class UpdateWarehouseGrossArea extends DamlRecord<UpdateWarehouseGrossAre
     return JsonLfDecoders.record(Arrays.asList("newWarehouseGrossArea", "propertyKey"), name -> {
           switch (name) {
             case "newWarehouseGrossArea": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -108,7 +108,7 @@ public class UpdateWarehouseGrossArea extends DamlRecord<UpdateWarehouseGrossAre
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.UpdateWarehouseGrossArea(%s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateWarehouseGrossArea(%s, %s)",
         this.newWarehouseGrossArea, this.propertyKey);
   }
 }

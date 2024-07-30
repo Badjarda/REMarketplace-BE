@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -88,6 +88,6 @@ public class GetGarageInstrumentKey extends DamlRecord<GetGarageInstrumentKey> {
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.garageproperty.garageproperty.GetGarageInstrumentKey";
+    return "daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GetGarageInstrumentKey";
   }
 }

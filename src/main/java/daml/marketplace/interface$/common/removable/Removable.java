@@ -1,4 +1,4 @@
-package daml.interface$.common.removable;
+package daml.marketplace.interface$.common.removable;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -98,7 +98,7 @@ public final class Removable {
   public static final class INTERFACE_ extends InterfaceCompanion<Removable, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.common.removable.Removable", Removable.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.common.removable.Removable", Removable.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Remove, CHOICE_Archive));
     }
   }

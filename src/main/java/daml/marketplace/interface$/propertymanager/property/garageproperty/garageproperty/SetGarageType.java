@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -58,7 +58,7 @@ public class SetGarageType extends DamlRecord<SetGarageType> {
   public static JsonLfDecoder<SetGarageType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newGarageType"), name -> {
           switch (name) {
-            case "newGarageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.GarageType.jsonDecoder());
+            case "newGarageType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.GarageType.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetGarageType extends DamlRecord<SetGarageType> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageType(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.SetGarageType(%s)",
         this.newGarageType);
   }
 }

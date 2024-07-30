@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.userrole;
+package daml.marketplace.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -105,7 +105,7 @@ public class SetObservers extends DamlRecord<SetObservers> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.userrole.SetObservers(%s)",
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.userrole.SetObservers(%s)",
         this.newObservers);
   }
 }

@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -123,7 +123,7 @@ public final class Offer {
   public static final class INTERFACE_ extends InterfaceCompanion<Offer, ContractId, OView> {
     INTERFACE_() {
       super(
-            "daml.interface$.issuance.service.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
+            "daml.marketplace.interface$.issuance.service.Offer", Offer.TEMPLATE_ID, ContractId::new, OView.valueDecoder(),
             OView::fromJson,List.of(CHOICE_Archive, CHOICE_Accept, CHOICE_Decline, CHOICE_Withdraw))
           ;
     }

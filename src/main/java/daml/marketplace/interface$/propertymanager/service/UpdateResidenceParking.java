@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,8 +11,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.PropertyKey;
-import daml.interface$.propertymanager.property.common.Parking;
+import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.propertymanager.property.common.Parking;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -65,8 +65,8 @@ public class UpdateResidenceParking extends DamlRecord<UpdateResidenceParking> {
   public static JsonLfDecoder<UpdateResidenceParking> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newResidenceParking", "propertyKey"), name -> {
           switch (name) {
-            case "newResidenceParking": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.Parking.jsonDecoder());
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
+            case "newResidenceParking": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.Parking.jsonDecoder());
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -106,7 +106,7 @@ public class UpdateResidenceParking extends DamlRecord<UpdateResidenceParking> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.UpdateResidenceParking(%s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateResidenceParking(%s, %s)",
         this.newResidenceParking, this.propertyKey);
   }
 }

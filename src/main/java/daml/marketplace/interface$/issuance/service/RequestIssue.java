@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -131,7 +131,7 @@ public class RequestIssue extends DamlRecord<RequestIssue> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.issuance.service.RequestIssue(%s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.issuance.service.RequestIssue(%s, %s, %s, %s)",
         this.issuanceId, this.description, this.quantity, this.account);
   }
 }

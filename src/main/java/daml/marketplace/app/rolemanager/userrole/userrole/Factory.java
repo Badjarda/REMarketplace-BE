@@ -1,4 +1,4 @@
-package daml.app.rolemanager.userrole.userrole;
+package daml.marketplace.app.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -51,7 +51,7 @@ public final class Factory extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Factory> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.rolemanager.userrole.userrole.Factory",
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.rolemanager.userrole.userrole.Factory",
         TEMPLATE_ID, ContractId::new, v -> Factory.templateValueDecoder().decode(v),
         Factory::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -181,7 +181,7 @@ public final class Factory extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.rolemanager.userrole.userrole.Factory(%s, %s)", this.operator,
+    return String.format("daml.marketplace.app.rolemanager.userrole.userrole.Factory(%s, %s)", this.operator,
         this.observers);
   }
 
@@ -196,9 +196,9 @@ public final class Factory extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.rolemanager.userrole.factory.Factory.ContractId toInterface(
-        daml.interface$.rolemanager.userrole.factory.Factory.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.rolemanager.userrole.factory.Factory.ContractId(this.contractId);
+    public daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId toInterface(
+        daml.marketplace.interface$.rolemanager.userrole.factory.Factory.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -206,7 +206,7 @@ public final class Factory extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.rolemanager.userrole.factory.Factory.ContractId interfaceContractId) {
+        daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -263,9 +263,9 @@ public final class Factory extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.rolemanager.userrole.factory.Factory.CreateAnd toInterface(
-        daml.interface$.rolemanager.userrole.factory.Factory.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.rolemanager.userrole.factory.Factory.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.rolemanager.userrole.factory.Factory.CreateAnd toInterface(
+        daml.marketplace.interface$.rolemanager.userrole.factory.Factory.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.rolemanager.userrole.factory.Factory.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
