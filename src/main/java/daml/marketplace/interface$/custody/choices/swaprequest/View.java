@@ -1,4 +1,4 @@
-package daml.interface$.custody.choices.swaprequest;
+package daml.marketplace.interface$.custody.choices.swaprequest;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -153,7 +153,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.choices.swaprequest.View(%s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.custody.choices.swaprequest.View(%s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.buyer, this.seller, this.sellerAccount, this.buyerAccount,
         this.fungibleHoldingCid, this.fungibleAmount);
   }

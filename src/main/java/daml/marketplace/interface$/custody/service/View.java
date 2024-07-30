@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -118,7 +118,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.View(%s, %s, %s)", this.accountFactoryCid,
+    return String.format("daml.marketplace.interface$.custody.service.View(%s, %s, %s)", this.accountFactoryCid,
         this.holdingFactoryKey, this.claimRuleCid);
   }
 }

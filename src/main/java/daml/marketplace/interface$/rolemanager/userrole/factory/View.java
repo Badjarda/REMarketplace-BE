@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.factory;
+package daml.marketplace.interface$.rolemanager.userrole.factory;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,6 +96,6 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.factory.View(%s)", this.operator);
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.factory.View(%s)", this.operator);
   }
 }

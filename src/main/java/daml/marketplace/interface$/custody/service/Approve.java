@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -128,7 +128,7 @@ public class Approve extends DamlRecord<Approve> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.Approve(%s, %s, %s, %s)", this.operator,
+    return String.format("daml.marketplace.interface$.custody.service.Approve(%s, %s, %s, %s)", this.operator,
         this.accountFactoryCid, this.holdingFactoryKey, this.claimRuleCid);
   }
 }

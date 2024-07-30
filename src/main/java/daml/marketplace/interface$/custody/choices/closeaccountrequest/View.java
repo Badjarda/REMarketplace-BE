@@ -1,4 +1,4 @@
-package daml.interface$.custody.choices.closeaccountrequest;
+package daml.marketplace.interface$.custody.choices.closeaccountrequest;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -112,7 +112,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.choices.closeaccountrequest.View(%s, %s, %s)",
+    return String.format("daml.marketplace.interface$.custody.choices.closeaccountrequest.View(%s, %s, %s)",
         this.operator, this.user, this.account);
   }
 }

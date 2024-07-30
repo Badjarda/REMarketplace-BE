@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,7 +96,7 @@ public class GetView extends DamlRecord<GetView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.GetView(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.GetView(%s)",
         this.viewer);
   }
 }

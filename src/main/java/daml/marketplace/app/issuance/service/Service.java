@@ -1,4 +1,4 @@
-package daml.app.issuance.service;
+package daml.marketplace.app.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -50,7 +50,7 @@ public final class Service extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Service, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.issuance.service.Service", TEMPLATE_ID,
+      new ContractCompanion.WithKey<>("daml.marketplace.app.issuance.service.Service", TEMPLATE_ID,
         ContractId::new, v -> Service.templateValueDecoder().decode(v), Service::fromJson,
         Contract::new, List.of(CHOICE_Archive), e -> Tuple2.<java.lang.String,
         java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty,
@@ -194,7 +194,7 @@ public final class Service extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.issuance.service.Service(%s, %s)", this.operator, this.user);
+    return String.format("daml.marketplace.app.issuance.service.Service(%s, %s)", this.operator, this.user);
   }
 
   /**
@@ -217,23 +217,23 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.service.Service.ContractId toInterface(
-        daml.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.service.Service.ContractId(this.contractId);
+    public daml.marketplace.interface$.issuance.service.Service.ContractId toInterface(
+        daml.marketplace.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.service.Service.ContractId(this.contractId);
     }
 
-    public daml.interface$.base.service.Service.ContractId toInterface(
-        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.base.service.Service.ContractId(this.contractId);
+    public daml.marketplace.interface$.base.service.Service.ContractId toInterface(
+        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.base.service.Service.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.issuance.service.Service.ContractId interfaceContractId) {
+        daml.marketplace.interface$.issuance.service.Service.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.base.service.Service.ContractId interfaceContractId) {
+        daml.marketplace.interface$.base.service.Service.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -287,14 +287,14 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.service.Service.CreateAnd toInterface(
-        daml.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.service.Service.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.issuance.service.Service.CreateAnd toInterface(
+        daml.marketplace.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.service.Service.CreateAnd(COMPANION, this.createArguments);
     }
 
-    public daml.interface$.base.service.Service.CreateAnd toInterface(
-        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.base.service.Service.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.base.service.Service.CreateAnd toInterface(
+        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.base.service.Service.CreateAnd(COMPANION, this.createArguments);
     }
   }
 
@@ -309,14 +309,14 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.issuance.service.Service.ByKey toInterface(
-        daml.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.issuance.service.Service.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.issuance.service.Service.ByKey toInterface(
+        daml.marketplace.interface$.issuance.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.issuance.service.Service.ByKey(COMPANION, this.contractKey);
     }
 
-    public daml.interface$.base.service.Service.ByKey toInterface(
-        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.base.service.Service.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.base.service.Service.ByKey toInterface(
+        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.base.service.Service.ByKey(COMPANION, this.contractKey);
     }
   }
 }

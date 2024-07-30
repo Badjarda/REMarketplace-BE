@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Reject extends DamlRecord<Reject> {
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.service.Reject";
+    return "daml.marketplace.interface$.propertymanager.service.Reject";
   }
 }

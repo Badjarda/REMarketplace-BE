@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -31,7 +31,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -69,7 +69,7 @@ public final class Reference extends Template {
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Reference, PropertyKey> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.interface$.propertymanager.property.landproperty.landproperty.Reference", TEMPLATE_ID,
+        "daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.Reference", TEMPLATE_ID,
         ContractId::new, v -> Reference.templateValueDecoder().decode(v), Reference::fromJson,
         Contract::new, List.of(CHOICE_SetCid, CHOICE_SetObservers, CHOICE_Archive, CHOICE_GetCid),
         e -> PropertyKey.valueDecoder().decode(e));
@@ -281,8 +281,8 @@ public final class Reference extends Template {
   public static JsonLfDecoder<Reference> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("landPropertyView", "cid", "observers"), name -> {
           switch (name) {
-            case "landPropertyView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.landproperty.landproperty.View.jsonDecoder());
-            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId::new));
+            case "landPropertyView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.View.jsonDecoder());
+            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty.ContractId::new));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -328,7 +328,7 @@ public final class Reference extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.Reference(%s, %s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.Reference(%s, %s, %s)",
         this.landPropertyView, this.cid, this.observers);
   }
 

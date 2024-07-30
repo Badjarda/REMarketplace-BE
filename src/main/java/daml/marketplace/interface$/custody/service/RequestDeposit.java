@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -112,7 +112,7 @@ public class RequestDeposit extends DamlRecord<RequestDeposit> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.RequestDeposit(%s, %s)", this.quantity,
+    return String.format("daml.marketplace.interface$.custody.service.RequestDeposit(%s, %s)", this.quantity,
         this.account);
   }
 }

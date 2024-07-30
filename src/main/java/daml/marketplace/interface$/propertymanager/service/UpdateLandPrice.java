@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -67,7 +67,7 @@ public class UpdateLandPrice extends DamlRecord<UpdateLandPrice> {
     return JsonLfDecoders.record(Arrays.asList("newLandPrice", "propertyKey"), name -> {
           switch (name) {
             case "newLandPrice": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -107,7 +107,7 @@ public class UpdateLandPrice extends DamlRecord<UpdateLandPrice> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.UpdateLandPrice(%s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateLandPrice(%s, %s)",
         this.newLandPrice, this.propertyKey);
   }
 }

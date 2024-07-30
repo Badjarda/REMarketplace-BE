@@ -1,4 +1,4 @@
-package daml.interface$.custody.choices.withdrawrequest;
+package daml.marketplace.interface$.custody.choices.withdrawrequest;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -113,7 +113,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.choices.withdrawrequest.View(%s, %s, %s)",
+    return String.format("daml.marketplace.interface$.custody.choices.withdrawrequest.View(%s, %s, %s)",
         this.operator, this.user, this.holdingCid);
   }
 }

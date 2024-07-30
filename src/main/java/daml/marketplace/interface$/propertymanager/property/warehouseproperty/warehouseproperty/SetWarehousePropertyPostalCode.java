@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -99,7 +99,7 @@ public class SetWarehousePropertyPostalCode extends DamlRecord<SetWarehousePrope
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePropertyPostalCode(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePropertyPostalCode(%s)",
         this.newWarehousePropertyPostalCode);
   }
 }

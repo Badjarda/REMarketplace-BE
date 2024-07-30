@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -98,7 +98,7 @@ public class SetGaragePropertyCounty extends DamlRecord<SetGaragePropertyCounty>
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.SetGaragePropertyCounty(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.SetGaragePropertyCounty(%s)",
         this.newGaragePropertyCounty);
   }
 }

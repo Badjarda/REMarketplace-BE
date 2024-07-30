@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.permission;
+package daml.marketplace.interface$.rolemanager.userrole.permission;
 
 import com.daml.ledger.javaapi.data.Value;
 import com.daml.ledger.javaapi.data.codegen.DamlEnum;

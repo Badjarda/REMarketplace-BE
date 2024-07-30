@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -97,6 +97,6 @@ public class TerminateCustodianService extends DamlRecord<TerminateCustodianServ
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.TerminateCustodianService(%s)", this.user);
+    return String.format("daml.marketplace.interface$.role.operator.TerminateCustodianService(%s)", this.user);
   }
 }

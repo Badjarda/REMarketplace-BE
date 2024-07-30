@@ -1,4 +1,4 @@
-package daml.interface$.common.removable;
+package daml.marketplace.interface$.common.removable;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -87,6 +87,6 @@ public class Remove extends DamlRecord<Remove> {
 
   @Override
   public String toString() {
-    return "daml.interface$.common.removable.Remove";
+    return "daml.marketplace.interface$.common.removable.Remove";
   }
 }

@@ -1,4 +1,4 @@
-package daml.app.profilemanager.userprofile;
+package daml.marketplace.app.profilemanager.userprofile;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -37,8 +37,8 @@ import daml.da.set.types.Set;
 import daml.da.types.Tuple2;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.util.disclosure.Disclosure;
-import daml.interface$.profilemanager.userprofile.common.Gender;
-import daml.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -62,7 +62,7 @@ public final class UserProfile extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, UserProfile, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.app.profilemanager.userprofile.UserProfile",
+      new ContractCompanion.WithKey<>("daml.marketplace.app.profilemanager.userprofile.UserProfile",
         TEMPLATE_ID, ContractId::new, v -> UserProfile.templateValueDecoder().decode(v),
         UserProfile::fromJson, Contract::new, List.of(CHOICE_Archive),
         e -> Tuple2.<java.lang.String,
@@ -271,8 +271,8 @@ public final class UserProfile extends Template {
             case "fullName": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "password": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "birthday": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.date);
-            case "gender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
-            case "nationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
+            case "gender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.marketplace.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
+            case "nationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.marketplace.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
             case "contactMail": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "cellphoneNumber": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64));
             case "idNumber": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
@@ -355,7 +355,7 @@ public final class UserProfile extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.profilemanager.userprofile.UserProfile(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.app.profilemanager.userprofile.UserProfile(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.username, this.firstName, this.lastName,
         this.fullName, this.password, this.birthday, this.gender, this.nationality,
         this.contactMail, this.cellphoneNumber, this.idNumber, this.taxId, this.socialSecurityId,
@@ -382,9 +382,9 @@ public final class UserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId toInterface(
-        daml.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId(this.contractId);
+    public daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId toInterface(
+        daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -392,7 +392,7 @@ public final class UserProfile extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId interfaceContractId) {
+        daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -451,9 +451,9 @@ public final class UserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.profilemanager.userprofile.userprofile.UserProfile.CreateAnd toInterface(
-        daml.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.profilemanager.userprofile.userprofile.UserProfile.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.CreateAnd toInterface(
+        daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -472,9 +472,9 @@ public final class UserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.profilemanager.userprofile.userprofile.UserProfile.ByKey toInterface(
-        daml.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.profilemanager.userprofile.userprofile.UserProfile.ByKey(COMPANION, this.contractKey);
+    public daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.ByKey toInterface(
+        daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile.ByKey(COMPANION, this.contractKey);
     }
 
     public Disclosure.ByKey toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

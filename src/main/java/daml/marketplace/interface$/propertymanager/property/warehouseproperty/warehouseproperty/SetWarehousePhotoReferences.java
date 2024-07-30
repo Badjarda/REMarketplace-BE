@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -100,7 +100,7 @@ public class SetWarehousePhotoReferences extends DamlRecord<SetWarehousePhotoRef
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePhotoReferences(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.SetWarehousePhotoReferences(%s)",
         this.newPhotoReferences);
   }
 }

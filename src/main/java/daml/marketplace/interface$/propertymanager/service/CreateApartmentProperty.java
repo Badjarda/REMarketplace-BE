@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty;
+import daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -61,7 +61,7 @@ public class CreateApartmentProperty extends DamlRecord<CreateApartmentProperty>
   public static JsonLfDecoder<CreateApartmentProperty> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("createApartmentPropertyRequest"), name -> {
           switch (name) {
-            case "createApartmentPropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId::new));
+            case "createApartmentPropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId::new));
             default: return null;
           }
         }
@@ -99,7 +99,7 @@ public class CreateApartmentProperty extends DamlRecord<CreateApartmentProperty>
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.CreateApartmentProperty(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.CreateApartmentProperty(%s)",
         this.createApartmentPropertyRequest);
   }
 }

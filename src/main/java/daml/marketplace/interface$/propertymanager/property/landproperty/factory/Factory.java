@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.factory;
+package daml.marketplace.interface$.propertymanager.property.landproperty.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,10 +18,10 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.interface$.common.types.PropertyKey;
-import daml.interface$.propertymanager.property.common.LandType;
-import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
-import daml.interface$.propertymanager.property.landproperty.landproperty.LandProperty;
+import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.LandProperty;
 import java.lang.Boolean;
 import java.lang.Long;
 import java.lang.Override;
@@ -119,7 +119,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.propertymanager.property.landproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

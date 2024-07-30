@@ -1,4 +1,4 @@
-package daml.interface$.base.service;
+package daml.marketplace.interface$.base.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -98,7 +98,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.base.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.base.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Terminate));
     }
   }

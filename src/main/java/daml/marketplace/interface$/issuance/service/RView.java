@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -103,7 +103,7 @@ public class RView extends DamlRecord<RView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.issuance.service.RView(%s, %s)", this.user,
+    return String.format("daml.marketplace.interface$.issuance.service.RView(%s, %s)", this.user,
         this.operator);
   }
 }

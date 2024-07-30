@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,6 +96,6 @@ public class Approve extends DamlRecord<Approve> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.issuance.service.Approve(%s)", this.operator);
+    return String.format("daml.marketplace.interface$.issuance.service.Approve(%s)", this.operator);
   }
 }

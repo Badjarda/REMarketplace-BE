@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.service;
+package daml.marketplace.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,8 +12,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.PropertyKey;
-import daml.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -70,8 +70,8 @@ public class UpdateLandViableConstructionTypes extends DamlRecord<UpdateLandViab
   public static JsonLfDecoder<UpdateLandViableConstructionTypes> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newLandViableConstructionTypes", "propertyKey"), name -> {
           switch (name) {
-            case "newLandViableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
+            case "newLandViableConstructionTypes": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes.jsonDecoder()));
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -111,7 +111,7 @@ public class UpdateLandViableConstructionTypes extends DamlRecord<UpdateLandViab
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.service.UpdateLandViableConstructionTypes(%s, %s)",
+    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateLandViableConstructionTypes(%s, %s)",
         this.newLandViableConstructionTypes, this.propertyKey);
   }
 }

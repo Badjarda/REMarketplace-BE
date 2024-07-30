@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.landproperty.landproperty;
+package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -88,6 +88,6 @@ public class GetLandPropertyPostalCode extends DamlRecord<GetLandPropertyPostalC
 
   @Override
   public String toString() {
-    return "daml.interface$.propertymanager.property.landproperty.landproperty.GetLandPropertyPostalCode";
+    return "daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.GetLandPropertyPostalCode";
   }
 }

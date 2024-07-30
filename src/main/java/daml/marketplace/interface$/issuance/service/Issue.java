@@ -1,4 +1,4 @@
-package daml.interface$.issuance.service;
+package daml.marketplace.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.issuance.choices.issuerequest.IssueRequest;
+import daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class Issue extends DamlRecord<Issue> {
   public static JsonLfDecoder<Issue> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("issueRequestCid"), name -> {
           switch (name) {
-            case "issueRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.issuance.choices.issuerequest.IssueRequest.ContractId::new));
+            case "issueRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class Issue extends DamlRecord<Issue> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.issuance.service.Issue(%s)", this.issueRequestCid);
+    return String.format("daml.marketplace.interface$.issuance.service.Issue(%s)", this.issueRequestCid);
   }
 }

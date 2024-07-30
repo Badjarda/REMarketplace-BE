@@ -1,4 +1,4 @@
-package daml.interface$.issuance.issuance;
+package daml.marketplace.interface$.issuance.issuance;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -86,7 +86,7 @@ public final class Issuance {
   public static final class INTERFACE_ extends InterfaceCompanion<Issuance, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.issuance.issuance.Issuance", Issuance.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.issuance.issuance.Issuance", Issuance.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

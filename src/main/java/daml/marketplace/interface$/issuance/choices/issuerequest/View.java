@@ -1,4 +1,4 @@
-package daml.interface$.issuance.choices.issuerequest;
+package daml.marketplace.interface$.issuance.choices.issuerequest;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -148,7 +148,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.issuance.choices.issuerequest.View(%s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.issuance.choices.issuerequest.View(%s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.issuanceId, this.description, this.quantity, this.account);
   }
 }

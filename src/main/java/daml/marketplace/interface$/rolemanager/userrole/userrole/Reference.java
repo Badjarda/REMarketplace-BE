@@ -1,4 +1,4 @@
-package daml.interface$.rolemanager.userrole.userrole;
+package daml.marketplace.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -31,7 +31,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -68,7 +68,7 @@ public final class Reference extends Template {
         new UserRole.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Reference, UserRoleKey> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.interface$.rolemanager.userrole.userrole.Reference",
+      new ContractCompanion.WithKey<>("daml.marketplace.interface$.rolemanager.userrole.userrole.Reference",
         TEMPLATE_ID, ContractId::new, v -> Reference.templateValueDecoder().decode(v),
         Reference::fromJson, Contract::new, List.of(CHOICE_SetCid, CHOICE_SetObservers,
         CHOICE_Archive, CHOICE_GetCid), e -> UserRoleKey.valueDecoder().decode(e));
@@ -279,8 +279,8 @@ public final class Reference extends Template {
   public static JsonLfDecoder<Reference> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRoleView", "cid", "observers"), name -> {
           switch (name) {
-            case "userRoleView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.rolemanager.userrole.userrole.View.jsonDecoder());
-            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.rolemanager.userrole.userrole.UserRole.ContractId::new));
+            case "userRoleView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.rolemanager.userrole.userrole.View.jsonDecoder());
+            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole.ContractId::new));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -326,7 +326,7 @@ public final class Reference extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.rolemanager.userrole.userrole.Reference(%s, %s, %s)",
+    return String.format("daml.marketplace.interface$.rolemanager.userrole.userrole.Reference(%s, %s, %s)",
         this.userRoleView, this.cid, this.observers);
   }
 

@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,7 +16,7 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.interface$.rolemanager.userrole.factory.Factory;
+import daml.marketplace.interface$.rolemanager.userrole.factory.Factory;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
@@ -113,7 +113,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, RView> {
     INTERFACE_() {
       super(
-            "daml.interface$.role.operator.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
+            "daml.marketplace.interface$.role.operator.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
             RView::fromJson,List.of(CHOICE_Archive, CHOICE_Approve, CHOICE_Reject));
     }
   }

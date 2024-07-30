@@ -1,4 +1,4 @@
-package daml.app.custody.model;
+package daml.marketplace.app.custody.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -27,7 +27,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.daml.finance.interface$.holding.holding.Holding;
-import daml.interface$.common.removable.Removable;
+import daml.marketplace.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -49,7 +49,7 @@ public final class WithdrawRequest extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, WithdrawRequest> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.custody.model.WithdrawRequest", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.custody.model.WithdrawRequest", TEMPLATE_ID,
         ContractId::new, v -> WithdrawRequest.templateValueDecoder().decode(v),
         WithdrawRequest::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -184,7 +184,7 @@ public final class WithdrawRequest extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.custody.model.WithdrawRequest(%s, %s, %s)", this.operator,
+    return String.format("daml.marketplace.app.custody.model.WithdrawRequest(%s, %s, %s)", this.operator,
         this.user, this.holdingCid);
   }
 
@@ -199,9 +199,9 @@ public final class WithdrawRequest extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId toInterface(
-        daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId(this.contractId);
+    public daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId toInterface(
+        daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -209,7 +209,7 @@ public final class WithdrawRequest extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId interfaceContractId) {
+        daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -265,9 +265,9 @@ public final class WithdrawRequest extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.CreateAnd toInterface(
-        daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.CreateAnd toInterface(
+        daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {

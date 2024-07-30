@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.custody.choices.withdrawrequest.WithdrawRequest;
+import daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -59,7 +59,7 @@ public class Withdrawal extends DamlRecord<Withdrawal> {
   public static JsonLfDecoder<Withdrawal> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("withdrawRequestCid"), name -> {
           switch (name) {
-            case "withdrawRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId::new));
+            case "withdrawRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class Withdrawal extends DamlRecord<Withdrawal> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.custody.service.Withdrawal(%s)", this.withdrawRequestCid);
+    return String.format("daml.marketplace.interface$.custody.service.Withdrawal(%s)", this.withdrawRequestCid);
   }
 }

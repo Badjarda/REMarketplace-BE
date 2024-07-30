@@ -1,4 +1,4 @@
-package daml.interface$.base.service;
+package daml.marketplace.interface$.base.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -103,6 +103,6 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.base.service.View(%s, %s)", this.operator, this.user);
+    return String.format("daml.marketplace.interface$.base.service.View(%s, %s)", this.operator, this.user);
   }
 }

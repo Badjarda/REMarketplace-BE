@@ -1,4 +1,4 @@
-package daml.interface$.base.request;
+package daml.marketplace.interface$.base.request;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,7 +16,7 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.interface$.base.service.Service;
+import daml.marketplace.interface$.base.service.Service;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
@@ -124,7 +124,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.base.request.Request", Request.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.base.request.Request", Request.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Accept, CHOICE_Reject, CHOICE_Withdraw));
     }
   }

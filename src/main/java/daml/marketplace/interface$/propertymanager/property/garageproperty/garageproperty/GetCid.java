@@ -1,4 +1,4 @@
-package daml.interface$.propertymanager.property.garageproperty.garageproperty;
+package daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -96,7 +96,7 @@ public class GetCid extends DamlRecord<GetCid> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.propertymanager.property.garageproperty.garageproperty.GetCid(%s)",
+    return String.format("daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.GetCid(%s)",
         this.viewer);
   }
 }

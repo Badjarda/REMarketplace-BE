@@ -1,4 +1,4 @@
-package daml.interface$.profilemanager.service;
+package daml.marketplace.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -103,7 +103,7 @@ public class RView extends DamlRecord<RView> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.profilemanager.service.RView(%s, %s)", this.operator,
+    return String.format("daml.marketplace.interface$.profilemanager.service.RView(%s, %s)", this.operator,
         this.user);
   }
 }

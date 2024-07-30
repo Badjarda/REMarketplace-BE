@@ -1,4 +1,4 @@
-package daml.app.role.user;
+package daml.marketplace.app.role.user;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -47,7 +47,7 @@ public final class Request extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, Request> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.app.role.user.Request", TEMPLATE_ID, ContractId::new,
+      new ContractCompanion.WithoutKey<>("daml.marketplace.app.role.user.Request", TEMPLATE_ID, ContractId::new,
         v -> Request.templateValueDecoder().decode(v), Request::fromJson, Contract::new,
         List.of(CHOICE_Archive));
 
@@ -171,7 +171,7 @@ public final class Request extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.app.role.user.Request(%s, %s)", this.operator, this.user);
+    return String.format("daml.marketplace.app.role.user.Request(%s, %s)", this.operator, this.user);
   }
 
   public static final class ContractId extends com.daml.ledger.javaapi.data.codegen.ContractId<Request> implements Exercises<ExerciseCommand> {
@@ -185,13 +185,13 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.role.user.Request.ContractId toInterface(
-        daml.interface$.role.user.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.role.user.Request.ContractId(this.contractId);
+    public daml.marketplace.interface$.role.user.Request.ContractId toInterface(
+        daml.marketplace.interface$.role.user.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.role.user.Request.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.interface$.role.user.Request.ContractId interfaceContractId) {
+        daml.marketplace.interface$.role.user.Request.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -243,9 +243,9 @@ public final class Request extends Template {
       return COMPANION;
     }
 
-    public daml.interface$.role.user.Request.CreateAnd toInterface(
-        daml.interface$.role.user.Request.INTERFACE_ interfaceCompanion) {
-      return new daml.interface$.role.user.Request.CreateAnd(COMPANION, this.createArguments);
+    public daml.marketplace.interface$.role.user.Request.CreateAnd toInterface(
+        daml.marketplace.interface$.role.user.Request.INTERFACE_ interfaceCompanion) {
+      return new daml.marketplace.interface$.role.user.Request.CreateAnd(COMPANION, this.createArguments);
     }
   }
 }

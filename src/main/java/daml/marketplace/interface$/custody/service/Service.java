@@ -1,4 +1,4 @@
-package daml.interface$.custody.service;
+package daml.marketplace.interface$.custody.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -25,12 +25,12 @@ import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.interface$.common.types.PropertyKey;
-import daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
-import daml.interface$.custody.choices.depositrequest.DepositRequest;
-import daml.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
-import daml.interface$.custody.choices.swaprequest.SwapRequest;
-import daml.interface$.custody.choices.withdrawrequest.WithdrawRequest;
+import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
+import daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest;
+import daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
+import daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest;
+import daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest;
 import java.lang.Override;
 import java.lang.String;
 import java.math.BigDecimal;
@@ -349,7 +349,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.marketplace.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Deposit, CHOICE_RequestDeposit,
             CHOICE_AtomicSwapWarehouse, CHOICE_Withdrawal, CHOICE_AtomicSwapResidence,
             CHOICE_Archive, CHOICE_RequestCloseAccount, CHOICE_AtomicSwapApartment,

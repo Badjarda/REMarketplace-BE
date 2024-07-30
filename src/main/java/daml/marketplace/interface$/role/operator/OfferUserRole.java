@@ -1,4 +1,4 @@
-package daml.interface$.role.operator;
+package daml.marketplace.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -12,7 +12,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.interface$.common.types.UserRoleKey;
+import daml.marketplace.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -65,7 +65,7 @@ public class OfferUserRole extends DamlRecord<OfferUserRole> {
     return JsonLfDecoders.record(Arrays.asList("user", "userRole"), name -> {
           switch (name) {
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
             default: return null;
           }
         }
@@ -104,7 +104,7 @@ public class OfferUserRole extends DamlRecord<OfferUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.interface$.role.operator.OfferUserRole(%s, %s)", this.user,
+    return String.format("daml.marketplace.interface$.role.operator.OfferUserRole(%s, %s)", this.user,
         this.userRole);
   }
 }
