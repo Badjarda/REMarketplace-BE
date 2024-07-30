@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.issuance.service;
+package daml.interface$.issuance.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest;
+import daml.interface$.issuance.choices.issuerequest.IssueRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Issue extends DamlRecord<Issue> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final IssueRequest.ContractId issueRequestCid;
 
@@ -59,7 +59,7 @@ public class Issue extends DamlRecord<Issue> {
   public static JsonLfDecoder<Issue> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("issueRequestCid"), name -> {
           switch (name) {
-            case "issueRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId::new));
+            case "issueRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.issuance.choices.issuerequest.IssueRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class Issue extends DamlRecord<Issue> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.issuance.service.Issue(%s)", this.issueRequestCid);
+    return String.format("daml.interface$.issuance.service.Issue(%s)", this.issueRequestCid);
   }
 }

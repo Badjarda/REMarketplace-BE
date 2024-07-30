@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -14,8 +14,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.daml.finance.interface$.holding.transferable.Transferable;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
-import daml.marketplace.interface$.common.types.PropertyKey;
-import daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest;
+import daml.interface$.common.types.PropertyKey;
+import daml.interface$.custody.choices.swaprequest.SwapRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AtomicSwapWarehouse extends DamlRecord<AtomicSwapWarehouse> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final String seller;
 
@@ -96,8 +96,8 @@ public class AtomicSwapWarehouse extends DamlRecord<AtomicSwapWarehouse> {
             case "buyer": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "sellerAccount": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, daml.daml.finance.interface$.types.common.types.AccountKey.jsonDecoder());
             case "transferableHoldingCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.daml.finance.interface$.holding.transferable.Transferable.ContractId::new));
-            case "transferRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId::new));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
+            case "transferRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.swaprequest.SwapRequest.ContractId::new));
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, daml.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -145,7 +145,7 @@ public class AtomicSwapWarehouse extends DamlRecord<AtomicSwapWarehouse> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.custody.service.AtomicSwapWarehouse(%s, %s, %s, %s, %s, %s)",
+    return String.format("daml.interface$.custody.service.AtomicSwapWarehouse(%s, %s, %s, %s, %s, %s)",
         this.seller, this.buyer, this.sellerAccount, this.transferableHoldingCid,
         this.transferRequestCid, this.propertyKey);
   }

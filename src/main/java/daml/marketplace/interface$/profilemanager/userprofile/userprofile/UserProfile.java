@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
+package daml.interface$.profilemanager.userprofile.userprofile;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,8 +16,8 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class UserProfile {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
 
   public static final Choice<UserProfile, SetLastName, ContractId> CHOICE_SetLastName = 
       Choice.create("SetLastName", value$ -> value$.toValue(), value$ -> SetLastName.valueDecoder()
@@ -474,7 +474,7 @@ public final class UserProfile {
   public static final class INTERFACE_ extends InterfaceCompanion<UserProfile, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.profilemanager.userprofile.userprofile.UserProfile", UserProfile.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetUsername, CHOICE_SetPassword, CHOICE_Remove,
             CHOICE_GetPhotoReferences, CHOICE_GetTaxId, CHOICE_SetContactMail, CHOICE_SetLastName,
             CHOICE_Archive, CHOICE_GetBirthday, CHOICE_SetTaxId, CHOICE_GetSocialSecurityId,

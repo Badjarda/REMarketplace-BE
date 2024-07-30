@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.userprofile.userprofile;
+package daml.interface$.profilemanager.userprofile.userprofile;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SetContactMail extends DamlRecord<SetContactMail> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final String newContactMail;
 
@@ -96,7 +96,7 @@ public class SetContactMail extends DamlRecord<SetContactMail> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.profilemanager.userprofile.userprofile.SetContactMail(%s)",
+    return String.format("daml.interface$.profilemanager.userprofile.userprofile.SetContactMail(%s)",
         this.newContactMail);
   }
 }

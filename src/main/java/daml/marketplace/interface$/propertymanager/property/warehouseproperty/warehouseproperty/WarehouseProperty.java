@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,7 +17,7 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
+import daml.interface$.propertymanager.property.common.WarehouseType;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -26,7 +26,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public final class WarehouseProperty {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.PropertyManager.Property.WarehouseProperty.WarehouseProperty", "WarehouseProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.PropertyManager.Property.WarehouseProperty.WarehouseProperty", "WarehouseProperty");
 
   public static final Choice<WarehouseProperty, SetWarehousePropertyAddress, ContractId> CHOICE_SetWarehousePropertyAddress = 
       Choice.create("SetWarehousePropertyAddress", value$ -> value$.toValue(), value$ ->
@@ -536,7 +536,7 @@ public final class WarehouseProperty {
   public static final class INTERFACE_ extends InterfaceCompanion<WarehouseProperty, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty", WarehouseProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.WarehouseProperty", WarehouseProperty.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_SetWarehousePropertyCounty,
             CHOICE_GetWarehousePropertyAddress, CHOICE_SetWarehouseAdditionalInformation,
             CHOICE_SetWarehouseBuildDate, CHOICE_GetWarehouseGrossArea, CHOICE_SetWarehousePrice,

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.user;
+package daml.interface$.role.user;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -16,13 +16,13 @@ import com.daml.ledger.javaapi.data.codegen.Exercised;
 import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
-import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.interface$.common.types.UserRoleKey;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 
 public final class Request {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.Role.User", "Request");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Role.User", "Request");
 
   public static final Choice<Request, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -113,7 +113,7 @@ public final class Request {
   public static final class INTERFACE_ extends InterfaceCompanion<Request, ContractId, RView> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.role.user.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
+            "daml.interface$.role.user.Request", Request.TEMPLATE_ID, ContractId::new, RView.valueDecoder(),
             RView::fromJson,List.of(CHOICE_Archive, CHOICE_Approve, CHOICE_Reject));
     }
   }

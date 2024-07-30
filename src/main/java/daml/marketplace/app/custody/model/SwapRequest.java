@@ -1,4 +1,4 @@
-package daml.marketplace.app.custody.model;
+package daml.app.custody.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -29,7 +29,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.daml.finance.interface$.holding.transferable.Transferable;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
-import daml.marketplace.interface$.common.removable.Removable;
+import daml.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -44,7 +44,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class SwapRequest extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "App.Custody.Model", "SwapRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.Custody.Model", "SwapRequest");
 
   public static final Choice<SwapRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -52,7 +52,7 @@ public final class SwapRequest extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, SwapRequest> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.custody.model.SwapRequest", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.app.custody.model.SwapRequest", TEMPLATE_ID,
         ContractId::new, v -> SwapRequest.templateValueDecoder().decode(v), SwapRequest::fromJson,
         Contract::new, List.of(CHOICE_Archive));
 
@@ -225,7 +225,7 @@ public final class SwapRequest extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.custody.model.SwapRequest(%s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.custody.model.SwapRequest(%s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.buyer, this.seller, this.sellerAccount, this.buyerAccount,
         this.fungibleHoldingCid, this.fungibleAmount);
   }
@@ -241,9 +241,9 @@ public final class SwapRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId toInterface(
-        daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId(this.contractId);
+    public daml.interface$.custody.choices.swaprequest.SwapRequest.ContractId toInterface(
+        daml.interface$.custody.choices.swaprequest.SwapRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.choices.swaprequest.SwapRequest.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -251,7 +251,7 @@ public final class SwapRequest extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId interfaceContractId) {
+        daml.interface$.custody.choices.swaprequest.SwapRequest.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -307,9 +307,9 @@ public final class SwapRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.CreateAnd toInterface(
-        daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.custody.choices.swaprequest.SwapRequest.CreateAnd toInterface(
+        daml.interface$.custody.choices.swaprequest.SwapRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.choices.swaprequest.SwapRequest.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {

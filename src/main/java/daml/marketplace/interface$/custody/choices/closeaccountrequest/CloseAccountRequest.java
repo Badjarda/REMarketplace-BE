@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.choices.closeaccountrequest;
+package daml.interface$.custody.choices.closeaccountrequest;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -21,7 +21,7 @@ import java.lang.String;
 import java.util.List;
 
 public final class CloseAccountRequest {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.Custody.Choices.CloseAccountRequest", "CloseAccountRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Custody.Choices.CloseAccountRequest", "CloseAccountRequest");
 
   public static final Choice<CloseAccountRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -86,7 +86,7 @@ public final class CloseAccountRequest {
   public static final class INTERFACE_ extends InterfaceCompanion<CloseAccountRequest, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest", CloseAccountRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest", CloseAccountRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

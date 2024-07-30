@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.operator;
+package daml.interface$.role.operator;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -19,19 +19,19 @@ import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.lifecycle.rule.claim.Claim;
 import daml.daml.finance.interface$.types.common.types.HoldingFactoryKey;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.issuance.service.Offer;
-import daml.marketplace.interface$.issuance.service.Request;
-import daml.marketplace.interface$.issuance.service.Service;
-import daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.issuance.service.Offer;
+import daml.interface$.issuance.service.Request;
+import daml.interface$.issuance.service.Service;
+import daml.interface$.propertymanager.property.apartmentproperty.factory.Factory;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Map;
 
 public final class Role {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.Role.Operator", "Role");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Role.Operator", "Role");
 
   public static final Choice<Role, TerminateCustodianService, Unit> CHOICE_TerminateCustodianService = 
       Choice.create("TerminateCustodianService", value$ -> value$.toValue(), value$ ->
@@ -48,25 +48,25 @@ public final class Role {
         ApproveIssuanceRequest.valueDecoder().decode(value$), value$ ->
         new Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, ApprovePropertyManagerRequest, daml.marketplace.interface$.propertymanager.service.Service.ContractId> CHOICE_ApprovePropertyManagerRequest = 
+  public static final Choice<Role, ApprovePropertyManagerRequest, daml.interface$.propertymanager.service.Service.ContractId> CHOICE_ApprovePropertyManagerRequest = 
       Choice.create("ApprovePropertyManagerRequest", value$ -> value$.toValue(), value$ ->
         ApprovePropertyManagerRequest.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.propertymanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.propertymanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Role, TerminatePropertyManagerService, Unit> CHOICE_TerminatePropertyManagerService = 
       Choice.create("TerminatePropertyManagerService", value$ -> value$.toValue(), value$ ->
         TerminatePropertyManagerService.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Role, ApproveUserProfileManagerRequest, daml.marketplace.interface$.profilemanager.service.Service.ContractId> CHOICE_ApproveUserProfileManagerRequest = 
+  public static final Choice<Role, ApproveUserProfileManagerRequest, daml.interface$.profilemanager.service.Service.ContractId> CHOICE_ApproveUserProfileManagerRequest = 
       Choice.create("ApproveUserProfileManagerRequest", value$ -> value$.toValue(), value$ ->
         ApproveUserProfileManagerRequest.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.profilemanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.profilemanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, OfferUserProfileManagerService, daml.marketplace.interface$.profilemanager.service.Offer.ContractId> CHOICE_OfferUserProfileManagerService = 
+  public static final Choice<Role, OfferUserProfileManagerService, daml.interface$.profilemanager.service.Offer.ContractId> CHOICE_OfferUserProfileManagerService = 
       Choice.create("OfferUserProfileManagerService", value$ -> value$.toValue(), value$ ->
         OfferUserProfileManagerService.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.profilemanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.profilemanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Role, CreateInitialRole, UserRoleKey> CHOICE_CreateInitialRole = 
       Choice.create("CreateInitialRole", value$ -> value$.toValue(), value$ ->
@@ -83,35 +83,35 @@ public final class Role {
         daml.da.internal.template.Archive.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Role, OfferCustodianService, daml.marketplace.interface$.custody.service.Offer.ContractId> CHOICE_OfferCustodianService = 
+  public static final Choice<Role, OfferCustodianService, daml.interface$.custody.service.Offer.ContractId> CHOICE_OfferCustodianService = 
       Choice.create("OfferCustodianService", value$ -> value$.toValue(), value$ ->
         OfferCustodianService.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.custody.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.custody.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, OfferUserRoleManagerService, daml.marketplace.interface$.rolemanager.service.Offer.ContractId> CHOICE_OfferUserRoleManagerService = 
+  public static final Choice<Role, OfferUserRoleManagerService, daml.interface$.rolemanager.service.Offer.ContractId> CHOICE_OfferUserRoleManagerService = 
       Choice.create("OfferUserRoleManagerService", value$ -> value$.toValue(), value$ ->
         OfferUserRoleManagerService.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.rolemanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.rolemanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Role, TerminateUserProfileManagerService, Unit> CHOICE_TerminateUserProfileManagerService = 
       Choice.create("TerminateUserProfileManagerService", value$ -> value$.toValue(), value$ ->
         TerminateUserProfileManagerService.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Role, OfferUserRole, daml.marketplace.interface$.role.user.Offer.ContractId> CHOICE_OfferUserRole = 
+  public static final Choice<Role, OfferUserRole, daml.interface$.role.user.Offer.ContractId> CHOICE_OfferUserRole = 
       Choice.create("OfferUserRole", value$ -> value$.toValue(), value$ ->
         OfferUserRole.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.role.user.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.role.user.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, ApproveCustodianRequest, daml.marketplace.interface$.custody.service.Service.ContractId> CHOICE_ApproveCustodianRequest = 
+  public static final Choice<Role, ApproveCustodianRequest, daml.interface$.custody.service.Service.ContractId> CHOICE_ApproveCustodianRequest = 
       Choice.create("ApproveCustodianRequest", value$ -> value$.toValue(), value$ ->
         ApproveCustodianRequest.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.custody.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.custody.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, OfferPropertyManagerService, daml.marketplace.interface$.propertymanager.service.Offer.ContractId> CHOICE_OfferPropertyManagerService = 
+  public static final Choice<Role, OfferPropertyManagerService, daml.interface$.propertymanager.service.Offer.ContractId> CHOICE_OfferPropertyManagerService = 
       Choice.create("OfferPropertyManagerService", value$ -> value$.toValue(), value$ ->
         OfferPropertyManagerService.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.propertymanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.propertymanager.service.Offer.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Role, TerminateRole, Unit> CHOICE_TerminateRole = 
       Choice.create("TerminateRole", value$ -> value$.toValue(), value$ ->
@@ -123,15 +123,15 @@ public final class Role {
         TerminateIssuanceService.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final Choice<Role, ApproveUserRole, daml.marketplace.interface$.role.user.Role.ContractId> CHOICE_ApproveUserRole = 
+  public static final Choice<Role, ApproveUserRole, daml.interface$.role.user.Role.ContractId> CHOICE_ApproveUserRole = 
       Choice.create("ApproveUserRole", value$ -> value$.toValue(), value$ ->
         ApproveUserRole.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.role.user.Role.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.role.user.Role.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
-  public static final Choice<Role, ApproveUserRoleManagerRequest, daml.marketplace.interface$.rolemanager.service.Service.ContractId> CHOICE_ApproveUserRoleManagerRequest = 
+  public static final Choice<Role, ApproveUserRoleManagerRequest, daml.interface$.rolemanager.service.Service.ContractId> CHOICE_ApproveUserRoleManagerRequest = 
       Choice.create("ApproveUserRoleManagerRequest", value$ -> value$.toValue(), value$ ->
         ApproveUserRoleManagerRequest.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.rolemanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.rolemanager.service.Service.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final INTERFACE_ INTERFACE = new INTERFACE_();
 
@@ -183,18 +183,18 @@ public final class Role {
       return exerciseApproveIssuanceRequest(new ApproveIssuanceRequest(issuanceServiceRequestCid));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.propertymanager.service.Service.ContractId>> exerciseApprovePropertyManagerRequest(
+    default Update<Exercised<daml.interface$.propertymanager.service.Service.ContractId>> exerciseApprovePropertyManagerRequest(
         ApprovePropertyManagerRequest arg) {
       return makeExerciseCmd(CHOICE_ApprovePropertyManagerRequest, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.propertymanager.service.Service.ContractId>> exerciseApprovePropertyManagerRequest(
-        daml.marketplace.interface$.propertymanager.service.Request.ContractId propertyManagerServiceRequestCid,
+    default Update<Exercised<daml.interface$.propertymanager.service.Service.ContractId>> exerciseApprovePropertyManagerRequest(
+        daml.interface$.propertymanager.service.Request.ContractId propertyManagerServiceRequestCid,
         Factory.ContractId apartmentPropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+        daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+        daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+        daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+        daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
       return exerciseApprovePropertyManagerRequest(new ApprovePropertyManagerRequest(propertyManagerServiceRequestCid,
           apartmentPropertyFactoryCid, landPropertyFactoryCid, residencePropertyFactoryCid,
           garagePropertyFactoryCid, warehousePropertyFactoryCid));
@@ -209,26 +209,26 @@ public final class Role {
       return exerciseTerminatePropertyManagerService(new TerminatePropertyManagerService(user));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.service.Service.ContractId>> exerciseApproveUserProfileManagerRequest(
+    default Update<Exercised<daml.interface$.profilemanager.service.Service.ContractId>> exerciseApproveUserProfileManagerRequest(
         ApproveUserProfileManagerRequest arg) {
       return makeExerciseCmd(CHOICE_ApproveUserProfileManagerRequest, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.service.Service.ContractId>> exerciseApproveUserProfileManagerRequest(
-        daml.marketplace.interface$.profilemanager.service.Request.ContractId userProfileManagerServiceRequestCid,
-        daml.marketplace.interface$.profilemanager.userprofile.factory.Factory.ContractId userProfileFactoryCid) {
+    default Update<Exercised<daml.interface$.profilemanager.service.Service.ContractId>> exerciseApproveUserProfileManagerRequest(
+        daml.interface$.profilemanager.service.Request.ContractId userProfileManagerServiceRequestCid,
+        daml.interface$.profilemanager.userprofile.factory.Factory.ContractId userProfileFactoryCid) {
       return exerciseApproveUserProfileManagerRequest(new ApproveUserProfileManagerRequest(userProfileManagerServiceRequestCid,
           userProfileFactoryCid));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.service.Offer.ContractId>> exerciseOfferUserProfileManagerService(
+    default Update<Exercised<daml.interface$.profilemanager.service.Offer.ContractId>> exerciseOfferUserProfileManagerService(
         OfferUserProfileManagerService arg) {
       return makeExerciseCmd(CHOICE_OfferUserProfileManagerService, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.service.Offer.ContractId>> exerciseOfferUserProfileManagerService(
+    default Update<Exercised<daml.interface$.profilemanager.service.Offer.ContractId>> exerciseOfferUserProfileManagerService(
         String user,
-        daml.marketplace.interface$.profilemanager.userprofile.factory.Factory.ContractId userProfileFactoryCid) {
+        daml.interface$.profilemanager.userprofile.factory.Factory.ContractId userProfileFactoryCid) {
       return exerciseOfferUserProfileManagerService(new OfferUserProfileManagerService(user,
           userProfileFactoryCid));
     }
@@ -260,12 +260,12 @@ public final class Role {
       return exerciseArchive(new daml.da.internal.template.Archive());
     }
 
-    default Update<Exercised<daml.marketplace.interface$.custody.service.Offer.ContractId>> exerciseOfferCustodianService(
+    default Update<Exercised<daml.interface$.custody.service.Offer.ContractId>> exerciseOfferCustodianService(
         OfferCustodianService arg) {
       return makeExerciseCmd(CHOICE_OfferCustodianService, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.custody.service.Offer.ContractId>> exerciseOfferCustodianService(
+    default Update<Exercised<daml.interface$.custody.service.Offer.ContractId>> exerciseOfferCustodianService(
         String user,
         daml.daml.finance.interface$.account.factory.Factory.ContractId accountFactoryCid,
         HoldingFactoryKey holdingFactoryKey, Claim.ContractId claimRuleCid) {
@@ -273,14 +273,14 @@ public final class Role {
           holdingFactoryKey, claimRuleCid));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.rolemanager.service.Offer.ContractId>> exerciseOfferUserRoleManagerService(
+    default Update<Exercised<daml.interface$.rolemanager.service.Offer.ContractId>> exerciseOfferUserRoleManagerService(
         OfferUserRoleManagerService arg) {
       return makeExerciseCmd(CHOICE_OfferUserRoleManagerService, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.rolemanager.service.Offer.ContractId>> exerciseOfferUserRoleManagerService(
+    default Update<Exercised<daml.interface$.rolemanager.service.Offer.ContractId>> exerciseOfferUserRoleManagerService(
         String user,
-        daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId userRoleFactoryCid) {
+        daml.interface$.rolemanager.userrole.factory.Factory.ContractId userRoleFactoryCid) {
       return exerciseOfferUserRoleManagerService(new OfferUserRoleManagerService(user,
           userRoleFactoryCid));
     }
@@ -294,40 +294,40 @@ public final class Role {
       return exerciseTerminateUserProfileManagerService(new TerminateUserProfileManagerService(user));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.role.user.Offer.ContractId>> exerciseOfferUserRole(
+    default Update<Exercised<daml.interface$.role.user.Offer.ContractId>> exerciseOfferUserRole(
         OfferUserRole arg) {
       return makeExerciseCmd(CHOICE_OfferUserRole, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.role.user.Offer.ContractId>> exerciseOfferUserRole(
+    default Update<Exercised<daml.interface$.role.user.Offer.ContractId>> exerciseOfferUserRole(
         String user, UserRoleKey userRole) {
       return exerciseOfferUserRole(new OfferUserRole(user, userRole));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.custody.service.Service.ContractId>> exerciseApproveCustodianRequest(
+    default Update<Exercised<daml.interface$.custody.service.Service.ContractId>> exerciseApproveCustodianRequest(
         ApproveCustodianRequest arg) {
       return makeExerciseCmd(CHOICE_ApproveCustodianRequest, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.custody.service.Service.ContractId>> exerciseApproveCustodianRequest(
-        daml.marketplace.interface$.custody.service.Request.ContractId custodyServiceRequestCid,
+    default Update<Exercised<daml.interface$.custody.service.Service.ContractId>> exerciseApproveCustodianRequest(
+        daml.interface$.custody.service.Request.ContractId custodyServiceRequestCid,
         daml.daml.finance.interface$.account.factory.Factory.ContractId accountFactoryCid,
         HoldingFactoryKey holdingFactoryKey, Claim.ContractId claimRuleCid) {
       return exerciseApproveCustodianRequest(new ApproveCustodianRequest(custodyServiceRequestCid,
           accountFactoryCid, holdingFactoryKey, claimRuleCid));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.propertymanager.service.Offer.ContractId>> exerciseOfferPropertyManagerService(
+    default Update<Exercised<daml.interface$.propertymanager.service.Offer.ContractId>> exerciseOfferPropertyManagerService(
         OfferPropertyManagerService arg) {
       return makeExerciseCmd(CHOICE_OfferPropertyManagerService, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.propertymanager.service.Offer.ContractId>> exerciseOfferPropertyManagerService(
+    default Update<Exercised<daml.interface$.propertymanager.service.Offer.ContractId>> exerciseOfferPropertyManagerService(
         String user, Factory.ContractId apartmentPropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-        daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+        daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+        daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+        daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+        daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
       return exerciseOfferPropertyManagerService(new OfferPropertyManagerService(user,
           apartmentPropertyFactoryCid, landPropertyFactoryCid, residencePropertyFactoryCid,
           garagePropertyFactoryCid, warehousePropertyFactoryCid));
@@ -349,24 +349,24 @@ public final class Role {
       return exerciseTerminateIssuanceService(new TerminateIssuanceService(user));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.role.user.Role.ContractId>> exerciseApproveUserRole(
+    default Update<Exercised<daml.interface$.role.user.Role.ContractId>> exerciseApproveUserRole(
         ApproveUserRole arg) {
       return makeExerciseCmd(CHOICE_ApproveUserRole, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.role.user.Role.ContractId>> exerciseApproveUserRole(
-        daml.marketplace.interface$.role.user.Request.ContractId userRoleRequestCid, UserRoleKey userRole) {
+    default Update<Exercised<daml.interface$.role.user.Role.ContractId>> exerciseApproveUserRole(
+        daml.interface$.role.user.Request.ContractId userRoleRequestCid, UserRoleKey userRole) {
       return exerciseApproveUserRole(new ApproveUserRole(userRoleRequestCid, userRole));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.rolemanager.service.Service.ContractId>> exerciseApproveUserRoleManagerRequest(
+    default Update<Exercised<daml.interface$.rolemanager.service.Service.ContractId>> exerciseApproveUserRoleManagerRequest(
         ApproveUserRoleManagerRequest arg) {
       return makeExerciseCmd(CHOICE_ApproveUserRoleManagerRequest, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.rolemanager.service.Service.ContractId>> exerciseApproveUserRoleManagerRequest(
-        daml.marketplace.interface$.rolemanager.service.Request.ContractId userRoleManagerServiceRequestCid,
-        daml.marketplace.interface$.rolemanager.userrole.factory.Factory.ContractId userRoleFactoryCid) {
+    default Update<Exercised<daml.interface$.rolemanager.service.Service.ContractId>> exerciseApproveUserRoleManagerRequest(
+        daml.interface$.rolemanager.service.Request.ContractId userRoleManagerServiceRequestCid,
+        daml.interface$.rolemanager.userrole.factory.Factory.ContractId userRoleFactoryCid) {
       return exerciseApproveUserRoleManagerRequest(new ApproveUserRoleManagerRequest(userRoleManagerServiceRequestCid,
           userRoleFactoryCid));
     }
@@ -399,7 +399,7 @@ public final class Role {
   public static final class INTERFACE_ extends InterfaceCompanion<Role, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.role.operator.Role", Role.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.role.operator.Role", Role.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_OfferIssuanceService, CHOICE_ApproveUserRole,
             CHOICE_TerminateUserRoleManagerService, CHOICE_OfferUserRole,
             CHOICE_ApprovePropertyManagerRequest, CHOICE_TerminatePropertyManagerService,

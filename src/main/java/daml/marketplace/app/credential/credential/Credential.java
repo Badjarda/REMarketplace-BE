@@ -1,4 +1,4 @@
-package daml.marketplace.app.credential.credential;
+package daml.app.credential.credential;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -30,7 +30,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.types.Tuple2;
-import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -44,7 +44,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class Credential extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "App.Credential.Credential", "Credential");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.Credential.Credential", "Credential");
 
   public static final Choice<Credential, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -52,7 +52,7 @@ public final class Credential extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Credential, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.marketplace.app.credential.credential.Credential", TEMPLATE_ID,
+      new ContractCompanion.WithKey<>("daml.app.credential.credential.Credential", TEMPLATE_ID,
         ContractId::new, v -> Credential.templateValueDecoder().decode(v), Credential::fromJson,
         Contract::new, List.of(CHOICE_Archive), e -> Tuple2.<java.lang.String,
         java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty,
@@ -161,7 +161,7 @@ public final class Credential extends Template {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "roles": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder()));
+            case "roles": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(daml.interface$.common.types.UserRoleKey.jsonDecoder()));
             default: return null;
           }
         }
@@ -206,7 +206,7 @@ public final class Credential extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.credential.credential.Credential(%s, %s, %s)", this.operator,
+    return String.format("daml.app.credential.credential.Credential(%s, %s, %s)", this.operator,
         this.user, this.roles);
   }
 

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.service;
+package daml.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -13,7 +13,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserProfileKey;
+import daml.interface$.common.types.UserProfileKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class UpdateCellphoneNumber extends DamlRecord<UpdateCellphoneNumber> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final Optional<Long> newCellphoneNumber;
 
@@ -70,7 +70,7 @@ public class UpdateCellphoneNumber extends DamlRecord<UpdateCellphoneNumber> {
     return JsonLfDecoders.record(Arrays.asList("newCellphoneNumber", "userProfileKey"), name -> {
           switch (name) {
             case "newCellphoneNumber": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64));
-            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserProfileKey.jsonDecoder());
+            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserProfileKey.jsonDecoder());
             default: return null;
           }
         }
@@ -110,7 +110,7 @@ public class UpdateCellphoneNumber extends DamlRecord<UpdateCellphoneNumber> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.profilemanager.service.UpdateCellphoneNumber(%s, %s)",
+    return String.format("daml.interface$.profilemanager.service.UpdateCellphoneNumber(%s, %s)",
         this.newCellphoneNumber, this.userProfileKey);
   }
 }

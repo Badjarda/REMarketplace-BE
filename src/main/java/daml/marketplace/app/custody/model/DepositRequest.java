@@ -1,4 +1,4 @@
-package daml.marketplace.app.custody.model;
+package daml.app.custody.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -30,7 +30,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.marketplace.interface$.common.removable.Removable;
+import daml.interface$.common.removable.Removable;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -45,7 +45,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class DepositRequest extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "App.Custody.Model", "DepositRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.Custody.Model", "DepositRequest");
 
   public static final Choice<DepositRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -53,7 +53,7 @@ public final class DepositRequest extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithoutKey<Contract, ContractId, DepositRequest> COMPANION = 
-      new ContractCompanion.WithoutKey<>("daml.marketplace.app.custody.model.DepositRequest", TEMPLATE_ID,
+      new ContractCompanion.WithoutKey<>("daml.app.custody.model.DepositRequest", TEMPLATE_ID,
         ContractId::new, v -> DepositRequest.templateValueDecoder().decode(v),
         DepositRequest::fromJson, Contract::new, List.of(CHOICE_Archive));
 
@@ -200,7 +200,7 @@ public final class DepositRequest extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.custody.model.DepositRequest(%s, %s, %s, %s)", this.operator,
+    return String.format("daml.app.custody.model.DepositRequest(%s, %s, %s, %s)", this.operator,
         this.user, this.quantity, this.account);
   }
 
@@ -215,9 +215,9 @@ public final class DepositRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId toInterface(
-        daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId(this.contractId);
+    public daml.interface$.custody.choices.depositrequest.DepositRequest.ContractId toInterface(
+        daml.interface$.custody.choices.depositrequest.DepositRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.choices.depositrequest.DepositRequest.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -225,7 +225,7 @@ public final class DepositRequest extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId interfaceContractId) {
+        daml.interface$.custody.choices.depositrequest.DepositRequest.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -281,9 +281,9 @@ public final class DepositRequest extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.CreateAnd toInterface(
-        daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.custody.choices.depositrequest.DepositRequest.CreateAnd toInterface(
+        daml.interface$.custody.choices.depositrequest.DepositRequest.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.custody.choices.depositrequest.DepositRequest.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {

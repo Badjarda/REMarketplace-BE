@@ -1,4 +1,4 @@
-package daml.marketplace.app.propertymanager.model;
+package daml.app.propertymanager.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -35,10 +35,10 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.da.types.Tuple2;
+import daml.da.types.Tuple3;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.common.removable.Removable;
+import daml.interface$.common.removable.Removable;
 import java.lang.Boolean;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
@@ -56,21 +56,21 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class RequestCreateApartmentProperty extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "App.PropertyManager.Model", "RequestCreateApartmentProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.PropertyManager.Model", "RequestCreateApartmentProperty");
 
   public static final Choice<RequestCreateApartmentProperty, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
         daml.da.internal.template.Archive.valueDecoder().decode(value$), value$ ->
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
-  public static final ContractCompanion.WithKey<Contract, ContractId, RequestCreateApartmentProperty, Tuple2<String, Id>> COMPANION = 
+  public static final ContractCompanion.WithKey<Contract, ContractId, RequestCreateApartmentProperty, Tuple3<String, String, Id>> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.marketplace.app.propertymanager.model.RequestCreateApartmentProperty", TEMPLATE_ID,
+        "daml.app.propertymanager.model.RequestCreateApartmentProperty", TEMPLATE_ID,
         ContractId::new, v -> RequestCreateApartmentProperty.templateValueDecoder().decode(v),
         RequestCreateApartmentProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
-        e -> Tuple2.<java.lang.String,
+        e -> Tuple3.<java.lang.String, java.lang.String,
         daml.daml.finance.interface$.types.common.types.Id>valueDecoder(PrimitiveValueDecoders.fromParty,
-        Id.valueDecoder()).decode(e));
+        PrimitiveValueDecoders.fromParty, Id.valueDecoder()).decode(e));
 
   public final String operator;
 
@@ -156,7 +156,7 @@ public final class RequestCreateApartmentProperty extends Template {
    * @deprecated since Daml 2.3.0; use {@code byKey(key).exerciseArchive} instead
    */
   @Deprecated
-  public static Update<Exercised<Unit>> exerciseByKeyArchive(Tuple2<String, Id> key,
+  public static Update<Exercised<Unit>> exerciseByKeyArchive(Tuple3<String, String, Id> key,
       daml.da.internal.template.Archive arg) {
     return byKey(key).exerciseArchive(arg);
   }
@@ -165,7 +165,7 @@ public final class RequestCreateApartmentProperty extends Template {
    * @deprecated since Daml 2.3.0; use {@code byKey(key).exerciseArchive()} instead
    */
   @Deprecated
-  public static Update<Exercised<Unit>> exerciseByKeyArchive(Tuple2<String, Id> key) {
+  public static Update<Exercised<Unit>> exerciseByKeyArchive(Tuple3<String, String, Id> key) {
     return byKey(key).exerciseArchive();
   }
 
@@ -205,7 +205,7 @@ public final class RequestCreateApartmentProperty extends Template {
   }
 
   @Override
-  protected ContractCompanion.WithKey<Contract, ContractId, RequestCreateApartmentProperty, Tuple2<String, Id>> getCompanion(
+  protected ContractCompanion.WithKey<Contract, ContractId, RequestCreateApartmentProperty, Tuple3<String, String, Id>> getCompanion(
       ) {
     return COMPANION;
   }
@@ -405,7 +405,7 @@ public final class RequestCreateApartmentProperty extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.propertymanager.model.RequestCreateApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.propertymanager.model.RequestCreateApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.apartmentInstrument, this.apartmentPrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.grossArea, this.usableArea, this.bedrooms, this.bathrooms, this.floor,
@@ -418,8 +418,9 @@ public final class RequestCreateApartmentProperty extends Template {
       this to finish creating the command, or convert to an interface first with {@code toInterface}
       to invoke an interface {@code exercise} method.
    */
-  public static ByKey byKey(Tuple2<String, Id> key) {
-    return new ByKey(key.toValue(v$0 -> new Party(v$0), v$1 -> v$1.toValue()));
+  public static ByKey byKey(Tuple3<String, String, Id> key) {
+    return new ByKey(key.toValue(v$0 -> new Party(v$0), v$1 -> new Party(v$1),
+        v$2 -> v$2.toValue()));
   }
 
   public static final class ContractId extends com.daml.ledger.javaapi.data.codegen.ContractId<RequestCreateApartmentProperty> implements Exercises<ExerciseCommand> {
@@ -433,9 +434,9 @@ public final class RequestCreateApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId toInterface(
-        daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(this.contractId);
+    public daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId toInterface(
+        daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -443,7 +444,7 @@ public final class RequestCreateApartmentProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId interfaceContractId) {
+        daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -457,9 +458,9 @@ public final class RequestCreateApartmentProperty extends Template {
     }
   }
 
-  public static class Contract extends ContractWithKey<ContractId, RequestCreateApartmentProperty, Tuple2<String, Id>> {
+  public static class Contract extends ContractWithKey<ContractId, RequestCreateApartmentProperty, Tuple3<String, String, Id>> {
     public Contract(ContractId id, RequestCreateApartmentProperty data,
-        Optional<String> agreementText, Optional<Tuple2<String, Id>> key,
+        Optional<String> agreementText, Optional<Tuple3<String, String, Id>> key,
         java.util.Set<String> signatories, java.util.Set<String> observers) {
       super(id, data, agreementText, key, signatories, observers);
     }
@@ -471,7 +472,7 @@ public final class RequestCreateApartmentProperty extends Template {
     }
 
     public static Contract fromIdAndRecord(String contractId, DamlRecord record$,
-        Optional<String> agreementText, Optional<Tuple2<String, Id>> key,
+        Optional<String> agreementText, Optional<Tuple3<String, String, Id>> key,
         java.util.Set<String> signatories, java.util.Set<String> observers) {
       return COMPANION.fromIdAndRecord(contractId, record$, agreementText, key, signatories,
           observers);
@@ -503,9 +504,9 @@ public final class RequestCreateApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.CreateAnd toInterface(
-        daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.CreateAnd toInterface(
+        daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -524,9 +525,9 @@ public final class RequestCreateApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ByKey toInterface(
-        daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ByKey toInterface(
+        daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Removable.ByKey toInterface(Removable.INTERFACE_ interfaceCompanion) {

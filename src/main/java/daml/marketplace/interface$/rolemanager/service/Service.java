@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.service;
+package daml.interface$.rolemanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,15 +18,15 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Map;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.RoleManager.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.RoleManager.Service", "Service");
 
   public static final Choice<Service, UpdateUserRole, Unit> CHOICE_UpdateUserRole = 
       Choice.create("UpdateUserRole", value$ -> value$.toValue(), value$ ->
@@ -162,7 +162,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.rolemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.rolemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_UpdateUserRole, CHOICE_DeleteUserRole,
             CHOICE_AddPermissionToUserRole, CHOICE_Archive, CHOICE_RemovePermissionInUserRole,
             CHOICE_CreateUserRole));

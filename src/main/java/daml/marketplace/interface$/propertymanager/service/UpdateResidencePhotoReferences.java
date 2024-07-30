@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -13,7 +13,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdateResidencePhotoReferences extends DamlRecord<UpdateResidencePhotoReferences> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final List<String> newResidencePhotoReferences;
 
@@ -70,7 +70,7 @@ public class UpdateResidencePhotoReferences extends DamlRecord<UpdateResidencePh
     return JsonLfDecoders.record(Arrays.asList("newResidencePhotoReferences", "propertyKey"), name -> {
           switch (name) {
             case "newResidencePhotoReferences": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.list(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text));
-            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.PropertyKey.jsonDecoder());
+            case "propertyKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.PropertyKey.jsonDecoder());
             default: return null;
           }
         }
@@ -110,7 +110,7 @@ public class UpdateResidencePhotoReferences extends DamlRecord<UpdateResidencePh
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.service.UpdateResidencePhotoReferences(%s, %s)",
+    return String.format("daml.interface$.propertymanager.service.UpdateResidencePhotoReferences(%s, %s)",
         this.newResidencePhotoReferences, this.propertyKey);
   }
 }

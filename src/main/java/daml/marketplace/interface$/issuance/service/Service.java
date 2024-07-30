@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.issuance.service;
+package daml.interface$.issuance.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -22,16 +22,16 @@ import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.marketplace.interface$.issuance.choices.deissuerequest.DeIssueRequest;
-import daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest;
-import daml.marketplace.interface$.issuance.issuance.Issuance;
+import daml.interface$.issuance.choices.deissuerequest.DeIssueRequest;
+import daml.interface$.issuance.choices.issuerequest.IssueRequest;
+import daml.interface$.issuance.issuance.Issuance;
 import java.lang.Override;
 import java.lang.String;
 import java.math.BigDecimal;
 import java.util.List;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f", "Interface.Issuance.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Issuance.Service", "Service");
 
   public static final Choice<Service, RequestDeIssue, DeIssueRequest.ContractId> CHOICE_RequestDeIssue = 
       Choice.create("RequestDeIssue", value$ -> value$.toValue(), value$ ->
@@ -40,7 +40,7 @@ public final class Service {
 
   public static final Choice<Service, Issue, Tuple2<Issuance.ContractId, Holding.ContractId>> CHOICE_Issue = 
       Choice.create("Issue", value$ -> value$.toValue(), value$ -> Issue.valueDecoder()
-        .decode(value$), value$ -> Tuple2.<daml.marketplace.interface$.issuance.issuance.Issuance.ContractId,
+        .decode(value$), value$ -> Tuple2.<daml.interface$.issuance.issuance.Issuance.ContractId,
         daml.daml.finance.interface$.holding.holding.Holding.ContractId>valueDecoder(v$0 ->
           new Issuance.ContractId(v$0.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()),
         v$1 ->
@@ -158,7 +158,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.issuance.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.issuance.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Issue, CHOICE_Archive, CHOICE_RequestDeIssue,
             CHOICE_DeIssue, CHOICE_RequestIssue));
     }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.landproperty.landproperty;
+package daml.interface$.propertymanager.property.landproperty.landproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.interface$.propertymanager.property.common.LandType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SetLandType extends DamlRecord<SetLandType> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final LandType newLandType;
 
@@ -58,7 +58,7 @@ public class SetLandType extends DamlRecord<SetLandType> {
   public static JsonLfDecoder<SetLandType> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newLandType"), name -> {
           switch (name) {
-            case "newLandType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.common.LandType.jsonDecoder());
+            case "newLandType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.common.LandType.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class SetLandType extends DamlRecord<SetLandType> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.SetLandType(%s)",
+    return String.format("daml.interface$.propertymanager.property.landproperty.landproperty.SetLandType(%s)",
         this.newLandType);
   }
 }

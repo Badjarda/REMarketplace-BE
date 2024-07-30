@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.role.operator;
+package daml.interface$.role.operator;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class TerminateRole extends DamlRecord<TerminateRole> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public TerminateRole() {
   }
@@ -87,6 +87,6 @@ public class TerminateRole extends DamlRecord<TerminateRole> {
 
   @Override
   public String toString() {
-    return "daml.marketplace.interface$.role.operator.TerminateRole";
+    return "daml.interface$.role.operator.TerminateRole";
   }
 }

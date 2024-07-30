@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.service;
+package daml.interface$.profilemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,8 +11,8 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserProfileKey;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.common.types.UserProfileKey;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class UpdateNationality extends DamlRecord<UpdateNationality> {
-  public static final String _packageId = "8c6e592f5a33911df4c5cbfd683c840613ba80718b2d85f183257ac23495fc1f";
+  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
 
   public final Nationality newNationality;
 
@@ -65,8 +65,8 @@ public class UpdateNationality extends DamlRecord<UpdateNationality> {
   public static JsonLfDecoder<UpdateNationality> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("newNationality", "userProfileKey"), name -> {
           switch (name) {
-            case "newNationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
-            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.marketplace.interface$.common.types.UserProfileKey.jsonDecoder());
+            case "newNationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
+            case "userProfileKey": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, daml.interface$.common.types.UserProfileKey.jsonDecoder());
             default: return null;
           }
         }
@@ -106,7 +106,7 @@ public class UpdateNationality extends DamlRecord<UpdateNationality> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.profilemanager.service.UpdateNationality(%s, %s)",
+    return String.format("daml.interface$.profilemanager.service.UpdateNationality(%s, %s)",
         this.newNationality, this.userProfileKey);
   }
 }
