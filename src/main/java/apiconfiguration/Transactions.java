@@ -61,8 +61,10 @@ import business.useraccount.entity.repository.UserHoldingTransferableRepository;
 import business.userprofile.entity.model.ProfileServiceOffer;
 import business.userprofile.entity.model.UserProfile;
 import business.userprofile.entity.model.UserProfileCreateRequest;
+import business.userprofile.entity.model.UserProfileReferenceInterface;
 import business.userprofile.entity.repository.ProfileServiceOfferRepository;
 import business.userprofile.entity.repository.UserProfileCreateRequestRepository;
+import business.userprofile.entity.repository.UserProfileReferenceInterfaceRepository;
 import business.userprofile.entity.repository.UserProfileRepository;
 import business.userproperty.entity.model.ApartmentProperty;
 import business.userproperty.entity.model.GarageProperty;
@@ -138,6 +140,8 @@ public class Transactions {
   UserProfileFactoryRepository userProfileFactoryRepository;
   @Inject
   UserProfileManagerRepository userProfileManagerRepository;
+  @Inject
+  UserProfileReferenceInterfaceRepository userProfileReferenceInterfaceRepository;
   @Inject
   ProfileServiceOfferRepository profileServiceOfferRepository;
   @Inject
@@ -273,6 +277,9 @@ public class Transactions {
     } else if (templateId
         .equals(daml.marketplace.app.profilemanager.model.RequestCreateUserProfile.TEMPLATE_ID.toProto())) {
       handleRequestCreateUserProfileCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.profilemanager.userprofile.userprofile.Reference.TEMPLATE_ID.toProto())) {
+      handleUserProfileReferenceInterfaceCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.custody.model.OpenAccountRequest.TEMPLATE_ID.toProto())) {
       handleRequestCreateUserAccountCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.custody.model.CloseAccountRequest.TEMPLATE_ID.toProto())) {
@@ -392,6 +399,9 @@ public class Transactions {
     } else if (templateId
         .equals(daml.marketplace.app.profilemanager.model.RequestCreateUserProfile.TEMPLATE_ID.toProto())) {
       handleRequestCreateUserProfileArchivedEvent(contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.profilemanager.userprofile.userprofile.Reference.TEMPLATE_ID.toProto())) {
+      handleUserProfileReferenceInterfaceArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.custody.model.OpenAccountRequest.TEMPLATE_ID.toProto())) {
       handleRequestCreateUserAccountArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.custody.model.CloseAccountRequest.TEMPLATE_ID.toProto())) {
@@ -539,8 +549,13 @@ public class Transactions {
   private void handleRequestCreateUserProfileCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    System.out.println(operatorId+userId);
     userProfileCreateRequestRepository.persist(new UserProfileCreateRequest(operatorId+userId, contractId));
+  }
+
+  private void handleUserProfileReferenceInterfaceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    userProfileReferenceInterfaceRepository.persist(new UserProfileReferenceInterface(operatorId+userId, contractId));
   }
 
   private void handleRequestCreateUserAccountCreatedEvent(CreatedEvent event, String contractId) {
@@ -853,6 +868,10 @@ public class Transactions {
 
   private void handleUserProfileArchivedEvent(String contractId) {
     userProfileRepository.delete("contractId", contractId);
+  }
+
+  private void handleUserProfileReferenceInterfaceArchivedEvent(String contractId) {
+    userProfileReferenceInterfaceRepository.delete("contractId", contractId);
   }
 
   private void handleRoleUserRoleArchivedEvent(String contractId) {
