@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
+package daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -31,7 +31,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
-import daml.marketplace.interface$.common.types.PropertyKey;
+import daml.interface$.common.types.PropertyKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -45,7 +45,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class Reference extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.PropertyManager.Property.ApartmentProperty.ApartmentProperty", "Reference");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "Interface.PropertyManager.Property.ApartmentProperty.ApartmentProperty", "Reference");
 
   public static final Choice<Reference, SetCid, ContractId> CHOICE_SetCid = 
       Choice.create("SetCid", value$ -> value$.toValue(), value$ -> SetCid.valueDecoder()
@@ -69,7 +69,7 @@ public final class Reference extends Template {
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Reference, PropertyKey> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference",
+        "daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference",
         TEMPLATE_ID, ContractId::new, v -> Reference.templateValueDecoder().decode(v),
         Reference::fromJson, Contract::new, List.of(CHOICE_SetCid, CHOICE_SetObservers,
         CHOICE_Archive, CHOICE_GetCid), e -> PropertyKey.valueDecoder().decode(e));
@@ -282,8 +282,8 @@ public final class Reference extends Template {
   public static JsonLfDecoder<Reference> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("apartmentPropertyView", "cid", "observers"), name -> {
           switch (name) {
-            case "apartmentPropertyView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.View.jsonDecoder());
-            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId::new));
+            case "apartmentPropertyView": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.View.jsonDecoder());
+            case "cid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId::new));
             case "observers": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.genMap(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text, daml.da.set.types.Set.jsonDecoder(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party)));
             default: return null;
           }
@@ -329,7 +329,7 @@ public final class Reference extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference(%s, %s, %s)",
+    return String.format("daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference(%s, %s, %s)",
         this.apartmentPropertyView, this.cid, this.observers);
   }
 

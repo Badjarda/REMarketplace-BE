@@ -1,4 +1,4 @@
-package daml.marketplace.app.propertymanager.service;
+package daml.app.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -29,7 +29,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.types.Tuple2;
-import daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory;
+import daml.interface$.propertymanager.property.apartmentproperty.factory.Factory;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -43,7 +43,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class Service extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.PropertyManager.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "App.PropertyManager.Service", "Service");
 
   public static final Choice<Service, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -51,7 +51,7 @@ public final class Service extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, Service, Tuple2<String, String>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.marketplace.app.propertymanager.service.Service", TEMPLATE_ID,
+      new ContractCompanion.WithKey<>("daml.app.propertymanager.service.Service", TEMPLATE_ID,
         ContractId::new, v -> Service.templateValueDecoder().decode(v), Service::fromJson,
         Contract::new, List.of(CHOICE_Archive), e -> Tuple2.<java.lang.String,
         java.lang.String>valueDecoder(PrimitiveValueDecoders.fromParty,
@@ -63,19 +63,19 @@ public final class Service extends Template {
 
   public final Factory.ContractId apartmentPropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid;
 
-  public final daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid;
+  public final daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid;
 
   public Service(String operator, String user, Factory.ContractId apartmentPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+      daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+      daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+      daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+      daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
     this.operator = operator;
     this.user = user;
     this.apartmentPropertyFactoryCid = apartmentPropertyFactoryCid;
@@ -125,10 +125,10 @@ public final class Service extends Template {
 
   public static Update<Created<ContractId>> create(String operator, String user,
       Factory.ContractId apartmentPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
-      daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
+      daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid,
+      daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid,
+      daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid,
+      daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid) {
     return new Service(operator, user, apartmentPropertyFactoryCid, landPropertyFactoryCid,
         residencePropertyFactoryCid, garagePropertyFactoryCid,
         warehousePropertyFactoryCid).create();
@@ -177,14 +177,14 @@ public final class Service extends Template {
       String user = PrimitiveValueDecoders.fromParty.decode(fields$.get(1).getValue());
       Factory.ContractId apartmentPropertyFactoryCid =
           new Factory.ContractId(fields$.get(2).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected apartmentPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(fields$.get(3).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected landPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId(fields$.get(4).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected residencePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected garagePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
-      daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid =
-          new daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId(fields$.get(6).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected warehousePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId landPropertyFactoryCid =
+          new daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(fields$.get(3).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected landPropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId residencePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId(fields$.get(4).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected residencePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId garagePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected garagePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
+      daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId warehousePropertyFactoryCid =
+          new daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId(fields$.get(6).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected warehousePropertyFactoryCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       return new Service(operator, user, apartmentPropertyFactoryCid, landPropertyFactoryCid,
           residencePropertyFactoryCid, garagePropertyFactoryCid, warehousePropertyFactoryCid);
     } ;
@@ -195,11 +195,11 @@ public final class Service extends Template {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "user": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
-            case "apartmentPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory.ContractId::new));
-            case "landPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId::new));
-            case "residencePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId::new));
-            case "garagePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId::new));
-            case "warehousePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId::new));
+            case "apartmentPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(2, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.apartmentproperty.factory.Factory.ContractId::new));
+            case "landPropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(3, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.landproperty.factory.Factory.ContractId::new));
+            case "residencePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId::new));
+            case "garagePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId::new));
+            case "warehousePropertyFactoryCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId::new));
             default: return null;
           }
         }
@@ -254,7 +254,7 @@ public final class Service extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.propertymanager.service.Service(%s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.propertymanager.service.Service(%s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.apartmentPropertyFactoryCid, this.landPropertyFactoryCid,
         this.residencePropertyFactoryCid, this.garagePropertyFactoryCid,
         this.warehousePropertyFactoryCid);
@@ -280,23 +280,23 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.service.Service.ContractId toInterface(
-        daml.marketplace.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.service.Service.ContractId(this.contractId);
+    public daml.interface$.propertymanager.service.Service.ContractId toInterface(
+        daml.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.service.Service.ContractId(this.contractId);
     }
 
-    public daml.marketplace.interface$.base.service.Service.ContractId toInterface(
-        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.base.service.Service.ContractId(this.contractId);
+    public daml.interface$.base.service.Service.ContractId toInterface(
+        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.base.service.Service.ContractId(this.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.propertymanager.service.Service.ContractId interfaceContractId) {
+        daml.interface$.propertymanager.service.Service.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.base.service.Service.ContractId interfaceContractId) {
+        daml.interface$.base.service.Service.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -350,14 +350,14 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.service.Service.CreateAnd toInterface(
-        daml.marketplace.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.service.Service.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.propertymanager.service.Service.CreateAnd toInterface(
+        daml.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.service.Service.CreateAnd(COMPANION, this.createArguments);
     }
 
-    public daml.marketplace.interface$.base.service.Service.CreateAnd toInterface(
-        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.base.service.Service.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.base.service.Service.CreateAnd toInterface(
+        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.base.service.Service.CreateAnd(COMPANION, this.createArguments);
     }
   }
 
@@ -372,14 +372,14 @@ public final class Service extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.service.Service.ByKey toInterface(
-        daml.marketplace.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.service.Service.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.propertymanager.service.Service.ByKey toInterface(
+        daml.interface$.propertymanager.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.service.Service.ByKey(COMPANION, this.contractKey);
     }
 
-    public daml.marketplace.interface$.base.service.Service.ByKey toInterface(
-        daml.marketplace.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.base.service.Service.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.base.service.Service.ByKey toInterface(
+        daml.interface$.base.service.Service.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.base.service.Service.ByKey(COMPANION, this.contractKey);
     }
   }
 }

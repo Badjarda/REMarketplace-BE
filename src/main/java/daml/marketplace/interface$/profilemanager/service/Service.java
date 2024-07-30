@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.profilemanager.service;
+package daml.interface$.profilemanager.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -18,9 +18,9 @@ import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.marketplace.interface$.common.types.UserProfileKey;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.common.types.UserProfileKey;
+import daml.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Long;
 import java.lang.Override;
 import java.lang.String;
@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.ProfileManager.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "Interface.ProfileManager.Service", "Service");
 
   public static final Choice<Service, UpdateSocialSecurityId, Unit> CHOICE_UpdateSocialSecurityId = 
       Choice.create("UpdateSocialSecurityId", value$ -> value$.toValue(), value$ ->
@@ -106,10 +106,10 @@ public final class Service {
         CreateUserProfile.valueDecoder().decode(value$), value$ -> UserProfileKey.valueDecoder()
         .decode(value$));
 
-  public static final Choice<Service, RequestCreateUserProfile, daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId> CHOICE_RequestCreateUserProfile = 
+  public static final Choice<Service, RequestCreateUserProfile, daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId> CHOICE_RequestCreateUserProfile = 
       Choice.create("RequestCreateUserProfile", value$ -> value$.toValue(), value$ ->
         RequestCreateUserProfile.valueDecoder().decode(value$), value$ ->
-        new daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
+        new daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId(value$.asContractId().orElseThrow(() -> new IllegalArgumentException("Expected value$ to be of type com.daml.ledger.javaapi.data.ContractId")).getValue()));
 
   public static final Choice<Service, UpdateContactMail, Unit> CHOICE_UpdateContactMail = 
       Choice.create("UpdateContactMail", value$ -> value$.toValue(), value$ ->
@@ -271,16 +271,16 @@ public final class Service {
     }
 
     default Update<Exercised<UserProfileKey>> exerciseCreateUserProfile(
-        daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId createUserProfileRequest) {
+        daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId createUserProfileRequest) {
       return exerciseCreateUserProfile(new CreateUserProfile(createUserProfileRequest));
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId>> exerciseRequestCreateUserProfile(
+    default Update<Exercised<daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId>> exerciseRequestCreateUserProfile(
         RequestCreateUserProfile arg) {
       return makeExerciseCmd(CHOICE_RequestCreateUserProfile, arg);
     }
 
-    default Update<Exercised<daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId>> exerciseRequestCreateUserProfile(
+    default Update<Exercised<daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId>> exerciseRequestCreateUserProfile(
         Id id, String username, String firstName, String lastName, String fullName, String password,
         LocalDate birthday, Optional<Gender> gender, Nationality nationality, String contactMail,
         Optional<Long> cellphoneNumber, Long idNumber, Long taxId, Long socialSecurityId,
@@ -327,7 +327,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.profilemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.profilemanager.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_UpdateGender, CHOICE_UpdateContactMail,
             CHOICE_UpdateTaxId, CHOICE_CreateUserProfile, CHOICE_UpdateBirthday,
             CHOICE_UpdatePassword, CHOICE_UpdateFirstName, CHOICE_UpdateCellphoneNumber,

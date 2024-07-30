@@ -1,4 +1,4 @@
-package daml.marketplace.app.profilemanager.model;
+package daml.app.profilemanager.model;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -36,9 +36,9 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.da.types.Tuple3;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.marketplace.interface$.common.removable.Removable;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.interface$.common.removable.Removable;
+import daml.interface$.profilemanager.userprofile.common.Gender;
+import daml.interface$.profilemanager.userprofile.common.Nationality;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -54,7 +54,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class RequestCreateUserProfile extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.ProfileManager.Model", "RequestCreateUserProfile");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "App.ProfileManager.Model", "RequestCreateUserProfile");
 
   public static final Choice<RequestCreateUserProfile, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -62,7 +62,7 @@ public final class RequestCreateUserProfile extends Template {
         PrimitiveValueDecoders.fromUnit.decode(value$));
 
   public static final ContractCompanion.WithKey<Contract, ContractId, RequestCreateUserProfile, Tuple3<String, String, Id>> COMPANION = 
-      new ContractCompanion.WithKey<>("daml.marketplace.app.profilemanager.model.RequestCreateUserProfile",
+      new ContractCompanion.WithKey<>("daml.app.profilemanager.model.RequestCreateUserProfile",
         TEMPLATE_ID, ContractId::new,
         v -> RequestCreateUserProfile.templateValueDecoder().decode(v),
         RequestCreateUserProfile::fromJson, Contract::new, List.of(CHOICE_Archive),
@@ -274,8 +274,8 @@ public final class RequestCreateUserProfile extends Template {
             case "fullName": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "password": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "birthday": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(8, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.date);
-            case "gender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.marketplace.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
-            case "nationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.marketplace.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
+            case "gender": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(9, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(daml.interface$.profilemanager.userprofile.common.Gender.jsonDecoder()));
+            case "nationality": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(10, daml.interface$.profilemanager.userprofile.common.Nationality.jsonDecoder());
             case "contactMail": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "cellphoneNumber": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.optional(com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64));
             case "idNumber": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
@@ -358,7 +358,7 @@ public final class RequestCreateUserProfile extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.profilemanager.model.RequestCreateUserProfile(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.profilemanager.model.RequestCreateUserProfile(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.username, this.firstName, this.lastName,
         this.fullName, this.password, this.birthday, this.gender, this.nationality,
         this.contactMail, this.cellphoneNumber, this.idNumber, this.taxId, this.socialSecurityId,
@@ -386,9 +386,9 @@ public final class RequestCreateUserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId toInterface(
-        daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId(this.contractId);
+    public daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId toInterface(
+        daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId(this.contractId);
     }
 
     public Removable.ContractId toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -396,7 +396,7 @@ public final class RequestCreateUserProfile extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId interfaceContractId) {
+        daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -455,9 +455,9 @@ public final class RequestCreateUserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.CreateAnd toInterface(
-        daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.CreateAnd toInterface(
+        daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Removable.CreateAnd toInterface(Removable.INTERFACE_ interfaceCompanion) {
@@ -476,9 +476,9 @@ public final class RequestCreateUserProfile extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ByKey toInterface(
-        daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ByKey toInterface(
+        daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.profilemanager.choices.requestcreateuserprofile.RequestCreateUserProfile.ByKey(COMPANION, this.contractKey);
     }
 
     public Removable.ByKey toInterface(Removable.INTERFACE_ interfaceCompanion) {

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest;
+import daml.interface$.custody.choices.depositrequest.DepositRequest;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Deposit extends DamlRecord<Deposit> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public final DepositRequest.ContractId depositRequestCid;
 
@@ -59,7 +59,7 @@ public class Deposit extends DamlRecord<Deposit> {
   public static JsonLfDecoder<Deposit> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("depositRequestCid"), name -> {
           switch (name) {
-            case "depositRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId::new));
+            case "depositRequestCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.custody.choices.depositrequest.DepositRequest.ContractId::new));
             default: return null;
           }
         }
@@ -97,6 +97,6 @@ public class Deposit extends DamlRecord<Deposit> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.custody.service.Deposit(%s)", this.depositRequestCid);
+    return String.format("daml.interface$.custody.service.Deposit(%s)", this.depositRequestCid);
   }
 }

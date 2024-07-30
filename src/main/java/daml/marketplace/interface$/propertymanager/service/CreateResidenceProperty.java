@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.service;
+package daml.interface$.propertymanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty;
+import daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreateResidenceProperty extends DamlRecord<CreateResidenceProperty> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public final RequestCreateResidenceProperty.ContractId createResidencePropertyRequest;
 
@@ -61,7 +61,7 @@ public class CreateResidenceProperty extends DamlRecord<CreateResidenceProperty>
   public static JsonLfDecoder<CreateResidenceProperty> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("createResidencePropertyRequest"), name -> {
           switch (name) {
-            case "createResidencePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId::new));
+            case "createResidencePropertyRequest": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId::new));
             default: return null;
           }
         }
@@ -99,7 +99,7 @@ public class CreateResidenceProperty extends DamlRecord<CreateResidenceProperty>
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.service.CreateResidenceProperty(%s)",
+    return String.format("daml.interface$.propertymanager.service.CreateResidenceProperty(%s)",
         this.createResidencePropertyRequest);
   }
 }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
+package daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class GetWarehouseAdditionalInformation extends DamlRecord<GetWarehouseAdditionalInformation> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public GetWarehouseAdditionalInformation() {
   }
@@ -89,6 +89,6 @@ public class GetWarehouseAdditionalInformation extends DamlRecord<GetWarehouseAd
 
   @Override
   public String toString() {
-    return "daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.GetWarehouseAdditionalInformation";
+    return "daml.interface$.propertymanager.property.warehouseproperty.warehouseproperty.GetWarehouseAdditionalInformation";
   }
 }

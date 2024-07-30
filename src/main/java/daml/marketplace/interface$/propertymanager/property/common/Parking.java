@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.property.common;
+package daml.interface$.propertymanager.property.common;
 
 import com.daml.ledger.javaapi.data.Value;
 import com.daml.ledger.javaapi.data.codegen.DamlEnum;

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.userrole.factory;
+package daml.interface$.rolemanager.userrole.factory;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -17,16 +17,16 @@ import com.daml.ledger.javaapi.data.codegen.InterfaceCompanion;
 import com.daml.ledger.javaapi.data.codegen.PrimitiveValueDecoders;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.da.set.types.Set;
-import daml.marketplace.interface$.common.types.UserRoleKey;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
-import daml.marketplace.interface$.rolemanager.userrole.userrole.UserRole;
+import daml.interface$.common.types.UserRoleKey;
+import daml.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.rolemanager.userrole.userrole.UserRole;
 import java.lang.Override;
 import java.lang.String;
 import java.util.List;
 import java.util.Map;
 
 public final class Factory {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.RoleManager.UserRole.Factory", "Factory");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "Interface.RoleManager.UserRole.Factory", "Factory");
 
   public static final Choice<Factory, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -105,7 +105,7 @@ public final class Factory {
   public static final class INTERFACE_ extends InterfaceCompanion<Factory, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.rolemanager.userrole.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.rolemanager.userrole.factory.Factory", Factory.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive, CHOICE_Create));
     }
   }

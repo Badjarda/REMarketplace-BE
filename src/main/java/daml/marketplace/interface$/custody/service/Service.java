@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.service;
+package daml.interface$.custody.service;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -25,12 +25,12 @@ import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
 import daml.daml.finance.interface$.types.common.types.Quantity;
-import daml.marketplace.interface$.common.types.PropertyKey;
-import daml.marketplace.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
-import daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest;
-import daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
-import daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest;
-import daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest;
+import daml.interface$.common.types.PropertyKey;
+import daml.interface$.custody.choices.closeaccountrequest.CloseAccountRequest;
+import daml.interface$.custody.choices.depositrequest.DepositRequest;
+import daml.interface$.custody.choices.openaccountrequest.OpenAccountRequest;
+import daml.interface$.custody.choices.swaprequest.SwapRequest;
+import daml.interface$.custody.choices.withdrawrequest.WithdrawRequest;
 import java.lang.Override;
 import java.lang.String;
 import java.math.BigDecimal;
@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Custody.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "Interface.Custody.Service", "Service");
 
   public static final Choice<Service, AtomicSwapLand, Tuple2<Transferable.ContractId, Transferable.ContractId>> CHOICE_AtomicSwapLand = 
       Choice.create("AtomicSwapLand", value$ -> value$.toValue(), value$ ->
@@ -349,7 +349,7 @@ public final class Service {
   public static final class INTERFACE_ extends InterfaceCompanion<Service, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.custody.service.Service", Service.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Deposit, CHOICE_RequestDeposit,
             CHOICE_AtomicSwapWarehouse, CHOICE_Withdrawal, CHOICE_AtomicSwapResidence,
             CHOICE_Archive, CHOICE_RequestCloseAccount, CHOICE_AtomicSwapApartment,

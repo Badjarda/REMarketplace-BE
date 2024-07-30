@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.custody.choices.withdrawrequest;
+package daml.interface$.custody.choices.withdrawrequest;
 
 import com.daml.ledger.javaapi.data.ContractFilter;
 import com.daml.ledger.javaapi.data.CreateAndExerciseCommand;
@@ -21,7 +21,7 @@ import java.lang.String;
 import java.util.List;
 
 public final class WithdrawRequest {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "Interface.Custody.Choices.WithdrawRequest", "WithdrawRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "Interface.Custody.Choices.WithdrawRequest", "WithdrawRequest");
 
   public static final Choice<WithdrawRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -86,7 +86,7 @@ public final class WithdrawRequest {
   public static final class INTERFACE_ extends InterfaceCompanion<WithdrawRequest, ContractId, View> {
     INTERFACE_() {
       super(
-            "daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest", WithdrawRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
+            "daml.interface$.custody.choices.withdrawrequest.WithdrawRequest", WithdrawRequest.TEMPLATE_ID, ContractId::new, View.valueDecoder(),
             View::fromJson,List.of(CHOICE_Archive));
     }
   }

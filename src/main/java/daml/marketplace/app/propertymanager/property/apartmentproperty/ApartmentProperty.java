@@ -1,4 +1,4 @@
-package daml.marketplace.app.propertymanager.property.apartmentproperty;
+package daml.app.propertymanager.property.apartmentproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -56,7 +56,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class ApartmentProperty extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4", "App.PropertyManager.Property.ApartmentProperty", "ApartmentProperty");
+  public static final Identifier TEMPLATE_ID = new Identifier("f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079", "App.PropertyManager.Property.ApartmentProperty", "ApartmentProperty");
 
   public static final Choice<ApartmentProperty, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -65,7 +65,7 @@ public final class ApartmentProperty extends Template {
 
   public static final ContractCompanion.WithKey<Contract, ContractId, ApartmentProperty, Tuple3<String, String, Id>> COMPANION = 
       new ContractCompanion.WithKey<>(
-        "daml.marketplace.app.propertymanager.property.apartmentproperty.ApartmentProperty", TEMPLATE_ID,
+        "daml.app.propertymanager.property.apartmentproperty.ApartmentProperty", TEMPLATE_ID,
         ContractId::new, v -> ApartmentProperty.templateValueDecoder().decode(v),
         ApartmentProperty::fromJson, Contract::new, List.of(CHOICE_Archive),
         e -> Tuple3.<java.lang.String, java.lang.String,
@@ -399,7 +399,7 @@ public final class ApartmentProperty extends Template {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.propertymanager.property.apartmentproperty.ApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.app.propertymanager.property.apartmentproperty.ApartmentProperty(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.instrument, this.apartmentPrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.grossArea, this.usableArea, this.bedrooms, this.bathrooms, this.floor,
@@ -428,9 +428,9 @@ public final class ApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId toInterface(
-        daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId(this.contractId);
+    public daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId toInterface(
+        daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId(this.contractId);
     }
 
     public Disclosure.ContractId toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -438,7 +438,7 @@ public final class ApartmentProperty extends Template {
     }
 
     public static ContractId unsafeFromInterface(
-        daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId interfaceContractId) {
+        daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ContractId interfaceContractId) {
       return new ContractId(interfaceContractId.contractId);
     }
 
@@ -497,9 +497,9 @@ public final class ApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.CreateAnd toInterface(
-        daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.CreateAnd(COMPANION, this.createArguments);
+    public daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.CreateAnd toInterface(
+        daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.CreateAnd(COMPANION, this.createArguments);
     }
 
     public Disclosure.CreateAnd toInterface(Disclosure.INTERFACE_ interfaceCompanion) {
@@ -518,9 +518,9 @@ public final class ApartmentProperty extends Template {
       return COMPANION;
     }
 
-    public daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ByKey toInterface(
-        daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
-      return new daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ByKey(COMPANION, this.contractKey);
+    public daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ByKey toInterface(
+        daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.INTERFACE_ interfaceCompanion) {
+      return new daml.interface$.propertymanager.property.apartmentproperty.apartmentproperty.ApartmentProperty.ByKey(COMPANION, this.contractKey);
     }
 
     public Disclosure.ByKey toInterface(Disclosure.INTERFACE_ interfaceCompanion) {

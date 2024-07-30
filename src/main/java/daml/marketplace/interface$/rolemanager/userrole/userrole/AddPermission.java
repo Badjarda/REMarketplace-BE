@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.userrole.userrole;
+package daml.interface$.rolemanager.userrole.userrole;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.interface$.rolemanager.userrole.permission.Permission;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AddPermission extends DamlRecord<AddPermission> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public final Permission permission;
 
@@ -58,7 +58,7 @@ public class AddPermission extends DamlRecord<AddPermission> {
   public static JsonLfDecoder<AddPermission> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("permission"), name -> {
           switch (name) {
-            case "permission": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.rolemanager.userrole.permission.Permission.jsonDecoder());
+            case "permission": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.rolemanager.userrole.permission.Permission.jsonDecoder());
             default: return null;
           }
         }
@@ -96,7 +96,7 @@ public class AddPermission extends DamlRecord<AddPermission> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.rolemanager.userrole.userrole.AddPermission(%s)",
+    return String.format("daml.interface$.rolemanager.userrole.userrole.AddPermission(%s)",
         this.permission);
   }
 }

@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty;
+package daml.interface$.propertymanager.choices.requestcreateresidenceproperty;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -20,9 +20,9 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.InstrumentKey;
-import daml.marketplace.interface$.propertymanager.property.common.Orientation;
-import daml.marketplace.interface$.propertymanager.property.common.Parking;
-import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
+import daml.interface$.propertymanager.property.common.Orientation;
+import daml.interface$.propertymanager.property.common.Parking;
+import daml.interface$.propertymanager.property.common.ResidenceType;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Long;
@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class View extends DamlRecord<View> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public final String operator;
 
@@ -221,11 +221,11 @@ public class View extends DamlRecord<View> {
             case "bedrooms": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(11, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
             case "bathrooms": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(12, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
             case "floors": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(13, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.int64);
-            case "residenceType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, daml.marketplace.interface$.propertymanager.property.common.ResidenceType.jsonDecoder());
+            case "residenceType": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(14, daml.interface$.propertymanager.property.common.ResidenceType.jsonDecoder());
             case "backyard": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(15, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
-            case "parking": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, daml.marketplace.interface$.propertymanager.property.common.Parking.jsonDecoder());
+            case "parking": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(16, daml.interface$.propertymanager.property.common.Parking.jsonDecoder());
             case "buildDate": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(17, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.date);
-            case "orientation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(18, daml.marketplace.interface$.propertymanager.property.common.Orientation.jsonDecoder());
+            case "orientation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(18, daml.interface$.propertymanager.property.common.Orientation.jsonDecoder());
             case "installedEquipment": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(19, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "additionalInformation": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(20, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
             case "description": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(21, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.text);
@@ -318,7 +318,7 @@ public class View extends DamlRecord<View> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.View(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.interface$.propertymanager.choices.requestcreateresidenceproperty.View(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.user, this.id, this.residenceInstrument, this.residencePrice,
         this.propertyAddress, this.propertyPostalCode, this.propertyDistrict, this.propertyCounty,
         this.grossArea, this.usableArea, this.bedrooms, this.bathrooms, this.floors,

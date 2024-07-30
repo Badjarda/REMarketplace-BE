@@ -1,4 +1,4 @@
-package daml.marketplace.interface$.rolemanager.service;
+package daml.interface$.rolemanager.service;
 
 import static com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders.apply;
 
@@ -11,7 +11,7 @@ import com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoder;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfEncoders;
 import com.daml.ledger.javaapi.data.codegen.json.JsonLfReader;
-import daml.marketplace.interface$.common.types.UserRoleKey;
+import daml.interface$.common.types.UserRoleKey;
 import java.lang.Deprecated;
 import java.lang.IllegalArgumentException;
 import java.lang.Object;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class DeleteUserRole extends DamlRecord<DeleteUserRole> {
-  public static final String _packageId = "e09e7a18c217e8002e4a374c04915d394e5120e173ac8f1ee6decbc2d8c3c8b4";
+  public static final String _packageId = "f8883c36e16696951f0e9312ee45dacca92b05226daf215a5159b95d1b1c4079";
 
   public final UserRoleKey userRole;
 
@@ -58,7 +58,7 @@ public class DeleteUserRole extends DamlRecord<DeleteUserRole> {
   public static JsonLfDecoder<DeleteUserRole> jsonDecoder() {
     return JsonLfDecoders.record(Arrays.asList("userRole"), name -> {
           switch (name) {
-            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.marketplace.interface$.common.types.UserRoleKey.jsonDecoder());
+            case "userRole": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, daml.interface$.common.types.UserRoleKey.jsonDecoder());
             default: return null;
           }
         }
@@ -96,6 +96,6 @@ public class DeleteUserRole extends DamlRecord<DeleteUserRole> {
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.rolemanager.service.DeleteUserRole(%s)", this.userRole);
+    return String.format("daml.interface$.rolemanager.service.DeleteUserRole(%s)", this.userRole);
   }
 }
