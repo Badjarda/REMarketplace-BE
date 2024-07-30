@@ -537,8 +537,10 @@ public class Transactions {
   }
 
   private void handleRequestCreateUserProfileCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    userProfileCreateRequestRepository.persist(new UserProfileCreateRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    System.out.println(operatorId+userId);
+    userProfileCreateRequestRepository.persist(new UserProfileCreateRequest(operatorId+userId, contractId));
   }
 
   private void handleRequestCreateUserAccountCreatedEvent(CreatedEvent event, String contractId) {
