@@ -242,7 +242,7 @@ public class UserProfileService {
     } catch (Exception e) {
       return "Error Updating User Profile: " + e.getMessage();
     }
-    return "Success Updating User Profile:\n";
+    return "Success Updating User Profile!\n";
   }
 
 }
