@@ -3,6 +3,7 @@ package business.workflow.boundary;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import apiconfiguration.Transactions;
+import business.custody.service.AccountManagerService;
 import business.operator.service.OperatorService;
 import business.party.service.PartyService;
 import business.profilemanager.service.ProfileManagerService;
 import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
+import business.useraccount.service.UserAccountService;
 import business.userprofile.dto.ProfileServiceOfferDTO;
 import business.userprofile.dto.UserProfileDTO;
 import business.userprofile.service.UserProfileService;
@@ -52,6 +55,12 @@ public class WorkflowResourceTest {
 
     @Inject
     UserProfileService userProfileService;
+
+    @Inject
+    AccountManagerService accountManagerService;
+
+    @Inject
+    UserAccountService userAccountService;
 
     @Test
     public void testWorkflow() {
@@ -143,7 +152,37 @@ public class WorkflowResourceTest {
         System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
         System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
 
-        //Modify Profile
+        // Modify Profile
         System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
+    
+        // Create Account Factories
+        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, "CustodyService"+uuid2));
+        System.out.println(accountManagerService.createCustodyService(uuid1, uuid3, "CustodyService"+uuid3));
+        
+        /**
+        // Offer Account Services
+        System.out.println(operatorService.offerCustodianService(uuid1, uuid2));
+        System.out.println(operatorService.offerCustodianService(uuid1, uuid3));
+    
+        // Accept Account Services
+        System.out.println(userAccountService.acceptCustodyService(uuid1, uuid2));
+        System.out.println(userAccountService.acceptCustodyService(uuid1, uuid3));
+
+        // Create Account Open Requests
+        System.out.println(userAccountService.requestOpenAccount(uuid1, uuid2, "Account"+uuid2, "My Daml.Finance Account"));
+        System.out.println(userAccountService.requestOpenAccount(uuid1, uuid3, "Account"+uuid3, "My Daml.Finance Account"));
+
+        // Accept Account Open Requests
+        System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid2));
+        System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid3));
+
+        // Create Deposit Currency Requests
+        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid2, "EUR", new BigDecimal("200000.0")));
+        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "USD", new BigDecimal("150000.0")));
+
+        // Accept Deposit Currency Requests
+        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid2));
+        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3));
+        */
     }
 }
