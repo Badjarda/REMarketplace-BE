@@ -559,8 +559,9 @@ public class Transactions {
   }
 
   private void handleRequestCreateUserAccountCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    userAccountCreateRequestRepository.persist(new UserAccountCreateRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    userAccountCreateRequestRepository.persist(new UserAccountCreateRequest(operatorId+userId, contractId));
   }
 
   private void handleRequestCloseUserAccountCreatedEvent(CreatedEvent event, String contractId) {
@@ -699,13 +700,13 @@ public class Transactions {
   }
 
   private void handleAccountFactoryCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    accountFactoryRepository.persist(new AccountFactory(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    accountFactoryRepository.persist(new AccountFactory(operatorId, contractId));
   }
 
   private void handleHoldingFactoryCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    holdingFactoryRepository.persist(new HoldingFactory(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    holdingFactoryRepository.persist(new HoldingFactory(operatorId, contractId));
   }
 
   private void handleSettlementFactoryCreatedEvent(CreatedEvent event, String contractId) {
@@ -724,8 +725,9 @@ public class Transactions {
   }
 
   private void handleCustodyServiceOfferCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    custodyServiceOfferRepository.persist(new CustodyServiceOffer(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    custodyServiceOfferRepository.persist(new CustodyServiceOffer(operatorId+userId, contractId));
   }
 
   private void handleIssuanceServiceOfferCreatedEvent(CreatedEvent event, String contractId) {

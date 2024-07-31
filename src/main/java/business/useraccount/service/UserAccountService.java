@@ -137,7 +137,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestOpenAccount(userAccountId, description, controllers, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Open Account : " + e.getMessage();

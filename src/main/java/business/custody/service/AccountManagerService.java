@@ -5,12 +5,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Command;
 import com.daml.ledger.javaapi.data.Unit;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
+import business.custody.entity.model.AccountFactory;
+import business.custody.entity.model.HoldingFactory;
+import business.custody.entity.model.SettlementFactory;
+import business.custody.entity.repository.AccountFactoryRepository;
 import business.custody.entity.repository.HoldingFactoryRepository;
 import business.custody.entity.repository.RouteProviderRepository;
 import business.custody.entity.repository.SettlementFactoryRepository;
@@ -42,6 +47,9 @@ public class AccountManagerService {
 
     @Inject
     RouteProviderRepository routeProviderRepository;
+
+    @Inject
+    AccountFactoryRepository accountFactoryRepository;
 
     public static final String APP_ID = "OperatorId";
 
@@ -80,14 +88,16 @@ public class AccountManagerService {
         return "Created Account Factory!\n";
     }
 
-    public String createAccountFactory(String operatorParty,
-            Map<String, Set<String>> observersMap) {
+    public String createAccountFactory(String operatorParty, Map<String, Set<String>> observersMap) {
         try {
-            List<Command> accFactoryCommands = daml.daml.finance.account.account.Factory
+            AccountFactory accFactory = accountFactoryRepository.findById(operatorParty);
+            if (accFactory == null) {
+                List<Command> accFactoryCommands = daml.daml.finance.account.account.Factory
                     .create(operatorParty, observersMap)
                     .commands();
-            Transaction transaction = transactionService.submitTransaction(accFactoryCommands, Arrays.asList(operatorParty), null);
-            transactionService.handleTransaction(transaction);
+                Transaction transaction = transactionService.submitTransaction(accFactoryCommands, Arrays.asList(operatorParty), null);
+                transactionService.handleTransaction(transaction);
+            }
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Account Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -95,15 +105,19 @@ public class AccountManagerService {
         }
         return "Created Account Factory!\n";
     }
+    
 
     public String createHoldingFactory(String operatorParty, Id holdingId,
             Map<String, Set<String>> observersMap) {
         try {
-            List<Command> holdingFacCommands = daml.daml.finance.holding.factory.Factory
-                    .create(operatorParty, holdingId, observersMap)
-                    .commands();
-            Transaction transaction = transactionService.submitTransaction(holdingFacCommands, Arrays.asList(operatorParty), null);
-            transactionService.handleTransaction(transaction);
+            HoldingFactory holdingFactory = holdingFactoryRepository.findById(operatorParty);
+            if(holdingFactory==null){
+                List<Command> holdingFacCommands = daml.daml.finance.holding.factory.Factory
+                        .create(operatorParty, holdingId, observersMap)
+                        .commands();
+                Transaction transaction = transactionService.submitTransaction(holdingFacCommands, Arrays.asList(operatorParty), null);
+                transactionService.handleTransaction(transaction);
+            }
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Holding Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -115,12 +129,15 @@ public class AccountManagerService {
     public String createSettlementFactory(String operatorParty,
             Set<String> observers) {
         try {
-            List<Command> settlementFactoryCommands = daml.daml.finance.settlement.factory.Factory
-                    .create(operatorParty, observers)
-                    .commands();
-            Transaction transaction = transactionService.submitTransaction(settlementFactoryCommands,
-                    Arrays.asList(operatorParty), null);
-            transactionService.handleTransaction(transaction);
+            SettlementFactory settlementFactory = settlementFactoryRepository.findById(operatorParty);
+            if(settlementFactory == null){
+                List<Command> settlementFactoryCommands = daml.daml.finance.settlement.factory.Factory
+                        .create(operatorParty, observers)
+                        .commands();
+                Transaction transaction = transactionService.submitTransaction(settlementFactoryCommands,
+                        Arrays.asList(operatorParty), null);
+                transactionService.handleTransaction(transaction);
+            }
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error creating Settlement Factory : " + e.getMessage() + "\n";
         } catch (Exception e) {

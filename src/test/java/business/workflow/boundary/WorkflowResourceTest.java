@@ -156,22 +156,21 @@ public class WorkflowResourceTest {
         System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
     
         // Create Account Factories
-        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, "CustodyService"+uuid2));
-        System.out.println(accountManagerService.createCustodyService(uuid1, uuid3, "CustodyService"+uuid3));
+        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, "CustodyService"+uuid1));
         
-        /**
+        
         // Offer Account Services
         System.out.println(operatorService.offerCustodianService(uuid1, uuid2));
         System.out.println(operatorService.offerCustodianService(uuid1, uuid3));
-    
+        
         // Accept Account Services
         System.out.println(userAccountService.acceptCustodyService(uuid1, uuid2));
         System.out.println(userAccountService.acceptCustodyService(uuid1, uuid3));
-
+        
         // Create Account Open Requests
         System.out.println(userAccountService.requestOpenAccount(uuid1, uuid2, "Account"+uuid2, "My Daml.Finance Account"));
         System.out.println(userAccountService.requestOpenAccount(uuid1, uuid3, "Account"+uuid3, "My Daml.Finance Account"));
-
+        /**
         // Accept Account Open Requests
         System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid2));
         System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid3));
