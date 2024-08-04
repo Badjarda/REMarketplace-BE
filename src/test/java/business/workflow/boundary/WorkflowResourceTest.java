@@ -158,7 +158,6 @@ public class WorkflowResourceTest {
         // Create Account Factories
         System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, "CustodyService"+uuid1));
         
-        
         // Offer Account Services
         System.out.println(operatorService.offerCustodianService(uuid1, uuid2));
         System.out.println(operatorService.offerCustodianService(uuid1, uuid3));
@@ -170,11 +169,11 @@ public class WorkflowResourceTest {
         // Create Account Open Requests
         System.out.println(userAccountService.requestOpenAccount(uuid1, uuid2, "Account"+uuid2, "My Daml.Finance Account"));
         System.out.println(userAccountService.requestOpenAccount(uuid1, uuid3, "Account"+uuid3, "My Daml.Finance Account"));
-        /**
+        
         // Accept Account Open Requests
         System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid2));
         System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid3));
-
+        
         // Create Deposit Currency Requests
         System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid2, "EUR", new BigDecimal("200000.0")));
         System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "USD", new BigDecimal("150000.0")));
@@ -182,6 +181,5 @@ public class WorkflowResourceTest {
         // Accept Deposit Currency Requests
         System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid2));
         System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3));
-        */
     }
 }

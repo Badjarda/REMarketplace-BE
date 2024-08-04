@@ -43,17 +43,21 @@ import business.rolemanager.entity.model.UserRoleManager;
 import business.rolemanager.entity.repository.UserRoleFactoryRepository;
 import business.rolemanager.entity.repository.UserRoleManagerRepository;
 import business.useraccount.entity.model.CustodyServiceOffer;
+import business.useraccount.entity.model.HoldingFactoryInterface;
 import business.useraccount.entity.model.UserAccount;
 import business.useraccount.entity.model.UserAccountCloseRequest;
 import business.useraccount.entity.model.UserAccountCreateRequest;
 import business.useraccount.entity.model.UserAccountDepositRequest;
+import business.useraccount.entity.model.UserAccountInterface;
 import business.useraccount.entity.model.UserAccountWithdrawRequest;
 import business.useraccount.entity.model.UserHoldingFungible;
 import business.useraccount.entity.model.UserHoldingTransferable;
 import business.useraccount.entity.repository.CustodyServiceOfferRepository;
+import business.useraccount.entity.repository.HoldingFactoryInterfaceRepository;
 import business.useraccount.entity.repository.UserAccountCloseRequestRepository;
 import business.useraccount.entity.repository.UserAccountCreateRequestRepository;
 import business.useraccount.entity.repository.UserAccountDepositRequestRepository;
+import business.useraccount.entity.repository.UserAccountInterfaceRepository;
 import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserAccountWithdrawRequestRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
@@ -88,10 +92,12 @@ import business.userproperty.entity.repository.RequestCreateResidenceRepository;
 import business.userproperty.entity.repository.RequestCreateWarehouseRepository;
 import business.userproperty.entity.repository.ResidencePropertyRepository;
 import business.userproperty.entity.repository.WarehousePropertyRepository;
+import business.userrole.entity.model.CredentialApp;
 import business.userrole.entity.model.UserRole;
 import business.userrole.entity.model.UserRoleApp;
 import business.userrole.entity.model.UserRoleInterface;
 import business.userrole.entity.model.UserRoleOffer;
+import business.userrole.entity.repository.CredentialAppRepository;
 import business.userrole.entity.repository.UserRoleAppRepository;
 import business.userrole.entity.repository.UserRoleInterfaceRepository;
 import business.userrole.entity.repository.UserRoleOfferRepository;
@@ -137,6 +143,8 @@ public class Transactions {
   @Inject
   UserRoleManagerRepository userRoleManagerRepository;
   @Inject
+  CredentialAppRepository credentialAppRepository;
+  @Inject
   UserProfileFactoryRepository userProfileFactoryRepository;
   @Inject
   UserProfileManagerRepository userProfileManagerRepository;
@@ -170,6 +178,8 @@ public class Transactions {
   AccountFactoryRepository accountFactoryRepository;
   @Inject
   HoldingFactoryRepository holdingFactoryRepository;
+  @Inject
+  HoldingFactoryInterfaceRepository holdingFactoryInterfaceRepository;
   @Inject
   SettlementFactoryRepository settlementFactoryRepository;
   @Inject
@@ -212,6 +222,8 @@ public class Transactions {
   UserAccountWithdrawRequestRepository userAccountWithdrawRequestRepository;
   @Inject
   UserAccountRepository userAccountRepository;
+  @Inject
+  UserAccountInterfaceRepository userAccountInterfaceRepository;
   @Inject
   UserProfileRepository userProfileRepository;
   @Inject
@@ -258,6 +270,8 @@ public class Transactions {
     String contractId = created.getContractId();
     if (templateId.equals(daml.marketplace.app.role.operator.Role.TEMPLATE_ID.toProto())) {
       handleOperatorRoleCreatedEvent(created, contractId);
+    } else if (templateId.equals(daml.marketplace.app.credential.credential.Credential.TEMPLATE_ID.toProto())) {
+      handleCredentialAppCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.rolemanager.userrole.userrole.Factory.TEMPLATE_ID.toProto())) {
       handleUserRoleFactoryCreatedEvent(created, contractId);
     } else if (templateId
@@ -294,6 +308,8 @@ public class Transactions {
       handleRequestDeIssueCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.account.account.Account.TEMPLATE_ID.toProto())) {
       handleUserAccountCreatedEvent(created, contractId);
+    } else if (templateId.equals(daml.daml.finance.interface$.account.account.Reference.TEMPLATE_ID.toProto())) {
+      handleUserAccountInterfaceCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.marketplace.app.profilemanager.userprofile.UserProfile.TEMPLATE_ID.toProto())) {
       handleUserProfileCreatedEvent(created, contractId);
     } else if (templateId
@@ -345,6 +361,8 @@ public class Transactions {
       handleAccountFactoryCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.holding.factory.Factory.TEMPLATE_ID.toProto())) {
       handleHoldingFactoryCreatedEvent(created, contractId);
+    } else if (templateId.equals(daml.daml.finance.interface$.holding.factory.Reference.TEMPLATE_ID.toProto())) {
+      handleHoldingFactoryInterfaceCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.settlement.factory.Factory.TEMPLATE_ID.toProto())) {
       handleSettlementFactoryCreatedEvent(created, contractId);
     } else if (templateId.equals(
@@ -383,6 +401,8 @@ public class Transactions {
     String contractId = archived.getContractId();
     if (templateId.equals(Role.TEMPLATE_ID.toProto())) {
       handleOperatorRoleArchivedEvent(contractId);
+    } else if (templateId.equals(daml.marketplace.app.credential.credential.Credential.TEMPLATE_ID.toProto())) {
+      handleCredentialAppArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.rolemanager.userrole.userrole.Factory.TEMPLATE_ID.toProto())) {
       handleUserRoleFactoryArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.profilemanager.userprofile.Factory.TEMPLATE_ID.toProto())) {
@@ -431,6 +451,8 @@ public class Transactions {
       handleRequestCreateWarehouseArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.account.account.Account.TEMPLATE_ID.toProto())) {
       handleUserAccountArchivedEvent(contractId);
+    } else if (templateId.equals(daml.daml.finance.interface$.account.account.Reference.TEMPLATE_ID.toProto())) {
+      handleUserAccountInterfaceArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.profilemanager.userprofile.UserProfile.TEMPLATE_ID.toProto())) {
       handleUserProfileArchivedEvent(contractId);
     } else if (templateId.equals(daml.marketplace.app.role.user.Offer.TEMPLATE_ID.toProto())) {
@@ -469,6 +491,8 @@ public class Transactions {
       handleAccountFactoryArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.holding.factory.Factory.TEMPLATE_ID.toProto())) {
       handleHoldingFactoryArchivedEvent(contractId);
+    } else if (templateId.equals(daml.daml.finance.interface$.holding.factory.Reference.TEMPLATE_ID.toProto())) {
+      handleHoldingFactoryInterfaceArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.settlement.factory.Factory.TEMPLATE_ID.toProto())) {
       handleSettlementFactoryArchivedEvent(contractId);
     } else if (templateId.equals(
@@ -507,6 +531,12 @@ public class Transactions {
   private void handleOperatorRoleCreatedEvent(CreatedEvent event, String contractId) {
     String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
     operatorRepository.persist(new Operator(partyId, contractId));
+  }
+
+  private void handleCredentialAppCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    credentialAppRepository.persist(new CredentialApp(operatorId+userId, contractId));
   }
 
   private void handleUserRoleFactoryCreatedEvent(CreatedEvent event, String contractId) {
@@ -570,8 +600,9 @@ public class Transactions {
   }
 
   private void handleRequestDepositCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    userAccountDepositRequestRepository.persist(new UserAccountDepositRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    userAccountDepositRequestRepository.persist(new UserAccountDepositRequest(operatorId + userId, contractId));
   }
 
   private void handleRequestWithdrawCreatedEvent(CreatedEvent event, String contractId) {
@@ -594,6 +625,12 @@ public class Transactions {
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String accountId = event.getCreateArguments().getFields(2).getValue().getParty();
     userAccountRepository.persist(new UserAccount(operatorId + userId, contractId, accountId));
+  }
+
+  private void handleUserAccountInterfaceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
+    userAccountInterfaceRepository.persist(new UserAccountInterface(operatorId + userId, contractId));
   }
 
   private void handleUserProfileCreatedEvent(CreatedEvent event, String contractId) {
@@ -709,6 +746,11 @@ public class Transactions {
     holdingFactoryRepository.persist(new HoldingFactory(operatorId, contractId));
   }
 
+  private void handleHoldingFactoryInterfaceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    holdingFactoryInterfaceRepository.persist(new HoldingFactoryInterface(operatorId, contractId));
+  }
+
   private void handleSettlementFactoryCreatedEvent(CreatedEvent event, String contractId) {
     String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
     settlementFactoryRepository.persist(new SettlementFactory(partyId, contractId));
@@ -782,6 +824,10 @@ public class Transactions {
 
   private void handleOperatorRoleArchivedEvent(String contractId) {
     operatorRepository.delete("contractId", contractId);
+  }
+
+  private void handleCredentialAppArchivedEvent(String contractId) {
+    credentialAppRepository.delete("contractId", contractId);
   }
 
   private void handleUserRoleFactoryArchivedEvent(String contractId) {
@@ -868,6 +914,10 @@ public class Transactions {
     userAccountRepository.delete("contractId", contractId);
   }
 
+  private void handleUserAccountInterfaceArchivedEvent(String contractId) {
+    userAccountInterfaceRepository.delete("contractId", contractId);
+  }
+
   private void handleUserProfileArchivedEvent(String contractId) {
     userProfileRepository.delete("contractId", contractId);
   }
@@ -922,6 +972,10 @@ public class Transactions {
 
   private void handleHoldingFactoryArchivedEvent(String contractId) {
     holdingFactoryRepository.delete("contractId", contractId);
+  }
+
+  private void handleHoldingFactoryInterfaceArchivedEvent(String contractId) {
+    holdingFactoryInterfaceRepository.delete("contractId", contractId);
   }
 
   private void handleSettlementFactoryArchivedEvent(String contractId) {

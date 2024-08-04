@@ -243,7 +243,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestDeposit(quantity, accountKey)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Deposit Currency Instrument : " + e.getMessage();
