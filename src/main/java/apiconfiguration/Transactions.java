@@ -734,8 +734,9 @@ public class Transactions {
   }
 
   private void handlePropertyServiceOfferCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    propertyServiceOfferRepository.persist(new PropertyServiceOffer(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    propertyServiceOfferRepository.persist(new PropertyServiceOffer(operatorId + userId, contractId));
   }
 
   private void handleAccountFactoryCreatedEvent(CreatedEvent event, String contractId) {

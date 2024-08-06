@@ -86,8 +86,7 @@ public class UserPropertyService {
         .getContractId();
     List<com.daml.ledger.javaapi.data.Command> command = null;
 
-    var serviceAcceptId = new daml.marketplace.interface$.profilemanager.service.Offer.ContractId(
-        offerContractId);
+    var serviceAcceptId = new daml.marketplace.interface$.propertymanager.service.Offer.ContractId(offerContractId);
 
     if (action.equals("accept"))
       command = serviceAcceptId.exerciseAccept().commands();
