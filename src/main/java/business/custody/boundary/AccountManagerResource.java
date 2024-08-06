@@ -15,9 +15,9 @@ public class AccountManagerResource {
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
-  @Path("/createCustodyService/{operator}/{user}/{holdingTypeId}")
-  public String createCustodyService(String operator, String user, String holdingTypeId) {
-    return accountManagerService.createCustodyService(operator, user, holdingTypeId);
+  @Path("/createCustodyService/{operator}/{user}/{publicString}/{holdingTypeId}")
+  public String createCustodyService(String operator, String user, String publicString, String holdingTypeId) {
+    return accountManagerService.createCustodyService(operator, user, publicString, holdingTypeId);
   }
 
 }

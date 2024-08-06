@@ -17,6 +17,7 @@ import business.custody.service.AccountManagerService;
 import business.operator.service.OperatorService;
 import business.party.service.PartyService;
 import business.profilemanager.service.ProfileManagerService;
+import business.propertymanager.service.PropertyManagerService;
 import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
 import business.useraccount.service.UserAccountService;
@@ -24,6 +25,7 @@ import business.userprofile.dto.ProfileServiceOfferDTO;
 import business.userprofile.dto.UserProfileDTO;
 import business.userprofile.service.UserProfileService;
 import business.userrole.service.UserRoleService;
+import business.userproperty.service.UserPropertyService;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import io.quarkus.test.junit.QuarkusTest;
@@ -57,6 +59,12 @@ public class WorkflowResourceTest {
     UserProfileService userProfileService;
 
     @Inject
+    PropertyManagerService propertyManagerService;
+
+    @Inject
+    UserPropertyService userPropertyService;
+
+    @Inject
     AccountManagerService accountManagerService;
 
     @Inject
@@ -68,6 +76,8 @@ public class WorkflowResourceTest {
         String uuid2 = UUID.randomUUID().toString(); // Seller
         String uuid3 = UUID.randomUUID().toString(); // Buyer
         String uuid4 = UUID.randomUUID().toString(); // Public
+
+        System.out.println();
 
         // Creating the parties
         System.out.println(partyService.createParty(uuid1));
@@ -100,12 +110,12 @@ public class WorkflowResourceTest {
         System.out.println(userRoleService.acceptUserRole(uuid1, uuid3));
         
         // Create User Profile Factory
-        System.out.println(profileManagerService.createUserProfileFactory(uuid1));
+        //System.out.println(profileManagerService.createUserProfileFactory(uuid1));
 
 
         // Offer User Profile Service
-        System.out.println(operatorService.offerUserProfileService(uuid1, uuid2));
-        System.out.println(operatorService.offerUserProfileService(uuid1, uuid3));
+        //System.out.println(operatorService.offerUserProfileService(uuid1, uuid2));
+        //System.out.println(operatorService.offerUserProfileService(uuid1, uuid3));
         
         // Accept Profile Service
         //ProfileServiceOfferDTO offer = new ProfileServiceOfferDTO(uuid1, uuid2);
@@ -116,23 +126,24 @@ public class WorkflowResourceTest {
             //.then()
             //.statusCode(200)
             //.body(is("Accepted Profile Service!\n"));
-        System.out.println(userProfileService.acceptProfileService(uuid1, uuid2));
-        System.out.println(userProfileService.acceptProfileService(uuid1, uuid3));
+        //System.out.println(userProfileService.acceptProfileService(uuid1, uuid2));
+        //System.out.println(userProfileService.acceptProfileService(uuid1, uuid3));
 
         // Create Profile Requests
-        List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
+        //List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
         /** 
         UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
                         "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
                         Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
                         Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
-                        photoReferences);*/
+                        photoReferences);
         
         System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
                         "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
                         Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
                         Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
+        */
         /**given()
             .contentType(MediaType.APPLICATION_JSON)
             .body(profileDTO)
@@ -140,23 +151,23 @@ public class WorkflowResourceTest {
             .then()
             .statusCode(200)
             .body(is("Success Create User Profile Request!\n"));
-        */
+        
 
         System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
                         "Profile" + uuid3, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
                         LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com",
                         Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
-        
+        */
         // Accept Profile Request
-        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
-        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
+        //System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
+        //System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
 
         // Modify Profile
-        System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
+        //System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
     
         // Create Account Factories
-        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, "CustodyService"+uuid1));
+        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, uuid4, "TransferableUser"));
         
         // Offer Account Services
         System.out.println(operatorService.offerCustodianService(uuid1, uuid2));
@@ -179,7 +190,30 @@ public class WorkflowResourceTest {
         System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "USD", new BigDecimal("150000.0")));
 
         // Accept Deposit Currency Requests
-        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid2));
-        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3));
+        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid2, uuid4));
+        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3, uuid4));
+
+        // Create Withdraw Currency Requests
+        System.out.println(userAccountService.requestWithdrawFungible(uuid1, uuid2));
+
+        // Accept Withdraw Currency Requests
+        System.out.println(operatorService.acceptRequestWithdraw(uuid1, uuid2));
+
+        // Create Property Service
+        System.out.println(propertyManagerService.createPropertyFactories(uuid1));
+
+        // Offer Property Service
+        System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid2));
+        System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid3));
+
+        //Accept Property Service
+        System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid2));
+        System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid3));
+
+        // Create Deposit Property ------------------------ TESTAR DEPOIS ------------------------
+        //System.out.println(userAccountService.requestDepositPropertyInstrument(uuid1, uuid2, "PropertyId"));
+        //System.out.println(userAccountService.requestDepositPropertyInstrument(uuid1, uuid2, "PropertyId"));
+
+        // Accept Deposit Property Requests
     }
 }

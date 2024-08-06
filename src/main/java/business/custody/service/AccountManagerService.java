@@ -57,26 +57,38 @@ public class AccountManagerService {
 
     }
 
-    public String createCustodyService(String operator, String user, String holdingTypeId) {
+    public String createCustodyService(String operator, String user, String publicString, String holdingTypeId) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
+            String publicParty = userRepository.findById(publicString).getPartyId();
 
             Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
             Set<String> observers = new Set<>(singletonMap);
             Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
             observersMap.put("Default", observers);
+
+            Map<String, Unit> singletonMap2 = Collections.singletonMap(publicParty, Unit.getInstance());
+            Set<String> observers2 = new Set<>(singletonMap2);
+            Map<String, Set<String>> observersMap2 = new HashMap<String, Set<String>>();
+            observersMap2.put("Default", observers2);
+
+            Map<String, Unit> singletonMap3 = Collections.singletonMap(userParty, Unit.getInstance());
+            Set<String> observers3 = new Set<>(singletonMap3);
+            Map<String, Set<String>> observersMap3 = new HashMap<String, Set<String>>();
+            observersMap3.put("Default", observers3);
+
             Id holdingId = new Id(holdingTypeId);
 
-            createAccountFactory(operatorParty, observersMap);
+            createAccountFactory(operatorParty, observersMap3);
 
-            createHoldingFactory(operatorParty, holdingId, observersMap);
+            createHoldingFactory(operatorParty, holdingId, observersMap2);
 
-            createHoldingFactoryReference(operatorParty, holdingId, observersMap);
+            createHoldingFactoryReference(operatorParty, holdingId, observersMap2);
 
-            createRouteSettlement(operatorParty, userParty, observers);
+            createRouteSettlement(operatorParty, userParty, observers3);
 
-            createSettlementFactory(operatorParty, observers);
+            createSettlementFactory(operatorParty, observers3);
 
             createLifecycleClaimRule(operatorParty, userParty, false);
 
@@ -146,8 +158,7 @@ public class AccountManagerService {
         return "Created Settlement Factory!\n";
     }
 
-    public String createHoldingFactoryReference(String operatorParty, Id holdingId,
-            Map<String, Set<String>> observersMap) {
+    public String createHoldingFactoryReference(String operatorParty, Id holdingId, Map<String, Set<String>> observersMap) {
         try {
             View factoryView = new daml.daml.finance.interface$.holding.factory.View(
                     operatorParty, holdingId);

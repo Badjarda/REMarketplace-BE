@@ -20,4 +20,7 @@ public class UserAccountInterface {
   @Column(name = "contractId")
   private String contractId;
 
+  @Column(name = "accountId")
+  private String accountId;
+
 }

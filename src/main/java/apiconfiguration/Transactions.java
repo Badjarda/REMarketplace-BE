@@ -606,8 +606,9 @@ public class Transactions {
   }
 
   private void handleRequestWithdrawCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    userAccountWithdrawRequestRepository.persist(new UserAccountWithdrawRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    userAccountWithdrawRequestRepository.persist(new UserAccountWithdrawRequest(operatorId+userId, contractId));
   }
 
   private void handleRequestIssueCreatedEvent(CreatedEvent event, String contractId) {
@@ -623,14 +624,15 @@ public class Transactions {
   private void handleUserAccountCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String accountId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String accountId = event.getCreateArguments().getFields(4).getValue().getRecord().getFields(0).getValue().getText();
     userAccountRepository.persist(new UserAccount(operatorId + userId, contractId, accountId));
   }
 
   private void handleUserAccountInterfaceCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
-    userAccountInterfaceRepository.persist(new UserAccountInterface(operatorId + userId, contractId));
+    String accountId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
+    userAccountInterfaceRepository.persist(new UserAccountInterface(operatorId + userId, contractId, accountId));
   }
 
   private void handleUserProfileCreatedEvent(CreatedEvent event, String contractId) {
@@ -807,10 +809,9 @@ public class Transactions {
   }
 
   private void handleUserHoldingFungibleCreatedEvent(CreatedEvent event, String contractId) {
-    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
-    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String holdingCid = event.getCreateArguments().getFields(2).getValue().getParty();
-    userHoldingFungibleRepository.persist(new UserHoldingFungible(operatorId + userId, contractId, holdingCid));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
+    userHoldingFungibleRepository.persist(new UserHoldingFungible(operatorId + userId, contractId));
   }
 
   private void handleUserHoldingTransferableCreatedEvent(CreatedEvent event, String contractId) {

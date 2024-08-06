@@ -201,10 +201,8 @@ public class UserAccountService {
       var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
           servicId);
 
-      command = serviceId
-          .exerciseRequestDeposit(quantity, accountKey)
-          .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      command = serviceId.exerciseRequestDeposit(quantity, accountKey).commands();
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Deposit Property Instrument : " + e.getMessage();
@@ -234,15 +232,11 @@ public class UserAccountService {
       AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
 
       List<com.daml.ledger.javaapi.data.Command> command = null;
-      String servicId = custodyManagerRepository.findById(operatorParty + userParty)
-          .getContractId();
+      String servicId = custodyManagerRepository.findById(operatorParty + userParty).getContractId();
       
-      var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
-          servicId);
+      var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
-      command = serviceId
-          .exerciseRequestDeposit(quantity, accountKey)
-          .commands();
+      command = serviceId.exerciseRequestDeposit(quantity, accountKey).commands();
       Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -281,16 +275,17 @@ public class UserAccountService {
     return "Success Request Withdraw Property Instrument\n";
   }
 
-  public String requestWithdrawFungible(String operator, String user, String holdingCid){
+  public String requestWithdrawFungible(String operator, String user){
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
+
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
       Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
       observersMap.put("Default", observers);
 
-      String holdingCId = userHoldingFungibleRepository.findById(holdingCid).getContractId();
+      String holdingCId = userHoldingFungibleRepository.findById(operatorParty+userParty).getContractId();
       var holdingContractId = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
 
       List<com.daml.ledger.javaapi.data.Command> command = null;
@@ -299,7 +294,7 @@ public class UserAccountService {
       var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
       command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty,userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Withdraw Currency Instrument : " + e.getMessage();

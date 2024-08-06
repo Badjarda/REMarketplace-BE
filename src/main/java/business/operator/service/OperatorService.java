@@ -284,28 +284,23 @@ public class OperatorService {
             var operatorId = new daml.marketplace.interface$.role.operator.Role.ContractId(
                     operatorContractId);
 
-            String apartmentPropertyFactoryCid = apartmentPropertyFactoryRepository.findById(operatorParty)
-                    .getContractId();
+            String apartmentPropertyFactoryCid = apartmentPropertyFactoryRepository.findById(operatorParty).getContractId();
             var apartmentPropertyFactoryContractid = new daml.marketplace.interface$.propertymanager.property.apartmentproperty.factory.Factory.ContractId(
                     apartmentPropertyFactoryCid);
 
-            String landPropertyFactoryCid = landPropertyFactoryRepository.findById(operatorParty)
-                    .getContractId();
+            String landPropertyFactoryCid = landPropertyFactoryRepository.findById(operatorParty).getContractId();
             var landPropertyFactoryContractid = new daml.marketplace.interface$.propertymanager.property.landproperty.factory.Factory.ContractId(
                     landPropertyFactoryCid);
 
-            String residencePropertyFactoryCid = residencePropertyFactoryRepository.findById(operatorParty)
-                    .getContractId();
+            String residencePropertyFactoryCid = residencePropertyFactoryRepository.findById(operatorParty).getContractId();
             var residencePropertyFactoryContractid = new daml.marketplace.interface$.propertymanager.property.residenceproperty.factory.Factory.ContractId(
                     residencePropertyFactoryCid);
 
-            String garagePropertyFactoryCid = garagePropertyFactoryRepository.findById(operatorParty)
-                    .getContractId();
+            String garagePropertyFactoryCid = garagePropertyFactoryRepository.findById(operatorParty).getContractId();
             var garagePropertyFactoryContractid = new daml.marketplace.interface$.propertymanager.property.garageproperty.factory.Factory.ContractId(
                     garagePropertyFactoryCid);
 
-            String warehousePropertyFactoryCid = warehousePropertyFactoryRepository.findById(operatorParty)
-                    .getContractId();
+            String warehousePropertyFactoryCid = warehousePropertyFactoryRepository.findById(operatorParty).getContractId();
             var warehousePropertyFactoryContractid = new daml.marketplace.interface$.propertymanager.property.warehouseproperty.factory.Factory.ContractId(
                     warehousePropertyFactoryCid);
 
@@ -378,15 +373,13 @@ public class OperatorService {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
-            String servicId = custodyManagerRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
-                    servicId);
+            String servicId = custodyManagerRepository.findById(operatorParty + userParty).getContractId();
+
+            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
             String rId = userAccountCreateRequestRepository.findById(operatorParty + userParty)
                     .getContractId();
-            var requestId = new daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest.ContractId(
-                    rId);
+            var requestId = new daml.marketplace.interface$.custody.choices.openaccountrequest.OpenAccountRequest.ContractId(rId);
 
             var command = serviceId.exerciseOpenAccount(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
@@ -425,21 +418,21 @@ public class OperatorService {
         return "User Account Successfully Closed!\n";
     }
 
-    public String acceptRequestDeposit(String operator, String user) {
+    public String acceptRequestDeposit(String operator, String user, String publicString) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
-            String servicId = custodyManagerRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
-                    servicId);
+            String publicParty = userRepository.findById(publicString).getPartyId();
+            String servicId = custodyManagerRepository.findById(operatorParty + userParty).getContractId();
 
-            String rId = userAccountDepositRequestRepository.findById(operatorParty + userParty)
-                    .getContractId();
+            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
+
+            String rId = userAccountDepositRequestRepository.findById(operatorParty + userParty).getContractId();
+
             var requestId = new daml.marketplace.interface$.custody.choices.depositrequest.DepositRequest.ContractId(rId);
-
+            
             var command = serviceId.exerciseDeposit(requestId).commands();
-            Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
+            Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, publicParty, userParty), Arrays.asList(publicParty));
             transactionService.handleTransaction(transaction);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Deposit in User Account : " + e.getMessage() + "\n";
@@ -453,13 +446,11 @@ public class OperatorService {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
-            String servicId = custodyManagerRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
-                    servicId);
+            String servicId = custodyManagerRepository.findById(operatorParty + userParty).getContractId();
+            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
-            String rId = userAccountWithdrawRequestRepository.findById(operatorParty + userParty)
-                    .getContractId();
+            String rId = userAccountWithdrawRequestRepository.findById(operatorParty + userParty).getContractId();
+
             var requestId = new daml.marketplace.interface$.custody.choices.withdrawrequest.WithdrawRequest.ContractId(rId);
 
             var command = serviceId.exerciseWithdrawal(requestId).commands();

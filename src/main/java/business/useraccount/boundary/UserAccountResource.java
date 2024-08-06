@@ -76,8 +76,8 @@ public class UserAccountResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestWithdrawCurrency/{operator}/{user}/{holdingCid}")
-  public String requestWithdrawCurrency(String operator, String user, String holdingCid) {
-    return userAccountService.requestWithdrawFungible(operator, user, holdingCid);
+  @Path("/requestWithdrawCurrency/{operator}/{user}")
+  public String requestWithdrawCurrency(String operator, String user) {
+    return userAccountService.requestWithdrawFungible(operator, user);
   }
 }
