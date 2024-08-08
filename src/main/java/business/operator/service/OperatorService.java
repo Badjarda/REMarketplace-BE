@@ -512,13 +512,10 @@ public class OperatorService {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
-            String servicId = propertyManagerRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(
-                    servicId);
+            String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
+            var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
-            String rId = requestCreateApartmentRepository.findById(operatorParty + userParty)
-                    .getContractId();
+            String rId = requestCreateApartmentRepository.findById(operatorParty + userParty).getContractId();
             var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(
                     rId);
 

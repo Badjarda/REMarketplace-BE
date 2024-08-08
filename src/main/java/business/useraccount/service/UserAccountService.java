@@ -165,7 +165,7 @@ public class UserAccountService {
       command = serviceId
           .exerciseRequestCloseAccount(accountKey)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Close Account : " + e.getMessage();
@@ -265,7 +265,7 @@ public class UserAccountService {
       var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
       command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Withdraw Property Instrument : " + e.getMessage();

@@ -149,7 +149,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, bathrooms, floor, parkingSpaces, elevator, buildDate, 
       installedEquipment, additionalInformation, description, photoReferences, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Apartment : " + e.getMessage();
@@ -182,7 +182,7 @@ public class UserPropertyService {
       command = serviceId.exerciseRequestCreateGarageProperty(userPropertyId, garagePropertyKey, garagePrice, propertyAddress, propertyPostalCode, 
       propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity, installedEquipment, additionalInformation, description, photoReferences, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Garage : " + e.getMessage();
@@ -216,7 +216,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, 
       installedEquipment, viableConstructionTypes, additionalInformation, description, photoReferences, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Land : " + e.getMessage();
@@ -248,7 +248,7 @@ public class UserPropertyService {
 
       command = serviceId.exerciseRequestCreateResidenceProperty(userPropertyId, residencePropertyKey, residencePrice, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty,
        grossArea, usableArea, bedrooms, bathrooms, floors, residenceType, backyard, parking, buildDate, orientation, installedEquipment, additionalInformation, description, photoReferences, observersMap).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Residence : " + e.getMessage();
@@ -282,7 +282,7 @@ public class UserPropertyService {
       propertyDistrict, propertyCounty, warehouseType, grossArea, usableArea, floors, buildDate, installedEquipment, 
       additionalInformation, description, photoReferences, observersMap)
           .commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Create Warehouse : " + e.getMessage();

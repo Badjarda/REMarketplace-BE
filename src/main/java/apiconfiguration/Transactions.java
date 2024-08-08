@@ -709,28 +709,33 @@ public class Transactions {
   }
 
   private void handleRequestCreateApartmentCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    requestCreateApartmentRepository.persist(new RequestCreateApartment(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    requestCreateApartmentRepository.persist(new RequestCreateApartment(operatorId + userId, contractId));
   }
 
   private void handleRequestCreateGarageCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    requestCreateGarageRepository.persist(new RequestCreateGarage(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    requestCreateGarageRepository.persist(new RequestCreateGarage(operatorId + userId, contractId));
   }
 
   private void handleRequestCreateLandCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    requestCreateLandRepository.persist(new RequestCreateLand(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    requestCreateLandRepository.persist(new RequestCreateLand(operatorId + userId, contractId));
   }
 
   private void handleRequestCreateResidenceCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    requestCreateResidenceRepository.persist(new RequestCreateResidence(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    requestCreateResidenceRepository.persist(new RequestCreateResidence(operatorId + userId, contractId));
   }
 
   private void handleRequestCreateWarehouseCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    requestCreateWarehouseRepository.persist(new RequestCreateWarehouse(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    requestCreateWarehouseRepository.persist(new RequestCreateWarehouse(operatorId + userId, contractId));
   }
 
   private void handlePropertyServiceOfferCreatedEvent(CreatedEvent event, String contractId) {

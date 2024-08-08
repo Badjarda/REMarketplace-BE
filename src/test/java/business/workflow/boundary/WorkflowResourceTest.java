@@ -28,6 +28,13 @@ import business.userrole.service.UserRoleService;
 import business.userproperty.service.UserPropertyService;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.common.Parking;
+import daml.marketplace.interface$.propertymanager.property.common.Orientation;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MediaType;
@@ -206,9 +213,53 @@ public class WorkflowResourceTest {
         System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid2));
         System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid3));
 
-        //Accept Property Service
+        // Accept Property Service
         System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid2));
         System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid3));
+
+        // Request Create Apartment Property
+        List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
+        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + uuid2, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(100.0), 
+            new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
+            "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Accept Request Create Apartment Property
+        System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2));
+
+        // Request Create Land Property
+        List<ViableConstructionTypes> viableConstructionTypes = Arrays.asList(ViableConstructionTypes.BUILDING, ViableConstructionTypes.RESIDENCE); 
+        System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid2, "PropertyId" + uuid2, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", "2675-614", "Lisbon", "Odivelas", LandType.RUSTIC, new BigDecimal(100.0), new BigDecimal(100.0),
+            new BigDecimal(100.0), (long) 2L, true, "Frigorífico", viableConstructionTypes, "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Accept Request Create Land Property
+        System.out.println(operatorService.acceptRequestCreateLandProperty(uuid1, uuid2));
+
+        // Request Create Garage Property
+        System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + uuid2, new BigDecimal(250000.0), 
+        "Rua Abel Manta n4 7Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(100.0), GarageType.CONDOMINIUMPRIVATE,
+        (long) 2L, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Accept Request Create Garage Property
+        System.out.println(operatorService.acceptRequestCreateGarageProperty(uuid1, uuid2));
+
+        // Request Create Residence Property
+        System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + uuid2, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(100.0), new BigDecimal(100.0),
+            (long) 2L, (long) 2L, (long) 2L, ResidenceType.DETACHED, "In the back", Parking.COVERED, LocalDate.of(1900, 1, 1),
+            Orientation.EAST, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Accept Request Create Residence Property
+        System.out.println(operatorService.acceptRequestCreateResidenceProperty(uuid1, uuid2));
+
+        // Request Create Warehouse Property
+        System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid2, "PropertyId" + uuid2, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", "2675-614", "Lisbon", "Odivelas", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(100.0), new BigDecimal(100.0),
+            (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Accept Request Create Warehouse Property
+        System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid1, uuid2));
 
         // Create Deposit Property ------------------------ TESTAR DEPOIS ------------------------
         //System.out.println(userAccountService.requestDepositPropertyInstrument(uuid1, uuid2, "PropertyId"));
