@@ -71,8 +71,11 @@ import business.userprofile.entity.repository.UserProfileCreateRequestRepository
 import business.userprofile.entity.repository.UserProfileReferenceInterfaceRepository;
 import business.userprofile.entity.repository.UserProfileRepository;
 import business.userproperty.entity.model.ApartmentProperty;
+import business.userproperty.entity.model.ApartmentPropertyInterfaceReference;
 import business.userproperty.entity.model.GarageProperty;
+import business.userproperty.entity.model.GaragePropertyInterfaceReference;
 import business.userproperty.entity.model.LandProperty;
+import business.userproperty.entity.model.LandPropertyInterfaceReference;
 import business.userproperty.entity.model.PropertyServiceOffer;
 import business.userproperty.entity.model.RequestCreateApartment;
 import business.userproperty.entity.model.RequestCreateGarage;
@@ -80,7 +83,14 @@ import business.userproperty.entity.model.RequestCreateLand;
 import business.userproperty.entity.model.RequestCreateResidence;
 import business.userproperty.entity.model.RequestCreateWarehouse;
 import business.userproperty.entity.model.ResidenceProperty;
+import business.userproperty.entity.model.ResidencePropertyInterfaceReference;
 import business.userproperty.entity.model.WarehouseProperty;
+import business.userproperty.entity.model.WarehousePropertyInterfaceReference;
+import business.userproperty.entity.repository.ApartmentPropertyInterfaceReferenceRepository;
+import business.userproperty.entity.repository.GaragePropertyInterfaceReferenceRepository;
+import business.userproperty.entity.repository.LandPropertyInterfaceReferenceRepository;
+import business.userproperty.entity.repository.ResidencePropertyInterfaceReferenceRepository;
+import business.userproperty.entity.repository.WarehousePropertyInterfaceReferenceRepository;
 import business.userproperty.entity.repository.ApartmentPropertyRepository;
 import business.userproperty.entity.repository.GaragePropertyRepository;
 import business.userproperty.entity.repository.LandPropertyRepository;
@@ -236,6 +246,16 @@ public class Transactions {
   ResidencePropertyRepository residencePropertyRepository;
   @Inject
   WarehousePropertyRepository warehousePropertyRepository;
+  @Inject
+  ApartmentPropertyInterfaceReferenceRepository apartmentPropertyInterfaceReferenceRepository;
+  @Inject
+  GaragePropertyInterfaceReferenceRepository garagePropertyInterfaceReferenceRepository;
+  @Inject
+  LandPropertyInterfaceReferenceRepository landPropertyInterfaceReferenceRepository;
+  @Inject
+  ResidencePropertyInterfaceReferenceRepository residencePropertyInterfaceReferenceRepository;
+  @Inject
+  WarehousePropertyInterfaceReferenceRepository warehousePropertyInterfaceReferenceRepository;
 
   private ManagedChannel channel;
 
@@ -342,6 +362,21 @@ public class Transactions {
     } else if (templateId
         .equals(daml.marketplace.app.propertymanager.model.RequestCreateWarehouseProperty.TEMPLATE_ID.toProto())) {
       handleRequestCreateWarehouseCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.app.propertymanager.model.RequestCreateApartmentProperty.TEMPLATE_ID.toProto())) {
+      handleRequestCreateApartmentCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.app.propertymanager.model.RequestCreateGarageProperty.TEMPLATE_ID.toProto())) {
+      handleRequestCreateGarageCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.app.propertymanager.model.RequestCreateLandProperty.TEMPLATE_ID.toProto())) {
+      handleRequestCreateLandCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.app.propertymanager.model.RequestCreateResidenceProperty.TEMPLATE_ID.toProto())) {
+      handleRequestCreateResidenceCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.app.propertymanager.model.RequestCreateWarehouseProperty.TEMPLATE_ID.toProto())) {
+      handleRequestCreateWarehouseCreatedEvent(created, contractId);
     } else if (templateId.equals(
         daml.marketplace.app.propertymanager.property.apartmentproperty.ApartmentProperty.TEMPLATE_ID.toProto())) {
       handleApartmentPropertyCreatedEvent(created, contractId);
@@ -357,6 +392,21 @@ public class Transactions {
     } else if (templateId.equals(
         daml.marketplace.app.propertymanager.property.warehouseproperty.WarehouseProperty.TEMPLATE_ID.toProto())) {
       handleWarehousePropertyCreatedEvent(created, contractId);
+    } else if (templateId.equals(
+        daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleApartmentPropertyInterfaceReferenceCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleGaragePropertyInterfaceReferenceCreatedEvent(created, contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleLandPropertyInterfaceReferenceCreatedEvent(created, contractId);
+    } else if (templateId.equals(
+        daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleResidencePropertyInterfaceReferenceCreatedEvent(created, contractId);
+    } else if (templateId.equals(
+        daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleWarehousePropertyInterfaceReferenceCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.account.account.Factory.TEMPLATE_ID.toProto())) {
       handleAccountFactoryCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.holding.factory.Factory.TEMPLATE_ID.toProto())) {
@@ -487,6 +537,21 @@ public class Transactions {
     } else if (templateId.equals(
         daml.marketplace.app.propertymanager.property.warehouseproperty.WarehouseProperty.TEMPLATE_ID.toProto())) {
       handleWarehousePropertyArchivedEvent(contractId);
+    } else if (templateId.equals(
+      daml.marketplace.interface$.propertymanager.property.apartmentproperty.apartmentproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleApartmentPropertyInterfaceReferenceArchivedEvent(contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.propertymanager.property.garageproperty.garageproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleGaragePropertyInterfaceReferenceArchivedEvent(contractId);
+    } else if (templateId
+        .equals(daml.marketplace.interface$.propertymanager.property.landproperty.landproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleLandPropertyInterfaceReferenceArchivedEvent(contractId);
+    } else if (templateId.equals(
+      daml.marketplace.interface$.propertymanager.property.residenceproperty.residenceproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleResidencePropertyInterfaceReferenceArchivedEvent(contractId);
+    } else if (templateId.equals(
+      daml.marketplace.interface$.propertymanager.property.warehouseproperty.warehouseproperty.Reference.TEMPLATE_ID.toProto())) {
+      handleWarehousePropertyInterfaceReferenceArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.account.account.Factory.TEMPLATE_ID.toProto())) {
       handleAccountFactoryArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.holding.factory.Factory.TEMPLATE_ID.toProto())) {
@@ -642,38 +707,68 @@ public class Transactions {
     userProfileRepository.persist(new UserProfile(operatorId + userId, contractId, profileId));
   }
 
+  private void handleApartmentPropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    apartmentPropertyInterfaceReferenceRepository.persist(new ApartmentPropertyInterfaceReference(operatorId + userId, contractId));
+  }
+
+  private void handleGaragePropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    garagePropertyInterfaceReferenceRepository.persist(new GaragePropertyInterfaceReference(operatorId + userId, contractId));
+  }
+
+  private void handleLandPropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    landPropertyInterfaceReferenceRepository.persist(new LandPropertyInterfaceReference(operatorId + userId, contractId));
+  }
+
+  private void handleResidencePropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    residencePropertyInterfaceReferenceRepository.persist(new ResidencePropertyInterfaceReference(operatorId + userId, contractId));
+  }
+
+  private void handleWarehousePropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    warehousePropertyInterfaceReferenceRepository.persist(new WarehousePropertyInterfaceReference(operatorId + userId, contractId));
+  }
+
   private void handleApartmentPropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String propertyId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     apartmentPropertyRepository.persist(new ApartmentProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleGaragePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String propertyId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     garagePropertyRepository.persist(new GarageProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleLandPropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String propertyId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     landPropertyRepository.persist(new LandProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleResidencePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String propertyId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     residencePropertyRepository.persist(new ResidenceProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleWarehousePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String propertyId = event.getCreateArguments().getFields(2).getValue().getParty();
+    String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     warehousePropertyRepository.persist(new WarehouseProperty(operatorId + userId, contractId, propertyId));
   }
 
@@ -915,6 +1010,26 @@ public class Transactions {
 
   private void handleWarehousePropertyArchivedEvent(String contractId) {
     warehousePropertyRepository.delete("contractId", contractId);
+  }
+
+  private void handleApartmentPropertyInterfaceReferenceArchivedEvent(String contractId) {
+    apartmentPropertyInterfaceReferenceRepository.delete("contractId", contractId);
+  }
+
+  private void handleGaragePropertyInterfaceReferenceArchivedEvent(String contractId) {
+    garagePropertyInterfaceReferenceRepository.delete("contractId", contractId);
+  }
+
+  private void handleLandPropertyInterfaceReferenceArchivedEvent(String contractId) {
+    landPropertyInterfaceReferenceRepository.delete("contractId", contractId);
+  }
+
+  private void handleResidencePropertyInterfaceReferenceArchivedEvent(String contractId) {
+    residencePropertyInterfaceReferenceRepository.delete("contractId", contractId);
+  }
+
+  private void handleWarehousePropertyInterfaceReferenceArchivedEvent(String contractId) {
+    warehousePropertyInterfaceReferenceRepository.delete("contractId", contractId);
   }
 
   private void handleUserAccountArchivedEvent(String contractId) {

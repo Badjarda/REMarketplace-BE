@@ -261,6 +261,35 @@ public class WorkflowResourceTest {
         // Accept Request Create Warehouse Property
         System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid1, uuid2));
 
+        // Modify Apartment Property Fields
+        System.out.println(userPropertyService.modifyUserApartmentPropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
+        "Rua Abel Manta n4 8Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(100.0), 
+        new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
+        "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        /* 
+        // Modify Land Property Fields
+        System.out.println(userPropertyService.modifyUserLandPropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
+        "Rua Abel Manta n4 8Frente", "2675-614", "Lisbon", "Odivelas", LandType.RUSTIC, new BigDecimal(121.0), new BigDecimal(100.0),
+        new BigDecimal(100.0), (long) 2L, true, "Frigorífico", viableConstructionTypes, "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        // Modify Garage Property Fields
+        System.out.println(userPropertyService.modifyUserGaragePropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
+        "Rua Abel Manta n4 8Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(121.0), GarageType.CONDOMINIUMPRIVATE,
+        (long) 2L, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        // Modify Residence Property Fields
+        System.out.println(userPropertyService.modifyUserResidencePropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
+        "Rua Abel Manta n4 8Frente", "2675-614", "Lisbon", "Odivelas", new BigDecimal(121.0), new BigDecimal(100.0),
+        (long) 2L, (long) 2L, (long) 2L, ResidenceType.DETACHED, "In the back", Parking.COVERED, LocalDate.of(1900, 1, 1),
+        Orientation.EAST, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        // Modify Warehouse Property Fields
+        System.out.println(userPropertyService.modifyUserWarehousePropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
+        "Rua Abel Manta n4 8Frente", "2675-614", "Lisbon", "Odivelas", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(121.0), new BigDecimal(100.0),
+        (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        */
+
         // Create Deposit Property ------------------------ TESTAR DEPOIS ------------------------
         //System.out.println(userAccountService.requestDepositPropertyInstrument(uuid1, uuid2, "PropertyId"));
         //System.out.println(userAccountService.requestDepositPropertyInstrument(uuid1, uuid2, "PropertyId"));
