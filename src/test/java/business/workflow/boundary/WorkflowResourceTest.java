@@ -1,7 +1,7 @@
 package business.workflow.boundary;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
+//import static io.restassured.RestAssured.given;
+//import static org.hamcrest.CoreMatchers.is;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -38,7 +38,7 @@ import daml.marketplace.interface$.propertymanager.property.common.Parking;
 import daml.marketplace.interface$.propertymanager.property.common.Orientation;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.MediaType;
+//import jakarta.ws.rs.core.MediaType;
 
 @QuarkusTest
 public class WorkflowResourceTest {
@@ -80,7 +80,7 @@ public class WorkflowResourceTest {
 
     @Inject
     IssuanceService issuanceService;
-
+    
     @Test
     public void testWorkflow() {
         String uuid1 = UUID.randomUUID().toString(); // Operator
@@ -115,14 +115,12 @@ public class WorkflowResourceTest {
         System.out.println(operatorService.offerUserRole(uuid1, uuid2, "RegisteredUserRole"));
         System.out.println(operatorService.offerUserRole(uuid1, uuid3, "RegisteredUserRole"));
 
-
         // Accept User Role
         System.out.println(userRoleService.acceptUserRole(uuid1, uuid2));
         System.out.println(userRoleService.acceptUserRole(uuid1, uuid3));
         
         // Create User Profile Factory
         System.out.println(profileManagerService.createUserProfileFactory(uuid1));
-
 
         // Offer User Profile Service
         System.out.println(operatorService.offerUserProfileService(uuid1, uuid2));
@@ -318,9 +316,10 @@ public class WorkflowResourceTest {
         //System.out.println(operatorService.acceptRequestDeIssue(uuid1, uuid2));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2));
+        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));
 
         // Accept Atomic Swap Request
         System.out.println(userAccountService.acceptSwapRequest(uuid1, uuid3, uuid2, uuid4, postalCode1, "APARTMENT"));
     }
+
 }

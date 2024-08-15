@@ -184,7 +184,7 @@ public class IssuanceService {
     return "Success Request Issue Transferable\n";
   }
 
-  public String requestSwap(String operator, String buyer, String seller){
+  public String requestSwap(String operator, String buyer, String seller, String postalCode){
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String buyerParty = userRepository.findById(buyer).getPartyId();
@@ -205,7 +205,10 @@ public class IssuanceService {
       String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
       AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
 
-      command = serviceId.exerciseRequestSwap(sellerParty, sellerAccountKey, buyerAccountKey, holdingFungibleContractId, holdingAmount).commands();
+      String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + postalCode).getContractId();
+      var transferableHoldingCid = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(transferableHoldingCId);
+
+      command = serviceId.exerciseRequestSwap(sellerParty, sellerAccountKey, buyerAccountKey, holdingFungibleContractId, holdingAmount, transferableHoldingCid).commands();
       Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, sellerParty, buyerParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {

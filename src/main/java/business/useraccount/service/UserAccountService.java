@@ -265,16 +265,12 @@ public class UserAccountService {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String buyerParty = userRepository.findById(buyer).getPartyId();
             String sellerParty = userRepository.findById(seller).getPartyId();
-            String publicParty = userRepository.findById(publicString).getPartyId();
 
             String servicId = custodyManagerRepository.findById(operatorParty + sellerParty).getContractId();
             var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
             
             String swapRequestCId = userSwapRequestRepository.findById(operatorParty + buyerParty + sellerParty).getContractId();
             var swapRequestCid = new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId(swapRequestCId);
-
-            String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + postalCode).getContractId();
-            var transferableHoldingCid = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(transferableHoldingCId);
 
             String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
             AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
@@ -284,23 +280,23 @@ public class UserAccountService {
             if(propertyType.equals("APARTMENT")){
                 String apartmentIdString = apartmentPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(apartmentIdString));
-                command = serviceId.exerciseAtomicSwapApartment(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+                command = serviceId.exerciseAtomicSwapApartment(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("GARAGE")){
                 String garageIdString = garagePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(garageIdString));
-                command = serviceId.exerciseAtomicSwapGarage(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+                command = serviceId.exerciseAtomicSwapGarage(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("LAND")){
                 String landIdString = landPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(landIdString));
-                command = serviceId.exerciseAtomicSwapLand(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+                command = serviceId.exerciseAtomicSwapLand(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("RESIDENCE")){
                 String residenceIdString = residencePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(residenceIdString));
-                command = serviceId.exerciseAtomicSwapResidence(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+                command = serviceId.exerciseAtomicSwapResidence(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("WAREHOUSE")){
                 String warehouseIdString = warehousePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(warehouseIdString));
-                command = serviceId.exerciseAtomicSwapWarehouse(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+                command = serviceId.exerciseAtomicSwapWarehouse(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else{
             System.out.println("PROPERTY TYPE NOT COMPATIBLE");
             }

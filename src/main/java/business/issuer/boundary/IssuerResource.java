@@ -2,7 +2,7 @@ package business.issuer.boundary;
 
 import business.issuer.dto.IssuanceServiceOfferDTO;
 import business.issuer.dto.IssueRequestDTO;
-import business.issuer.dto.TransferDTO;
+import business.issuer.dto.SwapRequestDTO;
 import business.issuer.service.IssuanceService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
@@ -46,7 +46,7 @@ public class IssuerResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/requestSwap")
-  public String requestSwap(TransferDTO request) {
-    return issuanceService.requestSwap(request.getOperator(), request.getBuyer(), request.getSeller());
+  public String requestSwap(SwapRequestDTO request) {
+    return issuanceService.requestSwap(request.getOperator(), request.getBuyer(), request.getSeller(), request.getPostalCode());
   }
 }

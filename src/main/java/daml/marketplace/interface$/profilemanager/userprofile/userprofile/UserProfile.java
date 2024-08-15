@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 public final class UserProfile {
-  public static final Identifier TEMPLATE_ID = new Identifier("0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
+  public static final Identifier TEMPLATE_ID = new Identifier("b93cea58d2cd7e7792117719e7c79bd5a10ca2a87dc57a03f202a3ec5bc6c5d9", "Interface.ProfileManager.UserProfile.UserProfile", "UserProfile");
 
   public static final Choice<UserProfile, GetBirthday, LocalDate> CHOICE_GetBirthday = 
       Choice.create("GetBirthday", value$ -> value$.toValue(), value$ -> GetBirthday.valueDecoder()

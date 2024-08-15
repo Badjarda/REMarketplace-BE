@@ -9,12 +9,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransferDTO {
+public class SwapRequestDTO {
     private String operator;
 
     private String buyer;
 
     private String seller;
+
+    private String postalCode;
 }
 
   

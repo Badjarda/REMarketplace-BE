@@ -47,7 +47,6 @@ import java.util.Collections;
 import java.util.Map;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.HoldingFactoryKey;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
@@ -56,11 +55,11 @@ import com.daml.ledger.javaapi.data.codegen.Created;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.marketplace.app.role.operator.Role;
 import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
-import daml.marketplace.interface$.common.types.PropertyKey;
 import business.profilemanager.entity.repository.UserProfileFactoryRepository;
 import daml.marketplace.interface$.common.types.UserRoleKey;
 
 @ApplicationScoped
+@SuppressWarnings("deprecation")
 public class OperatorService {
     @Inject
     DamlLedgerClientProvider clientProvider;

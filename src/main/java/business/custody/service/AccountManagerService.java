@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Command;

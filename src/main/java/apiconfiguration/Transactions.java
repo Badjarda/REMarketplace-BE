@@ -1,7 +1,9 @@
 package apiconfiguration;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.daml.ledger.api.v1.EventOuterClass.CreatedEvent;
@@ -132,6 +134,8 @@ import business.propertymanager.entity.repository.ResidencePropertyFactoryReposi
 import business.propertymanager.entity.model.WarehousePropertyFactory;
 import business.propertymanager.entity.repository.WarehousePropertyFactoryRepository;
 import daml.marketplace.app.role.operator.Role;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
+import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
@@ -712,10 +716,29 @@ public class Transactions {
   }
 
   private void handleUserProfileCreatedEvent(CreatedEvent event, String contractId) {
+    System.out.println(event);
+    /**
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String profileId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    userProfileRepository.persist(new UserProfile(operatorId + userId, contractId, profileId));
+    String username = event.getCreateArguments().getFields(3).getValue().getRecord().getFields(0).getValue().getText();
+    String firstName = event.getCreateArguments().getFields(4).getValue().getRecord().getFields(0).getValue().getText();
+    String lastName = event.getCreateArguments().getFields(5).getValue().getRecord().getFields(0).getValue().getText();
+    String fullName = event.getCreateArguments().getFields(6).getValue().getRecord().getFields(0).getValue().getText();
+    String password = event.getCreateArguments().getFields(7).getValue().getRecord().getFields(0).getValue().getText();
+    
+    LocalDate birthday = event.getCreateArguments().getFields(8).getValue().getRecord().getFields(0).getValue().getDate();
+    Optional<Gender> gender = event.getCreateArguments().getFields(9).getValue().getRecord().getFields(0).getValue().getOptionalGender();
+    Nationality nationality;
+    String contactMail;
+    Optional<Long> cellphoneNumber;
+    Long idNumber;
+    Long taxId;
+    Long socialSecurityId;
+    List<String> photoReferences;
+    userProfileRepository.persist(new UserProfile(operatorId + userId, contractId, profileId, username, firstName, lastName, fullName,
+      password, birthday, gender, nationality, contactMail, cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences));
+       */
   }
 
   private void handleApartmentPropertyInterfaceReferenceCreatedEvent(CreatedEvent event, String contractId) {
@@ -752,35 +775,35 @@ public class Transactions {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    apartmentPropertyRepository.persist(new ApartmentProperty(operatorId + userId, contractId, propertyId));
+    //apartmentPropertyRepository.persist(new ApartmentProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleGaragePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    garagePropertyRepository.persist(new GarageProperty(operatorId + userId, contractId, propertyId));
+    //garagePropertyRepository.persist(new GarageProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleLandPropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    landPropertyRepository.persist(new LandProperty(operatorId + userId, contractId, propertyId));
+    //landPropertyRepository.persist(new LandProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleResidencePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    residencePropertyRepository.persist(new ResidenceProperty(operatorId + userId, contractId, propertyId));
+    //residencePropertyRepository.persist(new ResidenceProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleWarehousePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    warehousePropertyRepository.persist(new WarehouseProperty(operatorId + userId, contractId, propertyId));
+    //warehousePropertyRepository.persist(new WarehouseProperty(operatorId + userId, contractId, propertyId));
   }
 
   private void handleUserRoleOfferCreatedEvent(CreatedEvent event, String contractId) {
@@ -954,7 +977,7 @@ public class Transactions {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String buyerId = event.getCreateArguments().getFields(1).getValue().getParty();
     String sellerId = event.getCreateArguments().getFields(2).getValue().getParty();
-    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + buyerId + sellerId, contractId));
+    //userSwapRequestRepository.persist(new UserSwapRequest(operatorId + buyerId + sellerId, contractId));
   }
 
   // ----------- Handle Archived Event Methods------------------------

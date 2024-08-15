@@ -44,7 +44,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class SwapRequest extends Template {
-  public static final Identifier TEMPLATE_ID = new Identifier("0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4", "App.Custody.Model", "SwapRequest");
+  public static final Identifier TEMPLATE_ID = new Identifier("b93cea58d2cd7e7792117719e7c79bd5a10ca2a87dc57a03f202a3ec5bc6c5d9", "App.Custody.Model", "SwapRequest");
 
   public static final Choice<SwapRequest, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->
@@ -70,9 +70,11 @@ public final class SwapRequest extends Template {
 
   public final BigDecimal fungibleAmount;
 
+  public final Transferable.ContractId transferableHoldingCid;
+
   public SwapRequest(String operator, String buyer, String seller, AccountKey sellerAccount,
       AccountKey buyerAccount, Transferable.ContractId fungibleHoldingCid,
-      BigDecimal fungibleAmount) {
+      BigDecimal fungibleAmount, Transferable.ContractId transferableHoldingCid) {
     this.operator = operator;
     this.buyer = buyer;
     this.seller = seller;
@@ -80,6 +82,7 @@ public final class SwapRequest extends Template {
     this.buyerAccount = buyerAccount;
     this.fungibleHoldingCid = fungibleHoldingCid;
     this.fungibleAmount = fungibleAmount;
+    this.transferableHoldingCid = transferableHoldingCid;
   }
 
   @Override
@@ -105,9 +108,9 @@ public final class SwapRequest extends Template {
 
   public static Update<Created<ContractId>> create(String operator, String buyer, String seller,
       AccountKey sellerAccount, AccountKey buyerAccount, Transferable.ContractId fungibleHoldingCid,
-      BigDecimal fungibleAmount) {
+      BigDecimal fungibleAmount, Transferable.ContractId transferableHoldingCid) {
     return new SwapRequest(operator, buyer, seller, sellerAccount, buyerAccount, fungibleHoldingCid,
-        fungibleAmount).create();
+        fungibleAmount, transferableHoldingCid).create();
   }
 
   @Override
@@ -133,7 +136,7 @@ public final class SwapRequest extends Template {
   }
 
   public DamlRecord toValue() {
-    ArrayList<DamlRecord.Field> fields = new ArrayList<DamlRecord.Field>(7);
+    ArrayList<DamlRecord.Field> fields = new ArrayList<DamlRecord.Field>(8);
     fields.add(new DamlRecord.Field("operator", new Party(this.operator)));
     fields.add(new DamlRecord.Field("buyer", new Party(this.buyer)));
     fields.add(new DamlRecord.Field("seller", new Party(this.seller)));
@@ -141,13 +144,14 @@ public final class SwapRequest extends Template {
     fields.add(new DamlRecord.Field("buyerAccount", this.buyerAccount.toValue()));
     fields.add(new DamlRecord.Field("fungibleHoldingCid", this.fungibleHoldingCid.toValue()));
     fields.add(new DamlRecord.Field("fungibleAmount", new Numeric(this.fungibleAmount)));
+    fields.add(new DamlRecord.Field("transferableHoldingCid", this.transferableHoldingCid.toValue()));
     return new DamlRecord(fields);
   }
 
   private static ValueDecoder<SwapRequest> templateValueDecoder() throws IllegalArgumentException {
     return value$ -> {
       Value recordValue$ = value$;
-      List<DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(7,0, recordValue$);
+      List<DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(8,0, recordValue$);
       String operator = PrimitiveValueDecoders.fromParty.decode(fields$.get(0).getValue());
       String buyer = PrimitiveValueDecoders.fromParty.decode(fields$.get(1).getValue());
       String seller = PrimitiveValueDecoders.fromParty.decode(fields$.get(2).getValue());
@@ -157,13 +161,15 @@ public final class SwapRequest extends Template {
           new Transferable.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected fungibleHoldingCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       BigDecimal fungibleAmount = PrimitiveValueDecoders.fromNumeric
           .decode(fields$.get(6).getValue());
+      Transferable.ContractId transferableHoldingCid =
+          new Transferable.ContractId(fields$.get(7).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected transferableHoldingCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       return new SwapRequest(operator, buyer, seller, sellerAccount, buyerAccount,
-          fungibleHoldingCid, fungibleAmount);
+          fungibleHoldingCid, fungibleAmount, transferableHoldingCid);
     } ;
   }
 
   public static JsonLfDecoder<SwapRequest> jsonDecoder() {
-    return JsonLfDecoders.record(Arrays.asList("operator", "buyer", "seller", "sellerAccount", "buyerAccount", "fungibleHoldingCid", "fungibleAmount"), name -> {
+    return JsonLfDecoders.record(Arrays.asList("operator", "buyer", "seller", "sellerAccount", "buyerAccount", "fungibleHoldingCid", "fungibleAmount", "transferableHoldingCid"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "buyer": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
@@ -172,10 +178,11 @@ public final class SwapRequest extends Template {
             case "buyerAccount": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, daml.daml.finance.interface$.types.common.types.AccountKey.jsonDecoder());
             case "fungibleHoldingCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.daml.finance.interface$.holding.transferable.Transferable.ContractId::new));
             case "fungibleAmount": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "transferableHoldingCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.daml.finance.interface$.holding.transferable.Transferable.ContractId::new));
             default: return null;
           }
         }
-        , (Object[] args) -> new SwapRequest(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6])));
+        , (Object[] args) -> new SwapRequest(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7])));
   }
 
   public static SwapRequest fromJson(String json) throws JsonLfDecoder.Error {
@@ -190,7 +197,8 @@ public final class SwapRequest extends Template {
         JsonLfEncoders.Field.of("sellerAccount", apply(AccountKey::jsonEncoder, sellerAccount)),
         JsonLfEncoders.Field.of("buyerAccount", apply(AccountKey::jsonEncoder, buyerAccount)),
         JsonLfEncoders.Field.of("fungibleHoldingCid", apply(JsonLfEncoders::contractId, fungibleHoldingCid)),
-        JsonLfEncoders.Field.of("fungibleAmount", apply(JsonLfEncoders::numeric, fungibleAmount)));
+        JsonLfEncoders.Field.of("fungibleAmount", apply(JsonLfEncoders::numeric, fungibleAmount)),
+        JsonLfEncoders.Field.of("transferableHoldingCid", apply(JsonLfEncoders::contractId, transferableHoldingCid)));
   }
 
   public static ContractFilter<Contract> contractFilter() {
@@ -214,20 +222,22 @@ public final class SwapRequest extends Template {
         Objects.equals(this.sellerAccount, other.sellerAccount) &&
         Objects.equals(this.buyerAccount, other.buyerAccount) &&
         Objects.equals(this.fungibleHoldingCid, other.fungibleHoldingCid) &&
-        Objects.equals(this.fungibleAmount, other.fungibleAmount);
+        Objects.equals(this.fungibleAmount, other.fungibleAmount) &&
+        Objects.equals(this.transferableHoldingCid, other.transferableHoldingCid);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(this.operator, this.buyer, this.seller, this.sellerAccount,
-        this.buyerAccount, this.fungibleHoldingCid, this.fungibleAmount);
+        this.buyerAccount, this.fungibleHoldingCid, this.fungibleAmount,
+        this.transferableHoldingCid);
   }
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.app.custody.model.SwapRequest(%s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.app.custody.model.SwapRequest(%s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.buyer, this.seller, this.sellerAccount, this.buyerAccount,
-        this.fungibleHoldingCid, this.fungibleAmount);
+        this.fungibleHoldingCid, this.fungibleAmount, this.transferableHoldingCid);
   }
 
   public static final class ContractId extends com.daml.ledger.javaapi.data.codegen.ContractId<SwapRequest> implements Exercises<ExerciseCommand> {

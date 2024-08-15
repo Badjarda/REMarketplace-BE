@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class View extends DamlRecord<View> {
-  public static final String _packageId = "0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4";
+  public static final String _packageId = "b93cea58d2cd7e7792117719e7c79bd5a10ca2a87dc57a03f202a3ec5bc6c5d9";
 
   public final String operator;
 
@@ -43,9 +43,11 @@ public class View extends DamlRecord<View> {
 
   public final BigDecimal fungibleAmount;
 
+  public final Transferable.ContractId transferableHoldingCid;
+
   public View(String operator, String buyer, String seller, AccountKey sellerAccount,
       AccountKey buyerAccount, Transferable.ContractId fungibleHoldingCid,
-      BigDecimal fungibleAmount) {
+      BigDecimal fungibleAmount, Transferable.ContractId transferableHoldingCid) {
     this.operator = operator;
     this.buyer = buyer;
     this.seller = seller;
@@ -53,6 +55,7 @@ public class View extends DamlRecord<View> {
     this.buyerAccount = buyerAccount;
     this.fungibleHoldingCid = fungibleHoldingCid;
     this.fungibleAmount = fungibleAmount;
+    this.transferableHoldingCid = transferableHoldingCid;
   }
 
   /**
@@ -66,7 +69,7 @@ public class View extends DamlRecord<View> {
   public static ValueDecoder<View> valueDecoder() throws IllegalArgumentException {
     return value$ -> {
       Value recordValue$ = value$;
-      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(7,0,
+      List<com.daml.ledger.javaapi.data.DamlRecord.Field> fields$ = PrimitiveValueDecoders.recordCheck(8,0,
           recordValue$);
       String operator = PrimitiveValueDecoders.fromParty.decode(fields$.get(0).getValue());
       String buyer = PrimitiveValueDecoders.fromParty.decode(fields$.get(1).getValue());
@@ -77,13 +80,15 @@ public class View extends DamlRecord<View> {
           new Transferable.ContractId(fields$.get(5).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected fungibleHoldingCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       BigDecimal fungibleAmount = PrimitiveValueDecoders.fromNumeric
           .decode(fields$.get(6).getValue());
+      Transferable.ContractId transferableHoldingCid =
+          new Transferable.ContractId(fields$.get(7).getValue().asContractId().orElseThrow(() -> new IllegalArgumentException("Expected transferableHoldingCid to be of type com.daml.ledger.javaapi.data.ContractId")).getValue());
       return new View(operator, buyer, seller, sellerAccount, buyerAccount, fungibleHoldingCid,
-          fungibleAmount);
+          fungibleAmount, transferableHoldingCid);
     } ;
   }
 
   public com.daml.ledger.javaapi.data.DamlRecord toValue() {
-    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(7);
+    ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field> fields = new ArrayList<com.daml.ledger.javaapi.data.DamlRecord.Field>(8);
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("operator", new Party(this.operator)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("buyer", new Party(this.buyer)));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("seller", new Party(this.seller)));
@@ -91,11 +96,12 @@ public class View extends DamlRecord<View> {
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("buyerAccount", this.buyerAccount.toValue()));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("fungibleHoldingCid", this.fungibleHoldingCid.toValue()));
     fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("fungibleAmount", new Numeric(this.fungibleAmount)));
+    fields.add(new com.daml.ledger.javaapi.data.DamlRecord.Field("transferableHoldingCid", this.transferableHoldingCid.toValue()));
     return new com.daml.ledger.javaapi.data.DamlRecord(fields);
   }
 
   public static JsonLfDecoder<View> jsonDecoder() {
-    return JsonLfDecoders.record(Arrays.asList("operator", "buyer", "seller", "sellerAccount", "buyerAccount", "fungibleHoldingCid", "fungibleAmount"), name -> {
+    return JsonLfDecoders.record(Arrays.asList("operator", "buyer", "seller", "sellerAccount", "buyerAccount", "fungibleHoldingCid", "fungibleAmount", "transferableHoldingCid"), name -> {
           switch (name) {
             case "operator": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(0, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
             case "buyer": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(1, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.party);
@@ -104,10 +110,11 @@ public class View extends DamlRecord<View> {
             case "buyerAccount": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(4, daml.daml.finance.interface$.types.common.types.AccountKey.jsonDecoder());
             case "fungibleHoldingCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(5, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.daml.finance.interface$.holding.transferable.Transferable.ContractId::new));
             case "fungibleAmount": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(6, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.numeric(10));
+            case "transferableHoldingCid": return com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.JavaArg.at(7, com.daml.ledger.javaapi.data.codegen.json.JsonLfDecoders.contractId(daml.daml.finance.interface$.holding.transferable.Transferable.ContractId::new));
             default: return null;
           }
         }
-        , (Object[] args) -> new View(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6])));
+        , (Object[] args) -> new View(JsonLfDecoders.cast(args[0]), JsonLfDecoders.cast(args[1]), JsonLfDecoders.cast(args[2]), JsonLfDecoders.cast(args[3]), JsonLfDecoders.cast(args[4]), JsonLfDecoders.cast(args[5]), JsonLfDecoders.cast(args[6]), JsonLfDecoders.cast(args[7])));
   }
 
   public static View fromJson(String json) throws JsonLfDecoder.Error {
@@ -122,7 +129,8 @@ public class View extends DamlRecord<View> {
         JsonLfEncoders.Field.of("sellerAccount", apply(AccountKey::jsonEncoder, sellerAccount)),
         JsonLfEncoders.Field.of("buyerAccount", apply(AccountKey::jsonEncoder, buyerAccount)),
         JsonLfEncoders.Field.of("fungibleHoldingCid", apply(JsonLfEncoders::contractId, fungibleHoldingCid)),
-        JsonLfEncoders.Field.of("fungibleAmount", apply(JsonLfEncoders::numeric, fungibleAmount)));
+        JsonLfEncoders.Field.of("fungibleAmount", apply(JsonLfEncoders::numeric, fungibleAmount)),
+        JsonLfEncoders.Field.of("transferableHoldingCid", apply(JsonLfEncoders::contractId, transferableHoldingCid)));
   }
 
   @Override
@@ -142,19 +150,21 @@ public class View extends DamlRecord<View> {
         Objects.equals(this.sellerAccount, other.sellerAccount) &&
         Objects.equals(this.buyerAccount, other.buyerAccount) &&
         Objects.equals(this.fungibleHoldingCid, other.fungibleHoldingCid) &&
-        Objects.equals(this.fungibleAmount, other.fungibleAmount);
+        Objects.equals(this.fungibleAmount, other.fungibleAmount) &&
+        Objects.equals(this.transferableHoldingCid, other.transferableHoldingCid);
   }
 
   @Override
   public int hashCode() {
     return Objects.hash(this.operator, this.buyer, this.seller, this.sellerAccount,
-        this.buyerAccount, this.fungibleHoldingCid, this.fungibleAmount);
+        this.buyerAccount, this.fungibleHoldingCid, this.fungibleAmount,
+        this.transferableHoldingCid);
   }
 
   @Override
   public String toString() {
-    return String.format("daml.marketplace.interface$.custody.choices.swaprequest.View(%s, %s, %s, %s, %s, %s, %s)",
+    return String.format("daml.marketplace.interface$.custody.choices.swaprequest.View(%s, %s, %s, %s, %s, %s, %s, %s)",
         this.operator, this.buyer, this.seller, this.sellerAccount, this.buyerAccount,
-        this.fungibleHoldingCid, this.fungibleAmount);
+        this.fungibleHoldingCid, this.fungibleAmount, this.transferableHoldingCid);
   }
 }
