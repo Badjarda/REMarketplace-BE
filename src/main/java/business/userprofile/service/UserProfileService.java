@@ -170,70 +170,7 @@ public class UserProfileService {
       UserProfileKey key = new UserProfileKey(operatorParty, userParty, new Id(profileIdString));
       var serviceId = new daml.marketplace.interface$.profilemanager.service.Service.ContractId(
           servicId);
-      Transaction transaction = transactionService.submitTransaction(serviceId.exerciseUpdateUsername(username, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(
-          serviceId.exerciseUpdateFirstName(firstName, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(serviceId.exerciseUpdateLastName(lastName, key).commands(),
-          Arrays.asList(operatorParty, userParty),null);
-      transactionService.handleTransaction(transaction);
-
-      transaction =  transactionService.submitTransaction(serviceId.exerciseUpdateFullName(fullName, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction =  transactionService.submitTransaction(serviceId.exerciseUpdatePassword(password, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction =  transactionService.submitTransaction(serviceId.exerciseUpdateBirthday(birthday, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      if (gender.isPresent()){
-        transaction = transactionService.submitTransaction(
-            serviceId.exerciseUpdateGender(gender, key).commands(),
-            Arrays.asList(operatorParty, userParty), null);
-        transactionService.handleTransaction(transaction);
-      }
-
-      transaction = transactionService.submitTransaction(
-          serviceId.exerciseUpdateNationality(nationality, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(
-          serviceId.exerciseUpdateContactMail(contactMail, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      if (cellphoneNumber.isPresent()){
-        transaction = transactionService.submitTransaction(
-            serviceId.exerciseUpdateCellphoneNumber(cellphoneNumber, key)
-                .commands(),
-            Arrays.asList(operatorParty, userParty), null);
-        transactionService.handleTransaction(transaction);
-      }
-
-      transaction = transactionService.submitTransaction(serviceId.exerciseUpdateIdNumber(idNumber, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(serviceId.exerciseUpdateTaxId(taxId, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(
-          serviceId.exerciseUpdateSocialSecurityId(socialSecurityId, key).commands(),
-          Arrays.asList(operatorParty, userParty), null);
-      transactionService.handleTransaction(transaction);
-
-      transaction = transactionService.submitTransaction(serviceId.exerciseUpdatePhotoReferences(photoReferences, key).commands(),
+      Transaction transaction = transactionService.submitTransaction(serviceId.exerciseUpdateProfile(username, firstName, lastName, fullName, password, birthday, gender, nationality, contactMail, cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences, key).commands(),
           Arrays.asList(operatorParty, userParty), null);
       transactionService.handleTransaction(transaction);
 

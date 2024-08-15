@@ -1,5 +1,6 @@
 package apiconfiguration;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,6 +53,7 @@ import business.useraccount.entity.model.UserAccountInterface;
 import business.useraccount.entity.model.UserAccountWithdrawRequest;
 import business.useraccount.entity.model.UserHoldingFungible;
 import business.useraccount.entity.model.UserHoldingTransferable;
+import business.useraccount.entity.model.UserSwapRequest;
 import business.useraccount.entity.repository.CustodyServiceOfferRepository;
 import business.useraccount.entity.repository.HoldingFactoryInterfaceRepository;
 import business.useraccount.entity.repository.UserAccountCloseRequestRepository;
@@ -62,6 +64,7 @@ import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserAccountWithdrawRequestRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
+import business.useraccount.entity.repository.UserSwapRequestRepository;
 import business.userprofile.entity.model.ProfileServiceOffer;
 import business.userprofile.entity.model.UserProfile;
 import business.userprofile.entity.model.UserProfileCreateRequest;
@@ -230,6 +233,8 @@ public class Transactions {
   UserHoldingTransferableRepository userHoldingTransferableRepository;
   @Inject
   UserAccountWithdrawRequestRepository userAccountWithdrawRequestRepository;
+  @Inject
+  UserSwapRequestRepository userSwapRequestRepository;
   @Inject
   UserAccountRepository userAccountRepository;
   @Inject
@@ -441,6 +446,8 @@ public class Transactions {
       handleUserHoldingFungibleCreatedEvent(created, contractId);
     } else if (templateId.equals(daml.daml.finance.holding.transferable.Transferable.TEMPLATE_ID.toProto())) {
       handleUserHoldingTransferableCreatedEvent(created, contractId);
+    } else if (templateId.equals(daml.marketplace.app.custody.model.SwapRequest.TEMPLATE_ID.toProto())) {
+      handleUserSwapRequestCreatedEvent(created, contractId);
     } else {
       System.out.println("Unsupported template ID: " + templateId.toString() + "\n");
     }
@@ -586,6 +593,8 @@ public class Transactions {
       handleUserHoldingFungibleArchivedEvent(contractId);
     } else if (templateId.equals(daml.daml.finance.holding.transferable.Transferable.TEMPLATE_ID.toProto())) {
       handleUserHoldingTransferableArchivedEvent(contractId);
+    } else if (templateId.equals(daml.marketplace.app.custody.model.SwapRequest.TEMPLATE_ID.toProto())) {
+      handleUserSwapRequestArchivedEvent(contractId);
     } else {
       System.out.println("Unsupported template ID: " + templateId.toString() + "\n");
     }
@@ -677,13 +686,15 @@ public class Transactions {
   }
 
   private void handleRequestIssueCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    issueRequestRepository.persist(new IssueRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    issueRequestRepository.persist(new IssueRequest(operatorId + userId, contractId));
   }
 
   private void handleRequestDeIssueCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    deIssueRequestRepository.persist(new DeIssueRequest(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    deIssueRequestRepository.persist(new DeIssueRequest(operatorId + userId, contractId));
   }
 
   private void handleUserAccountCreatedEvent(CreatedEvent event, String contractId) {
@@ -876,13 +887,15 @@ public class Transactions {
   }
 
   private void handleIssuanceServiceOfferCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    issuanceServiceOfferRepository.persist(new IssuanceServiceOffer(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    issuanceServiceOfferRepository.persist(new IssuanceServiceOffer(operatorId+userId, contractId));
   }
 
   private void handleIssuanceServiceCreatedEvent(CreatedEvent event, String contractId) {
-    String partyId = event.getCreateArguments().getFields(0).getValue().getParty();
-    issuanceManagerRepository.persist(new IssuanceManager(partyId, contractId));
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
+    issuanceManagerRepository.persist(new IssuanceManager(operatorId+userId, contractId));
   }
 
   private void handleProfileManagerServiceCreatedEvent(CreatedEvent event, String contractId) {
@@ -912,14 +925,36 @@ public class Transactions {
   private void handleUserHoldingFungibleCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
     String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
-    userHoldingFungibleRepository.persist(new UserHoldingFungible(operatorId + userId, contractId));
+    String amountString = event.getCreateArguments().getFields(2).getValue().getNumeric();
+    BigDecimal newAmount = new BigDecimal(amountString);
+    try {
+        UserHoldingFungible existingHolding = userHoldingFungibleRepository.findById(operatorId + userId);
+        userHoldingFungibleRepository.deleteById(operatorId + userId);
+        if (existingHolding != null) {
+            // Sum the amounts
+            BigDecimal updatedAmount = existingHolding.getAmount().add(newAmount);
+            userHoldingFungibleRepository.persist(new UserHoldingFungible(operatorId + userId, contractId, updatedAmount));
+        } else {
+            // Create a new entry
+            userHoldingFungibleRepository.persist(new UserHoldingFungible(operatorId + userId, contractId, newAmount));
+        }
+    } catch (Exception e) {
+        // Handle any unexpected exceptions
+        e.printStackTrace();
+    }
   }
 
   private void handleUserHoldingTransferableCreatedEvent(CreatedEvent event, String contractId) {
+    String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
+    String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
+    userHoldingTransferableRepository.persist(new UserHoldingTransferable(operatorId + userId, contractId));
+  }
+
+  private void handleUserSwapRequestCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
-    String userId = event.getCreateArguments().getFields(1).getValue().getParty();
-    String holdingCid = event.getCreateArguments().getFields(2).getValue().getParty();
-    userHoldingTransferableRepository.persist(new UserHoldingTransferable(operatorId + userId, contractId, holdingCid));
+    String buyerId = event.getCreateArguments().getFields(1).getValue().getParty();
+    String sellerId = event.getCreateArguments().getFields(2).getValue().getParty();
+    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + buyerId + sellerId, contractId));
   }
 
   // ----------- Handle Archived Event Methods------------------------
@@ -1146,6 +1181,10 @@ public class Transactions {
 
   private void handleUserHoldingTransferableArchivedEvent(String contractId) {
     userHoldingTransferableRepository.delete("contractId", contractId);
+  }
+
+  private void handleUserSwapRequestArchivedEvent(String contractId) {
+    userSwapRequestRepository.delete("contractId", contractId);
   }
 
   // ------------------------------------------------------------------------

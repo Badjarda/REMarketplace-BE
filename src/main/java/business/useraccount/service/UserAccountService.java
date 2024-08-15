@@ -19,10 +19,16 @@ import business.useraccount.entity.repository.CustodyServiceOfferRepository;
 import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
+import business.useraccount.entity.repository.UserSwapRequestRepository;
 import business.userproperty.entity.repository.ApartmentPropertyRepository;
+import business.userproperty.entity.repository.GaragePropertyRepository;
+import business.userproperty.entity.repository.LandPropertyRepository;
+import business.userproperty.entity.repository.ResidencePropertyRepository;
+import business.userproperty.entity.repository.WarehousePropertyRepository;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.Quantity;
+import daml.marketplace.interface$.common.types.PropertyKey;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.HoldingStandard;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -59,6 +65,21 @@ public class UserAccountService {
 
   @Inject
   UserHoldingFungibleRepository userHoldingFungibleRepository;
+
+  @Inject
+  UserSwapRequestRepository userSwapRequestRepository;
+
+  @Inject
+  GaragePropertyRepository garagePropertyRepository;
+
+  @Inject
+  LandPropertyRepository landPropertyRepository;
+
+  @Inject
+  ResidencePropertyRepository residencePropertyRepository;
+
+  @Inject
+  WarehousePropertyRepository warehousePropertyRepository;
 
   public static final String APP_ID = "OperatorId";
 
@@ -176,43 +197,6 @@ public class UserAccountService {
   }
 
   @SuppressWarnings("unchecked")
-  public String requestDepositPropertyInstrument(String operator, String user, String propertyId){
-    try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
-      String userParty = userRepository.findById(user).getPartyId();
-      Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
-      Set<String> observers = new Set<>(singletonMap);
-      Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
-      observersMap.put("Default", observers);
-      
-      Id userPropertyId = new Id(propertyId);
-      String version = "0";
-      var propertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, userPropertyId, version, HoldingStandard.TRANSFERABLE);
-      @SuppressWarnings("rawtypes")
-      Quantity quantity = new daml.daml.finance.interface$.types.common.types.Quantity(propertyKey, 1.0);
-
-      String accountIdString = userAccountRepository.findById(operatorParty + userParty).getAccountId();
-      AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
-
-      List<com.daml.ledger.javaapi.data.Command> command = null;
-      String servicId = custodyManagerRepository.findById(operatorParty + userParty)
-          .getContractId();
-      
-      var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(
-          servicId);
-
-      command = serviceId.exerciseRequestDeposit(quantity, accountKey).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
-      transactionService.handleTransaction(transaction);
-    } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error request Deposit Property Instrument : " + e.getMessage();
-    } catch (Exception e) {
-      return "Error request Deposit Property Instrument : " + e.getMessage();
-    }
-    return "Success Request Deposit Property Instrument\n";
-  }
-
-  @SuppressWarnings("unchecked")
   public String requestDepositCurrencyInstrument(String operator, String user, String tokenStringId, BigDecimal amount){
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
@@ -247,34 +231,6 @@ public class UserAccountService {
     return "Success Request Deposit Currency Instrument\n";
   }
 
-  public String requestWithdrawTransferable(String operator, String user, String holdingCid){
-    try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
-      String userParty = userRepository.findById(user).getPartyId();
-      Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
-      Set<String> observers = new Set<>(singletonMap);
-      Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
-      observersMap.put("Default", observers);
-
-      String holdingCId = userHoldingTransferableRepository.findById(holdingCid).getContractId();
-      var holdingContractId = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
-
-      List<com.daml.ledger.javaapi.data.Command> command = null;
-      String servicId = custodyManagerRepository.findById(operatorParty + userParty).getContractId();
-      
-      var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
-
-      command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
-      transactionService.handleTransaction(transaction);
-    } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error request Withdraw Property Instrument : " + e.getMessage();
-    } catch (Exception e) {
-      return "Error request Withdraw Property Instrument : " + e.getMessage();
-    }
-    return "Success Request Withdraw Property Instrument\n";
-  }
-
   public String requestWithdrawFungible(String operator, String user){
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
@@ -304,4 +260,61 @@ public class UserAccountService {
     return "Success Request Withdraw Currency Instrument\n";
   }
 
+  public String acceptSwapRequest(String operator, String buyer, String seller, String publicString, String postalCode, String propertyType) {
+        try {
+            String operatorParty = userRepository.findById(operator).getPartyId();
+            String buyerParty = userRepository.findById(buyer).getPartyId();
+            String sellerParty = userRepository.findById(seller).getPartyId();
+            String publicParty = userRepository.findById(publicString).getPartyId();
+
+            String servicId = custodyManagerRepository.findById(operatorParty + sellerParty).getContractId();
+            var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
+            
+            String swapRequestCId = userSwapRequestRepository.findById(operatorParty + buyerParty + sellerParty).getContractId();
+            var swapRequestCid = new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId(swapRequestCId);
+
+            String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + postalCode).getContractId();
+            var transferableHoldingCid = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(transferableHoldingCId);
+
+            String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
+            AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
+
+            List<com.daml.ledger.javaapi.data.Command> command = null;
+
+            if(propertyType.equals("APARTMENT")){
+                String apartmentIdString = apartmentPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(apartmentIdString));
+                command = serviceId.exerciseAtomicSwapApartment(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+            } else if(propertyType.equals("GARAGE")){
+                String garageIdString = garagePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(garageIdString));
+                command = serviceId.exerciseAtomicSwapGarage(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+            } else if(propertyType.equals("LAND")){
+                String landIdString = landPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(landIdString));
+                command = serviceId.exerciseAtomicSwapLand(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+            } else if(propertyType.equals("RESIDENCE")){
+                String residenceIdString = residencePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(residenceIdString));
+                command = serviceId.exerciseAtomicSwapResidence(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+            } else if(propertyType.equals("WAREHOUSE")){
+                String warehouseIdString = warehousePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(warehouseIdString));
+                command = serviceId.exerciseAtomicSwapWarehouse(sellerParty, buyerParty, sellerAccountKey, transferableHoldingCid, swapRequestCid, key).commands();
+            } else{
+            System.out.println("PROPERTY TYPE NOT COMPATIBLE");
+            }
+            Transaction transaction = transactionService.submitTransaction(
+                command, 
+                Arrays.asList(operatorParty, buyerParty, sellerParty), 
+                Arrays.asList(operatorParty, buyerParty, sellerParty)
+            );
+            transactionService.handleTransaction(transaction);
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            return "Error Atomic Swap : " + e.getMessage() + "\n";
+        } catch (Exception e) {
+            return "Error Atomic Swap : " + e.getMessage() + "\n";
+        }
+        return "Successfully Atomic Swapped!\n";
+    }
 }

@@ -17,10 +17,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LandProperty {
   @Id
-  @GeneratedValue(strategy=GenerationType.AUTO)
-  private Long id;
-
-  @Column(name = "partyId")
   private String partyId;
 
   @Column(name = "contractId")
@@ -28,10 +24,4 @@ public class LandProperty {
 
   @Column(name = "propertyId")
   private String propertyId;
-
-  public LandProperty(String partyId, String contractId, String propertyId) {
-    this.partyId = partyId;
-    this.contractId = contractId;
-    this.propertyId = propertyId;
-  }
 }

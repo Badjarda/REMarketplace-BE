@@ -21,6 +21,8 @@ public class IssueRequestDTO {
 
   private String propertyIdString;
 
+  private String postalCode;
+
   private String tokenStringId;
 
   private BigDecimal amount;

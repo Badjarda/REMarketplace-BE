@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public final class Factory {
-  public static final Identifier TEMPLATE_ID = new Identifier("8b6e58552ef878dbcd4586daf541e0ca6dd1b0d75795e7f9ece68259cb3242b1", "Interface.ProfileManager.UserProfile.Factory", "Factory");
+  public static final Identifier TEMPLATE_ID = new Identifier("0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4", "Interface.ProfileManager.UserProfile.Factory", "Factory");
 
   public static final Choice<Factory, daml.da.internal.template.Archive, Unit> CHOICE_Archive = 
       Choice.create("Archive", value$ -> value$.toValue(), value$ ->

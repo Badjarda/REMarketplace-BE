@@ -39,31 +39,14 @@ public class IssuerResource {
   @Path("/requestIssueTransferable")
   public String requestIssueTransferable(IssueRequestDTO request) {
     return issuanceService.requestIssueTransferable(request.getOperator(), request.getUser(),
-        request.getIssuanceIdString(), request.getPropertyIdString());
+        request.getIssuanceIdString(), request.getPostalCode(), request.getPropertyIdString());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestIssueFungible")
-  public String requestIssueFungible(IssueRequestDTO request) {
-    return issuanceService.requestIssueFungible(request.getOperator(), request.getUser(), request.getIssuanceIdString(),
-        request.getTokenStringId(), request.getAmount());
-  }
-
-  @POST
-  @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/issueTransferCurrency")
-  public String issueTransferCurrency(TransferDTO request) {
-    return issuanceService.issueTransferCurrency(request.getOperator(), request.getBuyer(), request.getSeller());
-  }
-
-  @POST
-  @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/issueTransferProperty")
-  public String issueTransferProperty(TransferDTO request) {
-    return issuanceService.issueTransferProperty(request.getOperator(), request.getBuyer(), request.getSeller());
+  @Path("/requestSwap")
+  public String requestSwap(TransferDTO request) {
+    return issuanceService.requestSwap(request.getOperator(), request.getBuyer(), request.getSeller());
   }
 }

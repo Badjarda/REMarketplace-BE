@@ -52,25 +52,9 @@ public class UserAccountResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestDepositProperty/{operator}/{user}/{propertyId}")
-  public String requestDepositProperty(String operator, String user, String propertyId) {
-    return userAccountService.requestDepositPropertyInstrument(operator, user, propertyId);
-  }
-
-  @POST
-  @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.APPLICATION_JSON)
   @Path("/requestDepositCurrency/{operator}/{user}/{tokenId}/{amount}")
   public String requestDepositCurrency(String operator, String user, String tokenId, BigDecimal amount) {
     return userAccountService.requestDepositCurrencyInstrument(operator, user, tokenId, amount);
-  }
-
-  @POST
-  @Produces(MediaType.TEXT_PLAIN)
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestWithdrawProperty/{operator}/{user}/{holdingCid}")
-  public String requestWithdrawProperty(String operator, String user, String holdingCid) {
-    return userAccountService.requestWithdrawTransferable(operator, user, holdingCid);
   }
 
   @POST

@@ -2,6 +2,7 @@ package business.operator.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import lombok.experimental.var;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
 import business.custody.entity.repository.AccountFactoryRepository;
@@ -22,13 +23,21 @@ import business.user.entity.repository.UserRepository;
 import business.useraccount.entity.repository.UserAccountCloseRequestRepository;
 import business.useraccount.entity.repository.UserAccountCreateRequestRepository;
 import business.useraccount.entity.repository.UserAccountDepositRequestRepository;
+import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserAccountWithdrawRequestRepository;
+import business.useraccount.entity.repository.UserHoldingTransferableRepository;
+import business.useraccount.entity.repository.UserSwapRequestRepository;
 import business.userprofile.entity.repository.UserProfileCreateRequestRepository;
+import business.userproperty.entity.repository.ApartmentPropertyRepository;
+import business.userproperty.entity.repository.GaragePropertyRepository;
+import business.userproperty.entity.repository.LandPropertyRepository;
 import business.userproperty.entity.repository.RequestCreateApartmentRepository;
 import business.userproperty.entity.repository.RequestCreateGarageRepository;
 import business.userproperty.entity.repository.RequestCreateLandRepository;
 import business.userproperty.entity.repository.RequestCreateResidenceRepository;
 import business.userproperty.entity.repository.RequestCreateWarehouseRepository;
+import business.userproperty.entity.repository.ResidencePropertyRepository;
+import business.userproperty.entity.repository.WarehousePropertyRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +47,7 @@ import java.util.Collections;
 import java.util.Map;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
+import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.HoldingFactoryKey;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
@@ -46,6 +56,7 @@ import com.daml.ledger.javaapi.data.codegen.Created;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.marketplace.app.role.operator.Role;
 import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
+import daml.marketplace.interface$.common.types.PropertyKey;
 import business.profilemanager.entity.repository.UserProfileFactoryRepository;
 import daml.marketplace.interface$.common.types.UserRoleKey;
 
@@ -122,6 +133,22 @@ public class OperatorService {
     IssueRequestRepository issueRequestRepository;
     @Inject
     DeIssueRequestRepository deIssueRequestRepository;
+    @Inject
+    UserSwapRequestRepository userSwapRequestRepository;
+    @Inject
+    UserAccountRepository userAccountRepository;
+    @Inject
+    UserHoldingTransferableRepository userHoldingTransferableRepository;
+    @Inject
+    ApartmentPropertyRepository apartmentPropertyRepository;
+    @Inject
+    GaragePropertyRepository garagePropertyRepository;
+    @Inject
+    LandPropertyRepository landPropertyRepository;
+    @Inject
+    ResidencePropertyRepository residencePropertyRepository;
+    @Inject
+    WarehousePropertyRepository warehousePropertyRepository;
     @Inject
     Transactions transactionService;
 
@@ -434,6 +461,8 @@ public class OperatorService {
             var command = serviceId.exerciseDeposit(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, publicParty, userParty), Arrays.asList(publicParty));
             transactionService.handleTransaction(transaction);
+            // delete the request
+            userAccountDepositRequestRepository.deleteById(operatorParty + userParty);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Deposit in User Account : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -508,7 +537,7 @@ public class OperatorService {
         return "Successfully DeIssue in User Account!\n";
     }
 
-    public String acceptRequestCreateApartmentProperty(String operator, String user) {
+    public String acceptRequestCreateApartmentProperty(String operator, String user, String postalCode) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
@@ -530,7 +559,7 @@ public class OperatorService {
         return "Apartment Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateGarageProperty(String operator, String user) {
+    public String acceptRequestCreateGarageProperty(String operator, String user, String postalCode) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
@@ -555,7 +584,7 @@ public class OperatorService {
         return "Garage Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateLandProperty(String operator, String user) {
+    public String acceptRequestCreateLandProperty(String operator, String user, String postalCode) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
@@ -580,7 +609,7 @@ public class OperatorService {
         return "Land Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateResidenceProperty(String operator, String user) {
+    public String acceptRequestCreateResidenceProperty(String operator, String user, String postalCode) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
@@ -605,7 +634,7 @@ public class OperatorService {
         return "Residence Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateWarehouseProperty(String operator, String user) {
+    public String acceptRequestCreateWarehouseProperty(String operator, String user, String postalCode) {
         try {
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
@@ -629,5 +658,4 @@ public class OperatorService {
         }
         return "Warehouse Property Successfully Created!\n";
     }
-
 }

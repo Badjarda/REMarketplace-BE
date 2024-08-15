@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
+import business.custody.entity.repository.CustodyManagerRepository;
 import business.issuance.entity.repository.IssuanceManagerRepository;
 import business.issuer.entity.repository.IssuanceServiceOfferRepository;
 import business.operator.entity.repository.OperatorRepository;
@@ -20,6 +21,11 @@ import business.user.entity.repository.UserRepository;
 import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
+import business.userproperty.entity.repository.ApartmentPropertyRepository;
+import business.userproperty.entity.repository.GaragePropertyRepository;
+import business.userproperty.entity.repository.LandPropertyRepository;
+import business.userproperty.entity.repository.ResidencePropertyRepository;
+import business.userproperty.entity.repository.WarehousePropertyRepository;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.HoldingStandard;
@@ -56,6 +62,24 @@ public class IssuanceService {
 
   @Inject
   UserAccountRepository userAccountRepository;
+
+  @Inject
+  ApartmentPropertyRepository apartmentPropertyRepository;
+
+  @Inject
+  GaragePropertyRepository garagePropertyRepository;
+
+  @Inject
+  LandPropertyRepository landPropertyRepository;
+
+  @Inject
+  ResidencePropertyRepository residencePropertyRepository;
+
+  @Inject
+  WarehousePropertyRepository warehousePropertyRepository;
+
+  @Inject
+  CustodyManagerRepository custodyManagerRepository;
 
   public static final String APP_ID = "OperatorId";
 
@@ -112,7 +136,7 @@ public class IssuanceService {
   }
 
   @SuppressWarnings("unchecked")
-  public String requestIssueTransferable(String operator, String user, String issuanceIdString, String propertyIdString) {
+  public String requestIssueTransferable(String operator, String user, String issuanceIdString, String postalCode, String propertyType) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -126,17 +150,31 @@ public class IssuanceService {
       var serviceId = new daml.marketplace.interface$.issuance.service.Service.ContractId(servicId);
 
       Id issuanceId = new Id(issuanceIdString);
+      String propertyIdString = "";
+      if(propertyType.equals("APARTMENT")){
+        propertyIdString = apartmentPropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+      } else if(propertyType.equals("GARAGE")){
+        propertyIdString = garagePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+      } else if(propertyType.equals("LAND")){
+        propertyIdString = landPropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+      } else if(propertyType.equals("RESIDENCE")){
+        propertyIdString = residencePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+      } else if(propertyType.equals("WAREHOUSE")){
+        propertyIdString = warehousePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+      } else{
+        System.out.println("PROPERTY TYPE NOT COMPATIBLE");
+      }
       Id propertyId = new Id(propertyIdString);
       String version = "0";
       var propertyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, propertyId, version, HoldingStandard.TRANSFERABLE);
       @SuppressWarnings("rawtypes")
-      Quantity quantity = new daml.daml.finance.interface$.types.common.types.Quantity(propertyKey, 1.0);
+      Quantity quantity = new daml.daml.finance.interface$.types.common.types.Quantity(propertyKey, new BigDecimal(1.0));
 
       String accountIdString = userAccountRepository.findById(operatorParty + userParty).getAccountId();
       AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
 
       command = serviceId.exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty,userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request Issue Transferable : " + e.getMessage();
@@ -146,8 +184,39 @@ public class IssuanceService {
     return "Success Request Issue Transferable\n";
   }
 
-  @SuppressWarnings("unchecked")
-  public String requestIssueFungible(String operator, String user, String issuanceIdString, String tokenStringId, BigDecimal amount) {
+  public String requestSwap(String operator, String buyer, String seller){
+    try {
+      String operatorParty = userRepository.findById(operator).getPartyId();
+      String buyerParty = userRepository.findById(buyer).getPartyId();
+      String sellerParty = userRepository.findById(seller).getPartyId();
+
+      List<com.daml.ledger.javaapi.data.Command> command = null;
+
+      String servicId = custodyManagerRepository.findById(operatorParty + buyerParty).getContractId();
+      var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
+
+      String holdingCId = userHoldingFungibleRepository.findById(operatorParty + buyerParty).getContractId();
+      BigDecimal holdingAmount = userHoldingFungibleRepository.findById(operatorParty + buyerParty).getAmount();
+      var holdingFungibleContractId = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(holdingCId);
+
+      String accountIdBuyer = userAccountRepository.findById(operatorParty + buyerParty).getAccountId();
+      AccountKey buyerAccountKey = new AccountKey(operatorParty, buyerParty, new Id(accountIdBuyer));
+
+      String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
+      AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
+
+      command = serviceId.exerciseRequestSwap(sellerParty, sellerAccountKey, buyerAccountKey, holdingFungibleContractId, holdingAmount).commands();
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty, sellerParty, buyerParty), null);
+      transactionService.handleTransaction(transaction);
+    } catch (IllegalArgumentException | IllegalStateException e) {
+      return "Error Transfer Property : " + e.getMessage();
+    } catch (Exception e) {
+      return "Error Transfer Property : " + e.getMessage();
+    }
+    return "Success Swap Request!\n";
+  }
+
+  public String requestDeIssueTransferable(String operator, String user, String issuanceIdString) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -161,86 +230,19 @@ public class IssuanceService {
       var serviceId = new daml.marketplace.interface$.issuance.service.Service.ContractId(servicId);
 
       Id issuanceId = new Id(issuanceIdString);
-      Id tokenId = new Id(tokenStringId);
-      String version = "0";
-      var currencyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, tokenId, version, HoldingStandard.TRANSFERABLEFUNGIBLE);
-      @SuppressWarnings("rawtypes")
-      Quantity quantity = new daml.daml.finance.interface$.types.common.types.Quantity(currencyKey, amount);
 
-      String accountIdString = userAccountRepository.findById(operatorParty + userParty).getAccountId();
-      AccountKey accountKey = new AccountKey(operatorParty, userParty, new Id(accountIdString));
+      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + userParty).getContractId();
+      var holdingCid = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
 
-      command = serviceId.exerciseRequestIssue(issuanceId, servicId, quantity, accountKey).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty), null);
+      command = serviceId.exerciseRequestDeIssue(issuanceId, holdingCid).commands();
+      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty,userParty), null);
       transactionService.handleTransaction(transaction);
     } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error Request Issue Fungible : " + e.getMessage();
+      return "Error Request DeIssue Transferable : " + e.getMessage();
     } catch (Exception e) {
-      return "Error Request Issue Fungible : " + e.getMessage();
+      return "Error Request DeIssue Transferable : " + e.getMessage();
     }
-    return "Success Request Issue Fungible\n";
-  }
-
-  public String issueTransferCurrency(String operator, String buyer, String seller){
-    try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
-      String buyerParty = userRepository.findById(buyer).getPartyId();
-      String sellerParty = userRepository.findById(seller).getPartyId();
-      
-      Map<String, Unit> singletonMapBuyer = Collections.singletonMap(buyerParty, Unit.getInstance());
-      Map<String, Unit> singletonMapSeller = Collections.singletonMap(sellerParty, Unit.getInstance());
-      Map<String, Unit> combinedMap = new HashMap<>(singletonMapBuyer);
-      combinedMap.putAll(singletonMapSeller);
-      Set<String> observers = new Set<>(combinedMap);
-
-      List<com.daml.ledger.javaapi.data.Command> command = null;
-
-      String holdingCId = userHoldingFungibleRepository.findById(operatorParty + buyerParty).getContractId();
-      var holdingFungibleContractId = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(holdingCId);
-
-      String accountIdString = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
-      AccountKey accountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdString));
-
-      command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
-      transactionService.handleTransaction(transaction);
-    } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error Transfer Currency : " + e.getMessage();
-    } catch (Exception e) {
-      return "Error Transfer Currency : " + e.getMessage();
-    }
-    return "Success Transfer Currency\n";
-  }
-
-  public String issueTransferProperty(String operator, String buyer, String seller){
-    try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
-      String buyerParty = userRepository.findById(buyer).getPartyId();
-      String sellerParty = userRepository.findById(seller).getPartyId();
-      
-      Map<String, Unit> singletonMapBuyer = Collections.singletonMap(buyerParty, Unit.getInstance());
-      Map<String, Unit> singletonMapSeller = Collections.singletonMap(sellerParty, Unit.getInstance());
-      Map<String, Unit> combinedMap = new HashMap<>(singletonMapBuyer);
-      combinedMap.putAll(singletonMapSeller);
-      Set<String> observers = new Set<>(combinedMap);
-
-      List<com.daml.ledger.javaapi.data.Command> command = null;
-
-      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + buyerParty).getContractId();
-      var holdingFungibleContractId = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(holdingCId);
-
-      String accountIdString = userAccountRepository.findById(operatorParty + buyer).getAccountId();
-      AccountKey accountKey = new AccountKey(operatorParty, buyerParty, new Id(accountIdString));
-
-      command = holdingFungibleContractId.exerciseTransfer(observers, accountKey).commands();
-      Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(buyerParty, sellerParty), null);
-      transactionService.handleTransaction(transaction);
-    } catch (IllegalArgumentException | IllegalStateException e) {
-      return "Error Transfer Property : " + e.getMessage();
-    } catch (Exception e) {
-      return "Error Transfer Property : " + e.getMessage();
-    }
-    return "Success Transfer Property\n";
+    return "Success Request DeIssue Transferable\n";
   }
 
 }
