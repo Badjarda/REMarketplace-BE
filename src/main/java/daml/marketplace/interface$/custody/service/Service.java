@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class Service {
-  public static final Identifier TEMPLATE_ID = new Identifier("0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4", "Interface.Custody.Service", "Service");
+  public static final Identifier TEMPLATE_ID = new Identifier("b93cea58d2cd7e7792117719e7c79bd5a10ca2a87dc57a03f202a3ec5bc6c5d9", "Interface.Custody.Service", "Service");
 
   public static final Choice<Service, AtomicSwapLand, Tuple2<Transferable.ContractId, Transferable.ContractId>> CHOICE_AtomicSwapLand = 
       Choice.create("AtomicSwapLand", value$ -> value$.toValue(), value$ ->
@@ -167,10 +167,9 @@ public final class Service {
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapLand(
         String seller, String buyer, AccountKey sellerAccount,
-        Transferable.ContractId transferableHoldingCid, SwapRequest.ContractId transferRequestCid,
-        PropertyKey propertyKey) {
+        SwapRequest.ContractId transferRequestCid, PropertyKey propertyKey) {
       return exerciseAtomicSwapLand(new AtomicSwapLand(seller, buyer, sellerAccount,
-          transferableHoldingCid, transferRequestCid, propertyKey));
+          transferRequestCid, propertyKey));
     }
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapResidence(
@@ -180,10 +179,9 @@ public final class Service {
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapResidence(
         String seller, String buyer, AccountKey sellerAccount,
-        Transferable.ContractId transferableHoldingCid, SwapRequest.ContractId transferRequestCid,
-        PropertyKey propertyKey) {
+        SwapRequest.ContractId transferRequestCid, PropertyKey propertyKey) {
       return exerciseAtomicSwapResidence(new AtomicSwapResidence(seller, buyer, sellerAccount,
-          transferableHoldingCid, transferRequestCid, propertyKey));
+          transferRequestCid, propertyKey));
     }
 
     default Update<Exercised<CloseAccountRequest.ContractId>> exerciseRequestCloseAccount(
@@ -242,10 +240,9 @@ public final class Service {
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapApartment(
         String seller, String buyer, AccountKey sellerAccount,
-        Transferable.ContractId transferableHoldingCid, SwapRequest.ContractId transferRequestCid,
-        PropertyKey propertyKey) {
+        SwapRequest.ContractId transferRequestCid, PropertyKey propertyKey) {
       return exerciseAtomicSwapApartment(new AtomicSwapApartment(seller, buyer, sellerAccount,
-          transferableHoldingCid, transferRequestCid, propertyKey));
+          transferRequestCid, propertyKey));
     }
 
     default Update<Exercised<Unit>> exerciseArchive(daml.da.internal.template.Archive arg) {
@@ -281,10 +278,9 @@ public final class Service {
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapWarehouse(
         String seller, String buyer, AccountKey sellerAccount,
-        Transferable.ContractId transferableHoldingCid, SwapRequest.ContractId transferRequestCid,
-        PropertyKey propertyKey) {
+        SwapRequest.ContractId transferRequestCid, PropertyKey propertyKey) {
       return exerciseAtomicSwapWarehouse(new AtomicSwapWarehouse(seller, buyer, sellerAccount,
-          transferableHoldingCid, transferRequestCid, propertyKey));
+          transferRequestCid, propertyKey));
     }
 
     default Update<Exercised<WithdrawRequest.ContractId>> exerciseRequestWithdraw(
@@ -303,9 +299,10 @@ public final class Service {
 
     default Update<Exercised<SwapRequest.ContractId>> exerciseRequestSwap(String seller,
         AccountKey sellerAccount, AccountKey buyerAccount,
-        Transferable.ContractId fungibleHoldingCid, BigDecimal fungibleAmount) {
+        Transferable.ContractId fungibleHoldingCid, BigDecimal fungibleAmount,
+        Transferable.ContractId transferableHoldingCid) {
       return exerciseRequestSwap(new RequestSwap(seller, sellerAccount, buyerAccount,
-          fungibleHoldingCid, fungibleAmount));
+          fungibleHoldingCid, fungibleAmount, transferableHoldingCid));
     }
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapGarage(
@@ -315,10 +312,9 @@ public final class Service {
 
     default Update<Exercised<Tuple2<Transferable.ContractId, Transferable.ContractId>>> exerciseAtomicSwapGarage(
         String seller, String buyer, AccountKey sellerAccount,
-        Transferable.ContractId transferableHoldingCid, SwapRequest.ContractId transferRequestCid,
-        PropertyKey propertyKey) {
+        SwapRequest.ContractId transferRequestCid, PropertyKey propertyKey) {
       return exerciseAtomicSwapGarage(new AtomicSwapGarage(seller, buyer, sellerAccount,
-          transferableHoldingCid, transferRequestCid, propertyKey));
+          transferRequestCid, propertyKey));
     }
   }
 

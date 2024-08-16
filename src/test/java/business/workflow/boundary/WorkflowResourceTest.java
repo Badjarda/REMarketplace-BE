@@ -150,7 +150,7 @@ public class WorkflowResourceTest {
                         photoReferences);*/
         
         System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
-                        "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
+                        "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(1874, 12, 15),
                         Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
                         Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
@@ -318,7 +318,7 @@ public class WorkflowResourceTest {
         //System.out.println(operatorService.acceptRequestDeIssue(uuid1, uuid2));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2));
+        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));
 
         // Accept Atomic Swap Request
         System.out.println(userAccountService.acceptSwapRequest(uuid1, uuid3, uuid2, uuid4, postalCode1, "APARTMENT"));

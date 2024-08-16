@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Create extends DamlRecord<Create> {
-  public static final String _packageId = "0d9ec89bad8d531192667801b2000705bd418a72539b23331a355e1e2c1609a4";
+  public static final String _packageId = "b93cea58d2cd7e7792117719e7c79bd5a10ca2a87dc57a03f202a3ec5bc6c5d9";
 
   public final InstrumentKey instrument;
 
