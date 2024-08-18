@@ -2,7 +2,6 @@ package business.operator.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import lombok.experimental.var;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
 import business.custody.entity.repository.AccountFactoryRepository;
@@ -503,7 +502,7 @@ public class OperatorService {
 
             String rId = issueRequestRepository.findById(operatorParty + userParty).getContractId();
             var requestId = new daml.marketplace.interface$.issuance.choices.issuerequest.IssueRequest.ContractId(rId);
-
+            
             var command = serviceId.exerciseIssue(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);

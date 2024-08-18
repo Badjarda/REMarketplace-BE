@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,12 +22,14 @@ import business.profilemanager.service.ProfileManagerService;
 import business.propertymanager.service.PropertyManagerService;
 import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
+import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.service.UserAccountService;
 //import business.userprofile.dto.ProfileServiceOfferDTO;
 //import business.userprofile.dto.UserProfileDTO;
 import business.userprofile.service.UserProfileService;
 import business.userrole.service.UserRoleService;
 import business.userproperty.service.UserPropertyService;
+import daml.marketplace.app.custody.model.SwapRequest;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import daml.marketplace.interface$.propertymanager.property.common.GarageType;
@@ -311,16 +314,102 @@ public class WorkflowResourceTest {
         // Accept Issue Transferable Request
         System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
 
+        // Create Issue Transferable Request 
+        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode3, "GARAGE"));
+
+        // Accept Issue Transferable Request
+        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
+
+        // Create Issue Transferable Request 
+        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode4, "RESIDENCE"));
+
+        // Accept Issue Transferable Request
+        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
+
+        // Create Issue Transferable Request 
+        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode5, "WAREHOUSE"));
+
+        // Accept Issue Transferable Request
+        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
+
+        // Create Issue Transferable Request 
+        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode2, "LAND"));
+
+        // Accept Issue Transferable Request
+        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
+
         // Create DeIssue Transferable Request
-        //System.out.println(issuanceService.requestDeIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2));
+        System.out.println(issuanceService.requestDeIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode2));
 
         // Accept DeIssue Transferable Request
-        //System.out.println(operatorService.acceptRequestDeIssue(uuid1, uuid2));
+        System.out.println(operatorService.acceptRequestDeIssue(uuid1, uuid2));
 
         // Atomic Swap Request
         System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));
 
         // Accept Atomic Swap Request
         System.out.println(userAccountService.acceptSwapRequest(uuid1, uuid3, uuid2, uuid4, postalCode1, "APARTMENT"));
+
+        // Atomic Swap Request
+        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode3));
+
+        // Atomic Swap Request
+        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode4));
+
+        // Atomic Swap Request
+        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode5));
+        
+        // Test GETS of individual property
+        System.out.println("GET INDIVIDUAL PROPERTY : ");
+        System.out.println(userPropertyService.getApartmentPropertyById(uuid1, postalCode1));
+        System.out.println(userPropertyService.getLandPropertyById(uuid1, postalCode2));
+        System.out.println(userPropertyService.getGaragePropertyById(uuid1, postalCode3));
+        System.out.println(userPropertyService.getResidencePropertyById(uuid1, postalCode4));
+        System.out.println(userPropertyService.getWarehousePropertyById(uuid1, postalCode5));
+
+        // Test GETS of all properties of a user
+        Map<String, List<?>> allUserProperties = userPropertyService.getAllUserProperties(uuid1, uuid2);
+        System.out.println("\nGET ALL USER PROPERTIES : ");
+        System.out.println("APARTMENTS : " + allUserProperties.get("APARTMENT"));
+        System.out.println("GARAGES : " + allUserProperties.get("GARAGE"));
+        System.out.println("LANDS : " + allUserProperties.get("LAND"));
+        System.out.println("RESIDENCES : " + allUserProperties.get("RESIDENCE"));
+        System.out.println("WAREHOUSES : " + allUserProperties.get("WAREHOUSE"));
+
+        // Test GET ALL PROPERTIES
+        System.out.println("\nGET ALL PROPERTIES : ");
+        Map<String, List<?>> allProperties = userPropertyService.getAllProperties();
+        System.out.println("APARTMENTS : " + allProperties.get("APARTMENT"));
+        System.out.println("GARAGES : " + allProperties.get("GARAGE"));
+        System.out.println("LANDS : " + allProperties.get("LAND"));
+        System.out.println("RESIDENCES : " + allProperties.get("RESIDENCE"));
+        System.out.println("WAREHOUSES : " + allProperties.get("WAREHOUSE"));
+
+        // Test GET ALL USER SWAP REQUESTS
+        System.out.println("\nGET ALL USER SWAP REQUESTS : ");
+        for (SwapRequestGETDTO request: userAccountService.getAllUserSwapRequests(uuid1, uuid2)) {
+            System.out.println("\nSWAP REQUEST FOR: " + request.getSellerId());
+            System.out.println("Buyer: " + request.getBuyerId());
+            switch (request.getPropertyType()) {
+                case "APARTMENT":
+                    System.out.println(request.getApartmentDTO().getPropertyPostalCode());
+                    break;
+                case "GARAGE":
+                    System.out.println(request.getGarageDTO().getPropertyPostalCode());
+                    break;
+                case "LAND":
+                    System.out.println(request.getLandDTO().getPropertyPostalCode());
+                    break;
+                case "RESIDENCE":
+                    System.out.println(request.getResidenceDTO().getPropertyPostalCode());
+                    break;
+                case "WAREHOUSE":
+                    System.out.println(request.getWarehouseDTO().getPropertyPostalCode());
+                    break;
+                default:
+                    break;
+            }
+        }
+        
     }
 }

@@ -137,13 +137,19 @@ import business.propertymanager.entity.repository.WarehousePropertyFactoryReposi
 import daml.marketplace.app.role.operator.Role;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
+import daml.marketplace.interface$.propertymanager.property.common.GarageType;
+import daml.marketplace.interface$.propertymanager.property.common.LandType;
+import daml.marketplace.interface$.propertymanager.property.common.Orientation;
+import daml.marketplace.interface$.propertymanager.property.common.Parking;
+import daml.marketplace.interface$.propertymanager.property.common.ViableConstructionTypes;
+import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
+import daml.marketplace.interface$.propertymanager.property.common.ResidenceType;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.persistence.Column;
 
 @ApplicationScoped
 public class Transactions {
@@ -727,15 +733,11 @@ public class Transactions {
     String lastName = event.getCreateArguments().getFields(5).getValue().getText();
     String fullName = event.getCreateArguments().getFields(6).getValue().getText();
     String password = event.getCreateArguments().getFields(7).getValue().getText();
-    
     LocalDate birthday = LocalDate.ofEpochDay(event.getCreateArguments().getFields(8).getValue().getDate());
-
     String genderValue = event.getCreateArguments().getFields(9).getValue().getOptional().getValue().getEnum().getConstructor().toString();
     Gender gender = UserProfileHelper.genderFromString(genderValue);
-
     String nationalityValue = event.getCreateArguments().getFields(10).getValue().getEnum().getConstructor();
     Nationality nationality = UserProfileHelper.nationalityFromString(nationalityValue);
-
     String contactMail = event.getCreateArguments().getFields(11).getValue().getText();
     Long cellphoneNumber = event.getCreateArguments().getFields(12).getValue().getOptional().getValue().getInt64();
     Long idNumber = event.getCreateArguments().getFields(13).getValue().getInt64();
@@ -785,66 +787,50 @@ public class Transactions {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    System.out.println("Operator ID: " + operatorId);
-    System.out.println("User ID: " + userId);
-    System.out.println("Property ID: " + propertyId);
-
     BigDecimal apartmentPrice = new BigDecimal(event.getCreateArguments().getFields(4).getValue().getNumeric());
-    System.out.println("Apartment Price: " + apartmentPrice);
-
     String propertyAddress = event.getCreateArguments().getFields(5).getValue().getText();
-    System.out.println("Property Address: " + propertyAddress);
-
     String propertyPostalCode = event.getCreateArguments().getFields(6).getValue().getText();
-    System.out.println("Property Postal Code: " + propertyPostalCode);
-
     String propertyDistrict = event.getCreateArguments().getFields(7).getValue().getText();
-    System.out.println("Property District: " + propertyDistrict);
-
     String propertyCounty = event.getCreateArguments().getFields(8).getValue().getText();
-    System.out.println("Property County: " + propertyCounty);
-
     BigDecimal grossArea = new BigDecimal(event.getCreateArguments().getFields(9).getValue().getNumeric());
-    System.out.println("Gross Area: " + grossArea);
-
     BigDecimal usableArea = new BigDecimal(event.getCreateArguments().getFields(10).getValue().getNumeric());
-    System.out.println("Usable Area: " + usableArea);
-
     Long bedrooms = event.getCreateArguments().getFields(11).getValue().getInt64();
-    System.out.println("Bedrooms: " + bedrooms);
-
     Long bathrooms = event.getCreateArguments().getFields(12).getValue().getInt64();
-    System.out.println("Bathrooms: " + bathrooms);
-
     Long floor = event.getCreateArguments().getFields(13).getValue().getInt64();
-    System.out.println("Floor: " + floor);
-
     Long parkingSpaces = event.getCreateArguments().getFields(14).getValue().getInt64();
-    System.out.println("Parking Spaces: " + parkingSpaces);
-    
     Boolean elevator = event.getCreateArguments().getFields(15).getValue().getBool();
-    System.out.println("Elevator: " + elevator);
-
     LocalDate buildDate = LocalDate.ofEpochDay(event.getCreateArguments().getFields(16).getValue().getDate());
-    System.out.println("Build Date: " + buildDate);
-
     String installedEquipment = event.getCreateArguments().getFields(17).getValue().getText();
-    System.out.println("Installed Equipment: " + installedEquipment);
-
     String additionalInformation = event.getCreateArguments().getFields(18).getValue().getText();
-    System.out.println("Additional Information: " + additionalInformation);
-
     String description = event.getCreateArguments().getFields(19).getValue().getText();
-    System.out.println("Description: " + description);
-
     List<String> photoReferences = new ArrayList<>();
     List<ValueOuterClass.Value> elements = event.getCreateArguments().getFields(20).getValue().getList().getElementsList();
     for (ValueOuterClass.Value element : elements) {
         photoReferences.add(element.getText());
     }
+    /** 
+    System.out.println("Operator ID: " + operatorId);
+    System.out.println("User ID: " + userId);
+    System.out.println("Property ID: " + propertyId);
+    System.out.println("Apartment Price: " + apartmentPrice);
+    System.out.println("Property Address: " + propertyAddress);
+    System.out.println("Property Postal Code: " + propertyPostalCode);
+    System.out.println("Property District: " + propertyDistrict);
+    System.out.println("Property County: " + propertyCounty);
+    System.out.println("Gross Area: " + grossArea);
+    System.out.println("Usable Area: " + usableArea);
+    System.out.println("Bedrooms: " + bedrooms);
+    System.out.println("Bathrooms: " + bathrooms);
+    System.out.println("Floor: " + floor);
+    System.out.println("Parking Spaces: " + parkingSpaces);
+    System.out.println("Elevator: " + elevator);
+    System.out.println("Build Date: " + buildDate);
+    System.out.println("Installed Equipment: " + installedEquipment);
+    System.out.println("Additional Information: " + additionalInformation);
+    System.out.println("Description: " + description);
     System.out.println("Photo References: " + photoReferences);
-
-    ApartmentProperty apartmentProperty = new ApartmentProperty(operatorId + userId + propertyPostalCode, contractId, propertyId,
+    */
+    ApartmentProperty apartmentProperty = new ApartmentProperty(operatorId + propertyPostalCode, contractId, propertyId,
      apartmentPrice, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, 
      bathrooms, floor, parkingSpaces, elevator, buildDate, installedEquipment, additionalInformation, description, photoReferences);
     apartmentPropertyRepository.persist(apartmentProperty);
@@ -854,28 +840,206 @@ public class Transactions {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    //garagePropertyRepository.persist(new GarageProperty(operatorId + userId, contractId, propertyId));
+    BigDecimal garagePrice = new BigDecimal(event.getCreateArguments().getFields(4).getValue().getNumeric());
+    String propertyAddress = event.getCreateArguments().getFields(5).getValue().getText();
+    String propertyPostalCode = event.getCreateArguments().getFields(6).getValue().getText();
+    String propertyDistrict = event.getCreateArguments().getFields(7).getValue().getText();
+    String propertyCounty = event.getCreateArguments().getFields(8).getValue().getText();
+    BigDecimal garageArea = new BigDecimal(event.getCreateArguments().getFields(9).getValue().getNumeric());
+    String garageTypeStr = event.getCreateArguments().getFields(10).getValue().getEnum().getConstructor();
+    GarageType garageType = UserPropertyHelper.garageTypeFromString(garageTypeStr);
+    Long vehicleCapacity = event.getCreateArguments().getFields(11).getValue().getInt64();
+    String installedEquipment = event.getCreateArguments().getFields(12).getValue().getText();
+    String additionalInformation = event.getCreateArguments().getFields(13).getValue().getText();
+    String description = event.getCreateArguments().getFields(14).getValue().getText();
+    List<String> photoReferences = new ArrayList<>();
+    List<ValueOuterClass.Value> elements = event.getCreateArguments().getFields(15).getValue().getList().getElementsList();
+    for (ValueOuterClass.Value element : elements) {
+        photoReferences.add(element.getText());
+    }
+    /** 
+    System.out.println("Operator ID: " + operatorId);
+    System.out.println("User ID: " + userId);
+    System.out.println("Property ID: " + propertyId);
+    System.out.println("Garage Price: " + garagePrice);
+    System.out.println("Property Address: " + propertyAddress);
+    System.out.println("Property Postal Code: " + propertyPostalCode);
+    System.out.println("Property District: " + propertyDistrict);
+    System.out.println("Property County: " + propertyCounty);
+    System.out.println("Garage Area: " + garageArea);
+    System.out.println("Garage Type: " + garageType);
+    System.out.println("Vehicle Capacity: " + vehicleCapacity);
+    System.out.println("Installed Equipment: " + installedEquipment);
+    System.out.println("Additional Information: " + additionalInformation);
+    System.out.println("Description: " + description);
+    System.out.println("Photo References: " + photoReferences);
+    */
+    
+    garagePropertyRepository.persist(new GarageProperty(operatorId + propertyPostalCode, contractId, propertyId, garagePrice, propertyAddress, 
+    propertyPostalCode, propertyDistrict, propertyCounty, garageArea, garageType, vehicleCapacity, installedEquipment, 
+    additionalInformation, description, photoReferences));
   }
 
   private void handleLandPropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    //landPropertyRepository.persist(new LandProperty(operatorId + userId, contractId, propertyId));
+    BigDecimal landPrice = new BigDecimal(event.getCreateArguments().getFields(4).getValue().getNumeric());
+    String propertyAddress = event.getCreateArguments().getFields(5).getValue().getText();
+    String propertyPostalCode = event.getCreateArguments().getFields(6).getValue().getText();
+    String propertyDistrict = event.getCreateArguments().getFields(7).getValue().getText();
+    String propertyCounty = event.getCreateArguments().getFields(8).getValue().getText();
+    String landTypeStr = event.getCreateArguments().getFields(9).getValue().getEnum().getConstructor();
+    LandType landType = UserPropertyHelper.landTypeFromString(landTypeStr);
+    BigDecimal totalLandArea = new BigDecimal(event.getCreateArguments().getFields(10).getValue().getNumeric());
+    BigDecimal minimumSurfaceForSale = new BigDecimal(event.getCreateArguments().getFields(11).getValue().getNumeric());
+    BigDecimal buildableArea = new BigDecimal(event.getCreateArguments().getFields(12).getValue().getNumeric());
+    Long buildableFloors = event.getCreateArguments().getFields(13).getValue().getInt64();
+    Boolean accessByRoad = event.getCreateArguments().getFields(14).getValue().getBool();
+    String installedEquipment = event.getCreateArguments().getFields(15).getValue().getText();
+    List<ValueOuterClass.Value> elements = event.getCreateArguments().getFields(16).getValue().getList().getElementsList();
+    List<String> constructionTypeStrs = new ArrayList<>();
+    for (ValueOuterClass.Value element : elements) {
+        constructionTypeStrs.add(element.getEnum().getConstructor());
+    }
+    List<ViableConstructionTypes> viableConstructionTypes = UserPropertyHelper.viableConstructionTypesFromStrings(constructionTypeStrs);
+    String additionalInformation = event.getCreateArguments().getFields(17).getValue().getText();
+    String description = event.getCreateArguments().getFields(18).getValue().getText();
+    List<String> photoReferences = new ArrayList<>();
+    List<ValueOuterClass.Value> elements1 = event.getCreateArguments().getFields(19).getValue().getList().getElementsList();
+    for (ValueOuterClass.Value element : elements1) {
+        photoReferences.add(element.getText());
+    }
+    /** 
+    System.out.println("Operator ID: " + operatorId);
+    System.out.println("User ID: " + userId);
+    System.out.println("Property ID: " + propertyId);
+    System.out.println("Land Price: " + landPrice);
+    System.out.println("Property Address: " + propertyAddress);
+    System.out.println("Property Postal Code: " + propertyPostalCode);
+    System.out.println("Property District: " + propertyDistrict);
+    System.out.println("Property County: " + propertyCounty);
+    System.out.println("Land Type: " + landType);
+    System.out.println("Total Land Area: " + totalLandArea);
+    System.out.println("Minimum Surface For Sale: " + minimumSurfaceForSale);
+    System.out.println("Buildable Area: " + buildableArea);
+    System.out.println("Buildable Floors: " + buildableFloors);
+    System.out.println("Access by Road: " + accessByRoad);
+    System.out.println("Installed Equipment: " + installedEquipment);
+    System.out.println("Viable Construction Types: " + viableConstructionTypes);
+    System.out.println("Additional Information: " + additionalInformation);
+    System.out.println("Description: " + description);
+    System.out.println("Photo References: " + photoReferences);
+    */
+    landPropertyRepository.persist(new LandProperty(operatorId + propertyPostalCode, contractId, propertyId, landPrice, propertyAddress, propertyPostalCode, 
+    propertyDistrict, propertyCounty, landType, totalLandArea, minimumSurfaceForSale, buildableArea, buildableFloors, accessByRoad, 
+    installedEquipment, viableConstructionTypes, additionalInformation, description, photoReferences));
   }
 
   private void handleResidencePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    //residencePropertyRepository.persist(new ResidenceProperty(operatorId + userId, contractId, propertyId));
+    BigDecimal residencePrice = new BigDecimal(event.getCreateArguments().getFields(4).getValue().getNumeric());
+    String propertyAddress = event.getCreateArguments().getFields(5).getValue().getText();
+    String propertyPostalCode = event.getCreateArguments().getFields(6).getValue().getText();
+    String propertyDistrict = event.getCreateArguments().getFields(7).getValue().getText();
+    String propertyCounty = event.getCreateArguments().getFields(8).getValue().getText();
+    BigDecimal grossArea = new BigDecimal(event.getCreateArguments().getFields(9).getValue().getNumeric());
+    BigDecimal usableArea = new BigDecimal(event.getCreateArguments().getFields(10).getValue().getNumeric());
+    Long bedrooms = event.getCreateArguments().getFields(11).getValue().getInt64();
+    Long bathrooms = event.getCreateArguments().getFields(12).getValue().getInt64();
+    Long floors = event.getCreateArguments().getFields(13).getValue().getInt64();
+    String residenceTypeStr = event.getCreateArguments().getFields(14).getValue().getEnum().getConstructor();
+    ResidenceType residenceType = UserPropertyHelper.residenceTypeFromString(residenceTypeStr);
+    String backyard = event.getCreateArguments().getFields(15).getValue().getText();
+    String parkingStr = event.getCreateArguments().getFields(16).getValue().getEnum().getConstructor();
+    Parking parking = UserPropertyHelper.parkingFromString(parkingStr);
+    LocalDate buildDate = LocalDate.ofEpochDay(event.getCreateArguments().getFields(17).getValue().getDate());
+    String orientationStr = event.getCreateArguments().getFields(18).getValue().getEnum().getConstructor();
+    Orientation orientation = UserPropertyHelper.orientationFromString(orientationStr);
+    String installedEquipment = event.getCreateArguments().getFields(19).getValue().getText();
+    String additionalInformation = event.getCreateArguments().getFields(20).getValue().getText();
+    String description = event.getCreateArguments().getFields(21).getValue().getText();
+    List<String> photoReferences = new ArrayList<>();
+    List<ValueOuterClass.Value> elements1 = event.getCreateArguments().getFields(22).getValue().getList().getElementsList();
+    for (ValueOuterClass.Value element : elements1) {
+        photoReferences.add(element.getText());
+    }
+    /** 
+    System.out.println("Operator ID: " + operatorId);
+    System.out.println("User ID: " + userId);
+    System.out.println("Property ID: " + propertyId);
+    System.out.println("Residence Price: " + residencePrice);
+    System.out.println("Property Address: " + propertyAddress);
+    System.out.println("Property Postal Code: " + propertyPostalCode);
+    System.out.println("Property District: " + propertyDistrict);
+    System.out.println("Property County: " + propertyCounty);
+    System.out.println("Gross Area: " + grossArea);
+    System.out.println("Usable Area: " + usableArea);
+    System.out.println("Bedrooms: " + bedrooms);
+    System.out.println("Bathrooms: " + bathrooms);
+    System.out.println("Floors: " + floors);
+    System.out.println("Residence Type: " + residenceType);
+    System.out.println("Backyard: " + backyard);
+    System.out.println("Parking: " + parking);
+    System.out.println("Build Date: " + buildDate);
+    System.out.println("Orientation: " + orientation);
+    System.out.println("Installed Equipment: " + installedEquipment);
+    System.out.println("Additional Information: " + additionalInformation);
+    System.out.println("Description: " + description);
+    System.out.println("Photo References: " + photoReferences);
+    */
+    residencePropertyRepository.persist(new ResidenceProperty(operatorId + propertyPostalCode, contractId, propertyId, residencePrice, propertyAddress, 
+    propertyPostalCode, propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, bathrooms, floors, residenceType, 
+    backyard, parking, buildDate, orientation, installedEquipment, additionalInformation, description, photoReferences));
   }
 
   private void handleWarehousePropertyCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String userId = event.getCreateArguments().getFields(1).getValue().getParty();
     String propertyId = event.getCreateArguments().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
-    //warehousePropertyRepository.persist(new WarehouseProperty(operatorId + userId, contractId, propertyId));
+    BigDecimal warehousePrice = new BigDecimal(event.getCreateArguments().getFields(4).getValue().getNumeric());
+    String propertyAddress = event.getCreateArguments().getFields(5).getValue().getText();
+    String propertyPostalCode = event.getCreateArguments().getFields(6).getValue().getText();
+    String propertyDistrict = event.getCreateArguments().getFields(7).getValue().getText();
+    String propertyCounty = event.getCreateArguments().getFields(8).getValue().getText();
+    String warehouseTypeStr = event.getCreateArguments().getFields(9).getValue().getEnum().getConstructor();
+    WarehouseType warehouseType = UserPropertyHelper.warehouseTypeFromString(warehouseTypeStr);
+    BigDecimal grossArea = new BigDecimal(event.getCreateArguments().getFields(10).getValue().getNumeric());
+    BigDecimal usableArea = new BigDecimal(event.getCreateArguments().getFields(11).getValue().getNumeric());
+    Long floors = event.getCreateArguments().getFields(12).getValue().getInt64();
+    LocalDate buildDate = LocalDate.ofEpochDay(event.getCreateArguments().getFields(13).getValue().getDate());
+    String installedEquipment = event.getCreateArguments().getFields(14).getValue().getText();
+    String additionalInformation = event.getCreateArguments().getFields(15).getValue().getText();
+    String description = event.getCreateArguments().getFields(16).getValue().getText();
+    List<String> photoReferences = new ArrayList<>();
+    List<ValueOuterClass.Value> elements1 = event.getCreateArguments().getFields(17).getValue().getList().getElementsList();
+    for (ValueOuterClass.Value element : elements1) {
+        photoReferences.add(element.getText());
+    }
+    /**
+    System.out.println("Operator ID: " + operatorId);
+    System.out.println("User ID: " + userId);
+    System.out.println("Property ID: " + propertyId);
+    System.out.println("Warehouse Price: " + warehousePrice);
+    System.out.println("Property Address: " + propertyAddress);
+    System.out.println("Property Postal Code: " + propertyPostalCode);
+    System.out.println("Property District: " + propertyDistrict);
+    System.out.println("Property County: " + propertyCounty);
+    System.out.println("Warehouse Type: " + warehouseType);
+    System.out.println("Gross Area: " + grossArea);
+    System.out.println("Usable Area: " + usableArea);
+    System.out.println("Floors: " + floors);
+    System.out.println("Build Date: " + buildDate);
+    System.out.println("Installed Equipment: " + installedEquipment);
+    System.out.println("Additional Information: " + additionalInformation);
+    System.out.println("Description: " + description);
+    System.out.println("Photo References: " + photoReferences);
+     */
+    warehousePropertyRepository.persist(new WarehouseProperty(operatorId + propertyPostalCode, contractId, propertyId, warehousePrice, propertyAddress, 
+    propertyPostalCode, propertyDistrict, propertyCounty, warehouseType, grossArea, usableArea, floors, buildDate, installedEquipment, 
+    additionalInformation, description, photoReferences));
   }
 
   private void handleUserRoleOfferCreatedEvent(CreatedEvent event, String contractId) {
@@ -1040,16 +1204,41 @@ public class Transactions {
   }
 
   private void handleUserHoldingTransferableCreatedEvent(CreatedEvent event, String contractId) {
+    String propertyId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(2).getValue().getRecord().getFields(0).getValue().getText();
     String operatorId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(1).getValue().getParty();
-    String userId = event.getCreateArguments().getFields(0).getValue().getRecord().getFields(0).getValue().getParty();
-    userHoldingTransferableRepository.persist(new UserHoldingTransferable(operatorId + userId, contractId));
+    String userId = event.getCreateArguments().getFields(1).getValue().getRecord().getFields(1).getValue().getParty();
+    String postalCode = propertyId.substring("PropertyId".length());
+    String propertyType = "";
+    if(apartmentPropertyRepository.findById(operatorId+postalCode) != null)
+      propertyType = "APARTMENT";
+    else if(garagePropertyRepository.findById(operatorId+postalCode) != null)
+      propertyType = "GARAGE";
+    else if(landPropertyRepository.findById(operatorId+postalCode) != null)
+      propertyType = "LAND";
+    else if(residencePropertyRepository.findById(operatorId+postalCode) != null)
+      propertyType = "RESIDENCE";
+    else if(warehousePropertyRepository.findById(operatorId+postalCode) != null)
+      propertyType = "WAREHOUSE";
+    userHoldingTransferableRepository.persist(new UserHoldingTransferable(operatorId + userId + propertyId, contractId, postalCode, propertyType));
   }
 
   private void handleUserSwapRequestCreatedEvent(CreatedEvent event, String contractId) {
     String operatorId = event.getCreateArguments().getFields(0).getValue().getParty();
     String buyerId = event.getCreateArguments().getFields(1).getValue().getParty();
     String sellerId = event.getCreateArguments().getFields(2).getValue().getParty();
-    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + buyerId + sellerId, contractId));
+    String transferableCid = event.getCreateArguments().getFields(7).getValue().getContractId();
+    System.out.println("TransferableCid: " + transferableCid);
+
+    String propertyType = "";
+    String postalCode = "";
+    List<UserHoldingTransferable> transferables = userHoldingTransferableRepository.findAll().list();
+    for (UserHoldingTransferable userHoldingTransferable : transferables) {
+      if(userHoldingTransferable.getContractId().equals(transferableCid)){
+        propertyType = userHoldingTransferable.getPropertyType();
+        postalCode = userHoldingTransferable.getPostalCode();
+      }
+    }
+    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + sellerId + buyerId + transferableCid, contractId, buyerId, propertyType, transferableCid, postalCode));
   }
 
   // ----------- Handle Archived Event Methods------------------------

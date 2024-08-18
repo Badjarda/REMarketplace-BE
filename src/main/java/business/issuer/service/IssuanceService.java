@@ -149,18 +149,18 @@ public class IssuanceService {
       String servicId = issuanceManagerRepository.findById(operatorParty + userParty).getContractId();
       var serviceId = new daml.marketplace.interface$.issuance.service.Service.ContractId(servicId);
 
-      Id issuanceId = new Id(issuanceIdString);
+      Id issuanceId = new Id(issuanceIdString+postalCode);
       String propertyIdString = "";
       if(propertyType.equals("APARTMENT")){
-        propertyIdString = apartmentPropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+        propertyIdString = apartmentPropertyRepository.findById(operatorParty + postalCode).getPropertyId();
       } else if(propertyType.equals("GARAGE")){
-        propertyIdString = garagePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+        propertyIdString = garagePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
       } else if(propertyType.equals("LAND")){
-        propertyIdString = landPropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+        propertyIdString = landPropertyRepository.findById(operatorParty + postalCode).getPropertyId();
       } else if(propertyType.equals("RESIDENCE")){
-        propertyIdString = residencePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+        propertyIdString = residencePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
       } else if(propertyType.equals("WAREHOUSE")){
-        propertyIdString = warehousePropertyRepository.findById(operatorParty + userParty + postalCode).getPropertyId();
+        propertyIdString = warehousePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
       } else{
         System.out.println("PROPERTY TYPE NOT COMPATIBLE");
       }
@@ -205,7 +205,7 @@ public class IssuanceService {
       String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
       AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
 
-      String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + postalCode).getContractId();
+      String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + "PropertyId"+postalCode).getContractId();
       var transferableHoldingCid = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(transferableHoldingCId);
 
       command = serviceId.exerciseRequestSwap(sellerParty, sellerAccountKey, buyerAccountKey, holdingFungibleContractId, holdingAmount, transferableHoldingCid).commands();
@@ -219,7 +219,7 @@ public class IssuanceService {
     return "Success Swap Request!\n";
   }
 
-  public String requestDeIssueTransferable(String operator, String user, String issuanceIdString) {
+  public String requestDeIssueTransferable(String operator, String user, String issuanceIdString, String postalCode) {
     try {
       String operatorParty = userRepository.findById(operator).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
@@ -232,9 +232,9 @@ public class IssuanceService {
       String servicId = issuanceManagerRepository.findById(operatorParty + userParty).getContractId();
       var serviceId = new daml.marketplace.interface$.issuance.service.Service.ContractId(servicId);
 
-      Id issuanceId = new Id(issuanceIdString);
+      Id issuanceId = new Id(issuanceIdString+postalCode);
 
-      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + userParty).getContractId();
+      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + userParty + "PropertyId"+postalCode).getContractId();
       var holdingCid = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
 
       command = serviceId.exerciseRequestDeIssue(issuanceId, holdingCid).commands();

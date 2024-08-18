@@ -20,4 +20,16 @@ public class UserSwapRequest {
 
   @Column(name = "contractId", length=500)
   private String contractId;
+
+  @Column(name = "buyerId")
+  private String buyerId;
+
+  @Column(name = "propertyType")
+  private String propertyType;
+
+  @Column(name = "transferableCid")
+  private String transferableCid;
+
+  @Column(name = "postalCode")
+  private String postalCode;
 }

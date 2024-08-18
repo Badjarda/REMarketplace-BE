@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
 import com.daml.ledger.javaapi.data.Unit;
@@ -15,11 +16,23 @@ import business.DamlLedgerClientProvider;
 import business.custody.entity.repository.CustodyManagerRepository;
 import business.operator.entity.repository.OperatorRepository;
 import business.user.entity.repository.UserRepository;
+import business.useraccount.dto.SwapRequestGETDTO;
+import business.useraccount.entity.model.UserSwapRequest;
 import business.useraccount.entity.repository.CustodyServiceOfferRepository;
 import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
 import business.useraccount.entity.repository.UserSwapRequestRepository;
+import business.userproperty.dto.ApartmentPropertyGETDTO;
+import business.userproperty.dto.GaragePropertyGETDTO;
+import business.userproperty.dto.LandPropertyGETDTO;
+import business.userproperty.dto.ResidencePropertyGETDTO;
+import business.userproperty.dto.WarehousePropertyGETDTO;
+import business.userproperty.entity.model.ApartmentProperty;
+import business.userproperty.entity.model.GarageProperty;
+import business.userproperty.entity.model.LandProperty;
+import business.userproperty.entity.model.ResidenceProperty;
+import business.userproperty.entity.model.WarehouseProperty;
 import business.userproperty.entity.repository.ApartmentPropertyRepository;
 import business.userproperty.entity.repository.GaragePropertyRepository;
 import business.userproperty.entity.repository.LandPropertyRepository;
@@ -268,8 +281,10 @@ public class UserAccountService {
 
             String servicId = custodyManagerRepository.findById(operatorParty + sellerParty).getContractId();
             var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
+
+            String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + "PropertyId"+postalCode).getContractId();
             
-            String swapRequestCId = userSwapRequestRepository.findById(operatorParty + buyerParty + sellerParty).getContractId();
+            String swapRequestCId = userSwapRequestRepository.findById(operatorParty + sellerParty + buyerParty + transferableHoldingCId).getContractId();
             var swapRequestCid = new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId(swapRequestCId);
 
             String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
@@ -278,23 +293,23 @@ public class UserAccountService {
             List<com.daml.ledger.javaapi.data.Command> command = null;
 
             if(propertyType.equals("APARTMENT")){
-                String apartmentIdString = apartmentPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                String apartmentIdString = apartmentPropertyRepository.findById(operatorParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(apartmentIdString));
                 command = serviceId.exerciseAtomicSwapApartment(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("GARAGE")){
-                String garageIdString = garagePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                String garageIdString = garagePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(garageIdString));
                 command = serviceId.exerciseAtomicSwapGarage(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("LAND")){
-                String landIdString = landPropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                String landIdString = landPropertyRepository.findById(operatorParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(landIdString));
                 command = serviceId.exerciseAtomicSwapLand(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("RESIDENCE")){
-                String residenceIdString = residencePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                String residenceIdString = residencePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(residenceIdString));
                 command = serviceId.exerciseAtomicSwapResidence(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else if(propertyType.equals("WAREHOUSE")){
-                String warehouseIdString = warehousePropertyRepository.findById(operatorParty + sellerParty + postalCode).getPropertyId();
+                String warehouseIdString = warehousePropertyRepository.findById(operatorParty + postalCode).getPropertyId();
                 PropertyKey key = new PropertyKey(operatorParty, sellerParty, new Id(warehouseIdString));
                 command = serviceId.exerciseAtomicSwapWarehouse(sellerParty, buyerParty, sellerAccountKey, swapRequestCid, key).commands();
             } else{
@@ -313,4 +328,169 @@ public class UserAccountService {
         }
         return "Successfully Atomic Swapped!\n";
     }
+
+    public List<SwapRequestGETDTO> getAllUserSwapRequests(String operatorId, String sellerId){
+      String operatorParty = userRepository.findById(operatorId).getPartyId();
+      String sellerParty = userRepository.findById(sellerId).getPartyId();
+      List<UserSwapRequest> swapRequests = userSwapRequestRepository.findByPartyIdStartingWith(operatorParty + sellerParty);
+
+      return swapRequests.stream()
+              .map(request -> mapToSwapRequestGETDTO(operatorId, request))
+              .collect(Collectors.toList());
+    }
+
+    public SwapRequestGETDTO mapToSwapRequestGETDTO(String operatorId, UserSwapRequest entity) {
+      String operatorParty = userRepository.findById(operatorId).getPartyId();
+      ApartmentPropertyGETDTO apartmentDTO = null;
+      LandPropertyGETDTO landDTO = null;
+      ResidencePropertyGETDTO residenceDTO = null;
+      GaragePropertyGETDTO garageDTO = null;
+      WarehousePropertyGETDTO warehouseDTO = null;
+
+      switch (entity.getPropertyType()) {
+          case "APARTMENT":
+              ApartmentProperty apartment = apartmentPropertyRepository.findById(operatorParty + entity.getPostalCode());
+                  apartmentDTO = mapToApartmentPropertyDTO(apartment);
+              break;
+          case "LAND":
+              LandProperty land = landPropertyRepository.findById(operatorParty + entity.getPostalCode());
+                  landDTO = mapToLandPropertyDTO(land);
+              break;
+          case "RESIDENCE":
+              ResidenceProperty residence = residencePropertyRepository.findById(operatorParty + entity.getPostalCode());
+                  residenceDTO = mapToResidencePropertyDTO(residence);
+              break;
+          case "GARAGE":
+              GarageProperty garage = garagePropertyRepository.findById(operatorParty + entity.getPostalCode());
+                  garageDTO = mapToGaragePropertyDTO(garage);
+              break;
+          case "WAREHOUSE":
+              WarehouseProperty warehouse = warehousePropertyRepository.findById(operatorParty + entity.getPostalCode());
+                  warehouseDTO = mapToWarehousePropertyDTO(warehouse);
+              break;
+          default:
+              break;
+      }
+
+      return new SwapRequestGETDTO(
+          entity.getPartyId(), 
+          entity.getBuyerId(),
+          entity.getPropertyType(),
+          apartmentDTO,
+          landDTO,
+          residenceDTO,
+          garageDTO,
+          warehouseDTO
+      );
+    }
+
+    public ApartmentPropertyGETDTO mapToApartmentPropertyDTO(ApartmentProperty entity) {
+      return new ApartmentPropertyGETDTO(
+          entity.getPropertyId(),
+          entity.getApartmentPrice(),
+          entity.getPropertyAddress(),
+          entity.getPropertyPostalCode(),
+          entity.getPropertyDistrict(),
+          entity.getPropertyCounty(),
+          entity.getGrossArea(),
+          entity.getUsableArea(),
+          entity.getBedrooms(),
+          entity.getBathrooms(),
+          entity.getFloor(),
+          entity.getParkingSpaces(),
+          entity.getElevator(),
+          entity.getBuildDate(),
+          entity.getInstalledEquipment(),
+          entity.getAdditionalInformation(),
+          entity.getDescription(),
+          entity.getPhotoReferences()
+      );
+    }
+  
+    public GaragePropertyGETDTO mapToGaragePropertyDTO(GarageProperty entity) {
+      return new GaragePropertyGETDTO(
+          entity.getPropertyId(),
+          entity.getGaragePrice(),
+          entity.getPropertyAddress(),
+          entity.getPropertyPostalCode(),
+          entity.getPropertyDistrict(),
+          entity.getPropertyCounty(),
+          entity.getGarageArea(),
+          entity.getGarageType(),
+          entity.getVehicleCapacity(),
+          entity.getInstalledEquipment(),
+          entity.getAdditionalInformation(),
+          entity.getDescription(),
+          entity.getPhotoReferences()
+      );
+    }
+  
+    public LandPropertyGETDTO mapToLandPropertyDTO(LandProperty entity) {
+      return new LandPropertyGETDTO(
+          entity.getPropertyId(),
+          entity.getLandPrice(),
+          entity.getPropertyAddress(),
+          entity.getPropertyPostalCode(),
+          entity.getPropertyDistrict(),
+          entity.getPropertyCounty(),
+          entity.getLandType(),
+          entity.getTotalLandArea(),
+          entity.getMinimumSurfaceForSale(),
+          entity.getBuildableArea(),
+          entity.getBuildableFloors(),
+          entity.getAccessByRoad(),
+          entity.getInstalledEquipment(),
+          entity.getViableConstructionTypes(),
+          entity.getAdditionalInformation(),
+          entity.getDescription(),
+          entity.getPhotoReferences()
+      );
+    }
+  
+    public ResidencePropertyGETDTO mapToResidencePropertyDTO(ResidenceProperty entity) {
+      return new ResidencePropertyGETDTO(
+          entity.getPropertyId(),
+          entity.getResidencePrice(),
+          entity.getPropertyAddress(),
+          entity.getPropertyPostalCode(),
+          entity.getPropertyDistrict(),
+          entity.getPropertyCounty(),
+          entity.getGrossArea(),
+          entity.getUsableArea(),
+          entity.getBedrooms(),
+          entity.getBathrooms(),
+          entity.getFloors(),
+          entity.getResidenceType(),
+          entity.getBackyard(),
+          entity.getParking(),
+          entity.getBuildDate(),
+          entity.getOrientation(),
+          entity.getInstalledEquipment(),
+          entity.getAdditionalInformation(),
+          entity.getDescription(),
+          entity.getPhotoReferences()
+      );
+    }
+  
+    public WarehousePropertyGETDTO mapToWarehousePropertyDTO(WarehouseProperty entity) {
+      return new WarehousePropertyGETDTO(
+          entity.getPropertyId(),
+          entity.getWarehousePrice(),
+          entity.getPropertyAddress(),
+          entity.getPropertyPostalCode(),
+          entity.getPropertyDistrict(),
+          entity.getPropertyCounty(),
+          entity.getWarehouseType(),
+          entity.getGrossArea(),
+          entity.getUsableArea(),
+          entity.getFloors(),
+          entity.getBuildDate(),
+          entity.getInstalledEquipment(),
+          entity.getAdditionalInformation(),
+          entity.getDescription(),
+          entity.getPhotoReferences()
+      );
+    }
+  
+
 }
