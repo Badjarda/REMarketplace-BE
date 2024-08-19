@@ -410,6 +410,14 @@ public class WorkflowResourceTest {
                     break;
             }
         }
+
+        // Test GET USER PROFILE
+        System.out.println("\nGET USER PROFILE : ");
+        System.out.println(userProfileService.getUserProfile(uuid1, uuid2).getFullName());
+
+        // Test GET USER BALANCE
+        System.out.println("\nGET USER BALANCE : ");
+        System.out.println(userAccountService.getUserHoldingFungible(uuid1, uuid3).getAmount());
         
     }
 }

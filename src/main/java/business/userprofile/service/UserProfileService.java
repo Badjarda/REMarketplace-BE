@@ -17,6 +17,8 @@ import business.DamlLedgerClientProvider;
 import business.operator.entity.repository.OperatorRepository;
 import business.profilemanager.entity.repository.UserProfileManagerRepository;
 import business.user.entity.repository.UserRepository;
+import business.userprofile.dto.UserProfileGETDTO;
+import business.userprofile.entity.model.UserProfile;
 import business.userprofile.entity.repository.ProfileServiceOfferRepository;
 import business.userprofile.entity.repository.UserProfileRepository;
 import business.userrole.entity.repository.UserRoleInterfaceRepository;
@@ -180,6 +182,32 @@ public class UserProfileService {
       return "Error Updating User Profile: " + e.getMessage();
     }
     return "Success Updating User Profile!\n";
+  }
+
+  public UserProfileGETDTO getUserProfile(String operatorId, String userId) {
+    String operatorParty = userRepository.findById(operatorId).getPartyId();
+    String userParty = userRepository.findById(userId).getPartyId();
+    return mapToUserProfileDTO(userProfileRepository.findById(operatorParty + userParty)); 
+  }
+
+  private UserProfileGETDTO mapToUserProfileDTO(UserProfile entity) {
+      return new UserProfileGETDTO(
+          entity.getProfileId(),
+          entity.getUsername(),
+          entity.getFirstName(),
+          entity.getLastName(),
+          entity.getFullName(),
+          entity.getPassword(),
+          entity.getBirthday(),
+          Optional.ofNullable(entity.getGender()),  // Handle Optional gender
+          entity.getNationality(),
+          entity.getContactMail(),
+          Optional.ofNullable(entity.getCellphoneNumber()),  // Handle Optional cellphone number
+          entity.getIdNumber(),
+          entity.getTaxId(),
+          entity.getSocialSecurityId(),
+          entity.getPhotoReferences()
+      );
   }
 
 }
