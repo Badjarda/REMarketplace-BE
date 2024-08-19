@@ -15,6 +15,7 @@ import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
 import business.custody.entity.repository.CustodyManagerRepository;
 import business.operator.entity.repository.OperatorRepository;
+import business.operator.service.OperatorService;
 import business.user.entity.repository.UserRepository;
 import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.dto.UserHoldingFungibleGETDTO;
@@ -95,6 +96,9 @@ public class UserAccountService {
 
   @Inject
   WarehousePropertyRepository warehousePropertyRepository;
+
+  @Inject
+    OperatorService operatorService;
 
   public static final String APP_ID = "OperatorId";
 
@@ -238,6 +242,8 @@ public class UserAccountService {
       command = serviceId.exerciseRequestDeposit(quantity, accountKey).commands();
       Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(userParty, operatorParty), null);
       transactionService.handleTransaction(transaction);
+
+      operatorService.acceptRequestDeposit(OperatorService.operatorId, user, OperatorService.publicId);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Deposit Currency Instrument : " + e.getMessage();
     } catch (Exception e) {
@@ -267,6 +273,8 @@ public class UserAccountService {
       command = serviceId.exerciseRequestWithdraw(holdingContractId).commands();
       Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty,userParty), null);
       transactionService.handleTransaction(transaction);
+
+      operatorService.acceptRequestWithdraw(OperatorService.operatorId, user);
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error request Withdraw Currency Instrument : " + e.getMessage();
     } catch (Exception e) {

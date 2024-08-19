@@ -1227,8 +1227,6 @@ public class Transactions {
     String buyerId = event.getCreateArguments().getFields(1).getValue().getParty();
     String sellerId = event.getCreateArguments().getFields(2).getValue().getParty();
     String transferableCid = event.getCreateArguments().getFields(7).getValue().getContractId();
-    System.out.println("TransferableCid: " + transferableCid);
-
     String propertyType = "";
     String postalCode = "";
     List<UserHoldingTransferable> transferables = userHoldingTransferableRepository.findAll().list();

@@ -17,6 +17,7 @@ import business.custody.entity.repository.CustodyManagerRepository;
 import business.issuance.entity.repository.IssuanceManagerRepository;
 import business.issuer.entity.repository.IssuanceServiceOfferRepository;
 import business.operator.entity.repository.OperatorRepository;
+import business.operator.service.OperatorService;
 import business.user.entity.repository.UserRepository;
 import business.useraccount.entity.repository.UserAccountRepository;
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
@@ -80,6 +81,9 @@ public class IssuanceService {
 
   @Inject
   CustodyManagerRepository custodyManagerRepository;
+
+  @Inject
+  OperatorService operatorService;
 
   public static final String APP_ID = "OperatorId";
 
@@ -235,11 +239,33 @@ public class IssuanceService {
       Id issuanceId = new Id(issuanceIdString+postalCode);
 
       String holdingCId = userHoldingTransferableRepository.findById(operatorParty + userParty + "PropertyId"+postalCode).getContractId();
+      String propertyType = userHoldingTransferableRepository.findById(operatorParty + userParty + "PropertyId"+postalCode).getPropertyType();
       var holdingCid = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
 
       command = serviceId.exerciseRequestDeIssue(issuanceId, holdingCid).commands();
       Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty,userParty), null);
       transactionService.handleTransaction(transaction);
+
+      operatorService.acceptRequestDeIssue(OperatorService.operatorId, user);
+      switch (propertyType) {
+        case "APARTMENT":
+          apartmentPropertyRepository.delete(apartmentPropertyRepository.findById(operatorParty+postalCode));
+          break;
+        case "GARAGE":
+          garagePropertyRepository.delete(garagePropertyRepository.findById(operatorParty+postalCode));
+          break;
+        case "LAND":
+          landPropertyRepository.delete(landPropertyRepository.findById(operatorParty+postalCode));
+          break;
+        case "RESIDENCE":
+          residencePropertyRepository.delete(residencePropertyRepository.findById(operatorParty+postalCode));
+          break;
+        case "WAREHOUSE":
+          warehousePropertyRepository.delete(warehousePropertyRepository.findById(operatorParty+postalCode));
+          break;
+        default:
+          break;
+      }
     } catch (IllegalArgumentException | IllegalStateException e) {
       return "Error Request DeIssue Transferable : " + e.getMessage();
     } catch (Exception e) {

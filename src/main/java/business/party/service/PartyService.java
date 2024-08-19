@@ -38,7 +38,6 @@ public class PartyService {
         try {
             partyResponse = alloc(partyName, true);
             partyId = partyResponse.getPartyDetails().getParty();
-
         } catch (ExecutionException e) {
             e.printStackTrace();
             return "error execution\n";

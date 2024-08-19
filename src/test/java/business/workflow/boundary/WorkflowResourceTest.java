@@ -93,20 +93,15 @@ public class WorkflowResourceTest {
 
         System.out.println();
 
+// SETUP OPERATOR + PUBLIC PARTY
+
         // Creating the parties
-        System.out.println(partyService.createParty(uuid1));
-        System.out.println(partyService.createParty(uuid2));
-        System.out.println(partyService.createParty(uuid3));
-        System.out.println(partyService.createParty(uuid4));
+        System.out.println(partyService.createParty(uuid1)); // OPERATOR
+        System.out.println(partyService.createParty(uuid4)); // PUBLIC
 
         // Creating the Users
-        System.out.println(userService.createUser(uuid1, uuid1));
-        System.out.println(userService.createUser(uuid2, uuid2));
-        System.out.println(userService.createUser(uuid3, uuid3));
-        System.out.println(userService.createUser(uuid4, uuid4));
-
-        // Create User Factory
-        System.out.println(roleManagerService.createUserFactory(uuid1));
+        System.out.println(userService.createOperator(uuid1, uuid1)); // OPERATOR
+        System.out.println(userService.createPublic(uuid4, uuid4)); // PUBLIC
 
         // Create Operator Role
         System.out.println(operatorService.createOperatorRole(uuid1));
@@ -114,116 +109,32 @@ public class WorkflowResourceTest {
         // Create Initial Role
         System.out.println(operatorService.createInitialRole(uuid1, uuid4));
 
-        // Offer User Role
-        System.out.println(operatorService.offerUserRole(uuid1, uuid2, "RegisteredUserRole"));
-        System.out.println(operatorService.offerUserRole(uuid1, uuid3, "RegisteredUserRole"));
+// SETUP USER
 
+        System.out.println(partyService.createParty(uuid2));
+        System.out.println(partyService.createParty(uuid3));
 
-        // Accept User Role
-        System.out.println(userRoleService.acceptUserRole(uuid1, uuid2));
-        System.out.println(userRoleService.acceptUserRole(uuid1, uuid3));
-        
-        // Create User Profile Factory
-        System.out.println(profileManagerService.createUserProfileFactory(uuid1));
-
-
-        // Offer User Profile Service
-        System.out.println(operatorService.offerUserProfileService(uuid1, uuid2));
-        System.out.println(operatorService.offerUserProfileService(uuid1, uuid3));
-        
-        // Accept Profile Service
-        //ProfileServiceOfferDTO offer = new ProfileServiceOfferDTO(uuid1, uuid2);
-        //given()
-            //.contentType(MediaType.APPLICATION_JSON)
-            //.body(offer)
-            //.post("/userProfile/acceptProfileService")
-            //.then()
-            //.statusCode(200)
-            //.body(is("Accepted Profile Service!\n"));
-        System.out.println(userProfileService.acceptProfileService(uuid1, uuid2));
-        System.out.println(userProfileService.acceptProfileService(uuid1, uuid3));
-
-        // Create Profile Requests
         List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
-        /** 
-        UserProfileDTO profileDTO = new UserProfileDTO(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
-                        "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(2000, 1, 1),
-                        Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
-                        Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
-                        photoReferences);*/
-        
-        System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid2, uuid4, "Profile" + uuid2, "DuarteCosta", "Duarte",
+        System.out.println(userService.createUser(uuid2, uuid2, "Profile" + uuid2, "DuarteCosta", "Duarte",
                         "Costa", "Duarte Ferreira da Costa", "passwordTest", LocalDate.of(1874, 12, 15),
                         Optional.of(Gender.MALE), Nationality.PORTUGUESE, "ola@gmail.com",
                         Optional.of((long) 912345678L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
-        
-        /**given()
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(profileDTO)
-            .post("/userProfile/requestCreateUserProfile")
-            .then()
-            .statusCode(200)
-            .body(is("Success Create User Profile Request!\n"));*/
-        
-
-        System.out.println(userProfileService.requestCreateUserProfile(uuid1, uuid3, uuid4,
-                        "Profile" + uuid3, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
+        System.out.println(userService.createUser(uuid3, uuid3, "Profile" + uuid3, "PauloSeixo", "Paulo", "Seixo", "Paulo Bem Seixc", "passwordTest1234",
                         LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.NIGERIEN, "adeus@gmail.com",
                         Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L,
                         photoReferences));
-        // Accept Profile Request
-        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid2));
-        System.out.println(operatorService.acceptRequestCreateProfile(uuid1, uuid3));
 
         // Modify Profile
-        System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
-    
-        // Create Account Factories
-        System.out.println(accountManagerService.createCustodyService(uuid1, uuid2, uuid4, "TransferableUser"));
-        
-        // Offer Account Services
-        System.out.println(operatorService.offerCustodianService(uuid1, uuid2));
-        System.out.println(operatorService.offerCustodianService(uuid1, uuid3));
-        
-        // Accept Account Services
-        System.out.println(userAccountService.acceptCustodyService(uuid1, uuid2));
-        System.out.println(userAccountService.acceptCustodyService(uuid1, uuid3));
-        
-        // Create Account Open Requests
-        System.out.println(userAccountService.requestOpenAccount(uuid1, uuid2, "Account"+uuid2, "My Daml.Finance Account"));
-        System.out.println(userAccountService.requestOpenAccount(uuid1, uuid3, "Account"+uuid3, "My Daml.Finance Account"));
-        
-        // Accept Account Open Requests
-        System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid2));
-        System.out.println(operatorService.acceptRequestOpenAccount(uuid1, uuid3));
-        
+        //System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
+              
         // Create Deposit Currency Requests + Accept
         System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "EUR", new BigDecimal("200000.0")));
 
-        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3, uuid4));
-
-
         System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "EUR", new BigDecimal("450000.0")));
-
-        System.out.println(operatorService.acceptRequestDeposit(uuid1, uuid3, uuid4));
 
         // Create Withdraw Currency Requests
         //System.out.println(userAccountService.requestWithdrawFungible(uuid1, uuid2));
-
-        // Accept Withdraw Currency Requests
-        //System.out.println(operatorService.acceptRequestWithdraw(uuid1, uuid2));
-
-        // Create Property Service
-        System.out.println(propertyManagerService.createPropertyFactories(uuid1));
-
-        // Offer Property Service
-        System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid2));
-        System.out.println(operatorService.offerPropertyManagerService(uuid1, uuid3));
-
-        // Accept Property Service
-        System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid2));
-        System.out.println(userPropertyService.acceptPropertyService(uuid1, uuid3));
 
         // Request Create Apartment Property
         String postalCode1 = "2675-614";
@@ -274,6 +185,7 @@ public class WorkflowResourceTest {
         System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid1, uuid2, postalCode5));
 
         // Modify Apartment Property Fields
+        /** 
         System.out.println(userPropertyService.modifyUserApartmentPropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
         "Rua Abel Manta n4 8Frente", postalCode1, "Lisbon", "Odivelas", new BigDecimal(100.0), 
         new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
@@ -299,50 +211,10 @@ public class WorkflowResourceTest {
         System.out.println(userPropertyService.modifyUserWarehousePropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
         "Rua Abel Manta n4 8Frente", postalCode5, "Lisbon", "Odivelas", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(121.0), new BigDecimal(100.0),
         (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
-
-        // Offer Issuance Service
-        System.out.println(operatorService.offerIssuanceService(uuid1, uuid2));
-        System.out.println(operatorService.offerIssuanceService(uuid1, uuid3));
-
-        // Accept Issuance Service
-        System.out.println(issuanceService.acceptIssuanceService(uuid1, uuid2));
-        System.out.println(issuanceService.acceptIssuanceService(uuid1, uuid3));
-        
-        // Create Issue Transferable Request 
-        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode1, "APARTMENT"));
-
-        // Accept Issue Transferable Request
-        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
-
-        // Create Issue Transferable Request 
-        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode3, "GARAGE"));
-
-        // Accept Issue Transferable Request
-        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
-
-        // Create Issue Transferable Request 
-        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode4, "RESIDENCE"));
-
-        // Accept Issue Transferable Request
-        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
-
-        // Create Issue Transferable Request 
-        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode5, "WAREHOUSE"));
-
-        // Accept Issue Transferable Request
-        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
-
-        // Create Issue Transferable Request 
-        System.out.println(issuanceService.requestIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode2, "LAND"));
-
-        // Accept Issue Transferable Request
-        System.out.println(operatorService.acceptRequestIssue(uuid1, uuid2));
+        */
 
         // Create DeIssue Transferable Request
         System.out.println(issuanceService.requestDeIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode2));
-
-        // Accept DeIssue Transferable Request
-        System.out.println(operatorService.acceptRequestDeIssue(uuid1, uuid2));
 
         // Atomic Swap Request
         System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));
@@ -362,7 +234,7 @@ public class WorkflowResourceTest {
         // Test GETS of individual property
         System.out.println("GET INDIVIDUAL PROPERTY : ");
         System.out.println(userPropertyService.getApartmentPropertyById(uuid1, postalCode1));
-        System.out.println(userPropertyService.getLandPropertyById(uuid1, postalCode2));
+        //System.out.println(userPropertyService.getLandPropertyById(uuid1, postalCode2));
         System.out.println(userPropertyService.getGaragePropertyById(uuid1, postalCode3));
         System.out.println(userPropertyService.getResidencePropertyById(uuid1, postalCode4));
         System.out.println(userPropertyService.getWarehousePropertyById(uuid1, postalCode5));

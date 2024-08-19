@@ -9,14 +9,17 @@ import business.custody.entity.repository.CustodyManagerRepository;
 import business.issuance.entity.repository.IssuanceManagerRepository;
 import business.issuer.entity.repository.DeIssueRequestRepository;
 import business.issuer.entity.repository.IssueRequestRepository;
+import business.issuer.service.IssuanceService;
 import business.operator.entity.repository.OperatorRepository;
 import business.profilemanager.entity.repository.UserProfileManagerRepository;
+import business.profilemanager.service.ProfileManagerService;
 import business.propertymanager.entity.repository.ApartmentPropertyFactoryRepository;
 import business.propertymanager.entity.repository.GaragePropertyFactoryRepository;
 import business.propertymanager.entity.repository.LandPropertyFactoryRepository;
 import business.propertymanager.entity.repository.PropertyManagerRepository;
 import business.propertymanager.entity.repository.ResidencePropertyFactoryRepository;
 import business.propertymanager.entity.repository.WarehousePropertyFactoryRepository;
+import business.propertymanager.service.PropertyManagerService;
 import business.rolemanager.entity.repository.UserRoleFactoryRepository;
 import business.user.entity.repository.UserRepository;
 import business.useraccount.entity.repository.UserAccountCloseRequestRepository;
@@ -46,7 +49,6 @@ import java.util.Collections;
 import java.util.Map;
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
-import daml.daml.finance.interface$.types.common.types.AccountKey;
 import daml.daml.finance.interface$.types.common.types.HoldingFactoryKey;
 
 import com.daml.ledger.api.v1.TransactionOuterClass.Transaction;
@@ -55,7 +57,6 @@ import com.daml.ledger.javaapi.data.codegen.Created;
 import com.daml.ledger.javaapi.data.codegen.Update;
 import daml.marketplace.app.role.operator.Role;
 import daml.marketplace.interface$.rolemanager.userrole.permission.Permission;
-import daml.marketplace.interface$.common.types.PropertyKey;
 import business.profilemanager.entity.repository.UserProfileFactoryRepository;
 import daml.marketplace.interface$.common.types.UserRoleKey;
 
@@ -151,15 +152,27 @@ public class OperatorService {
     @Inject
     Transactions transactionService;
 
+    @Inject
+    ProfileManagerService profileManagerService;
+
+    @Inject
+    PropertyManagerService propertyManagerService;
+    @Inject
+    IssuanceService issuanceService;
+
     public static final String APP_ID = "OperatorId";
+
+    public static String operatorId;
+
+    public static String publicId;
 
     public OperatorService() {
 
     }
 
     public String createOperatorRole(String operator) {
-
         try {
+            operatorId = operator;
             String operatorParty = userRepository.findById(operator).getPartyId();
             String userRoleFactoryCid = userRoleFactoryRepository.findById(operatorParty).getContractId();
 
@@ -172,6 +185,10 @@ public class OperatorService {
 
             Transaction transaction =  transactionService.submitTransaction(createCommands, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            profileManagerService.createUserProfileFactory(operator);
+            propertyManagerService.createPropertyFactories(operator);
+
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Operator: " + operator + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -182,8 +199,8 @@ public class OperatorService {
     }
 
     public String createInitialRole(String operator, String publicUser) {
-
         try {
+            publicId = publicUser;
             List<Permission> registeredUserPermissions = new ArrayList<>(Arrays.asList(
                     Permission.VIEW_ALL_MARKETPLACE_TRANSACTIONS, Permission.MANAGE_ALL_MARKETPLACE_TRANSACTIONS,
                     Permission.VIEW_ROLE, Permission.MANAGE_ROLE,
@@ -550,6 +567,9 @@ public class OperatorService {
             var command = serviceId.exerciseCreateApartmentProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            issuanceService.requestIssueTransferable(operatorId, user, "IssuanceId"+user, postalCode, "APARTMENT");
+            acceptRequestIssue(operatorId, user);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Apartment Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -575,6 +595,9 @@ public class OperatorService {
             var command = serviceId.exerciseCreateGarageProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            issuanceService.requestIssueTransferable(operatorId, user, "IssuanceId"+user, postalCode, "GARAGE");
+            acceptRequestIssue(operatorId, user);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Garage Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -600,6 +623,9 @@ public class OperatorService {
             var command = serviceId.exerciseCreateLandProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            issuanceService.requestIssueTransferable(operatorId, user, "IssuanceId"+user, postalCode, "LAND");
+            acceptRequestIssue(operatorId, user);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Land Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -625,6 +651,9 @@ public class OperatorService {
             var command = serviceId.exerciseCreateResidenceProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            issuanceService.requestIssueTransferable(operatorId, user, "IssuanceId"+user, postalCode, "RESIDENCE");
+            acceptRequestIssue(operatorId, user);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Residence Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
@@ -650,6 +679,9 @@ public class OperatorService {
             var command = serviceId.exerciseCreateWarehouseProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
             transactionService.handleTransaction(transaction);
+
+            issuanceService.requestIssueTransferable(operatorId, user, "IssuanceId"+user, postalCode, "WAREHOUSE");
+            acceptRequestIssue(operatorId, user);
         } catch (IllegalArgumentException | IllegalStateException e) {
             return "Error Creating Warehouse Property : " + e.getMessage() + "\n";
         } catch (Exception e) {
