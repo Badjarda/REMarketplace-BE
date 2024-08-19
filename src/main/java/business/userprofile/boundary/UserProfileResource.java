@@ -2,11 +2,14 @@ package business.userprofile.boundary;
 
 import business.userprofile.dto.ProfileServiceOfferDTO;
 import business.userprofile.dto.UserProfileDTO;
+import business.userprofile.dto.UserProfileGETDTO;
 import business.userprofile.service.UserProfileService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -51,6 +54,15 @@ public class UserProfileResource {
         request.getFirstName(), request.getLastName(), request.getFullName(), request.getPassword(),
         request.getBirthday(), request.getGender(), request.getNationality(), request.getContactMail(),
         request.getCellphoneNumber(), request.getIdNumber(), request.getTaxId(), request.getSocialSecurityId(), request.getPhotoReferences());
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/getUserProfile/{operatorId}/{userId}")
+  public UserProfileGETDTO getUserProfile(
+          @PathParam("operatorId") String operatorId,
+          @PathParam("userId") String userId) {
+      return userProfileService.getUserProfile(operatorId, userId);
   }
 
 }
