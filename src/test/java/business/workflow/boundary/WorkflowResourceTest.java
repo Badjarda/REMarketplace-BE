@@ -2,6 +2,7 @@ package business.workflow.boundary;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
+import jakarta.ws.rs.core.MediaType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -29,7 +30,6 @@ import business.useraccount.service.UserAccountService;
 import business.userprofile.service.UserProfileService;
 import business.userrole.service.UserRoleService;
 import business.userproperty.service.UserPropertyService;
-import daml.marketplace.app.custody.model.SwapRequest;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import daml.marketplace.interface$.propertymanager.property.common.GarageType;
@@ -41,7 +41,6 @@ import daml.marketplace.interface$.propertymanager.property.common.Parking;
 import daml.marketplace.interface$.propertymanager.property.common.Orientation;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.core.MediaType;
 
 @QuarkusTest
 public class WorkflowResourceTest {
@@ -290,6 +289,49 @@ public class WorkflowResourceTest {
         // Test GET USER BALANCE
         System.out.println("\nGET USER BALANCE : ");
         System.out.println(userAccountService.getUserHoldingFungible(uuid1, uuid3).getAmount());
+
+        String postalCode6 = "2675-620";
+        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode6, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", postalCode6, "Lisbon", "Odivelas", new BigDecimal(100.0), 
+            new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
+            "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        String postalCode7 = "2675-621";
+        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode7, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", postalCode7, "Lisbon", "Odivelas", new BigDecimal(100.0), 
+            new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
+            "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
         
+        String postalCode8 = "2675-622";
+        System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid2, "PropertyId" + postalCode8, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", postalCode8, "Lisbon", "Odivelas", LandType.RUSTIC, new BigDecimal(100.0), new BigDecimal(100.0),
+            new BigDecimal(100.0), (long) 2L, true, "Frigorífico", viableConstructionTypes, "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        String postalCode9 = "2675-623";
+        System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + postalCode9, new BigDecimal(250000.0), 
+        "Rua Abel Manta n4 7Frente", postalCode9, "Lisbon", "Odivelas", new BigDecimal(100.0), GarageType.CONDOMINIUMPRIVATE,
+        (long) 2L, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        String postalCode10 = "2675-624";
+        System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + postalCode10, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", postalCode10, "Lisbon", "Odivelas", new BigDecimal(100.0), new BigDecimal(100.0),
+            (long) 2L, (long) 2L, (long) 2L, ResidenceType.DETACHED, "In the back", Parking.COVERED, LocalDate.of(1900, 1, 1),
+            Orientation.EAST, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+
+        String postalCode11 = "2675-625";
+        System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid2, "PropertyId" + postalCode11, new BigDecimal(250000.0), 
+            "Rua Abel Manta n4 7Frente", postalCode11, "Lisbon", "Odivelas", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(100.0), new BigDecimal(100.0),
+            (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        
+        // Test GET USER CREATE PROPERTY REQUESTS
+        System.out.println("\nGET USER CREATE PROPERTY REQUESTS : ");
+        
+        Map<String, List<?>> requests = operatorService.getAllPropertyRequests();
+        System.out.println("APARTMENT : " + requests.get("APARTMENT"));
+        System.out.println("GARAGE : " + requests.get("GARAGE"));
+        System.out.println("LAND : " + requests.get("LAND"));
+        System.out.println("RESIDENCE : " + requests.get("RESIDENCE"));
+        System.out.println("WAREHOUSE : " + requests.get("WAREHOUSE"));
+       
     }
 }

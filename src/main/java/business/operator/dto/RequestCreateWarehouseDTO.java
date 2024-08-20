@@ -1,8 +1,8 @@
-package business.userproperty.dto;
+package business.operator.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
+import java.time.LocalDate;
 
 import daml.marketplace.interface$.propertymanager.property.common.WarehouseType;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class WarehousePropertyDTO {
-  private final String operator;
-  private final String user;
+public class RequestCreateWarehouseDTO {
+  private String partyId;
   private final String propertyId;
+  private String propertyType;
   private final BigDecimal warehousePrice;
   private final String propertyAddress;
   private final String propertyPostalCode;
@@ -31,3 +31,4 @@ public class WarehousePropertyDTO {
   private final String description;
   private final List<String> photoReferences;
 }
+

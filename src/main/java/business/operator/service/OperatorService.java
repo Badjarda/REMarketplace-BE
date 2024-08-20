@@ -10,6 +10,11 @@ import business.issuance.entity.repository.IssuanceManagerRepository;
 import business.issuer.entity.repository.DeIssueRequestRepository;
 import business.issuer.entity.repository.IssueRequestRepository;
 import business.issuer.service.IssuanceService;
+import business.operator.dto.RequestCreateApartmentDTO;
+import business.operator.dto.RequestCreateGarageDTO;
+import business.operator.dto.RequestCreateLandDTO;
+import business.operator.dto.RequestCreateResidenceDTO;
+import business.operator.dto.RequestCreateWarehouseDTO;
 import business.operator.entity.repository.OperatorRepository;
 import business.profilemanager.entity.repository.UserProfileManagerRepository;
 import business.profilemanager.service.ProfileManagerService;
@@ -30,6 +35,11 @@ import business.useraccount.entity.repository.UserAccountWithdrawRequestReposito
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
 import business.useraccount.entity.repository.UserSwapRequestRepository;
 import business.userprofile.entity.repository.UserProfileCreateRequestRepository;
+import business.userproperty.entity.model.RequestCreateApartment;
+import business.userproperty.entity.model.RequestCreateGarage;
+import business.userproperty.entity.model.RequestCreateLand;
+import business.userproperty.entity.model.RequestCreateResidence;
+import business.userproperty.entity.model.RequestCreateWarehouse;
 import business.userproperty.entity.repository.ApartmentPropertyRepository;
 import business.userproperty.entity.repository.GaragePropertyRepository;
 import business.userproperty.entity.repository.LandPropertyRepository;
@@ -47,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Collections;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import daml.da.set.types.Set;
 import daml.daml.finance.interface$.types.common.types.Id;
 import daml.daml.finance.interface$.types.common.types.HoldingFactoryKey;
@@ -560,7 +572,7 @@ public class OperatorService {
             String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
 
-            String rId = requestCreateApartmentRepository.findById(operatorParty + userParty).getContractId();
+            String rId = requestCreateApartmentRepository.findById(operatorParty + userParty + postalCode).getContractId();
             var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreateapartmentproperty.RequestCreateApartmentProperty.ContractId(
                     rId);
 
@@ -587,10 +599,8 @@ public class OperatorService {
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(
                     servicId);
 
-            String rId = requestCreateGarageRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(
-                    rId);
+            String rId = requestCreateGarageRepository.findById(operatorParty + userParty + postalCode).getContractId();
+            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreategarageproperty.RequestCreateGarageProperty.ContractId(rId);
 
             var command = serviceId.exerciseCreateGarageProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
@@ -615,10 +625,8 @@ public class OperatorService {
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(
                     servicId);
 
-            String rId = requestCreateLandRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId(
-                    rId);
+            String rId = requestCreateLandRepository.findById(operatorParty + userParty + postalCode).getContractId();
+            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreatelandproperty.RequestCreateLandProperty.ContractId(rId);
 
             var command = serviceId.exerciseCreateLandProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
@@ -643,10 +651,8 @@ public class OperatorService {
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(
                     servicId);
 
-            String rId = requestCreateResidenceRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId(
-                    rId);
+            String rId = requestCreateResidenceRepository.findById(operatorParty + userParty + postalCode).getContractId();
+            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreateresidenceproperty.RequestCreateResidenceProperty.ContractId(rId);
 
             var command = serviceId.exerciseCreateResidenceProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
@@ -671,10 +677,8 @@ public class OperatorService {
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(
                     servicId);
 
-            String rId = requestCreateWarehouseRepository.findById(operatorParty + userParty)
-                    .getContractId();
-            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(
-                    rId);
+            String rId = requestCreateWarehouseRepository.findById(operatorParty + userParty + postalCode).getContractId();
+            var requestId = new daml.marketplace.interface$.propertymanager.choices.requestcreatewarehouseproperty.RequestCreateWarehouseProperty.ContractId(rId);
 
             var command = serviceId.exerciseCreateWarehouseProperty(requestId).commands();
             Transaction transaction = transactionService.submitTransaction(command, Arrays.asList(operatorParty), null);
@@ -689,4 +693,164 @@ public class OperatorService {
         }
         return "Warehouse Property Successfully Created!\n";
     }
+
+    
+    public Map<String, List<?>> getAllPropertyRequests() {
+        Map<String, List<?>> requestsMap = new HashMap<>();
+
+        // Fetch and map apartment property requests
+        List<RequestCreateApartmentDTO> apartmentRequests = requestCreateApartmentRepository.findAll().stream()
+            .map(this::mapToRequestCreateApartmentDTO)
+            .collect(Collectors.toList());
+
+        // Fetch and map garage property requests
+        List<RequestCreateGarageDTO> garageRequests = requestCreateGarageRepository.findAll().stream()
+            .map(this::mapToRequestCreateGarageDTO)
+            .collect(Collectors.toList());
+
+        // Fetch and map land property requests
+        List<RequestCreateLandDTO> landRequests = requestCreateLandRepository.findAll().stream()
+            .map(this::mapToRequestCreateLandDTO)
+            .collect(Collectors.toList());
+
+        // Fetch and map residence property requests
+        List<RequestCreateResidenceDTO> residenceRequests = requestCreateResidenceRepository.findAll().stream()
+            .map(this::mapToRequestCreateResidenceDTO)
+            .collect(Collectors.toList());
+
+        // Fetch and map warehouse property requests
+        List<RequestCreateWarehouseDTO> warehouseRequests = requestCreateWarehouseRepository.findAll().stream()
+            .map(this::mapToRequestCreateWarehouseDTO)
+            .collect(Collectors.toList());
+
+        // Populate the map with the request lists
+        requestsMap.put("APARTMENT", apartmentRequests);
+        requestsMap.put("GARAGE", garageRequests);
+        requestsMap.put("LAND", landRequests);
+        requestsMap.put("RESIDENCE", residenceRequests);
+        requestsMap.put("WAREHOUSE", warehouseRequests);
+
+        return requestsMap;
+    }
+
+    public RequestCreateApartmentDTO mapToRequestCreateApartmentDTO(RequestCreateApartment entity) {
+        return new RequestCreateApartmentDTO(
+            entity.getPartyId(),
+            entity.getPropertyId(),
+            "APARTMENT",
+            entity.getApartmentPrice(),
+            entity.getPropertyAddress(),
+            entity.getPropertyPostalCode(),
+            entity.getPropertyDistrict(),
+            entity.getPropertyCounty(),
+            entity.getGrossArea(),
+            entity.getUsableArea(),
+            entity.getBedrooms(),
+            entity.getBathrooms(),
+            entity.getFloor(),
+            entity.getParkingSpaces(),
+            entity.getElevator(),
+            entity.getBuildDate(),
+            entity.getInstalledEquipment(),
+            entity.getAdditionalInformation(),
+            entity.getDescription(),
+            entity.getPhotoReferences()
+        );
+    }
+
+    public RequestCreateGarageDTO mapToRequestCreateGarageDTO(RequestCreateGarage entity) {
+        return new RequestCreateGarageDTO(
+            entity.getPartyId(),
+            entity.getPropertyId(),
+            "GARAGE",
+            entity.getGaragePrice(),
+            entity.getPropertyAddress(),
+            entity.getPropertyPostalCode(),
+            entity.getPropertyDistrict(),
+            entity.getPropertyCounty(),
+            entity.getGarageArea(),
+            entity.getGarageType(),
+            entity.getVehicleCapacity(),
+            entity.getInstalledEquipment(),
+            entity.getAdditionalInformation(),
+            entity.getDescription(),
+            entity.getPhotoReferences()
+        );
+    }
+
+    public RequestCreateLandDTO mapToRequestCreateLandDTO(RequestCreateLand entity) {
+        return new RequestCreateLandDTO(
+            entity.getPartyId(),
+            entity.getPropertyId(),
+            "LAND",
+            entity.getLandPrice(),
+            entity.getPropertyAddress(),
+            entity.getPropertyPostalCode(),
+            entity.getPropertyDistrict(),
+            entity.getPropertyCounty(),
+            entity.getLandType(),
+            entity.getTotalLandArea(),
+            entity.getMinimumSurfaceForSale(),
+            entity.getBuildableArea(),
+            entity.getBuildableFloors(),
+            entity.getAccessByRoad(),
+            entity.getInstalledEquipment(),
+            entity.getViableConstructionTypes(),
+            entity.getAdditionalInformation(),
+            entity.getDescription(),
+            entity.getPhotoReferences()
+        );
+    }
+
+    public RequestCreateResidenceDTO mapToRequestCreateResidenceDTO(RequestCreateResidence entity) {
+        return new RequestCreateResidenceDTO(
+            entity.getPartyId(),
+            entity.getPropertyId(),
+            "RESIDENCE",
+            entity.getResidencePrice(),
+            entity.getPropertyAddress(),
+            entity.getPropertyPostalCode(),
+            entity.getPropertyDistrict(),
+            entity.getPropertyCounty(),
+            entity.getGrossArea(),
+            entity.getUsableArea(),
+            entity.getBedrooms(),
+            entity.getBathrooms(),
+            entity.getFloors(),
+            entity.getResidenceType(),
+            entity.getBackyard(),
+            entity.getParking(),
+            entity.getBuildDate(),
+            entity.getOrientation(),
+            entity.getInstalledEquipment(),
+            entity.getAdditionalInformation(),
+            entity.getDescription(),
+            entity.getPhotoReferences()
+        );
+    }
+
+    public RequestCreateWarehouseDTO mapToRequestCreateWarehouseDTO(RequestCreateWarehouse entity) {
+        return new RequestCreateWarehouseDTO(
+            entity.getPartyId(),
+            entity.getPropertyId(),
+            "WAREHOUSE",
+            entity.getWarehousePrice(),
+            entity.getPropertyAddress(),
+            entity.getPropertyPostalCode(),
+            entity.getPropertyDistrict(),
+            entity.getPropertyCounty(),
+            entity.getWarehouseType(),
+            entity.getGrossArea(),
+            entity.getUsableArea(),
+            entity.getFloors(),
+            entity.getBuildDate(),
+            entity.getInstalledEquipment(),
+            entity.getAdditionalInformation(),
+            entity.getDescription(),
+            entity.getPhotoReferences()
+        );
+    }
+
+
+
 }
