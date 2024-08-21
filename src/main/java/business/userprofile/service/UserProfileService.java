@@ -15,6 +15,7 @@ import java.util.HashMap;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
 import business.operator.entity.repository.OperatorRepository;
+import business.operator.service.OperatorService;
 import business.profilemanager.entity.repository.UserProfileManagerRepository;
 import business.user.entity.repository.UserRepository;
 import business.userprofile.dto.UserProfileGETDTO;
@@ -184,8 +185,8 @@ public class UserProfileService {
     return "Success Updating User Profile!\n";
   }
 
-  public UserProfileGETDTO getUserProfile(String operatorId, String userId) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public UserProfileGETDTO getUserProfile(String userId) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String userParty = userRepository.findById(userId).getPartyId();
     return mapToUserProfileDTO(userProfileRepository.findById(operatorParty + userParty)); 
   }

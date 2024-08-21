@@ -1,5 +1,6 @@
 package business.userprofile.boundary;
 
+import business.userprofile.dto.GetProfile;
 import business.userprofile.dto.ProfileServiceOfferDTO;
 import business.userprofile.dto.UserProfileDTO;
 import business.userprofile.dto.UserProfileGETDTO;
@@ -56,13 +57,11 @@ public class UserProfileResource {
         request.getCellphoneNumber(), request.getIdNumber(), request.getTaxId(), request.getSocialSecurityId(), request.getPhotoReferences());
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/getUserProfile/{operatorId}/{userId}")
-  public UserProfileGETDTO getUserProfile(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("userId") String userId) {
-      return userProfileService.getUserProfile(operatorId, userId);
+  @Path("/getUserProfile")
+  public UserProfileGETDTO getUserProfile(GetProfile request) {
+      return userProfileService.getUserProfile(request.getUser());
   }
 
 }

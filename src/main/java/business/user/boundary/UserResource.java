@@ -1,15 +1,9 @@
 package business.user.boundary;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
 import apiconfiguration.Transactions;
 import business.party.service.PartyService;
 import business.user.dto.CreateUserDTO;
 import business.user.service.UserService;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
-import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;

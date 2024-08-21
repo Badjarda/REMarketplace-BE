@@ -14,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestCreateWarehouseDTO {
   private String partyId;
+  private String owner;
   private final String propertyId;
   private String propertyType;
   private final BigDecimal warehousePrice;

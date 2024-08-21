@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestCreateApartmentDTO {
   private String partyId;
+  private String owner;
   private String propertyId;
   private String propertyType;
   private BigDecimal apartmentPrice;

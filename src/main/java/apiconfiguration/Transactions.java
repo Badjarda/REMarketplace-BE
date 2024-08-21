@@ -3,7 +3,10 @@ package apiconfiguration;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.daml.ledger.api.v1.EventOuterClass.CreatedEvent;
@@ -29,6 +32,7 @@ import business.custody.entity.repository.CustodyManagerRepository;
 import business.custody.entity.repository.HoldingFactoryRepository;
 import business.custody.entity.repository.RouteProviderRepository;
 import business.custody.entity.repository.SettlementFactoryRepository;
+import business.custody.service.AccountManagerService;
 import business.issuance.entity.model.IssuanceManager;
 import business.issuance.entity.repository.IssuanceManagerRepository;
 import business.issuer.entity.model.DeIssueRequest;
@@ -37,15 +41,20 @@ import business.issuer.entity.model.IssueRequest;
 import business.issuer.entity.repository.DeIssueRequestRepository;
 import business.issuer.entity.repository.IssuanceServiceOfferRepository;
 import business.issuer.entity.repository.IssueRequestRepository;
+import business.issuer.service.IssuanceService;
 import business.operator.entity.model.Operator;
 
 import business.operator.entity.repository.OperatorRepository;
+import business.operator.service.OperatorService;
 import business.party.entity.repository.PartyRepository;
-
+import business.party.service.PartyService;
 import business.rolemanager.entity.model.UserRoleFactory;
 import business.rolemanager.entity.model.UserRoleManager;
 import business.rolemanager.entity.repository.UserRoleFactoryRepository;
 import business.rolemanager.entity.repository.UserRoleManagerRepository;
+import business.rolemanager.service.RoleManagerService;
+import business.user.service.UserService;
+import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.entity.model.CustodyServiceOffer;
 import business.useraccount.entity.model.HoldingFactoryInterface;
 import business.useraccount.entity.model.UserAccount;
@@ -68,6 +77,7 @@ import business.useraccount.entity.repository.UserAccountWithdrawRequestReposito
 import business.useraccount.entity.repository.UserHoldingFungibleRepository;
 import business.useraccount.entity.repository.UserHoldingTransferableRepository;
 import business.useraccount.entity.repository.UserSwapRequestRepository;
+import business.useraccount.service.UserAccountService;
 import business.userprofile.entity.model.ProfileServiceOffer;
 import business.userprofile.entity.model.UserProfile;
 import business.userprofile.entity.model.UserProfileCreateRequest;
@@ -76,6 +86,7 @@ import business.userprofile.entity.repository.ProfileServiceOfferRepository;
 import business.userprofile.entity.repository.UserProfileCreateRequestRepository;
 import business.userprofile.entity.repository.UserProfileReferenceInterfaceRepository;
 import business.userprofile.entity.repository.UserProfileRepository;
+import business.userprofile.service.UserProfileService;
 import business.userproperty.entity.model.ApartmentProperty;
 import business.userproperty.entity.model.ApartmentPropertyInterfaceReference;
 import business.userproperty.entity.model.GarageProperty;
@@ -108,6 +119,7 @@ import business.userproperty.entity.repository.RequestCreateResidenceRepository;
 import business.userproperty.entity.repository.RequestCreateWarehouseRepository;
 import business.userproperty.entity.repository.ResidencePropertyRepository;
 import business.userproperty.entity.repository.WarehousePropertyRepository;
+import business.userproperty.service.UserPropertyService;
 import business.userrole.entity.model.CredentialApp;
 import business.userrole.entity.model.UserRole;
 import business.userrole.entity.model.UserRoleApp;
@@ -118,10 +130,12 @@ import business.userrole.entity.repository.UserRoleAppRepository;
 import business.userrole.entity.repository.UserRoleInterfaceRepository;
 import business.userrole.entity.repository.UserRoleOfferRepository;
 import business.userrole.entity.repository.UserRoleRepository;
+import business.userrole.service.UserRoleService;
 import business.profilemanager.entity.model.UserProfileFactory;
 import business.profilemanager.entity.model.UserProfileManager;
 import business.profilemanager.entity.repository.UserProfileFactoryRepository;
 import business.profilemanager.entity.repository.UserProfileManagerRepository;
+import business.profilemanager.service.ProfileManagerService;
 import business.propertymanager.entity.model.ApartmentPropertyFactory;
 import business.propertymanager.entity.repository.ApartmentPropertyFactoryRepository;
 import business.propertymanager.entity.model.GaragePropertyFactory;
@@ -134,6 +148,7 @@ import business.propertymanager.entity.model.ResidencePropertyFactory;
 import business.propertymanager.entity.repository.ResidencePropertyFactoryRepository;
 import business.propertymanager.entity.model.WarehousePropertyFactory;
 import business.propertymanager.entity.repository.WarehousePropertyFactoryRepository;
+import business.propertymanager.service.PropertyManagerService;
 import daml.marketplace.app.role.operator.Role;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
@@ -273,6 +288,33 @@ public class Transactions {
   ResidencePropertyInterfaceReferenceRepository residencePropertyInterfaceReferenceRepository;
   @Inject
   WarehousePropertyInterfaceReferenceRepository warehousePropertyInterfaceReferenceRepository;
+
+  @Inject
+  PartyService partyService;
+  @Inject
+  UserService userService;
+  @Inject
+  OperatorService operatorService;
+  @Inject
+  Transactions transactionService;
+  @Inject
+  RoleManagerService roleManagerService;
+  @Inject
+  UserRoleService userRoleService;
+  @Inject
+  ProfileManagerService profileManagerService;
+  @Inject
+  UserProfileService userProfileService;
+  @Inject
+  PropertyManagerService propertyManagerService;
+  @Inject
+  UserPropertyService userPropertyService;
+  @Inject
+  AccountManagerService accountManagerService;
+  @Inject
+  UserAccountService userAccountService;
+  @Inject
+  IssuanceService issuanceService;
 
   private ManagedChannel channel;
 
@@ -1600,5 +1642,4 @@ public class Transactions {
     Transaction response = client.getCommandClient().submitAndWaitForTransaction(commandsSubmission).blockingGet().toProto();
     return response;      
   }
-  
 }

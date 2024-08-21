@@ -97,6 +97,17 @@ daml start
 
 sudo docker compose -f docker/dev/docker-compose.yaml up -d --build
 
+### CORS
+
+# CORS Configuration
+quarkus.http.cors=true
+quarkus.http.cors.origins=http://localhost:3000
+quarkus.http.cors.methods=GET,POST,PUT,DELETE,OPTIONS
+quarkus.http.cors.headers=Content-Type,Authorization
+quarkus.http.cors.exposed-headers=X-Custom-Header
+quarkus.http.cors.allow-credentials=true
+quarkus.http.cors.max-age=24H
+
 #### Run Quarkus
 
 java -jar ./target/quarkus-app/quarkus-run.jar

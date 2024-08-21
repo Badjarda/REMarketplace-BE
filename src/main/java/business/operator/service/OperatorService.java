@@ -734,8 +734,14 @@ public class OperatorService {
     }
 
     public RequestCreateApartmentDTO mapToRequestCreateApartmentDTO(RequestCreateApartment entity) {
+        String partyId = entity.getPartyId();
+        String operatorParty = userRepository.findById(operatorId).getPartyId();
+        partyId = partyId.replace(operatorParty, "");
+        int colonIndex = partyId.indexOf(':');
+        String owner = partyId.substring(0, colonIndex);
         return new RequestCreateApartmentDTO(
             entity.getPartyId(),
+            owner,
             entity.getPropertyId(),
             "APARTMENT",
             entity.getApartmentPrice(),
@@ -759,8 +765,14 @@ public class OperatorService {
     }
 
     public RequestCreateGarageDTO mapToRequestCreateGarageDTO(RequestCreateGarage entity) {
+        String partyId = entity.getPartyId();
+        String operatorParty = userRepository.findById(operatorId).getPartyId();
+        partyId = partyId.replace(operatorParty, "");
+        int colonIndex = partyId.indexOf(':');
+        String owner = partyId.substring(0, colonIndex);
         return new RequestCreateGarageDTO(
             entity.getPartyId(),
+            owner,
             entity.getPropertyId(),
             "GARAGE",
             entity.getGaragePrice(),
@@ -779,8 +791,14 @@ public class OperatorService {
     }
 
     public RequestCreateLandDTO mapToRequestCreateLandDTO(RequestCreateLand entity) {
+        String partyId = entity.getPartyId();
+        String operatorParty = userRepository.findById(operatorId).getPartyId();
+        partyId = partyId.replace(operatorParty, "");
+        int colonIndex = partyId.indexOf(':');
+        String owner = partyId.substring(0, colonIndex);
         return new RequestCreateLandDTO(
             entity.getPartyId(),
+            owner,
             entity.getPropertyId(),
             "LAND",
             entity.getLandPrice(),
@@ -803,8 +821,14 @@ public class OperatorService {
     }
 
     public RequestCreateResidenceDTO mapToRequestCreateResidenceDTO(RequestCreateResidence entity) {
+        String partyId = entity.getPartyId();
+        String operatorParty = userRepository.findById(operatorId).getPartyId();
+        partyId = partyId.replace(operatorParty, "");
+        int colonIndex = partyId.indexOf(':');
+        String owner = partyId.substring(0, colonIndex);
         return new RequestCreateResidenceDTO(
             entity.getPartyId(),
+            owner,
             entity.getPropertyId(),
             "RESIDENCE",
             entity.getResidencePrice(),
@@ -830,8 +854,14 @@ public class OperatorService {
     }
 
     public RequestCreateWarehouseDTO mapToRequestCreateWarehouseDTO(RequestCreateWarehouse entity) {
+        String partyId = entity.getPartyId();
+        String operatorParty = userRepository.findById(operatorId).getPartyId();
+        partyId = partyId.replace(operatorParty, "");
+        int colonIndex = partyId.indexOf(':');
+        String owner = partyId.substring(0, colonIndex);
         return new RequestCreateWarehouseDTO(
             entity.getPartyId(),
+            owner,
             entity.getPropertyId(),
             "WAREHOUSE",
             entity.getWarehousePrice(),
@@ -850,7 +880,5 @@ public class OperatorService {
             entity.getPhotoReferences()
         );
     }
-
-
 
 }

@@ -1,9 +1,5 @@
 package business.workflow.boundary;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import jakarta.ws.rs.core.MediaType;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -25,8 +21,6 @@ import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
 import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.service.UserAccountService;
-//import business.userprofile.dto.ProfileServiceOfferDTO;
-//import business.userprofile.dto.UserProfileDTO;
 import business.userprofile.service.UserProfileService;
 import business.userrole.service.UserRoleService;
 import business.userproperty.service.UserPropertyService;
@@ -284,44 +278,58 @@ public class WorkflowResourceTest {
 
         // Test GET USER PROFILE
         System.out.println("\nGET USER PROFILE : ");
-        System.out.println(userProfileService.getUserProfile(uuid1, uuid2).getFullName());
+        System.out.println(userProfileService.getUserProfile(uuid2).getFullName());
 
         // Test GET USER BALANCE
         System.out.println("\nGET USER BALANCE : ");
         System.out.println(userAccountService.getUserHoldingFungible(uuid1, uuid3).getAmount());
 
         String postalCode6 = "2675-620";
-        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode6, new BigDecimal(250000.0), 
-            "Rua Abel Manta n4 7Frente", postalCode6, "Lisbon", "Odivelas", new BigDecimal(100.0), 
-            new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
-            "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode6, 
+            new BigDecimal("320000.00"), 
+            "Avenida da Liberdade, n10 3Esq", postalCode6, "Lisbon", "Lisbon", new BigDecimal("120.0"), 
+            new BigDecimal("110.0"), 3L, 2L, 3L, 1L, true, LocalDate.of(2005, 6, 15), 
+            "Washing machine, Air conditioning", "Recently renovated with high-end finishes.", 
+            "A modern 3-bedroom apartment located in the heart of Lisbon, close to shops and public transport.", photoReferences));
 
         String postalCode7 = "2675-621";
-        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode7, new BigDecimal(250000.0), 
-            "Rua Abel Manta n4 7Frente", postalCode7, "Lisbon", "Odivelas", new BigDecimal(100.0), 
-            new BigDecimal(95.0), (long) 2L, (long) 1L, (long) 7L, (long) 1L, true, LocalDate.of(1900, 1, 1), 
-            "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
-        
+        System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode7, 
+            new BigDecimal("280000.00"), 
+            "Rua da Prata, n5 2Dir", postalCode7, "Lisbon", "Lisbon", new BigDecimal("90.0"), 
+            new BigDecimal("85.0"), 2L, 1L, 2L, 0L, false, LocalDate.of(2010, 9, 10), 
+            "Dishwasher, Built-in wardrobes", "Sunny apartment with a large living room and open kitchen.", 
+            "A cozy 2-bedroom apartment perfect for young professionals or a small family.", photoReferences));
+
         String postalCode8 = "2675-622";
-        System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid2, "PropertyId" + postalCode8, new BigDecimal(250000.0), 
-            "Rua Abel Manta n4 7Frente", postalCode8, "Lisbon", "Odivelas", LandType.RUSTIC, new BigDecimal(100.0), new BigDecimal(100.0),
-            new BigDecimal(100.0), (long) 2L, true, "Frigorífico", viableConstructionTypes, "Terraço comunitário no piso 0", "Long description", photoReferences));
+        System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid2, "PropertyId" + postalCode8, 
+            new BigDecimal("150000.00"), 
+            "Estrada Nacional 1, Km 58", postalCode8, "Leiria", "Leiria", LandType.URBAN, new BigDecimal("1000.0"), new BigDecimal("500.0"),
+            new BigDecimal("800.0"), 3L, true, "Paved road access, Electricity", viableConstructionTypes, 
+            "Ideal for building a small residential complex or a large private villa.", 
+            "Urban land in a rapidly developing area, close to schools and shopping centers.", photoReferences));
 
         String postalCode9 = "2675-623";
-        System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + postalCode9, new BigDecimal(250000.0), 
-        "Rua Abel Manta n4 7Frente", postalCode9, "Lisbon", "Odivelas", new BigDecimal(100.0), GarageType.CONDOMINIUMPRIVATE,
-        (long) 2L, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + postalCode9, 
+            new BigDecimal("30000.00"), 
+            "Rua da Alegria, n12", postalCode9, "Porto", "Porto", new BigDecimal("20.0"), GarageType.CONDOMINIUMPRIVATE,
+            1L, "Automatic door, Lighting", "Secure and well-maintained garage space.", 
+            "Single garage in the city center, perfect for protecting your vehicle from the elements.", photoReferences));
 
         String postalCode10 = "2675-624";
-        System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + postalCode10, new BigDecimal(250000.0), 
-            "Rua Abel Manta n4 7Frente", postalCode10, "Lisbon", "Odivelas", new BigDecimal(100.0), new BigDecimal(100.0),
-            (long) 2L, (long) 2L, (long) 2L, ResidenceType.DETACHED, "In the back", Parking.COVERED, LocalDate.of(1900, 1, 1),
-            Orientation.EAST, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + postalCode10, 
+            new BigDecimal("500000.00"), 
+            "Rua das Flores, n22", postalCode10, "Faro", "Faro", new BigDecimal("250.0"), new BigDecimal("220.0"),
+            5L, 4L, 3L, ResidenceType.CORNERLOT, "Private garden with pool", Parking.COVERED, LocalDate.of(2015, 3, 22),
+            Orientation.SOUTH, "Solar panels, Central heating", "Luxury residence with modern amenities and beautiful sea views.", 
+            "A stunning semi-detached house with a pool, ideal for a large family.", photoReferences));
 
         String postalCode11 = "2675-625";
-        System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid2, "PropertyId" + postalCode11, new BigDecimal(250000.0), 
-            "Rua Abel Manta n4 7Frente", postalCode11, "Lisbon", "Odivelas", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(100.0), new BigDecimal(100.0),
-            (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
+        System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid2, "PropertyId" + postalCode11, 
+            new BigDecimal("750000.00"), 
+            "Zona Industrial de Alverca", postalCode11, "Lisbon", "Alverca", WarehouseType.STORAGEROOM, new BigDecimal("1200.0"), new BigDecimal("1100.0"),
+            1L, LocalDate.of(2018, 11, 30), "High ceilings, Large loading bays", "Perfect for logistics operations with easy access to main highways.", 
+            "A modern logistic warehouse with excellent facilities and infrastructure.", photoReferences));
+
         
         // Test GET USER CREATE PROPERTY REQUESTS
         System.out.println("\nGET USER CREATE PROPERTY REQUESTS : ");
