@@ -233,7 +233,7 @@ public class WorkflowResourceTest {
         System.out.println(userPropertyService.getWarehousePropertyById(uuid1, postalCode5));
 
         // Test GETS of all properties of a user
-        Map<String, List<?>> allUserProperties = userPropertyService.getAllUserProperties(uuid1, uuid2);
+        Map<String, List<?>> allUserProperties = userPropertyService.getAllUserProperties(uuid2);
         System.out.println("\nGET ALL USER PROPERTIES : ");
         System.out.println("APARTMENTS : " + allUserProperties.get("APARTMENT"));
         System.out.println("GARAGES : " + allUserProperties.get("GARAGE"));

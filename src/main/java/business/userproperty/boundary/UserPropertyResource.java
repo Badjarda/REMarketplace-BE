@@ -7,6 +7,7 @@ import business.userproperty.dto.ApartmentPropertyDTO;
 import business.userproperty.dto.ApartmentPropertyGETDTO;
 import business.userproperty.dto.GaragePropertyDTO;
 import business.userproperty.dto.GaragePropertyGETDTO;
+import business.userproperty.dto.GetUserProperties;
 import business.userproperty.dto.LandPropertyDTO;
 import business.userproperty.dto.LandPropertyGETDTO;
 import business.userproperty.dto.PropertyServiceOfferDTO;
@@ -191,13 +192,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/userProperties/{operatorId}/{userId}")
-  public Map<String, List<?>> getAllUserProperties(
-    @PathParam("operatorId") String operatorId,
-    @PathParam("userId") String userId) {
-      return userPropertyService.getAllUserProperties(operatorId, userId);
+  @Path("/userProperties")
+  public Map<String, List<?>> getAllUserProperties(GetUserProperties request) {
+      return userPropertyService.getAllUserProperties(request.getOwner());
   }
 
   @GET

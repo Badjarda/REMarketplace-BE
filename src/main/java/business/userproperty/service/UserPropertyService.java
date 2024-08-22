@@ -445,9 +445,8 @@ public class UserPropertyService {
 
 //---------------------------------------------------------------------------------------------------------------------------------
 
-  public Map<String, List<?>> getAllUserProperties(String operatorId, String userId) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
-    String userParty = userRepository.findById(userId).getPartyId();
+  public Map<String, List<?>> getAllUserProperties(String userId) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
 
     List<UserHoldingTransferable> listHoldingTransferables = userHoldingTransferableRepository.findAll().list();
 
@@ -460,8 +459,8 @@ public class UserPropertyService {
     List<WarehousePropertyGETDTO> warehouses = new ArrayList<>();
 
     for (UserHoldingTransferable holding : listHoldingTransferables) {
-        String propertyId = operatorParty + holding.getPostalCode();
-        if(holding.getOwner().equals(userParty)){
+        if(holding.getOwner().equals(userId)){
+          String propertyId = operatorParty + holding.getPostalCode();
           switch (holding.getPropertyType()) {
             case "APARTMENT":
                 apartments.add(mapToApartmentPropertyDTO(apartmentPropertyRepository.findById(propertyId)));
@@ -488,7 +487,6 @@ public class UserPropertyService {
     propertiesMap.put("LAND", lands);
     propertiesMap.put("RESIDENCE", residences);
     propertiesMap.put("WAREHOUSE", warehouses);
-
     return propertiesMap;
   }
 
