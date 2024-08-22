@@ -209,7 +209,7 @@ public class IssuanceService {
       String accountIdSeller = userAccountRepository.findById(operatorParty + sellerParty).getAccountId();
       AccountKey sellerAccountKey = new AccountKey(operatorParty, sellerParty, new Id(accountIdSeller));
 
-      String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + "PropertyId"+postalCode).getContractId();
+      String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + "PropertyId"+postalCode).getContractId();
       var transferableHoldingCid = new daml.daml.finance.interface$.holding.transferable.Transferable.ContractId(transferableHoldingCId);
 
       command = serviceId.exerciseRequestSwap(sellerParty, sellerAccountKey, buyerAccountKey, holdingFungibleContractId, holdingAmount, transferableHoldingCid).commands();
@@ -238,8 +238,8 @@ public class IssuanceService {
 
       Id issuanceId = new Id(issuanceIdString+postalCode);
 
-      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + userParty + "PropertyId"+postalCode).getContractId();
-      String propertyType = userHoldingTransferableRepository.findById(operatorParty + userParty + "PropertyId"+postalCode).getPropertyType();
+      String holdingCId = userHoldingTransferableRepository.findById(operatorParty + "PropertyId"+postalCode).getContractId();
+      String propertyType = userHoldingTransferableRepository.findById(operatorParty + "PropertyId"+postalCode).getPropertyType();
       var holdingCid = new daml.daml.finance.interface$.holding.holding.Holding.ContractId(holdingCId);
 
       command = serviceId.exerciseRequestDeIssue(issuanceId, holdingCid).commands();

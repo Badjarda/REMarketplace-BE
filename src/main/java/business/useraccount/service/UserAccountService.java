@@ -292,7 +292,7 @@ public class UserAccountService {
         String servicId = custodyManagerRepository.findById(operatorParty + sellerParty).getContractId();
         var serviceId = new daml.marketplace.interface$.custody.service.Service.ContractId(servicId);
 
-        String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + sellerParty + "PropertyId"+postalCode).getContractId();
+        String transferableHoldingCId = userHoldingTransferableRepository.findById(operatorParty + "PropertyId"+postalCode).getContractId();
         
         String swapRequestCId = userSwapRequestRepository.findById(operatorParty + sellerParty + buyerParty + transferableHoldingCId).getContractId();
         var swapRequestCid = new daml.marketplace.interface$.custody.choices.swaprequest.SwapRequest.ContractId(swapRequestCId);
@@ -395,8 +395,11 @@ public class UserAccountService {
   }
 
   public ApartmentPropertyGETDTO mapToApartmentPropertyDTO(ApartmentProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new ApartmentPropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getApartmentPrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -418,8 +421,11 @@ public class UserAccountService {
   }
 
   public GaragePropertyGETDTO mapToGaragePropertyDTO(GarageProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new GaragePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getGaragePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -436,8 +442,11 @@ public class UserAccountService {
   }
 
   public LandPropertyGETDTO mapToLandPropertyDTO(LandProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new LandPropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getLandPrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -458,8 +467,11 @@ public class UserAccountService {
   }
 
   public ResidencePropertyGETDTO mapToResidencePropertyDTO(ResidenceProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new ResidencePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getResidencePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -483,8 +495,11 @@ public class UserAccountService {
   }
 
   public WarehousePropertyGETDTO mapToWarehousePropertyDTO(WarehouseProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new WarehousePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getWarehousePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),

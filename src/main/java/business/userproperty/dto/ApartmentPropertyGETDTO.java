@@ -12,7 +12,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ApartmentPropertyGETDTO {
-  private String propertyId;
+    private String propertyId;
+    private final String owner;
     private BigDecimal apartmentPrice;
     private String propertyAddress;
     private String propertyPostalCode;

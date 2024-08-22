@@ -16,6 +16,7 @@ import com.daml.ledger.javaapi.data.Unit;
 import apiconfiguration.Transactions;
 import business.DamlLedgerClientProvider;
 import business.operator.entity.repository.OperatorRepository;
+import business.operator.service.OperatorService;
 import business.propertymanager.entity.repository.PropertyManagerRepository;
 import business.user.entity.repository.UserRepository;
 import business.useraccount.entity.model.UserHoldingTransferable;
@@ -448,7 +449,8 @@ public class UserPropertyService {
     String operatorParty = userRepository.findById(operatorId).getPartyId();
     String userParty = userRepository.findById(userId).getPartyId();
 
-    List<UserHoldingTransferable> listHoldingTransferables = userHoldingTransferableRepository.findByPartyIdStartingWith(operatorParty + userParty);
+    List<UserHoldingTransferable> listHoldingTransferables = userHoldingTransferableRepository.findAll().list();
+
     Map<String, List<?>> propertiesMap = new HashMap<>();
 
     List<ApartmentPropertyGETDTO> apartments = new ArrayList<>();
@@ -459,7 +461,8 @@ public class UserPropertyService {
 
     for (UserHoldingTransferable holding : listHoldingTransferables) {
         String propertyId = operatorParty + holding.getPostalCode();
-        switch (holding.getPropertyType()) {
+        if(holding.getOwner().equals(userParty)){
+          switch (holding.getPropertyType()) {
             case "APARTMENT":
                 apartments.add(mapToApartmentPropertyDTO(apartmentPropertyRepository.findById(propertyId)));
                 break;
@@ -477,6 +480,7 @@ public class UserPropertyService {
                 break;
             default:
                 break;
+          }
         }
     }
     propertiesMap.put("APARTMENT", apartments);
@@ -577,8 +581,11 @@ public class UserPropertyService {
   }
 
   public ApartmentPropertyGETDTO mapToApartmentPropertyDTO(ApartmentProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new ApartmentPropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getApartmentPrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -600,8 +607,11 @@ public class UserPropertyService {
   }
 
   public GaragePropertyGETDTO mapToGaragePropertyDTO(GarageProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new GaragePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getGaragePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -618,8 +628,11 @@ public class UserPropertyService {
   }
 
   public LandPropertyGETDTO mapToLandPropertyDTO(LandProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new LandPropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getLandPrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -640,8 +653,11 @@ public class UserPropertyService {
   }
 
   public ResidencePropertyGETDTO mapToResidencePropertyDTO(ResidenceProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new ResidencePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getResidencePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),
@@ -665,8 +681,11 @@ public class UserPropertyService {
   }
 
   public WarehousePropertyGETDTO mapToWarehousePropertyDTO(WarehouseProperty entity) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
+    String owner = userHoldingTransferableRepository.findById(operatorParty + entity.getPropertyId()).getOwner();
     return new WarehousePropertyGETDTO(
         entity.getPropertyId(),
+        owner,
         entity.getWarehousePrice(),
         entity.getPropertyAddress(),
         entity.getPropertyPostalCode(),

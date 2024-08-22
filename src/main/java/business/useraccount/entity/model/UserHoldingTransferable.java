@@ -20,6 +20,9 @@ public class UserHoldingTransferable {
   @Column(name = "contractId")
   private String contractId;
 
+  @Column(name = "owner")
+  private String owner;
+
   @Column(name = "postalCode")
   private String postalCode;
 
