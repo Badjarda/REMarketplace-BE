@@ -339,13 +339,12 @@ public class UserAccountService {
     return "Successfully Atomic Swapped!\n";
   }
 
-  public List<SwapRequestGETDTO> getAllUserSwapRequests(String operatorId, String sellerId){
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public List<SwapRequestGETDTO> getAllUserSwapRequests(String sellerId){
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String sellerParty = userRepository.findById(sellerId).getPartyId();
     List<UserSwapRequest> swapRequests = userSwapRequestRepository.findByPartyIdStartingWith(operatorParty + sellerParty);
-
     return swapRequests.stream()
-            .map(request -> mapToSwapRequestGETDTO(operatorId, request))
+            .map(request -> mapToSwapRequestGETDTO(OperatorService.operatorId, request))
             .collect(Collectors.toList());
   }
 
@@ -517,8 +516,8 @@ public class UserAccountService {
     );
   }
 
-  public UserHoldingFungibleGETDTO getUserHoldingFungible(String operatorId, String userId){
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public UserHoldingFungibleGETDTO getUserHoldingFungible(String userId){
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String userParty = userRepository.findById(userId).getPartyId();
     return mapToUserHoldingFungibleGETDTO(userHoldingFungibleRepository.findById(operatorParty + userParty));
   }

@@ -19,14 +19,12 @@ import business.rolemanager.service.RoleManagerService;
 import business.user.service.UserService;
 import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.service.UserAccountService;
-import business.userprofile.dto.UserProfileGETDTO;
 import business.userprofile.service.UserProfileService;
 import business.userproperty.service.UserPropertyService;
 import business.userrole.service.UserRoleService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -199,6 +197,66 @@ public class OperatorResource {
             // Accept Request Create Warehouse Property
             System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid1, uuid2, postalCode6));
 
+            // Request Create Apartment Property
+            String postalCode19 = "5000-000";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode19, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode19, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode19));
+
+            // Request Create Apartment Property
+            String postalCode20 = "5000-001";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode20, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode20, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode20));
+
+            // Request Create Apartment Property
+            String postalCode21 = "5000-002";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode21, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode21, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode21));
+
+            // Request Create Apartment Property
+            String postalCode22 = "5000-003";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode22, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode22, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode22));
+
+            // Request Create Apartment Property
+            String postalCode23 = "5000-004";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode23, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode23, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode23));
+
+            // Request Create Apartment Property
+            String postalCode24 = "5000-005";
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode24, new BigDecimal(320000.0), 
+                "Avenida da Liberdade, 55", postalCode24, "Lisbon", "Lisbon", new BigDecimal(120.0), 
+                new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
+                "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
+
+            // Accept Request Create Apartment Property
+            System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode24));
+
 
             // Modify Apartment Property Fields
             /** 
@@ -275,7 +333,7 @@ public class OperatorResource {
 
             // Test GET ALL USER SWAP REQUESTS
             System.out.println("\nGET ALL USER SWAP REQUESTS : ");
-            for (SwapRequestGETDTO request: userAccountService.getAllUserSwapRequests(uuid1, uuid2)) {
+            for (SwapRequestGETDTO request: userAccountService.getAllUserSwapRequests(uuid3)) {
                 System.out.println("\nSWAP REQUEST FOR: " + request.getSellerId());
                 System.out.println("Buyer: " + request.getBuyerId());
                 switch (request.getPropertyType()) {
@@ -305,7 +363,7 @@ public class OperatorResource {
 
             // Test GET USER BALANCE
             System.out.println("\nGET USER BALANCE : ");
-            System.out.println(userAccountService.getUserHoldingFungible(uuid1, uuid3).getAmount());
+            System.out.println(userAccountService.getUserHoldingFungible(uuid3).getAmount());
 
             String postalCode8 = "2675-620";
             System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid3, "PropertyId" + postalCode8, 

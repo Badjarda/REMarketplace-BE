@@ -252,7 +252,7 @@ public class WorkflowResourceTest {
 
         // Test GET ALL USER SWAP REQUESTS
         System.out.println("\nGET ALL USER SWAP REQUESTS : ");
-        for (SwapRequestGETDTO request: userAccountService.getAllUserSwapRequests(uuid1, uuid2)) {
+        for (SwapRequestGETDTO request: userAccountService.getAllUserSwapRequests(uuid2)) {
             System.out.println("\nSWAP REQUEST FOR: " + request.getSellerId());
             System.out.println("Buyer: " + request.getBuyerId());
             switch (request.getPropertyType()) {
@@ -282,7 +282,7 @@ public class WorkflowResourceTest {
 
         // Test GET USER BALANCE
         System.out.println("\nGET USER BALANCE : ");
-        System.out.println(userAccountService.getUserHoldingFungible(uuid1, uuid3).getAmount());
+        System.out.println(userAccountService.getUserHoldingFungible(uuid3).getAmount());
 
         String postalCode6 = "2675-620";
         System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode6, 

@@ -15,7 +15,7 @@ import lombok.Setter;
 public class WarehousePropertyGETDTO {
   private final String propertyId;
   private final String owner;
-  private final BigDecimal warehousePrice;
+  private final BigDecimal price;
   private final String propertyAddress;
   private final String propertyPostalCode;
   private final String propertyDistrict;

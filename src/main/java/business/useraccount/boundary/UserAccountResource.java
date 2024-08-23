@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import business.useraccount.dto.CustodyServiceOfferDTO;
+import business.useraccount.dto.GetBalanceDTO;
+import business.useraccount.dto.GetSwapRequests;
 import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.dto.UserAccountDTO;
 import business.useraccount.dto.UserHoldingFungibleGETDTO;
@@ -13,7 +15,6 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -70,21 +71,17 @@ public class UserAccountResource {
     return userAccountService.requestWithdrawFungible(operator, user);
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/getUserBalance/{operatorId}/{userId}")
-  public UserHoldingFungibleGETDTO getUserHoldingFungible(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("userId") String userId) {
-      return userAccountService.getUserHoldingFungible(operatorId, userId);
+  @Path("/getUserBalance")
+  public UserHoldingFungibleGETDTO getUserHoldingFungible(GetBalanceDTO request) {
+      return userAccountService.getUserHoldingFungible(request.getUser());
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/getAllUserSwapRequests/{operatorId}/{userId}")
-  public List<SwapRequestGETDTO> getAllUserSwapRequests(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("userId") String userId) {
-      return userAccountService.getAllUserSwapRequests(operatorId, userId);
+  @Path("/getAllUserSwapRequests")
+  public List<SwapRequestGETDTO> getAllUserSwapRequests(GetSwapRequests request) {
+      return userAccountService.getAllUserSwapRequests(request.getUser());
   }
 }
