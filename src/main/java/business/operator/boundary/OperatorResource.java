@@ -141,7 +141,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode1 = "1000-001";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode1, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode1, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode1, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -151,7 +151,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode2 = "1000-002";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid3, "PropertyId" + postalCode2, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid3, "PropertyId" + postalCode2, new BigDecimal(320000.0), 
                 "Rua Hermano Sousa, 22", postalCode2, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -162,16 +162,25 @@ public class OperatorResource {
             // Request Create Land Property
             String postalCode3 = "3000-123";
             List<ViableConstructionTypes> viableConstructionTypes = Arrays.asList(ViableConstructionTypes.BUILDING, ViableConstructionTypes.RESIDENCE); 
-            System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid2, "PropertyId" + postalCode3, new BigDecimal(180000.0), 
+            System.out.println(userPropertyService.requestCreateLandProperty(uuid2, "PropertyId" + postalCode3, new BigDecimal(180000.0), 
                 "Estrada de Coimbra, Km 22", postalCode3, "Coimbra", "Coimbra", LandType.RUSTIC, new BigDecimal(5000.0), new BigDecimal(5000.0),
                 new BigDecimal(4500.0), (long) 1L, true, "Open land suitable for farming or construction", viableConstructionTypes, "Located near major roadways", "A large rustic plot ideal for agricultural use or future residential development", photoReferences));
 
             // Accept Request Create Land Property
             System.out.println(operatorService.acceptRequestCreateLandProperty(uuid1, uuid2, postalCode3));
 
+            // Request Create Land Property
+            String postalCode30 = "3000-124";
+            System.out.println(userPropertyService.requestCreateLandProperty(uuid2, "PropertyId" + postalCode30, new BigDecimal(180000.0), 
+                "Estrada de Coimbra, Km 22", postalCode30, "Coimbra", "Coimbra", LandType.RUSTIC, new BigDecimal(5000.0), new BigDecimal(5000.0),
+                new BigDecimal(4500.0), (long) 1L, true, "Open land suitable for farming or construction", viableConstructionTypes, "Located near major roadways", "A large rustic plot ideal for agricultural use or future residential development", photoReferences));
+
+            // Accept Request Create Land Property
+            System.out.println(operatorService.acceptRequestCreateLandProperty(uuid1, uuid2, postalCode30));
+
             // Request Create Garage Property
             String postalCode4 = "1100-234";
-            System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + postalCode4, new BigDecimal(50000.0), 
+            System.out.println(userPropertyService.requestCreateGarageProperty(uuid2, "PropertyId" + postalCode4, new BigDecimal(50000.0), 
                 "Rua dos Anjos, 24B", postalCode4, "Lisbon", "Lisbon", new BigDecimal(25.0), GarageType.CONDOMINIUMPRIVATE,
                 (long) 1L, "Secure garage with 24/7 access", "Conveniently located near metro station", "Spacious underground garage in a condominium with security", photoReferences));
 
@@ -180,7 +189,7 @@ public class OperatorResource {
 
             // Request Create Residence Property
             String postalCode5 = "2750-515";
-            System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + postalCode5, new BigDecimal(850000.0), 
+            System.out.println(userPropertyService.requestCreateResidenceProperty(uuid2, "PropertyId" + postalCode5, new BigDecimal(850000.0), 
                 "Rua das Acácias, 12", postalCode5, "Cascais", "Cascais", new BigDecimal(350.0), new BigDecimal(300.0),
                 (long) 4L, (long) 3L, (long) 2L, ResidenceType.DETACHED, "Large private backyard", Parking.COVERED, LocalDate.of(2020, 6, 1),
                 Orientation.SOUTH, "Bosch Refrigerator", "Spacious backyard with private pool", "Luxurious detached home in Cascais, with modern amenities and close to the beach", photoReferences));
@@ -190,7 +199,7 @@ public class OperatorResource {
 
             // Request Create Warehouse Property
             String postalCode6 = "4000-345";
-            System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid2, "PropertyId" + postalCode6, new BigDecimal(600000.0), 
+            System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid2, "PropertyId" + postalCode6, new BigDecimal(600000.0), 
                 "Zona Industrial do Porto, Rua A", postalCode6, "Porto", "Porto", WarehouseType.BUILDINGWAREHOUSE, new BigDecimal(2000.0), new BigDecimal(1800.0),
                 (long) 5L, LocalDate.of(2005, 11, 15), "Large cold storage room", "Includes offices and parking space", "Industrial warehouse ideal for logistics or manufacturing, located in a key industrial zone", photoReferences));
 
@@ -199,7 +208,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode19 = "5000-000";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode19, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode19, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode19, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -209,7 +218,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode20 = "5000-001";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode20, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode20, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode20, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -219,7 +228,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode21 = "5000-002";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode21, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode21, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode21, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -229,7 +238,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode22 = "5000-003";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode22, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode22, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode22, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -239,7 +248,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode23 = "5000-004";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode23, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode23, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode23, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -249,7 +258,7 @@ public class OperatorResource {
 
             // Request Create Apartment Property
             String postalCode24 = "5000-005";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode24, new BigDecimal(320000.0), 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode24, new BigDecimal(320000.0), 
                 "Avenida da Liberdade, 55", postalCode24, "Lisbon", "Lisbon", new BigDecimal(120.0), 
                 new BigDecimal(110.0), (long) 3L, (long) 2L, (long) 8L, (long) 1L, true, LocalDate.of(2010, 5, 1), 
                 "Samsung Refrigerator", "Private balcony with city view", "Modern 3-bedroom apartment in central Lisbon, perfect for families or professionals", photoReferences));
@@ -259,6 +268,7 @@ public class OperatorResource {
 
 
             // Modify Apartment Property Fields
+
             /** 
             System.out.println(userPropertyService.modifyUserApartmentPropertyFields(uuid1, uuid2, new BigDecimal(250001.0), 
             "Rua Abel Manta n4 8Frente", postalCode1, "Lisbon", "Odivelas", new BigDecimal(100.0), 
@@ -307,11 +317,11 @@ public class OperatorResource {
             
             // Test GETS of individual property
             System.out.println("GET INDIVIDUAL PROPERTY : ");
-            System.out.println(userPropertyService.getApartmentPropertyById(uuid1, postalCode1));
-            //System.out.println(userPropertyService.getLandPropertyById(uuid1, postalCode2));
-            System.out.println(userPropertyService.getGaragePropertyById(uuid1, postalCode4));
-            System.out.println(userPropertyService.getResidencePropertyById(uuid1, postalCode5));
-            System.out.println(userPropertyService.getWarehousePropertyById(uuid1, postalCode6));
+            System.out.println(userPropertyService.getApartmentPropertyById(postalCode1));
+            //System.out.println(userPropertyService.getLandPropertyById(postalCode2));
+            System.out.println(userPropertyService.getGaragePropertyById(postalCode4));
+            System.out.println(userPropertyService.getResidencePropertyById(postalCode5));
+            System.out.println(userPropertyService.getWarehousePropertyById(postalCode6));
 
             // Test GETS of all properties of a user
             Map<String, List<?>> allUserProperties = userPropertyService.getAllUserProperties(uuid2);
@@ -366,7 +376,7 @@ public class OperatorResource {
             System.out.println(userAccountService.getUserHoldingFungible(uuid3).getAmount());
 
             String postalCode8 = "2675-620";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid3, "PropertyId" + postalCode8, 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid3, "PropertyId" + postalCode8, 
                 new BigDecimal("320000.00"), 
                 "Avenida da Liberdade, n10 3Esq", postalCode8, "Lisbon", "Lisbon", new BigDecimal("120.0"), 
                 new BigDecimal("110.0"), 3L, 2L, 3L, 1L, true, LocalDate.of(2005, 6, 15), 
@@ -374,7 +384,7 @@ public class OperatorResource {
                 "A modern 3-bedroom apartment located in the heart of Lisbon, close to shops and public transport.", photoReferences));
 
             String postalCode9 = "2675-621";
-            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid1, uuid2, "PropertyId" + postalCode9, 
+            System.out.println(userPropertyService.requestCreateApartmentProperty(uuid2, "PropertyId" + postalCode9, 
                 new BigDecimal("280000.00"), 
                 "Rua da Prata, n5 2Dir", postalCode9, "Lisbon", "Lisbon", new BigDecimal("90.0"), 
                 new BigDecimal("85.0"), 2L, 1L, 2L, 0L, false, LocalDate.of(2010, 9, 10), 
@@ -382,7 +392,7 @@ public class OperatorResource {
                 "A cozy 2-bedroom apartment perfect for young professionals or a small family.", photoReferences));
 
             String postalCode10 = "2675-622";
-            System.out.println(userPropertyService.requestCreateLandProperty(uuid1, uuid3, "PropertyId" + postalCode10, 
+            System.out.println(userPropertyService.requestCreateLandProperty(uuid3, "PropertyId" + postalCode10, 
                 new BigDecimal("150000.00"), 
                 "Estrada Nacional 1, Km 58", postalCode10, "Leiria", "Leiria", LandType.URBAN, new BigDecimal("1000.0"), new BigDecimal("500.0"),
                 new BigDecimal("800.0"), 3L, true, "Paved road access, Electricity", viableConstructionTypes, 
@@ -390,14 +400,14 @@ public class OperatorResource {
                 "Urban land in a rapidly developing area, close to schools and shopping centers.", photoReferences));
 
             String postalCode11 = "2675-623";
-            System.out.println(userPropertyService.requestCreateGarageProperty(uuid1, uuid2, "PropertyId" + postalCode11, 
+            System.out.println(userPropertyService.requestCreateGarageProperty(uuid2, "PropertyId" + postalCode11, 
                 new BigDecimal("30000.00"), 
                 "Rua da Alegria, n12", postalCode11, "Porto", "Porto", new BigDecimal("20.0"), GarageType.CONDOMINIUMPRIVATE,
                 1L, "Automatic door, Lighting", "Secure and well-maintained garage space.", 
                 "Single garage in the city center, perfect for protecting your vehicle from the elements.", photoReferences));
 
             String postalCode12 = "2675-624";
-            System.out.println(userPropertyService.requestCreateResidenceProperty(uuid1, uuid2, "PropertyId" + postalCode12, 
+            System.out.println(userPropertyService.requestCreateResidenceProperty(uuid2, "PropertyId" + postalCode12, 
                 new BigDecimal("500000.00"), 
                 "Rua das Flores, n22", postalCode12, "Faro", "Faro", new BigDecimal("250.0"), new BigDecimal("220.0"),
                 5L, 4L, 3L, ResidenceType.CORNERLOT, "Private garden with pool", Parking.COVERED, LocalDate.of(2015, 3, 22),
@@ -405,7 +415,7 @@ public class OperatorResource {
                 "A stunning semi-detached house with a pool, ideal for a large family.", photoReferences));
 
             String postalCode13 = "2675-625";
-            System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid1, uuid3, "PropertyId" + postalCode13, 
+            System.out.println(userPropertyService.requestCreateWarehouseProperty(uuid3, "PropertyId" + postalCode13, 
                 new BigDecimal("750000.00"), 
                 "Zona Industrial de Alverca", postalCode13, "Lisbon", "Alverca", WarehouseType.STORAGEROOM, new BigDecimal("1200.0"), new BigDecimal("1100.0"),
                 1L, LocalDate.of(2018, 11, 30), "High ceilings, Large loading bays", "Perfect for logistics operations with easy access to main highways.", 

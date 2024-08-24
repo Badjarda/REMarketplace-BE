@@ -95,10 +95,10 @@ public class UserPropertyService {
 
   }
 
-  private void handlePropertyServiceOffer(String operator, String user, String action)
+  private void handlePropertyServiceOffer(String user, String action)
       throws IllegalArgumentException, IllegalStateException, Exception {
 
-    String operatorParty = userRepository.findById(operator).getPartyId();
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String userParty = userRepository.findById(user).getPartyId();
     String offerContractId = propertyServiceOfferRepository.findById(operatorParty + userParty)
         .getContractId();
@@ -115,9 +115,9 @@ public class UserPropertyService {
     transactionService.handleTransaction(transaction);
   }
 
-  public String acceptPropertyService(String operator, String user) {
+  public String acceptPropertyService(String user) {
     try {
-      handlePropertyServiceOffer(operator, user, "accept");
+      handlePropertyServiceOffer(user, "accept");
     } catch (IllegalArgumentException | IllegalStateException e) {
       // Handle input validation or contract existence check errors
       return "Error accepting Property Service: " + e.getMessage() + "\n";
@@ -129,9 +129,9 @@ public class UserPropertyService {
     return "Accepted Property Service!\n";
   }
 
-  public String declinePropertyService(String operator, String user) {
+  public String declinePropertyService(String user) {
     try {
-      handlePropertyServiceOffer(operator, user, "decline");
+      handlePropertyServiceOffer(user, "decline");
 
     } catch (IllegalArgumentException | IllegalStateException e) {
       // Handle input validation or contract existence check errors
@@ -143,11 +143,11 @@ public class UserPropertyService {
     return "Declined Property Service!\n";
   }
 
-  public String requestCreateApartmentProperty (String operator, String user, String propertyId, BigDecimal apartmentPrice,String propertyAddress, String propertyPostalCode, 
+  public String requestCreateApartmentProperty (String user, String propertyId, BigDecimal apartmentPrice,String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floor,Long parkingSpaces, 
    Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
@@ -177,11 +177,11 @@ public class UserPropertyService {
     return "Success Create Request Apartment\n";
   }
 
-  public String requestCreateGarageProperty (String operator, String user, String propertyId, BigDecimal garagePrice, String propertyAddress, 
+  public String requestCreateGarageProperty (String user, String propertyId, BigDecimal garagePrice, String propertyAddress, 
     String propertyPostalCode, String propertyDistrict,String propertyCounty, BigDecimal garageArea, GarageType garageType, 
     Long vehicleCapacity, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
@@ -210,11 +210,11 @@ public class UserPropertyService {
     return "Success Create Request Garage\n";
   }
 
-  public String requestCreateLandProperty (String operator, String user, String propertyId,  BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
+  public String requestCreateLandProperty (String user, String propertyId,  BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,LandType landType,BigDecimal totalLandArea,BigDecimal minimumSurfaceForSale,BigDecimal buildableArea,
    Long buildableFloors,Boolean accessByRoad, String installedEquipment,List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
@@ -245,11 +245,11 @@ public class UserPropertyService {
     return "Success Create Request Land\n";
   }
 
-  public String requestCreateResidenceProperty (String operator, String user, String propertyId,  BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
+  public String requestCreateResidenceProperty (String user, String propertyId,  BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
    String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floors,ResidenceType residenceType, 
    String backyard,Parking parking,LocalDate buildDate, Orientation orientation,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
@@ -277,11 +277,11 @@ public class UserPropertyService {
     return "Success Create Request Residence\n";
   }
 
-  public String requestCreateWarehouseProperty (String operator, String user, String propertyId, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
+  public String requestCreateWarehouseProperty (String user, String propertyId, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty, WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors, 
   LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
@@ -311,11 +311,11 @@ public class UserPropertyService {
     return "Success Create Request Warehouse\n";
   }
 
-  public String modifyUserApartmentPropertyFields(String operator, String user, BigDecimal apartmentPrice, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserApartmentPropertyFields(String user, BigDecimal apartmentPrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea,Long bedrooms,Long bathrooms, Long floor,Long parkingSpaces, 
   Boolean elevator,LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
       
@@ -336,11 +336,11 @@ public class UserPropertyService {
     return "Success Updating User Apartment Property!\n";
   }
 
-  public String modifyUserGaragePropertyFields(String operator, String user, BigDecimal garagePrice, String propertyAddress, 
+  public String modifyUserGaragePropertyFields(String user, BigDecimal garagePrice, String propertyAddress, 
   String propertyPostalCode, String propertyDistrict,String propertyCounty, BigDecimal garageArea, GarageType garageType, 
   Long vehicleCapacity, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
       
@@ -362,12 +362,12 @@ public class UserPropertyService {
     return "Success Updating User Garage Property!\n";
   }
 
-  public String modifyUserLandPropertyFields(String operator, String user, BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserLandPropertyFields(String user, BigDecimal landPrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,LandType landType,BigDecimal totalLandArea,BigDecimal minimumSurfaceForSale,
   BigDecimal buildableArea,Long buildableFloors,Boolean accessByRoad, String installedEquipment,
   List<ViableConstructionTypes> viableConstructionTypes,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
       
@@ -390,11 +390,11 @@ public class UserPropertyService {
     return "Success Updating User Land Property!\n";
   }
 
-  public String modifyUserResidencePropertyFields(String operator, String user, BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserResidencePropertyFields(String user, BigDecimal residencePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty,BigDecimal grossArea,BigDecimal usableArea, Long bedrooms, Long bathrooms, Long floors, ResidenceType residenceType, 
   String backyard,Parking parking,LocalDate buildDate, Orientation orientation, String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
       
@@ -402,7 +402,6 @@ public class UserPropertyService {
       PropertyKey key = new PropertyKey(operatorParty, userParty, new Id(residenceIdString));
 
       var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
-
       Transaction transaction = transactionService.submitTransaction(serviceId.exerciseUpdateResidence(residencePrice, propertyAddress, 
       propertyPostalCode, propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, bathrooms, 
       floors, residenceType, backyard, parking, buildDate, orientation, installedEquipment, 
@@ -417,11 +416,11 @@ public class UserPropertyService {
     return "Success Updating User Residence Property!\n";
   }
 
-  public String modifyUserWarehousePropertyFields(String operator, String user, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
+  public String modifyUserWarehousePropertyFields(String user, BigDecimal warehousePrice, String propertyAddress, String propertyPostalCode, 
   String propertyDistrict,String propertyCounty, WarehouseType warehouseType, BigDecimal grossArea, BigDecimal usableArea, Long floors, 
   LocalDate buildDate,String installedEquipment,String additionalInformation,String description, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
       
@@ -524,8 +523,8 @@ public class UserPropertyService {
         .collect(Collectors.toList());
   }
 
-  public ApartmentPropertyGETDTO getApartmentPropertyById(String operatorId, String postalCode) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public ApartmentPropertyGETDTO getApartmentPropertyById(String postalCode) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String partyId = operatorParty + postalCode;
     return mapToApartmentPropertyDTO(apartmentPropertyRepository.findById(partyId));
   }
@@ -536,8 +535,8 @@ public class UserPropertyService {
         .collect(Collectors.toList());
   }
 
-  public GaragePropertyGETDTO getGaragePropertyById(String operatorId, String postalCode) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public GaragePropertyGETDTO getGaragePropertyById(String postalCode) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String partyId = operatorParty + postalCode;
     return mapToGaragePropertyDTO(garagePropertyRepository.findById(partyId));
   }
@@ -548,8 +547,8 @@ public class UserPropertyService {
         .collect(Collectors.toList());
   }
 
-  public LandPropertyGETDTO getLandPropertyById(String operatorId, String postalCode) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public LandPropertyGETDTO getLandPropertyById(String postalCode) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String partyId = operatorParty + postalCode;
     return mapToLandPropertyDTO(landPropertyRepository.findById(partyId));
   }
@@ -560,8 +559,8 @@ public class UserPropertyService {
         .collect(Collectors.toList());
   }
 
-  public ResidencePropertyGETDTO getResidencePropertyById(String operatorId, String postalCode) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public ResidencePropertyGETDTO getResidencePropertyById(String postalCode) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String partyId = operatorParty + postalCode;
     return mapToResidencePropertyDTO(residencePropertyRepository.findById(partyId));
   }
@@ -572,8 +571,8 @@ public class UserPropertyService {
         .collect(Collectors.toList());
   }
 
-  public WarehousePropertyGETDTO getWarehousePropertyById(String operatorId, String postalCode) {
-    String operatorParty = userRepository.findById(operatorId).getPartyId();
+  public WarehousePropertyGETDTO getWarehousePropertyById(String postalCode) {
+    String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
     String partyId = operatorParty + postalCode;
     return mapToWarehousePropertyDTO(warehousePropertyRepository.findById(partyId));
   }

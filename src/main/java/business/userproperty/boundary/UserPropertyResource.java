@@ -7,6 +7,7 @@ import business.userproperty.dto.ApartmentPropertyDTO;
 import business.userproperty.dto.ApartmentPropertyGETDTO;
 import business.userproperty.dto.GaragePropertyDTO;
 import business.userproperty.dto.GaragePropertyGETDTO;
+import business.userproperty.dto.GetPropertyDTO;
 import business.userproperty.dto.GetUserProperties;
 import business.userproperty.dto.LandPropertyDTO;
 import business.userproperty.dto.LandPropertyGETDTO;
@@ -21,7 +22,6 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -35,7 +35,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/acceptPropertyService")
   public String acceptPropertyService(PropertyServiceOfferDTO offer) {
-    return userPropertyService.acceptPropertyService(offer.getOperator(), offer.getUser());
+    return userPropertyService.acceptPropertyService(offer.getUser());
   }
 
   @POST
@@ -43,7 +43,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/declinePropertyService")
   public String declinePropertyService(PropertyServiceOfferDTO offer) {
-    return userPropertyService.declinePropertyService(offer.getOperator(), offer.getUser());
+    return userPropertyService.declinePropertyService(offer.getUser());
   }
 
   @POST
@@ -51,7 +51,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/requestCreateApartment")
   public String requestCreateApartment(ApartmentPropertyDTO request) {
-    return userPropertyService.requestCreateApartmentProperty(request.getOperator(), request.getUser(),
+    return userPropertyService.requestCreateApartmentProperty(request.getUser(),
         request.getPropertyId(), request.getApartmentPrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(), request.getGrossArea(),
@@ -66,7 +66,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/requestCreateGarage")
   public String requestCreateGarage(GaragePropertyDTO request) {
-    return userPropertyService.requestCreateGarageProperty(request.getOperator(), request.getUser(),
+    return userPropertyService.requestCreateGarageProperty(request.getUser(),
         request.getPropertyId(), request.getGaragePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
@@ -79,7 +79,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/requestCreateLand")
   public String requestCreateLand(LandPropertyDTO request) {
-    return userPropertyService.requestCreateLandProperty(request.getOperator(), request.getUser(),
+    return userPropertyService.requestCreateLandProperty(request.getUser(),
         request.getPropertyId(), request.getLandPrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
@@ -95,7 +95,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/requestCreateResidence")
   public String requestCreateResidence(ResidencePropertyDTO request) {
-    return userPropertyService.requestCreateResidenceProperty(request.getOperator(), request.getUser(),
+    return userPropertyService.requestCreateResidenceProperty(request.getUser(),
         request.getPropertyId(), request.getResidencePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
@@ -111,7 +111,7 @@ public class UserPropertyResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/requestCreateWarehouse")
   public String requestCreateWarehouse(WarehousePropertyDTO request) {
-    return userPropertyService.requestCreateWarehouseProperty(request.getOperator(), request.getUser(),
+    return userPropertyService.requestCreateWarehouseProperty(request.getUser(),
         request.getPropertyId(), request.getWarehousePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
@@ -121,10 +121,10 @@ public class UserPropertyResource {
   }
 
   @POST
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateApartmentProperty")
   public String updateApartmentProperty(ApartmentPropertyDTO request) {
-    return userPropertyService.modifyUserApartmentPropertyFields(request.getOperator(), request.getUser(),request.getApartmentPrice(),
+    return userPropertyService.modifyUserApartmentPropertyFields(request.getUser(),request.getApartmentPrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getGrossArea(), request.getUsableArea(),
@@ -134,10 +134,10 @@ public class UserPropertyResource {
   }
 
   @POST
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateGarageProperty")
   public String updateGarageProperty(GaragePropertyDTO request) {
-    return userPropertyService.modifyUserGaragePropertyFields(request.getOperator(), request.getUser(),request.getGaragePrice(),
+    return userPropertyService.modifyUserGaragePropertyFields(request.getUser(),request.getGaragePrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getGarageArea(), request.getGarageType(),
@@ -146,10 +146,10 @@ public class UserPropertyResource {
   }
 
   @POST
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateLandProperty")
   public String updateLandProperty(LandPropertyDTO request) {
-    return userPropertyService.modifyUserLandPropertyFields(request.getOperator(), request.getUser(),request.getLandPrice(),
+    return userPropertyService.modifyUserLandPropertyFields(request.getUser(),request.getLandPrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getLandType(), request.getTotalLandArea(),
@@ -159,10 +159,10 @@ public class UserPropertyResource {
   }
 
   @POST
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateResidenceProperty")
   public String updateResidenceProperty(ResidencePropertyDTO request) {
-    return userPropertyService.modifyUserResidencePropertyFields(request.getOperator(), request.getUser(),request.getResidencePrice(),
+    return userPropertyService.modifyUserResidencePropertyFields(request.getUser(),request.getResidencePrice(),
         request.getPropertyAddress(), request.getPropertyPostalCode(), request.getPropertyDistrict(),
         request.getPropertyCounty(),
         request.getGrossArea(), request.getUsableArea(), request.getBedrooms(), request.getBathrooms(),
@@ -173,10 +173,10 @@ public class UserPropertyResource {
   }
 
   @POST
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/updateWarehouseProperty")
   public String updateWarehouseProperty(WarehousePropertyDTO request) {
-    return userPropertyService.modifyUserWarehousePropertyFields(request.getOperator(), request.getUser(),request.getWarehousePrice(),
+    return userPropertyService.modifyUserWarehousePropertyFields(request.getUser(),request.getWarehousePrice(),
         request.getPropertyAddress(),
         request.getPropertyPostalCode(), request.getPropertyDistrict(), request.getPropertyCounty(),
         request.getWarehouseType(), request.getGrossArea(),
@@ -206,13 +206,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllApartmentProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/apartments/{operatorId}/{postalCode}")
-  public ApartmentPropertyGETDTO getApartmentPropertyById(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("postalCode") String postalCode) {
-      return userPropertyService.getApartmentPropertyById(operatorId, postalCode);
+  @Path("/apartment")
+  public ApartmentPropertyGETDTO getApartmentPropertyById(GetPropertyDTO request) {
+      return userPropertyService.getApartmentPropertyById(request.getPostalCode());
   }
 
   @GET
@@ -222,13 +220,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllGarageProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/garages/{operatorId}/{postalCode}")
-  public GaragePropertyGETDTO getGaragePropertyById(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("postalCode") String postalCode) {
-      return userPropertyService.getGaragePropertyById(operatorId, postalCode);
+  @Path("/garage")
+  public GaragePropertyGETDTO getGaragePropertyById(GetPropertyDTO request) {
+      return userPropertyService.getGaragePropertyById(request.getPostalCode());
   }
 
   @GET
@@ -238,13 +234,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllLandProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/lands/{operatorId}/{postalCode}")
-  public LandPropertyGETDTO getLandPropertyById(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("postalCode") String postalCode) {
-      return userPropertyService.getLandPropertyById(operatorId, postalCode);
+  @Path("/land")
+  public LandPropertyGETDTO getLandPropertyById(GetPropertyDTO request) {
+      return userPropertyService.getLandPropertyById(request.getPostalCode());
   }
 
   @GET
@@ -254,13 +248,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllResidenceProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/residences/{operatorId}/{postalCode}")
-  public ResidencePropertyGETDTO getResidencePropertyById(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("postalCode") String postalCode) {
-      return userPropertyService.getResidencePropertyById(operatorId, postalCode);
+  @Path("/residence")
+  public ResidencePropertyGETDTO getResidencePropertyById(GetPropertyDTO request) {
+      return userPropertyService.getResidencePropertyById(request.getPostalCode());
   }
 
   @GET
@@ -270,13 +262,11 @@ public class UserPropertyResource {
       return userPropertyService.getAllWarehouseProperties();
   }
 
-  @GET
+  @POST
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/warehouses/{operatorId}/{postalCode}")
-  public WarehousePropertyGETDTO getWarehousePropertyById(
-          @PathParam("operatorId") String operatorId,
-          @PathParam("postalCode") String postalCode) {
-      return userPropertyService.getWarehousePropertyById(operatorId, postalCode);
+  @Path("/warehouse")
+  public WarehousePropertyGETDTO getWarehousePropertyById(GetPropertyDTO request) {
+      return userPropertyService.getWarehousePropertyById(request.getPostalCode());
   }
 
   

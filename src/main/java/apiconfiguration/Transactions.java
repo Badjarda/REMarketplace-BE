@@ -876,6 +876,7 @@ public class Transactions {
     System.out.println("Description: " + description);
     System.out.println("Photo References: " + photoReferences);
     */
+
     ApartmentProperty apartmentProperty = new ApartmentProperty(operatorId + propertyPostalCode, contractId, propertyId,
      apartmentPrice, propertyAddress, propertyPostalCode, propertyDistrict, propertyCounty, grossArea, usableArea, bedrooms, 
      bathrooms, floor, parkingSpaces, elevator, buildDate, installedEquipment, additionalInformation, description, photoReferences);
@@ -1011,7 +1012,6 @@ public class Transactions {
     }
     /** 
     System.out.println("Operator ID: " + operatorId);
-    System.out.println("User ID: " + userId);
     System.out.println("Property ID: " + propertyId);
     System.out.println("Residence Price: " + residencePrice);
     System.out.println("Property Address: " + propertyAddress);

@@ -97,7 +97,7 @@ public class UserService {
             operatorService.acceptRequestOpenAccount(OperatorService.operatorId, userName);
 
             operatorService.offerPropertyManagerService(OperatorService.operatorId, userName);
-            userPropertyService.acceptPropertyService(OperatorService.operatorId, userName);
+            userPropertyService.acceptPropertyService(userName);
 
             operatorService.offerIssuanceService(OperatorService.operatorId, userName);
             issuanceService.acceptIssuanceService(OperatorService.operatorId, userName);
