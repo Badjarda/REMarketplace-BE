@@ -122,9 +122,9 @@ public class WorkflowResourceTest {
         //System.out.println(userProfileService.modifyUserProfileFields(uuid1, uuid2, "JoséCosta", "José", "Costa", "José António Costa", "passwordTeste", LocalDate.of(2000, 1, 1), Optional.of(Gender.MALE), Nationality.PORTUGUESE, "jacosta.arq@gmail.com", Optional.of((long) 987654321L), (long) 212345678L, (long) 12345678901L, (long) 987654321L, photoReferences));
               
         // Create Deposit Currency Requests + Accept
-        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "EUR", new BigDecimal("200000.0")));
+        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid3, new BigDecimal("200000.0")));
 
-        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid1, uuid3, "EUR", new BigDecimal("450000.0")));
+        System.out.println(userAccountService.requestDepositCurrencyInstrument(uuid3, new BigDecimal("450000.0")));
 
         // Create Withdraw Currency Requests
         //System.out.println(userAccountService.requestWithdrawFungible(uuid1, uuid2));
@@ -207,7 +207,7 @@ public class WorkflowResourceTest {
         */
 
         // Create DeIssue Transferable Request
-        System.out.println(issuanceService.requestDeIssueTransferable(uuid1, uuid2, "IssuanceId"+uuid2, postalCode2));
+        System.out.println(issuanceService.requestDeIssueTransferable(uuid2, "IssuanceId"+uuid2, postalCode2));
 
         // Atomic Swap Request
         System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));

@@ -223,9 +223,9 @@ public class IssuanceService {
     return "Success Swap Request!\n";
   }
 
-  public String requestDeIssueTransferable(String operator, String user, String issuanceIdString, String postalCode) {
+  public String requestDeIssueTransferable(String user, String issuanceIdString, String postalCode) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);

@@ -216,16 +216,16 @@ public class UserAccountService {
   }
 
   @SuppressWarnings("unchecked")
-  public String requestDepositCurrencyInstrument(String operator, String user, String tokenStringId, BigDecimal amount){
+  public String requestDepositCurrencyInstrument(String user, BigDecimal amount){
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());
       Set<String> observers = new Set<>(singletonMap);
       Map<String, Set<String>> observersMap = new HashMap<String, Set<String>>();
       observersMap.put("Default", observers);
       
-      Id tokenId = new Id(tokenStringId);
+      Id tokenId = new Id("EUR");
       String version = "0";
       var currencyKey = new daml.daml.finance.interface$.types.common.types.InstrumentKey(userParty, operatorParty, tokenId, version, HoldingStandard.TRANSFERABLEFUNGIBLE);
       @SuppressWarnings("rawtypes")
@@ -252,9 +252,9 @@ public class UserAccountService {
     return "Success Request Deposit Currency Instrument\n";
   }
 
-  public String requestWithdrawFungible(String operator, String user){
+  public String requestWithdrawFungible(String user){
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
 
       Map<String, Unit> singletonMap = Collections.singletonMap(operatorParty, Unit.getInstance());

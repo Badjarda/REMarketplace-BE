@@ -1,18 +1,18 @@
 package business.useraccount.boundary;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import business.useraccount.dto.CustodyServiceOfferDTO;
+import business.useraccount.dto.DepositCurrencyDTO;
 import business.useraccount.dto.GetBalanceDTO;
 import business.useraccount.dto.GetSwapRequests;
 import business.useraccount.dto.SwapRequestGETDTO;
 import business.useraccount.dto.UserAccountDTO;
 import business.useraccount.dto.UserHoldingFungibleGETDTO;
+import business.useraccount.dto.WithdrawCurrencyDTO;
 import business.useraccount.service.UserAccountService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -58,17 +58,17 @@ public class UserAccountResource {
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestDepositCurrency/{operator}/{user}/{tokenId}/{amount}")
-  public String requestDepositCurrency(String operator, String user, String tokenId, BigDecimal amount) {
-    return userAccountService.requestDepositCurrencyInstrument(operator, user, tokenId, amount);
+  @Path("/requestDepositCurrency")
+  public String requestDepositCurrency(DepositCurrencyDTO request) {
+    return userAccountService.requestDepositCurrencyInstrument(request.getUser(), request.getAmount());
   }
 
   @POST
   @Produces(MediaType.TEXT_PLAIN)
   @Consumes(MediaType.APPLICATION_JSON)
-  @Path("/requestWithdrawCurrency/{operator}/{user}")
-  public String requestWithdrawCurrency(String operator, String user) {
-    return userAccountService.requestWithdrawFungible(operator, user);
+  @Path("/requestWithdrawCurrency")
+  public String requestWithdrawCurrency(WithdrawCurrencyDTO request) {
+    return userAccountService.requestWithdrawFungible(request.getUser());
   }
 
   @POST

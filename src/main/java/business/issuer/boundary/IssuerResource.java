@@ -1,5 +1,6 @@
 package business.issuer.boundary;
 
+import business.issuer.dto.DeIssueRequestDTO;
 import business.issuer.dto.IssuanceServiceOfferDTO;
 import business.issuer.dto.IssueRequestDTO;
 import business.issuer.dto.SwapRequestDTO;
@@ -40,6 +41,14 @@ public class IssuerResource {
   public String requestIssueTransferable(IssueRequestDTO request) {
     return issuanceService.requestIssueTransferable(request.getOperator(), request.getUser(),
         request.getIssuanceIdString(), request.getPostalCode(), request.getPropertyIdString());
+  }
+
+  @POST
+  @Produces(MediaType.TEXT_PLAIN)
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("/requestDeIssueTransferable")
+  public String requestDeIssueTransferable(DeIssueRequestDTO request) {
+    return issuanceService.requestDeIssueTransferable(request.getUser(), request.getIssuanceIdString(), request.getPostalCode());
   }
 
   @POST
