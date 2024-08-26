@@ -110,7 +110,7 @@ public class UserProfileService {
     return "Declined Profile Service!\n";
   }
 
-  public String requestCreateUserProfile(String operator, String user, String publicString, String profileId,
+  public String requestCreateUserProfile(String user, String publicString, String profileId,
       String username, String firstName, String lastName, String fullName, String password, LocalDate birthday,
       Optional<Gender> gender, Nationality nationality, String contactMail, Optional<Long> cellphoneNumber,
       Long idNumber, Long taxId, Long socialSecurityId, List<String> photoReferences) {
@@ -132,7 +132,7 @@ public class UserProfileService {
       System.out.println("TaxId: " + taxId);
       System.out.println("SocialSecurityId: " + socialSecurityId);
       System.out.println("Photo References: " + photoReferences.toString()); */
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String publicParty = userRepository.findById(publicString).getPartyId();
       List<com.daml.ledger.javaapi.data.Command> command = null;
@@ -159,12 +159,12 @@ public class UserProfileService {
     return "Success Create User Profile Request!\n";
   }
 
-  public String modifyUserProfileFields(String operator, String user, String username,
+  public String modifyUserProfileFields(String user, String username,
       String firstName, String lastName, String fullName, String password, LocalDate birthday, Optional<Gender> gender,
       Nationality nationality, String contactMail, Optional<Long> cellphoneNumber, Long idNumber, Long taxId,
       Long socialSecurityId, List<String> photoReferences) {
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String servicId = userProfileManagerRepository.findById(operatorParty + userParty)
           .getContractId();

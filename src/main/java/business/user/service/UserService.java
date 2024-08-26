@@ -20,6 +20,7 @@ import business.rolemanager.service.RoleManagerService;
 import business.user.entity.model.LedgerUser;
 import business.user.entity.repository.UserRepository;
 import business.useraccount.service.UserAccountService;
+import business.userprofile.entity.repository.UserProfileRepository;
 import business.userprofile.service.UserProfileService;
 import business.userproperty.service.UserPropertyService;
 import business.userrole.service.UserRoleService;
@@ -64,6 +65,9 @@ public class UserService {
     @Inject
     IssuanceService issuanceService;
 
+    @Inject
+    UserProfileRepository userProfileRepository;
+
     private DamlLedgerClient client;
 
     public UserService() {
@@ -102,7 +106,7 @@ public class UserService {
             operatorService.offerIssuanceService(OperatorService.operatorId, userName);
             issuanceService.acceptIssuanceService(OperatorService.operatorId, userName);
 
-            userProfileService.requestCreateUserProfile(OperatorService.operatorId, userName, OperatorService.publicId, profileId, username, firstName, lastName, 
+            userProfileService.requestCreateUserProfile(userName, OperatorService.publicId, profileId, username, firstName, lastName, 
             fullName, password, birthday, gender, nationality, contactMail, cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences);
             operatorService.acceptRequestCreateProfile(OperatorService.operatorId, userName);
 

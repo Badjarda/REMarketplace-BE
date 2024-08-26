@@ -5,6 +5,7 @@ import business.party.service.PartyService;
 import business.user.dto.CreateUserDTO;
 import business.user.service.UserService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -24,6 +25,7 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/createUser")
     public String createUser(CreateUserDTO request) {
         return userService.createUser(request.getName(), request.getParty(), request.getProfileId(), request.getUsername(), request.getFirstName(), request.getLastName(), 

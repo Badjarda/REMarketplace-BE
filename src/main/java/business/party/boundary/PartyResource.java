@@ -1,5 +1,6 @@
 package business.party.boundary;
 
+import business.party.dto.CreatePartyDTO;
 import business.party.service.PartyService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
@@ -14,8 +15,8 @@ public class PartyResource {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/createParty/{name}")
-    public String createParty(String name) {
-        return partyService.createParty(name);
+    @Path("/createParty")
+    public String createParty(CreatePartyDTO request) {
+        return partyService.createParty(request.getPartyName());
     }
 }

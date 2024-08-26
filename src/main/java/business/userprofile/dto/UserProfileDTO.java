@@ -1,55 +1,75 @@
 package business.userprofile.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import daml.marketplace.interface$.profilemanager.userprofile.common.Gender;
 import daml.marketplace.interface$.profilemanager.userprofile.common.Nationality;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserProfileDTO {
 
-  private String operator;
+  private final String user;
+  private final String publicString;
+  private final String profileId;
+  private final String username;
+  private final String firstName;
+  private final String lastName;
+  private final String fullName;
+  private final String password;
+  private final LocalDate birthday;
+  private final Optional<Gender> gender;
+  private final Nationality nationality;
+  private final String contactMail;
+  private final Optional<Long> cellphoneNumber;
+  private final Long idNumber;
+  private final Long taxId;
+  private final Long socialSecurityId;
+  private final List<String> photoReferences;
 
-  private String user;
-
-  private String publicString;
-
-  private String profileId;
-
-  private String username;
-
-  private String firstName;
-
-  private String lastName;
-
-  private String fullName;
-
-  private String password;
-
-  private LocalDate birthday;
-
-  private Optional<Gender> gender;
-
-  private Nationality nationality;
-
-  private String contactMail;
-
-  private Optional<Long> cellphoneNumber;
-
-  private Long idNumber;
-
-  private Long taxId;
-
-  private Long socialSecurityId;
-
-  private List<String> photoReferences;
+  @JsonCreator
+  public UserProfileDTO(
+      @JsonProperty("user") String user,
+      @JsonProperty("publicString") String publicString,
+      @JsonProperty("profileId") String profileId,
+      @JsonProperty("username") String username,
+      @JsonProperty("firstName") String firstName,
+      @JsonProperty("lastName") String lastName,
+      @JsonProperty("fullName") String fullName,
+      @JsonProperty("password") String password,
+      @JsonProperty("birthday") LocalDate birthday,
+      @JsonProperty("gender") Optional<Gender> gender,
+      @JsonProperty("nationality") Nationality nationality,
+      @JsonProperty("contactMail") String contactMail,
+      @JsonProperty("cellphoneNumber") Optional<Long> cellphoneNumber,
+      @JsonProperty("idNumber") Long idNumber,
+      @JsonProperty("taxId") Long taxId,
+      @JsonProperty("socialSecurityId") Long socialSecurityId,
+      @JsonProperty("photoReferences") List<String> photoReferences
+  ) {
+      this.user = user;
+      this.publicString = publicString;
+      this.profileId = profileId;
+      this.username = username;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.fullName = fullName;
+      this.password = password;
+      this.birthday = birthday;
+      this.gender = gender;
+      this.nationality = nationality;
+      this.contactMail = contactMail;
+      this.cellphoneNumber = cellphoneNumber;
+      this.idNumber = idNumber;
+      this.taxId = taxId;
+      this.socialSecurityId = socialSecurityId;
+      this.photoReferences = photoReferences;
+  }
 }

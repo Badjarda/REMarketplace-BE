@@ -41,7 +41,7 @@ public class UserProfileResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/requestCreateUserProfile")
   public String requestCreateUserProfile(UserProfileDTO request) {
-    return userProfileService.requestCreateUserProfile(request.getOperator(), request.getUser(), request.getPublicString(), 
+    return userProfileService.requestCreateUserProfile(request.getUser(), request.getPublicString(), 
         request.getProfileId(), request.getUsername(), request.getFirstName(), request.getLastName(), request.getFullName(),
         request.getPassword(), request.getBirthday(), request.getGender(), request.getNationality(), request.getContactMail(),
         request.getCellphoneNumber(), request.getIdNumber(), request.getTaxId(), request.getSocialSecurityId(), request.getPhotoReferences());
@@ -51,7 +51,7 @@ public class UserProfileResource {
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/updateProfile")
   public String updateProfile(UserProfileDTO request) {
-    return userProfileService.modifyUserProfileFields(request.getOperator(), request.getUser(), request.getUsername(),
+    return userProfileService.modifyUserProfileFields(request.getUser(), request.getUsername(),
         request.getFirstName(), request.getLastName(), request.getFullName(), request.getPassword(),
         request.getBirthday(), request.getGender(), request.getNationality(), request.getContactMail(),
         request.getCellphoneNumber(), request.getIdNumber(), request.getTaxId(), request.getSocialSecurityId(), request.getPhotoReferences());

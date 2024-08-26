@@ -791,6 +791,22 @@ public class Transactions {
         String text = element.getText();
         photoReferences.add(text);
     }
+    /** 
+    System.out.println("username: " + username);
+    System.out.println("firstName: " + firstName);
+    System.out.println("lastName: " + lastName);
+    System.out.println("fullName: " + fullName);
+    System.out.println("password: " + password);
+    System.out.println("birthday: " + birthday);
+    System.out.println("gender : " + gender);
+    System.out.println("nationality : " + nationality);
+    System.out.println("contactMail: " + contactMail);
+    System.out.println("cellphoneNumber: " + cellphoneNumber);
+    System.out.println("idNumber: " + idNumber);
+    System.out.println("taxId: " + taxId);
+    System.out.println("socialSecurityId: " + socialSecurityId);
+    System.out.println("Photo References: " + photoReferences);*/
+    
     userProfileRepository.persist(new UserProfile(operatorId + userId, contractId, profileId, username, firstName, lastName, fullName,
       password, birthday, gender, nationality, contactMail, cellphoneNumber, idNumber, taxId, socialSecurityId, photoReferences));
   }
