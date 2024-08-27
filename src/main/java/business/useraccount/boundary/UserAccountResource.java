@@ -2,6 +2,7 @@ package business.useraccount.boundary;
 
 import java.util.List;
 
+import business.useraccount.dto.AcceptSwapRequestDTO;
 import business.useraccount.dto.CustodyServiceOfferDTO;
 import business.useraccount.dto.DepositCurrencyDTO;
 import business.useraccount.dto.GetBalanceDTO;
@@ -69,6 +70,14 @@ public class UserAccountResource {
   @Path("/requestWithdrawCurrency")
   public String requestWithdrawCurrency(WithdrawCurrencyDTO request) {
     return userAccountService.requestWithdrawFungible(request.getUser());
+  }
+
+  @POST
+  @Produces(MediaType.TEXT_PLAIN)
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Path("/acceptSwapRequest")
+  public String acceptSwapRequest(AcceptSwapRequestDTO request) {
+    return userAccountService.acceptSwapRequest(request.getBuyer(), request.getSeller(), request.getPostalCode(), request.getPropertyType());
   }
 
   @POST

@@ -10,8 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SwapRequestDTO {
-    private String operator;
-
     private String buyer;
 
     private String seller;

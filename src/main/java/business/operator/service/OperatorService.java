@@ -565,9 +565,26 @@ public class OperatorService {
         return "Successfully DeIssue in User Account!\n";
     }
 
-    public String acceptRequestCreateApartmentProperty(String operator, String user, String postalCode) {
+    public String acceptCreatePropertyRequest(String user, String postalCode, String propertyType) {
+        switch (propertyType) {
+            case "APARTMENT":
+                return acceptRequestCreateApartmentProperty(user, postalCode);
+            case "GARAGE":
+                return acceptRequestCreateGarageProperty(user, postalCode);
+            case "LAND":
+                return acceptRequestCreateLandProperty(user, postalCode);
+            case "RESIDENCE":
+                return acceptRequestCreateResidenceProperty(user, postalCode);
+            case "WAREHOUSE":
+                return acceptRequestCreateWarehouseProperty(user, postalCode);
+            default:
+                return "invalid property type";
+        }
+    }
+
+    public String acceptRequestCreateApartmentProperty(String user, String postalCode) {
         try {
-            String operatorParty = userRepository.findById(operator).getPartyId();
+            String operatorParty = userRepository.findById(operatorId).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
             String servicId = propertyManagerRepository.findById(operatorParty + userParty).getContractId();
             var serviceId = new daml.marketplace.interface$.propertymanager.service.Service.ContractId(servicId);
@@ -590,9 +607,9 @@ public class OperatorService {
         return "Apartment Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateGarageProperty(String operator, String user, String postalCode) {
+    public String acceptRequestCreateGarageProperty(String user, String postalCode) {
         try {
-            String operatorParty = userRepository.findById(operator).getPartyId();
+            String operatorParty = userRepository.findById(operatorId).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
             String servicId = propertyManagerRepository.findById(operatorParty + userParty)
                     .getContractId();
@@ -616,9 +633,9 @@ public class OperatorService {
         return "Garage Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateLandProperty(String operator, String user, String postalCode) {
+    public String acceptRequestCreateLandProperty(String user, String postalCode) {
         try {
-            String operatorParty = userRepository.findById(operator).getPartyId();
+            String operatorParty = userRepository.findById(operatorId).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
             String servicId = propertyManagerRepository.findById(operatorParty + userParty)
                     .getContractId();
@@ -642,9 +659,9 @@ public class OperatorService {
         return "Land Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateResidenceProperty(String operator, String user, String postalCode) {
+    public String acceptRequestCreateResidenceProperty(String user, String postalCode) {
         try {
-            String operatorParty = userRepository.findById(operator).getPartyId();
+            String operatorParty = userRepository.findById(operatorId).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
             String servicId = propertyManagerRepository.findById(operatorParty + userParty)
                     .getContractId();
@@ -668,9 +685,9 @@ public class OperatorService {
         return "Residence Property Successfully Created!\n";
     }
 
-    public String acceptRequestCreateWarehouseProperty(String operator, String user, String postalCode) {
+    public String acceptRequestCreateWarehouseProperty(String user, String postalCode) {
         try {
-            String operatorParty = userRepository.findById(operator).getPartyId();
+            String operatorParty = userRepository.findById(operatorId).getPartyId();
             String userParty = userRepository.findById(user).getPartyId();
             String servicId = propertyManagerRepository.findById(operatorParty + userParty)
                     .getContractId();

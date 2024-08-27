@@ -56,6 +56,6 @@ public class IssuerResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("/requestSwap")
   public String requestSwap(SwapRequestDTO request) {
-    return issuanceService.requestSwap(request.getOperator(), request.getBuyer(), request.getSeller(), request.getPostalCode());
+    return issuanceService.requestSwap(request.getBuyer(), request.getSeller(), request.getPostalCode());
   }
 }

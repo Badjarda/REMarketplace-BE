@@ -283,9 +283,9 @@ public class UserAccountService {
     return "Success Request Withdraw Currency Instrument\n";
   }
 
-  public String acceptSwapRequest(String operator, String buyer, String seller, String publicString, String postalCode, String propertyType) {
+  public String acceptSwapRequest(String buyer, String seller, String postalCode, String propertyType) {
     try {
-        String operatorParty = userRepository.findById(operator).getPartyId();
+        String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
         String buyerParty = userRepository.findById(buyer).getPartyId();
         String sellerParty = userRepository.findById(seller).getPartyId();
 
@@ -382,7 +382,7 @@ public class UserAccountService {
     }
 
     return new SwapRequestGETDTO(
-        entity.getPartyId(), 
+        entity.getSellerId(), 
         entity.getBuyerId(),
         entity.getPropertyType(),
         apartmentDTO,

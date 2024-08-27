@@ -1420,7 +1420,7 @@ public class Transactions {
         postalCode = userHoldingTransferable.getPostalCode();
       }
     }
-    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + sellerId + buyerId + transferableCid, contractId, buyerId, propertyType, transferableCid, postalCode));
+    userSwapRequestRepository.persist(new UserSwapRequest(operatorId + sellerId + buyerId + transferableCid, contractId, buyerId, sellerId, propertyType, transferableCid, postalCode));
   }
 
   // ----------- Handle Archived Event Methods------------------------

@@ -137,7 +137,7 @@ public class WorkflowResourceTest {
             "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
         
         // Accept Request Create Apartment Property
-        System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid1, uuid2, postalCode1));
+        System.out.println(operatorService.acceptRequestCreateApartmentProperty(uuid2, postalCode1));
 
         // Request Create Land Property
         String postalCode2 = "2675-615";
@@ -147,7 +147,7 @@ public class WorkflowResourceTest {
             new BigDecimal(100.0), (long) 2L, true, "Frigorífico", viableConstructionTypes, "Terraço comunitário no piso 0", "Long description", photoReferences));
         
         // Accept Request Create Land Property
-        System.out.println(operatorService.acceptRequestCreateLandProperty(uuid1, uuid2, postalCode2));
+        System.out.println(operatorService.acceptRequestCreateLandProperty(uuid2, postalCode2));
 
         // Request Create Garage Property
         String postalCode3 = "2675-616";
@@ -156,7 +156,7 @@ public class WorkflowResourceTest {
         (long) 2L, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
         
         // Accept Request Create Garage Property
-        System.out.println(operatorService.acceptRequestCreateGarageProperty(uuid1, uuid2, postalCode3));
+        System.out.println(operatorService.acceptRequestCreateGarageProperty(uuid2, postalCode3));
 
         // Request Create Residence Property
         String postalCode4 = "2675-617";
@@ -166,7 +166,7 @@ public class WorkflowResourceTest {
             Orientation.EAST, "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
         
         // Accept Request Create Residence Property
-        System.out.println(operatorService.acceptRequestCreateResidenceProperty(uuid1, uuid2, postalCode4));
+        System.out.println(operatorService.acceptRequestCreateResidenceProperty(uuid2, postalCode4));
 
         // Request Create Warehouse Property
         String postalCode5 = "2675-618";
@@ -175,7 +175,7 @@ public class WorkflowResourceTest {
             (long) 2L, LocalDate.of(1900, 1, 1), "Frigorífico", "Terraço comunitário no piso 0", "Long description", photoReferences));
         
         // Accept Request Create Warehouse Property
-        System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid1, uuid2, postalCode5));
+        System.out.println(operatorService.acceptRequestCreateWarehouseProperty(uuid2, postalCode5));
 
         // Modify Apartment Property Fields
         /** 
@@ -210,19 +210,19 @@ public class WorkflowResourceTest {
         System.out.println(issuanceService.requestDeIssueTransferable(uuid2, "IssuanceId"+uuid2, postalCode2));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode1));
+        System.out.println(issuanceService.requestSwap(uuid3, uuid2, postalCode1));
 
         // Accept Atomic Swap Request
-        System.out.println(userAccountService.acceptSwapRequest(uuid1, uuid3, uuid2, uuid4, postalCode1, "APARTMENT"));
+        System.out.println(userAccountService.acceptSwapRequest(uuid3, uuid2, postalCode1, "APARTMENT"));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode3));
+        System.out.println(issuanceService.requestSwap(uuid3, uuid2, postalCode3));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode4));
+        System.out.println(issuanceService.requestSwap(uuid3, uuid2, postalCode4));
 
         // Atomic Swap Request
-        System.out.println(issuanceService.requestSwap(uuid1, uuid3, uuid2, postalCode5));
+        System.out.println(issuanceService.requestSwap(uuid3, uuid2, postalCode5));
         
         // Test GETS of individual property
         System.out.println("GET INDIVIDUAL PROPERTY : ");

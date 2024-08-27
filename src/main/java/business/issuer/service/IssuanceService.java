@@ -188,9 +188,9 @@ public class IssuanceService {
     return "Success Request Issue Transferable\n";
   }
 
-  public String requestSwap(String operator, String buyer, String seller, String postalCode){
+  public String requestSwap(String buyer, String seller, String postalCode){
     try {
-      String operatorParty = userRepository.findById(operator).getPartyId();
+      String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String buyerParty = userRepository.findById(buyer).getPartyId();
       String sellerParty = userRepository.findById(seller).getPartyId();
 

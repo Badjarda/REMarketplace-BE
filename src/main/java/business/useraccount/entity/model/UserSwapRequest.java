@@ -24,6 +24,9 @@ public class UserSwapRequest {
   @Column(name = "buyerId")
   private String buyerId;
 
+  @Column(name = "sellerId")
+  private String sellerId;
+
   @Column(name = "propertyType")
   private String propertyType;
 
