@@ -118,14 +118,14 @@ public class OperatorResource {
             List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
             System.out.println(userService.createUser(uuid2, uuid2, "Profile" + uuid2, "MariaSilva", "Maria",
                 "Silva", "Maria José da Silva", "SecurePassword!2023", LocalDate.of(1988, 5, 12),
-                Optional.of(Gender.FEMALE), Nationality.BRAZILIAN, "maria.silva@example.com",
+                Optional.of(Gender.FEMALE), Nationality.BRAZILIAN, "maria.silva@gmail.com",
                 Optional.of((long) 919876543L), (long) 203456789L, (long) 22345678901L, (long) 223456789L,
                 Arrays.asList("https://gateway.pinata.cloud/ipfs/QmU1zawfstRWzKB5FvdCgnXUSAGPpQeiNeUyQcGvfVCpic")));
 
             // Creating a user profile for John Smith
             System.out.println(userService.createUser(uuid3, uuid3, "Profile" + uuid3, "JohnSmith", "John", 
                 "Smith", "John Arthur Smith", "JohnsPass#123", LocalDate.of(1975, 11, 8), 
-                Optional.of(Gender.MALE), Nationality.CANADIAN, "john.smith@example.com",
+                Optional.of(Gender.MALE), Nationality.CANADIAN, "john.smith@gmail.com",
                 Optional.of((long) 987654321L), (long) 315678901L, (long) 13579246801L, (long) 198765432L,
                 Arrays.asList("https://gateway.pinata.cloud/ipfs/QmTycKRh8GPiCYZgeEn824Rhydt49M19MMMaeTVHxTaJqB")));
 
