@@ -101,6 +101,7 @@ sudo docker compose -f docker/dev/docker-compose.yaml up -d --build
 
 # CORS Configuration
 quarkus.http.cors=true
+quarkus.http.port=8100
 quarkus.http.cors.origins=http://localhost:3000
 quarkus.http.cors.methods=GET,POST,PUT,DELETE,OPTIONS
 quarkus.http.cors.headers=Content-Type,Authorization

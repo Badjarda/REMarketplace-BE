@@ -115,7 +115,7 @@ public class UserProfileService {
       Optional<Gender> gender, Nationality nationality, String contactMail, Optional<Long> cellphoneNumber,
       Long idNumber, Long taxId, Long socialSecurityId, List<String> photoReferences) {
     try {
-      /**
+      
       System.out.println("Creating a new Profile:\n");
       System.out.println("ProfileId: " + profileId);
       System.out.println("Username: " + username);
@@ -131,7 +131,7 @@ public class UserProfileService {
       System.out.println("IdNumber: " + idNumber);
       System.out.println("TaxId: " + taxId);
       System.out.println("SocialSecurityId: " + socialSecurityId);
-      System.out.println("Photo References: " + photoReferences.toString()); */
+      System.out.println("Photo References: " + photoReferences.toString()); 
       String operatorParty = userRepository.findById(OperatorService.operatorId).getPartyId();
       String userParty = userRepository.findById(user).getPartyId();
       String publicParty = userRepository.findById(publicString).getPartyId();
