@@ -88,8 +88,8 @@ public class OperatorResource {
     private void test(){
         if(service.getAllPropertyRequests().get("APARTMENT").size() == 0){
             String uuid1 = UUID.randomUUID().toString(); // Operator
-            String uuid2 = UUID.randomUUID().toString(); // Seller
-            String uuid3 = UUID.randomUUID().toString(); // Buyer
+            String uuid2 = "b8781c5b-d023-4a77-a9c0-7ed1b8ebe3f8"; // Seller
+            String uuid3 = "ea499e17-d52e-44fc-bee6-ccca125a24a0"; // Buyer
             String uuid4 = UUID.randomUUID().toString(); // Public
 
             System.out.println();
@@ -115,7 +115,6 @@ public class OperatorResource {
             System.out.println(partyService.createParty(uuid2));
             System.out.println(partyService.createParty(uuid3));
 
-            List<String> photoReferences = Arrays.asList("url1", "url2", "url3");
             System.out.println(userService.createUser(uuid2, uuid2, "Profile" + uuid2, "MariaSilva", "Maria",
                 "Silva", "Maria José da Silva", "SecurePassword!2023", LocalDate.of(1988, 5, 12),
                 Optional.of(Gender.FEMALE), Nationality.BRAZILIAN, "maria.silva@gmail.com",
@@ -124,7 +123,7 @@ public class OperatorResource {
 
             // Creating a user profile for John Smith
             System.out.println(userService.createUser(uuid3, uuid3, "Profile" + uuid3, "JohnSmith", "John", 
-                "Smith", "John Arthur Smith", "JohnsPass#123", LocalDate.of(1975, 11, 8), 
+                "Smith", "John Arthur Smith", "passwordTest", LocalDate.of(1975, 11, 8), 
                 Optional.of(Gender.MALE), Nationality.CANADIAN, "john.smith@gmail.com",
                 Optional.of((long) 987654321L), (long) 315678901L, (long) 13579246801L, (long) 198765432L,
                 Arrays.asList("https://gateway.pinata.cloud/ipfs/QmTycKRh8GPiCYZgeEn824Rhydt49M19MMMaeTVHxTaJqB")));
