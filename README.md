@@ -1,26 +1,4 @@
-# Getting started with Quarkus
-
-This is a minimal CRUD service exposing a couple of endpoints over REST.
-
-Under the hood, this demo uses:
-
-- RESTEasy to expose the REST endpoints
-- REST-assured and JUnit 5 for endpoint testing
-
-## Requirements
-
-To compile and run this demo you will need:
-
-- JDK 17+
-- GraalVM
-
-### Configuring GraalVM and JDK 17+
-
-Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 17+ `java` command is on the path.
-
-See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
-for help setting up your environment.
+# Back-end for the Decentralized Marketplace for Tokenized Real Estate
 
 ## Building the application
 
@@ -52,7 +30,6 @@ When you're done iterating in developer mode, you can run the application as a
 conventional jar file.
 
 > cd /mnt/c/Users/mestr/Desktop/REMarketplace-BE
-
 
 First compile it:
 
